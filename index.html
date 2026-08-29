@@ -122,38 +122,17 @@ document.querySelectorAll(".square").forEach(function(square) {
 
         const piece = selectedSquare.textContent;
 
-        let validMove = false;
+       let validMove = false;
 
-        if (piece === "♙") {
-            if (
-                toCol === fromCol &&
-                toRow === fromRow - 1 &&
-                this.textContent === ""
-            ) {
-                validMove = true;
-            }
-        }
-
-       if (piece === "♟") {
+if (piece === "♙") {
 
     if (
         toCol === fromCol &&
-        toRow === fromRow + 1 &&
+        toRow === fromRow - 1 &&
         this.textContent === ""
     ) {
         validMove = true;
     }
-
-    if (
-        fromRow === 1 &&
-        toCol === fromCol &&
-        toRow === fromRow + 2 &&
-        this.textContent === "" &&
-        squares[from + 8].textContent === ""
-    ) {
-        validMove = true;
-    }
-} 
 
     if (
         fromRow === 6 &&
@@ -166,17 +145,27 @@ document.querySelectorAll(".square").forEach(function(square) {
     }
 }
 
-        if (validMove) {
-            this.textContent = piece;
-            selectedSquare.textContent = "";
-        }
+if (piece === "♟") {
 
-        selectedSquare.classList.remove("selected");
-        selectedSquare = null;
+    if (
+        toCol === fromCol &&
+        toRow === fromRow + 1 &&
+        this.textContent === ""
+    ) {
+        validMove = true;
+    }
 
-    });
+  this.textContent === "" &&
+squares[from + 8].textContent === ""
+) {
+    validMove = true;
+}
+}
 
-});
+if (validMove) {
+    this.textContent = piece;
+    selectedSquare.textContent = "";
+}
 </script>
 
 </body>
