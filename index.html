@@ -1,1 +1,96 @@
 Shapeta883/saindex.htmlfett-
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shapeta Chess Kosova</title>
+
+<style>
+body {
+    margin: 0;
+    background: #222;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    margin: 20px 0;
+}
+
+#board {
+    width: 480px;
+    height: 480px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    border: 4px solid #111;
+}
+
+.square {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    box-sizing: border-box;
+}
+
+.light {
+    background: #f0d9b5;
+}
+
+.dark {
+    background: #b58863;
+}
+</style>
+</head>
+
+<body>
+
+<h1>♟️ SHAPETA CHESS KOSOVA 🇽🇰</h1>
+
+<div id="board"></div>
+
+<script>
+
+const board = document.getElementById("board");
+
+const pieces = [
+    ["♜","♞","♝","♛","♚","♝","♞","♜"],
+    ["♟","♟","♟","♟","♟","♟","♟","♟"],
+    ["","","","","","","",""],
+    ["","","","","","","",""],
+    ["","","","","","","",""],
+    ["","","","","","","",""],
+    ["♙","♙","♙","♙","♙","♙","♙","♙"],
+    ["♖","♘","♗","♕","♔","♗","♘","♖"]
+];
+
+for (let row = 0; row < 8; row++) {
+
+    for (let col = 0; col < 8; col++) {
+
+        const square = document.createElement("div");
+
+        square.classList.add("square");
+
+        if ((row + col) % 2 === 0) {
+            square.classList.add("light");
+        } else {
+            square.classList.add("dark");
+        }
+
+        square.textContent = pieces[row][col];
+
+        board.appendChild(square);
+    }
+}
+
+</script>
+
+</body>
+</html>
