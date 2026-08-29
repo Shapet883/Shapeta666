@@ -132,15 +132,37 @@ document.querySelectorAll(".square").forEach(function(square) {
             }
         }
 
-        if (piece === "♟") {
-            if (
-                toCol === fromCol &&
-                toRow === fromRow + 1 &&
-                this.textContent === ""
-            ) {
-                validMove = true;
-            }
-        }
+       if (piece === "♟") {
+
+    if (
+        toCol === fromCol &&
+        toRow === fromRow + 1 &&
+        this.textContent === ""
+    ) {
+        validMove = true;
+    }
+
+    if (
+        fromRow === 1 &&
+        toCol === fromCol &&
+        toRow === fromRow + 2 &&
+        this.textContent === "" &&
+        squares[from + 8].textContent === ""
+    ) {
+        validMove = true;
+    }
+} 
+
+    if (
+        fromRow === 6 &&
+        toCol === fromCol &&
+        toRow === fromRow - 2 &&
+        this.textContent === "" &&
+        squares[from - 8].textContent === ""
+    ) {
+        validMove = true;
+    }
+}
 
         if (validMove) {
             this.textContent = piece;
