@@ -91,7 +91,68 @@ for (let row = 0; row < 8; row++) {
         board.appendChild(square);
     }
 }
+let selectedSquare = null;
 
+document.querySelectorAll(".square").forEach(function(square) {
+
+    square.addEventListener("click", function() {
+
+        if (selectedSquare === null) {
+
+            if (this.textContent === "♙" || this.textContent === "♟") {
+                selectedSquare = this;
+                this.classList.add("selected");
+            }
+
+            return;
+        }
+
+        const squares = Array.from(document.querySelectorAll(".square"));
+
+        const from = squares.indexOf(selectedSquare);
+        const to = squares.indexOf(this);
+
+        const fromRow = Math.floor(from / 8);
+        const fromCol = from % 8;
+
+        const toRow = Math.floor(to / 8);
+        const toCol = to % 8;
+
+        const piece = selectedSquare.textContent;
+
+        let validMove = false;
+
+        if (piece === "♙") {
+            if (
+                toCol === fromCol &&
+                toRow === fromRow - 1 &&
+                this.textContent === ""
+            ) {
+                validMove = true;
+            }
+        }
+
+        if (piece === "♟") {
+            if (
+                toCol === fromCol &&
+                toRow === fromRow + 1 &&
+                this.textContent === ""
+            ) {
+                validMove = true;
+            }
+        }
+
+        if (validMove) {
+            this.textContent = piece;
+            selectedSquare.textContent = "";
+        }
+
+        selectedSquare.classList.remove("selected");
+        selectedSquare = null;
+
+    });
+
+});
 </script>
 
 </body>
