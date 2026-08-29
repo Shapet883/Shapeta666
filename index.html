@@ -155,11 +155,15 @@ if (piece === "♟") {
         validMove = true;
     }
 
-  this.textContent === "" &&
-squares[from + 8].textContent === ""
-) {
-    validMove = true;
-}
+    if (
+        fromRow === 1 &&
+        toCol === fromCol &&
+        toRow === fromRow + 2 &&
+        this.textContent === "" &&
+        squares[from + 8].textContent === ""
+    ) {
+        validMove = true;
+    }
 }
 
 if (validMove) {
