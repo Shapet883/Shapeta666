@@ -101,73 +101,7 @@ document.querySelectorAll(".square").forEach(function(square) {
 
         if (selectedSquare === null) {
 
-            if (this.textContent === "♙" || this.textContent === "♟") {
-                selectedSquare = this;
-                this.classList.add("selected");
-            }
-
-            return;
-        }
-
-        const squares = Array.from(document.querySelectorAll(".square"));
-
-        const from = squares.indexOf(selectedSquare);
-        const to = squares.indexOf(this);
-
-        const fromRow = Math.floor(from / 8);
-        const fromCol = from % 8;
-
-        const toRow = Math.floor(to / 8);
-        const toCol = to % 8;
-
-        const piece = selectedSquare.textContent;
-
-       let validMove = false;
-
-if (piece === "♙") {
-
-    if (
-        toCol === fromCol &&
-        toRow === fromRow - 1 &&
-        this.textContent === ""
-    ) {
-        validMove = true;
-    }
-
-    if (
-        fromRow === 6 &&
-        toCol === fromCol &&
-        toRow === fromRow - 2 &&
-        this.textContent === "" &&
-        squares[from - 8].textContent === ""
-    ) {
-        validMove = true;
-    }
-}
-
-if (piece === "♟") {
-
-    if (
-        toCol === fromCol &&
-        toRow === fromRow + 1 &&
-        this.textContent === ""
-    ) {
-        validMove = true;
-    }
-
-    if (
-        fromRow === 1 &&
-        toCol === fromCol &&
-        toRow === fromRow + 2 &&
-        this.textContent === "" &&
-        squares[from + 8].textContent === ""
-    ) {
-        validMove = true;
-    }
-}
-
-if (validMove) {
-    this.textContent = piece;
+    
     selectedSquare.textContent = "";
 }
 </script>
