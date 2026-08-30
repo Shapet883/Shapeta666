@@ -98,9 +98,14 @@ document.querySelectorAll(".square").forEach(function(square) {
 
     square.addEventListener("click", function() {
 
-        if (this.textContent === "♙" || this.textContent === "♟") {
-            this.classList.add("selected");
-        }
+      if (this.textContent === "♙" || this.textContent === "♟") {
+
+    document.querySelectorAll(".square").forEach(function(s) {
+        s.classList.remove("selected");
+    });
+
+    this.classList.add("selected");
+}  
 
     });
 
