@@ -95,18 +95,87 @@ for (let row = 0; row < 8; row++) {
         board.appendChild(square);
     }
 }
+let selectedSquare = null;
 document.querySelectorAll(".square").forEach(function(square) {
 
-    square.addEventListener("click", function() {
+square.addEventListener("click", function() {
 
-      if (this.textContent === "♙" || this.textContent === "♟") {
+const squares = Array.from(document.querySelectorAll(".square"));
 
-    document.querySelectorAll(".square").forEach(function(s) {
-        s.classList.remove("selected");
-    });
+if (selectedSquare === null) {
 
-    this.classList.add("selected");
-}  
+if (this.textContent === "♙" || this.textContent === "♟") {
+selectedSquare = this;
+this.classList.add("selected");
+}
+
+return;
+}
+
+        const from = squares.indexOf(selectedSquare);
+        const to = squares.indexOf(this);
+
+        const fromRow = Math.floor(from / 8);
+        const fromCol = from % 8;
+
+        const toRow = Math.floor(to / 8);
+        const toCol = to % 8;
+
+        const piece = selectedSquare.textContent;
+
+        let validMove = false;
+
+        // USHTARI I BARDHË
+        if (piece === "♙") {
+
+            if (
+                toCol === fromCol &&
+                toRow === fromRow - 1 &&
+                this.textContent === ""
+            ) {
+                validMove = true;
+            }
+
+            if (
+                fromRow === 6 &&
+                toCol === fromCol &&
+                toRow === fromRow - 2 &&
+                this.textContent === "" &&
+                squares[from - 8].textContent === ""
+            ) {
+                validMove = true;
+            }
+        }
+
+        // USHTARI I ZI
+        if (piece === "♟") {
+
+            if (
+                toCol === fromCol &&
+                toRow === fromRow + 1 &&
+                this.textContent === ""
+            ) {
+                validMove = true;
+            }
+
+            if (
+                fromRow === 1 &&
+                toCol === fromCol &&
+                toRow === fromRow + 2 &&
+                this.textContent === "" &&
+                squares[from + 8].textContent === ""
+            ) {
+                validMove = true;
+            }
+        }
+
+        if (validMove) {
+            this.textContent = piece;
+            selectedSquare.textContent = "";
+        }
+
+        selectedSquare.classList.remove("selected");
+        selectedSquare = null;
 
     });
 
