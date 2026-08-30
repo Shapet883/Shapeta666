@@ -91,6 +91,18 @@ for (let row = 0; row < 8; row++) {
         board.appendChild(square);
     }
 }
+document.querySelectorAll(".square").forEach(function(square) {
+
+    square.addEventListener("click", function() {
+
+        if (this.textContent === "♙" || this.textContent === "♟") {
+            this.classList.add("selected");
+        }
+
+    });
+
+});
+
 
 </script>
 
