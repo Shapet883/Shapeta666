@@ -97,6 +97,7 @@ for (let row = 0; row < 8; row++) {
 }
 let selectedSquare = null;
 let whiteTurn = true;
+let lastDoubleStep = null;
 document.querySelectorAll(".square").forEach(function(square) {
 
 square.addEventListener("click", function() {
@@ -190,7 +191,12 @@ if (
 if (validMove) {
     this.textContent = piece;
     selectedSquare.textContent = "";
-
+if (
+    (piece === "♙" && fromRow === 6 && toRow === 4) ||
+    (piece === "♟" && fromRow === 1 && toRow === 3)
+) {
+    lastDoubleStep = this;
+}
     whiteTurn = !whiteTurn;
 }
 
