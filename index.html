@@ -150,14 +150,15 @@ return;
             ) {
                 validMove = true;
             }
-        }
-if (
-    toRow === fromRow - 1 &&
-    Math.abs(toCol - fromCol) === 1 &&
-    this.textContent === "♟"
-) {
-    validMove = true;
-}
+                   if (
+                toRow === fromRow - 1 &&
+                Math.abs(toCol - fromCol) === 1 &&
+                this.textContent === "♟"
+            ) {
+                validMove = true;
+            }
+
+       }
         // USHTARI I ZI
         if (piece === "♟") {
 
