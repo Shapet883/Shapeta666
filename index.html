@@ -265,7 +265,19 @@ if (piece === "♟") {
     }
 }
 
+// KALI I BARDHË DHE I ZI
+if (piece === "♘" || piece === "♞") {
 
+    const rowDiff = Math.abs(toRow - fromRow);
+    const colDiff = Math.abs(toCol - fromCol);
+
+    if (
+        (rowDiff === 2 && colDiff === 1) ||
+        (rowDiff === 1 && colDiff === 2)
+    ) {
+        validMove = true;
+    }
+}
 // LËVIZJA
 if (validMove) {
 
