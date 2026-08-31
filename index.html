@@ -157,7 +157,15 @@ return;
             ) {
                 validMove = true;
             }
-
+  if (
+                lastDoubleStep &&
+                piece === "♙" &&
+                Math.abs(toCol - fromCol) === 1 &&
+                toRow === fromRow - 1 &&
+                lastDoubleStep === squares[from + (toCol - fromCol)]
+            ) {
+                validMove = true;
+            }
        }
         // USHTARI I ZI
         if (piece === "♟") {
