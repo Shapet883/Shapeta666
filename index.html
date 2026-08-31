@@ -131,45 +131,99 @@ return;
         let validMove = false;
 
         // USHTARI I BARDHË
-        if (piece === "♙") {
+if (piece === "♙") {
 
-            if (
-                toCol === fromCol &&
-                toRow === fromRow - 1 &&
-                this.textContent === ""
-            ) {
-                validMove = true;
-            }
+    // 1 katror përpara
+    if (
+        toCol === fromCol &&
+        toRow === fromRow - 1 &&
+        this.textContent === ""
+    ) {
+        validMove = true;
+    }
 
-            if (
-                fromRow === 6 &&
-                toCol === fromCol &&
-                toRow === fromRow - 2 &&
-                this.textContent === "" &&
-                squares[from - 8].textContent === ""
-            ) {
-                validMove = true;
-            }
-                   if (
-                toRow === fromRow - 1 &&
-                Math.abs(toCol - fromCol) === 1 &&
-                this.textContent === "♟"
-            ) {
-                validMove = true;
-            }
-  if (
-                lastDoubleStep &&
-                piece === "♙" &&
-                Math.abs(toCol - fromCol) === 1 &&
-                toRow === fromRow - 1 &&
-                lastDoubleStep === squares[from + (toCol - fromCol)]
-            ) {
-                validMove = true;
-            }
-       }
-        // USHTARI I ZI
-        if (piece === "♟") {
+    // 2 katrorë nga pozita fillestare
+    if (
+        fromRow === 6 &&
+        toCol === fromCol &&
+        toRow === fromRow - 2 &&
+        this.textContent === "" &&
+        squares[from - 8].textContent === ""
+    ) {
+        validMove = true;
+    }
 
+    // Marrje normale diagonale
+    if (
+        toRow === fromRow - 1 &&
+        Math.abs(toCol - fromCol) === 1 &&
+        this.textContent === "♟"
+    ) {
+        validMove = true;
+    }
+
+    // EN PASSANT
+    if (
+        lastDoubleStep &&
+        this.textContent === "" &&
+        Math.abs(toCol - fromCol) === 1 &&
+        toRow === fromRow - 1 &&
+        lastDoubleStep === squares[from + (toCol - fromCol)] &&
+        lastDoubleStep.textContent === "♟"
+    ) {
+        validMove = true;
+    }
+}
+          // USHTARI I BARDHË
+if (piece === "♙") {
+
+    // 1 katror përpara
+    if (
+        toCol === fromCol &&
+        toRow === fromRow - 1 &&
+        this.textContent === ""
+    ) {
+        validMove = true;
+    }
+
+    // 2 katrorë nga fillimi
+    if (
+        fromRow === 6 &&
+        toCol === fromCol &&
+        toRow === fromRow - 2 &&
+        this.textContent === "" &&
+        squares[from - 8].textContent === ""
+    ) {
+        validMove = true;
+    }
+
+    // Marrje normale diagonale
+    if (
+        toRow === fromRow - 1 &&
+        Math.abs(toCol - fromCol) === 1 &&
+        this.textContent === "♟"
+    ) {
+        validMove = true;
+    }
+
+    // EN PASSANT
+    if (
+        lastDoubleStep &&
+        this.textContent === "" &&
+        Math.abs(toCol - fromCol) === 1 &&
+        toRow === fromRow - 1 &&
+        lastDoubleStep === squares[from + (toCol - fromCol)] &&
+        lastDoubleStep.textContent === "♟"
+    ) {
+        validMove = true;
+    }
+}
+
+
+// USHTARI I ZI
+if (piece === "♟") {
+
+    // 1 katror përpara
     if (
         toCol === fromCol &&
         toRow === fromRow + 1 &&
@@ -178,6 +232,7 @@ return;
         validMove = true;
     }
 
+    // 2 katrorë nga fillimi
     if (
         fromRow === 1 &&
         toCol === fromCol &&
@@ -188,6 +243,7 @@ return;
         validMove = true;
     }
 
+    // Marrje normale diagonale
     if (
         toRow === fromRow + 1 &&
         Math.abs(toCol - fromCol) === 1 &&
@@ -195,17 +251,53 @@ return;
     ) {
         validMove = true;
     }
+
+    // EN PASSANT
+    if (
+        lastDoubleStep &&
+        this.textContent === "" &&
+        Math.abs(toCol - fromCol) === 1 &&
+        toRow === fromRow + 1 &&
+        lastDoubleStep === squares[from + (toCol - fromCol)] &&
+        lastDoubleStep.textContent === "♙"
+    ) {
+        validMove = true;
+    }
 }
 
+
+// LËVIZJA
 if (validMove) {
+
+    // Kontrollo nëse është EN PASSANT
+    const isEnPassant =
+        lastDoubleStep &&
+        this.textContent === "" &&
+        Math.abs(toCol - fromCol) === 1 &&
+        (
+            (piece === "♙" && toRow === fromRow - 1) ||
+            (piece === "♟" && toRow === fromRow + 1)
+        ) &&
+        lastDoubleStep === squares[from + (toCol - fromCol)];
+
+    // Nëse është En Passant, hiq ushtarin e kapur
+    if (isEnPassant) {
+        lastDoubleStep.textContent = "";
+    }
+
     this.textContent = piece;
     selectedSquare.textContent = "";
-if (
-    (piece === "♙" && fromRow === 6 && toRow === 4) ||
-    (piece === "♟" && fromRow === 1 && toRow === 3)
-) {
-    lastDoubleStep = this;
-}
+
+    // Ruaj vetëm lëvizjen e fundit me 2 katrorë
+    if (
+        (piece === "♙" && fromRow === 6 && toRow === 4) ||
+        (piece === "♟" && fromRow === 1 && toRow === 3)
+    ) {
+        lastDoubleStep = this;
+    } else {
+        lastDoubleStep = null;
+    }
+
     whiteTurn = !whiteTurn;
 }
 
