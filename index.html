@@ -228,13 +228,65 @@ if (piece === "♘" || piece === "♞") {
     const rowDiff = Math.abs(toRow - fromRow);
     const colDiff = Math.abs(toCol - fromCol);
 
+    const target = this.textContent;
+
+    const sameColor =
+        (piece === "♘" &&
+            ["♙", "♘", "♗", "♕", "♔"].includes(target)) ||
+        (piece === "♞" &&
+            ["♟", "♞", "♝", "♛", "♚"].includes(target));
+
     if (
-        (rowDiff === 2 && colDiff === 1) ||
-        (rowDiff === 1 && colDiff === 2)
+        (
+            (rowDiff === 2 && colDiff === 1) ||
+            (rowDiff === 1 && colDiff === 2)
+        ) &&
+        !sameColor
     ) {
         validMove = true;
     }
 }
+
+// LËVIZJA
+if (validMove) {
+
+    // Kontrollo nëse është EN PASSANT
+    const isEnPassant =
+        lastDoubleStep &&
+        this.textContent === "" &&
+        Math.abs(toCol - fromCol) === 1 &&
+        (
+            (piece === "♙" && toRow === fromRow - 1) ||
+            (piece === "♟" && toRow === fromRow + 1)
+        ) &&
+        lastDoubleStep === squares[from + (toCol - fromCol)];
+
+    // Nëse është En Passant, hiq ushtarin e kapur
+    if (isEnPassant) {
+        lastDoubleStep.textContent = "";
+    }
+
+    this.textContent = piece;
+    selectedSquare.textContent = "";
+
+    // Ruaj vetëm lëvizjen e fundit me 2 katrorë
+    if (
+        (piece === "♙" && fromRow === 6 && toRow === 4) ||
+        (piece === "♟" && fromRow === 1 && toRow === 3)
+    ) {
+        lastDoubleStep = this;
+    } else {
+        lastDoubleStep = null;
+    }
+
+    whiteTurn = !whiteTurn;
+}
+
+selectedSquare.classList.remove("selected");
+selectedSquare = null;
+
+    });
+
 // LËVIZJA
 if (validMove) {
 
