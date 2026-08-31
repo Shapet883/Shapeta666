@@ -107,11 +107,13 @@ const squares = Array.from(document.querySelectorAll(".square"));
 if (selectedSquare === null) {
 
 if (
-    (whiteTurn && this.textContent === "♙") ||
-    (!whiteTurn && this.textContent === "♟")
+    (whiteTurn &&
+        ["♙", "♘"].includes(this.textContent)) ||
+    (!whiteTurn &&
+        ["♟", "♞"].includes(this.textContent))
 ) {
-selectedSquare = this;
-this.classList.add("selected");
+    selectedSquare = this;
+    this.classList.add("selected");
 }
 
 return;
