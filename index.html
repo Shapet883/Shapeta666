@@ -176,52 +176,7 @@ if (piece === "♙") {
         validMove = true;
     }
 }
-          // USHTARI I BARDHË
-if (piece === "♙") {
-
-    // 1 katror përpara
-    if (
-        toCol === fromCol &&
-        toRow === fromRow - 1 &&
-        this.textContent === ""
-    ) {
-        validMove = true;
-    }
-
-    // 2 katrorë nga fillimi
-    if (
-        fromRow === 6 &&
-        toCol === fromCol &&
-        toRow === fromRow - 2 &&
-        this.textContent === "" &&
-        squares[from - 8].textContent === ""
-    ) {
-        validMove = true;
-    }
-
-    // Marrje normale diagonale
-    if (
-        toRow === fromRow - 1 &&
-        Math.abs(toCol - fromCol) === 1 &&
-        this.textContent === "♟"
-    ) {
-        validMove = true;
-    }
-
-    // EN PASSANT
-    if (
-        lastDoubleStep &&
-        this.textContent === "" &&
-        Math.abs(toCol - fromCol) === 1 &&
-        toRow === fromRow - 1 &&
-        lastDoubleStep === squares[from + (toCol - fromCol)] &&
-        lastDoubleStep.textContent === "♟"
-    ) {
-        validMove = true;
-    }
-}
-
-
+    
 // USHTARI I ZI
 if (piece === "♟") {
 
