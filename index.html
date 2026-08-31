@@ -96,6 +96,7 @@ for (let row = 0; row < 8; row++) {
     }
 }
 let selectedSquare = null;
+let whiteTurn = true;
 document.querySelectorAll(".square").forEach(function(square) {
 
 square.addEventListener("click", function() {
@@ -104,7 +105,10 @@ const squares = Array.from(document.querySelectorAll(".square"));
 
 if (selectedSquare === null) {
 
-if (this.textContent === "♙" || this.textContent === "♟") {
+if (
+    (whiteTurn && this.textContent === "♙") ||
+    (!whiteTurn && this.textContent === "♟")
+) {
 selectedSquare = this;
 this.classList.add("selected");
 }
@@ -184,12 +188,14 @@ if (
 }
 
 if (validMove) {
-            this.textContent = piece;
-            selectedSquare.textContent = "";
-        }
+    this.textContent = piece;
+    selectedSquare.textContent = "";
 
-        selectedSquare.classList.remove("selected");
-        selectedSquare = null;
+    whiteTurn = !whiteTurn;
+}
+
+selectedSquare.classList.remove("selected");
+selectedSquare = null;
 
     });
 
