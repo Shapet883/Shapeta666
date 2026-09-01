@@ -468,7 +468,65 @@ selectedSquare = null;
     });
 
 });
+// KONTROLLI I SHAHUT
+function isKingInCheck(king) {
 
+    const squares = Array.from(document.querySelectorAll(".square"));
+    const kingIndex = squares.indexOf(king);
+
+    const kingRow = Math.floor(kingIndex / 8);
+    const kingCol = kingIndex % 8;
+
+    const enemyPieces =
+        king.textContent === "♔"
+            ? ["♟", "♞", "♝", "♜", "♛"]
+            : ["♙", "♘", "♗", "♖", "♕"];
+
+    for (let i = 0; i < 64; i++) {
+
+        const piece = squares[i].textContent;
+
+        if (!enemyPieces.includes(piece)) {
+            continue;
+        }
+
+        const row = Math.floor(i / 8);
+        const col = i % 8;
+
+        const rowDiff = Math.abs(kingRow - row);
+        const colDiff = Math.abs(kingCol - col);
+
+        // KALI
+        if (
+            (piece === "♘" || piece === "♞") &&
+            (
+                (rowDiff === 2 && colDiff === 1) ||
+                (rowDiff === 1 && colDiff === 2)
+            )
+        ) {
+            return true;
+        }
+
+        // USHTARI
+        if (
+            piece === "♙" &&
+            kingRow === row - 1 &&
+            colDiff === 1
+        ) {
+            return true;
+        }
+
+        if (
+            piece === "♟" &&
+            kingRow === row + 1 &&
+            colDiff === 1
+        ) {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 </script>
 
