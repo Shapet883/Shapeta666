@@ -496,9 +496,8 @@ document.querySelectorAll(".square").forEach(function(square) {
 
             } else {
     whiteTurn = !whiteTurn;
+testCheckmate(whiteTurn ? "white" : "black");
 
-    if (isCheckmate(whiteTurn ? "white" : "black")) {
-        alert("♚ SHAH-MAT!");
     }
 }
              KONTROLLO SHAHUN
@@ -1126,6 +1125,23 @@ if (
     }
 
     return true;
+}
+function testCheckmate(color) {
+
+    const kingSymbol =
+        color === "white" ? "♔" : "♚";
+
+    const squares =
+        Array.from(document.querySelectorAll(".square"));
+
+    const king =
+        squares.find(
+            square => square.textContent === kingSymbol
+        );
+
+    if (king && isKingInCheck(king)) {
+        alert("Mbreti është në shah!");
+    }
 }
 </script>
 
