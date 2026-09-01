@@ -490,13 +490,17 @@ document.querySelectorAll(".square").forEach(function(square) {
                 lastDoubleStep = null;
 
                 alert("Nuk lejohet! Mbreti është në shah.");
+   lastDoubleStep = null;
+
+                alert("Nuk lejohet! Mbreti është në shah.");
 
             } else {
+    whiteTurn = !whiteTurn;
 
-                whiteTurn = !whiteTurn;
-            }
-
-            /*
+    if (isCheckmate(whiteTurn ? "white" : "black")) {
+        alert("♚ SHAH-MAT!");
+    }
+}
              KONTROLLO SHAHUN
             */
 
@@ -748,7 +752,381 @@ function isKingInCheck(king) {
 
     return false;
 }
+function isCheckmate(color) {
 
+    const squares =
+        Array.from(document.querySelectorAll(".square"));
+
+    const ownPieces =
+        color === "white"
+            ? ["♙","♘","♖","♗","♕","♔"]
+            : ["♟","♞","♜","♝","♛","♚"];
+
+    const enemyPieces =
+        color === "white"
+            ? ["♟","♞","♝","♜","♛","♚"]
+            : ["♙","♘","♗","♖","♕","♔"];
+
+    const kingSymbol =
+        color === "white" ? "♔" : "♚";
+
+    const king =
+        squares.find(
+            square => square.textContent === kingSymbol
+        );
+
+    if (!king) {
+        return false;
+    }
+
+    // Nëse mbreti nuk është në shah,
+    // nuk ka shah-mat.
+    if (!isKingInCheck(king)) {
+        return false;
+    }
+
+    /*
+     * Kontrollojmë të gjitha figurat e lojtarit.
+     * Nëse ekziston qoftë edhe një lëvizje
+     * që e nxjerr mbretin nga shahu,
+     * nuk është shah-mat.
+     */
+
+    for (let from = 0; from < 64; from++) {
+
+        const piece =
+            squares[from].textContent;
+
+        if (!ownPieces.includes(piece)) {
+            continue;
+        }
+
+        const fromRow =
+            Math.floor(from / 8);
+
+        const fromCol =
+            from % 8;
+
+        for (let to = 0; to < 64; to++) {
+
+            if (from === to) {
+                continue;
+            }
+
+            const target =
+                squares[to].textContent;
+
+            if (ownPieces.includes(target)) {
+                continue;
+            }
+if (
+    target === "♔" ||
+    target === "♚"
+) {
+    continue;
+}
+            const toRow =
+                Math.floor(to / 8);
+
+            const toCol =
+                to % 8;
+
+            let possible = false;
+
+            const rowDiff =
+                Math.abs(toRow - fromRow);
+
+            const colDiff =
+                Math.abs(toCol - fromCol);
+
+            /*
+             PAWN
+            */
+
+            if (piece === "♙") {
+
+                if (
+                    toCol === fromCol &&
+                    toRow === fromRow - 1 &&
+                    target === ""
+                ) {
+                    possible = true;
+                }
+
+                if (
+                    fromRow === 6 &&
+                    toCol === fromCol &&
+                    toRow === fromRow - 2 &&
+                    target === "" &&
+                    squares[from - 8].textContent === ""
+                ) {
+                    possible = true;
+                }
+
+                if (
+                    toRow === fromRow - 1 &&
+                    colDiff === 1 &&
+                    enemyPieces.includes(target)
+                ) {
+                    possible = true;
+                }
+            }
+
+            if (piece === "♟") {
+
+                if (
+                    toCol === fromCol &&
+                    toRow === fromRow + 1 &&
+                    target === ""
+                ) {
+                    possible = true;
+                }
+
+                if (
+                    fromRow === 1 &&
+                    toCol === fromCol &&
+                    toRow === fromRow + 2 &&
+                    target === "" &&
+                    squares[from + 8].textContent === ""
+                ) {
+                    possible = true;
+                }
+
+                if (
+                    toRow === fromRow + 1 &&
+                    colDiff === 1 &&
+                    enemyPieces.includes(target)
+                ) {
+                    possible = true;
+                }
+            }
+
+            /*
+             KALI
+            */
+
+            if (
+                piece === "♘" ||
+                piece === "♞"
+            ) {
+                if (
+                    (rowDiff === 2 && colDiff === 1) ||
+                    (rowDiff === 1 && colDiff === 2)
+                ) {
+                    possible = true;
+                }
+            }
+
+            /*
+             MBRETI
+            */
+
+            if (
+                piece === "♔" ||
+                piece === "♚"
+            ) {
+                if (
+                    rowDiff <= 1 &&
+                    colDiff <= 1 &&
+                    rowDiff + colDiff > 0
+                ) {
+                    possible = true;
+                }
+            }
+
+            /*
+             TORRA
+            */
+
+            if (
+                piece === "♖" ||
+                piece === "♜"
+            ) {
+
+                if (
+                    toRow === fromRow ||
+                    toCol === fromCol
+                ) {
+
+                    let blocked = false;
+
+                    const rowStep =
+                        toRow === fromRow
+                            ? 0
+                            : (toRow > fromRow ? 1 : -1);
+
+                    const colStep =
+                        toCol === fromCol
+                            ? 0
+                            : (toCol > fromCol ? 1 : -1);
+
+                    let r = fromRow + rowStep;
+                    let c = fromCol + colStep;
+
+                    while (
+                        r !== toRow ||
+                        c !== toCol
+                    ) {
+
+                        if (
+                            squares[r * 8 + c]
+                                .textContent !== ""
+                        ) {
+                            blocked = true;
+                            break;
+                        }
+
+                        r += rowStep;
+                        c += colStep;
+                    }
+
+                    if (!blocked) {
+                        possible = true;
+                    }
+                }
+            }
+
+            /*
+             FILI
+            */
+
+            if (
+                piece === "♗" ||
+                piece === "♝"
+            ) {
+
+                if (rowDiff === colDiff && rowDiff !== 0) {
+
+                    let blocked = false;
+
+                    const rowStep =
+                        toRow > fromRow ? 1 : -1;
+
+                    const colStep =
+                        toCol > fromCol ? 1 : -1;
+
+                    let r = fromRow + rowStep;
+                    let c = fromCol + colStep;
+
+                    while (
+                        r !== toRow ||
+                        c !== toCol
+                    ) {
+
+                        if (
+                            squares[r * 8 + c]
+                                .textContent !== ""
+                        ) {
+                            blocked = true;
+                            break;
+                        }
+
+                        r += rowStep;
+                        c += colStep;
+                    }
+
+                    if (!blocked) {
+                        possible = true;
+                    }
+                }
+            }
+
+            /*
+             MBRETËRESHA
+            */
+
+            if (
+                piece === "♕" ||
+                piece === "♛"
+            ) {
+
+                const straight =
+                    toRow === fromRow ||
+                    toCol === fromCol;
+
+                const diagonal =
+                    rowDiff === colDiff &&
+                    rowDiff !== 0;
+
+                if (straight || diagonal) {
+
+                    let blocked = false;
+
+                    const rowStep =
+                        toRow === fromRow
+                            ? 0
+                            : (toRow > fromRow ? 1 : -1);
+
+                    const colStep =
+                        toCol === fromCol
+                            ? 0
+                            : (toCol > fromCol ? 1 : -1);
+
+                    let r = fromRow + rowStep;
+                    let c = fromCol + colStep;
+
+                    while (
+                        r !== toRow ||
+                        c !== toCol
+                    ) {
+
+                        if (
+                            squares[r * 8 + c]
+                                .textContent !== ""
+                        ) {
+                            blocked = true;
+                            break;
+                        }
+
+                        r += rowStep;
+                        c += colStep;
+                    }
+
+                    if (!blocked) {
+                        possible = true;
+                    }
+                }
+            }
+
+            if (!possible) {
+                continue;
+            }
+
+            /*
+             PROVOJMË LËVIZJEN
+            */
+
+            const oldFrom =
+                squares[from].textContent;
+
+            const oldTo =
+                squares[to].textContent;
+
+            squares[to].textContent = oldFrom;
+            squares[from].textContent = "";
+
+            const newKing =
+                squares.find(
+                    square =>
+                        square.textContent === kingSymbol
+                );
+
+            const stillInCheck =
+                newKing &&
+                isKingInCheck(newKing);
+
+            // Kthejmë pozicionin siç ishte.
+            squares[from].textContent = oldFrom;
+            squares[to].textContent = oldTo;
+
+            if (!stillInCheck) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
 </script>
 
 </body>
