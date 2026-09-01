@@ -1,0 +1,755 @@
+
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shapeta Chess Kosova</title>
+
+<style>
+
+body {
+    margin: 0;
+    background: #222;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    margin: 20px 0;
+}
+
+#board {
+    width: 480px;
+    height: 480px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(8, 60px);
+    grid-template-rows: repeat(8, 60px);
+    border: 4px solid #111;
+}
+
+.square {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.light {
+    background: #d8c09a;
+}
+
+.dark {
+    background: #705735;
+}
+
+.selected {
+    box-shadow: 0 0 0 4px #888 inset;
+}
+
+.in-check {
+    background: red !important;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>♟️ SHAPETA CHESS KOSOVA 🇽🇰</h1>
+
+<div id="board"></div>
+
+<script>
+
+const board = document.getElementById("board");
+
+const pieces = [
+    ["♜","♞","♝","♛","♚","♝","♞","♜"],
+    ["♟","♟","♟","♟","♟","♟","♟","♟"],
+    ["","","","","","","",""],
+    ["","","","","","","",""],
+    ["","","","","","","",""],
+    ["","","","","","","",""],
+    ["♙","♙","♙","♙","♙","♙","♙","♙"],
+    ["♖","♘","♗","♕","♔","♗","♘","♖"]
+];
+
+for (let row = 0; row < 8; row++) {
+
+    for (let col = 0; col < 8; col++) {
+
+        const square = document.createElement("div");
+
+        square.classList.add("square");
+
+        if ((row + col) % 2 === 0) {
+            square.classList.add("light");
+        } else {
+            square.classList.add("dark");
+        }
+
+        square.textContent = pieces[row][col];
+
+        board.appendChild(square);
+    }
+}
+
+let selectedSquare = null;
+let whiteTurn = true;
+let lastDoubleStep = null;
+
+document.querySelectorAll(".square").forEach(function(square) {
+
+    square.addEventListener("click", function() {
+
+        const squares = Array.from(document.querySelectorAll(".square"));
+
+        if (selectedSquare === null) {
+
+            if (
+                (whiteTurn &&
+                    ["♙","♘","♖","♗","♕","♔"].includes(this.textContent)) ||
+                (!whiteTurn &&
+                    ["♟","♞","♜","♝","♛","♚"].includes(this.textContent))
+            ) {
+
+                selectedSquare = this;
+                this.classList.add("selected");
+            }
+
+            return;
+        }
+
+        const from = squares.indexOf(selectedSquare);
+        const to = squares.indexOf(this);
+
+        const fromRow = Math.floor(from / 8);
+        const fromCol = from % 8;
+
+        const toRow = Math.floor(to / 8);
+        const toCol = to % 8;
+
+        const piece = selectedSquare.textContent;
+        const target = this.textContent;
+
+        let validMove = false;
+
+        const whitePieces =
+            ["♙","♘","♖","♗","♕","♔"];
+
+        const blackPieces =
+            ["♟","♞","♜","♝","♛","♚"];
+
+        const sameColor =
+            (whitePieces.includes(piece) && whitePieces.includes(target)) ||
+            (blackPieces.includes(piece) && blackPieces.includes(target));
+
+        if (sameColor) {
+            selectedSquare.classList.remove("selected");
+            selectedSquare = null;
+            return;
+        }
+
+        /*
+         USHTARI I BARDHË
+        */
+
+        if (piece === "♙") {
+
+            if (
+                toCol === fromCol &&
+                toRow === fromRow - 1 &&
+                target === ""
+            ) {
+                validMove = true;
+            }
+
+            if (
+                fromRow === 6 &&
+                toCol === fromCol &&
+                toRow === fromRow - 2 &&
+                target === "" &&
+                squares[from - 8].textContent === ""
+            ) {
+                validMove = true;
+            }
+
+            if (
+                toRow === fromRow - 1 &&
+                Math.abs(toCol - fromCol) === 1 &&
+                blackPieces.includes(target)
+            ) {
+                validMove = true;
+            }
+
+            if (
+                lastDoubleStep &&
+                target === "" &&
+                Math.abs(toCol - fromCol) === 1 &&
+                toRow === fromRow - 1 &&
+                lastDoubleStep === squares[from + (toCol - fromCol)] &&
+                lastDoubleStep.textContent === "♟"
+            ) {
+                validMove = true;
+            }
+        }
+
+        /*
+         USHTARI I ZI
+        */
+
+        if (piece === "♟") {
+
+            if (
+                toCol === fromCol &&
+                toRow === fromRow + 1 &&
+                target === ""
+            ) {
+                validMove = true;
+            }
+
+            if (
+                fromRow === 1 &&
+                toCol === fromCol &&
+                toRow === fromRow + 2 &&
+                target === "" &&
+                squares[from + 8].textContent === ""
+            ) {
+                validMove = true;
+            }
+
+            if (
+                toRow === fromRow + 1 &&
+                Math.abs(toCol - fromCol) === 1 &&
+                whitePieces.includes(target)
+            ) {
+                validMove = true;
+            }
+
+            if (
+                lastDoubleStep &&
+                target === "" &&
+                Math.abs(toCol - fromCol) === 1 &&
+                toRow === fromRow + 1 &&
+                lastDoubleStep === squares[from + (toCol - fromCol)] &&
+                lastDoubleStep.textContent === "♙"
+            ) {
+                validMove = true;
+            }
+        }
+
+        /*
+         KALI
+        */
+
+        if (piece === "♘" || piece === "♞") {
+
+            const rowDiff = Math.abs(toRow - fromRow);
+            const colDiff = Math.abs(toCol - fromCol);
+
+            if (
+                (
+                    (rowDiff === 2 && colDiff === 1) ||
+                    (rowDiff === 1 && colDiff === 2)
+                ) &&
+                !sameColor
+            ) {
+                validMove = true;
+            }
+        }
+
+        /*
+         TORRA
+        */
+
+        if (piece === "♖" || piece === "♜") {
+
+            if (
+                (toRow === fromRow && toCol !== fromCol) ||
+                (toCol === fromCol && toRow !== fromRow)
+            ) {
+
+                let blocked = false;
+
+                const rowStep =
+                    toRow === fromRow ? 0 :
+                    (toRow > fromRow ? 1 : -1);
+
+                const colStep =
+                    toCol === fromCol ? 0 :
+                    (toCol > fromCol ? 1 : -1);
+
+                let r = fromRow + rowStep;
+                let c = fromCol + colStep;
+
+                while (r !== toRow || c !== toCol) {
+
+                    if (squares[r * 8 + c].textContent !== "") {
+                        blocked = true;
+                        break;
+                    }
+
+                    r += rowStep;
+                    c += colStep;
+                }
+
+                if (!blocked && !sameColor) {
+                    validMove = true;
+                }
+            }
+        }
+
+        /*
+         FILI
+        */
+
+        if (piece === "♗" || piece === "♝") {
+
+            const rowDiff = Math.abs(toRow - fromRow);
+            const colDiff = Math.abs(toCol - fromCol);
+
+            if (rowDiff === colDiff && rowDiff !== 0) {
+
+                let blocked = false;
+
+                const rowStep =
+                    toRow > fromRow ? 1 : -1;
+
+                const colStep =
+                    toCol > fromCol ? 1 : -1;
+
+                let r = fromRow + rowStep;
+                let c = fromCol + colStep;
+
+                while (r !== toRow || c !== toCol) {
+
+                    if (squares[r * 8 + c].textContent !== "") {
+                        blocked = true;
+                        break;
+                    }
+
+                    r += rowStep;
+                    c += colStep;
+                }
+
+                if (!blocked && !sameColor) {
+                    validMove = true;
+                }
+            }
+        }
+
+        /*
+         MBRETËRESHA
+        */
+
+        if (piece === "♕" || piece === "♛") {
+
+            const rowDiff = Math.abs(toRow - fromRow);
+            const colDiff = Math.abs(toCol - fromCol);
+
+            const straight =
+                (toRow === fromRow && toCol !== fromCol) ||
+                (toCol === fromCol && toRow !== fromRow);
+
+            const diagonal =
+                rowDiff === colDiff && rowDiff !== 0;
+
+            if (straight || diagonal) {
+
+                let blocked = false;
+
+                const rowStep =
+                    toRow === fromRow ? 0 :
+                    (toRow > fromRow ? 1 : -1);
+
+                const colStep =
+                    toCol === fromCol ? 0 :
+                    (toCol > fromCol ? 1 : -1);
+
+                let r = fromRow + rowStep;
+                let c = fromCol + colStep;
+
+                while (r !== toRow || c !== toCol) {
+
+                    if (squares[r * 8 + c].textContent !== "") {
+                        blocked = true;
+                        break;
+                    }
+
+                    r += rowStep;
+                    c += colStep;
+                }
+
+                if (!blocked && !sameColor) {
+                    validMove = true;
+                }
+            }
+        }
+
+        /*
+         MBRETI
+        */
+
+        if (piece === "♔" || piece === "♚") {
+
+            const rowDiff = Math.abs(toRow - fromRow);
+            const colDiff = Math.abs(toCol - fromCol);
+
+            if (
+                rowDiff <= 1 &&
+                colDiff <= 1 &&
+                rowDiff + colDiff > 0 &&
+                !sameColor
+            ) {
+                validMove = true;
+            }
+        }
+
+        /*
+         MOS LEJO KAPJEN E MBRETIT
+        */
+
+        if (
+            target === "♔" ||
+            target === "♚"
+        ) {
+            validMove = false;
+        }
+
+        /*
+         LËVIZJA
+        */
+
+        if (validMove) {
+
+            const isEnPassant =
+                lastDoubleStep &&
+                target === "" &&
+                Math.abs(toCol - fromCol) === 1 &&
+                (
+                    (piece === "♙" && toRow === fromRow - 1) ||
+                    (piece === "♟" && toRow === fromRow + 1)
+                ) &&
+                lastDoubleStep === squares[from + (toCol - fromCol)];
+
+            let capturedPiece = target;
+            let capturedSquare = this;
+
+            if (isEnPassant) {
+
+                capturedSquare =
+                    lastDoubleStep;
+
+                capturedPiece =
+                    lastDoubleStep.textContent;
+
+                lastDoubleStep.textContent = "";
+            }
+
+            this.textContent = piece;
+            selectedSquare.textContent = "";
+
+            if (
+                (piece === "♙" && fromRow === 6 && toRow === 4) ||
+                (piece === "♟" && fromRow === 1 && toRow === 3)
+            ) {
+                lastDoubleStep = this;
+            } else {
+                lastDoubleStep = null;
+            }
+
+            const allSquares =
+                Array.from(document.querySelectorAll(".square"));
+
+            const ownKing =
+                whitePieces.includes(piece)
+                    ? allSquares.find(
+                        square => square.textContent === "♔"
+                    )
+                    : allSquares.find(
+                        square => square.textContent === "♚"
+                    );
+
+            if (ownKing && isKingInCheck(ownKing)) {
+
+                this.textContent = capturedPiece;
+                selectedSquare.textContent = piece;
+
+                if (isEnPassant) {
+                    capturedSquare.textContent = capturedPiece;
+                }
+
+                lastDoubleStep = null;
+
+                alert("Nuk lejohet! Mbreti është në shah.");
+
+            } else {
+
+                whiteTurn = !whiteTurn;
+            }
+
+            /*
+             KONTROLLO SHAHUN
+            */
+
+            allSquares.forEach(function(square) {
+                square.classList.remove("in-check");
+            });
+
+            const whiteKing =
+                allSquares.find(
+                    square => square.textContent === "♔"
+                );
+
+            const blackKing =
+                allSquares.find(
+                    square => square.textContent === "♚"
+                );
+
+            if (whiteKing && isKingInCheck(whiteKing)) {
+                whiteKing.classList.add("in-check");
+            }
+
+            if (blackKing && isKingInCheck(blackKing)) {
+                blackKing.classList.add("in-check");
+            }
+        }
+
+        if (selectedSquare) {
+            selectedSquare.classList.remove("selected");
+            selectedSquare = null;
+        }
+
+    });
+});
+
+/*
+ KONTROLLI I SHAHUT
+*/
+
+function isKingInCheck(king) {
+
+    const squares =
+        Array.from(document.querySelectorAll(".square"));
+
+    const kingIndex =
+        squares.indexOf(king);
+
+    const kingRow =
+        Math.floor(kingIndex / 8);
+
+    const kingCol =
+        kingIndex % 8;
+
+    const enemyPieces =
+        king.textContent === "♔"
+            ? ["♟","♞","♝","♜","♛","♚"]
+            : ["♙","♘","♖","♗","♕","♔"];
+
+    for (let i = 0; i < 64; i++) {
+
+        const piece =
+            squares[i].textContent;
+
+        if (!enemyPieces.includes(piece)) {
+            continue;
+        }
+
+        const row =
+            Math.floor(i / 8);
+
+        const col =
+            i % 8;
+
+        const rowDiff =
+            Math.abs(kingRow - row);
+
+        const colDiff =
+            Math.abs(kingCol - col);
+
+        /*
+         KALI
+        */
+
+        if (
+            (piece === "♘" || piece === "♞") &&
+            (
+                (rowDiff === 2 && colDiff === 1) ||
+                (rowDiff === 1 && colDiff === 2)
+            )
+        ) {
+            return true;
+        }
+
+        /*
+         USHTARI
+        */
+
+        if (
+            piece === "♙" &&
+            kingRow === row - 1 &&
+            colDiff === 1
+        ) {
+            return true;
+        }
+
+        if (
+            piece === "♟" &&
+            kingRow === row + 1 &&
+            colDiff === 1
+        ) {
+            return true;
+        }
+
+        /*
+         MBRETI
+        */
+
+        if (
+            (piece === "♔" || piece === "♚") &&
+            rowDiff <= 1 &&
+            colDiff <= 1 &&
+            rowDiff + colDiff > 0
+        ) {
+            return true;
+        }
+
+        /*
+         TORRA
+        */
+
+        if (
+            (piece === "♖" || piece === "♜") &&
+            (row === kingRow || col === kingCol)
+        ) {
+
+            let blocked = false;
+
+            const rowStep =
+                row === kingRow ? 0 :
+                (kingRow > row ? 1 : -1);
+
+            const colStep =
+                col === kingCol ? 0 :
+                (kingCol > col ? 1 : -1);
+
+            let r = row + rowStep;
+            let c = col + colStep;
+
+            while (r !== kingRow || c !== kingCol) {
+
+                if (
+                    squares[r * 8 + c].textContent !== ""
+                ) {
+                    blocked = true;
+                    break;
+                }
+
+                r += rowStep;
+                c += colStep;
+            }
+
+            if (!blocked) {
+                return true;
+            }
+        }
+
+        /*
+         FILI
+        */
+
+        if (
+            (piece === "♗" || piece === "♝") &&
+            rowDiff === colDiff &&
+            rowDiff !== 0
+        ) {
+
+            let blocked = false;
+
+            const rowStep =
+                kingRow > row ? 1 : -1;
+
+            const colStep =
+                kingCol > col ? 1 : -1;
+
+            let r = row + rowStep;
+            let c = col + colStep;
+
+            while (r !== kingRow || c !== kingCol) {
+
+                if (
+                    squares[r * 8 + c].textContent !== ""
+                ) {
+                    blocked = true;
+                    break;
+                }
+
+                r += rowStep;
+                c += colStep;
+            }
+
+            if (!blocked) {
+                return true;
+            }
+        }
+
+        /*
+         MBRETËRESHA
+        */
+
+        if (
+            (piece === "♕" || piece === "♛") &&
+            (
+                row === kingRow ||
+                col === kingCol ||
+                rowDiff === colDiff
+            )
+        ) {
+
+            let blocked = false;
+
+            const rowStep =
+                row === kingRow ? 0 :
+                (kingRow > row ? 1 : -1);
+
+            const colStep =
+                col === kingCol ? 0 :
+                (kingCol > col ? 1 : -1);
+
+            let r = row + rowStep;
+            let c = col + colStep;
+
+            while (r !== kingRow || c !== kingCol) {
+
+                if (
+                    squares[r * 8 + c].textContent !== ""
+                ) {
+                    blocked = true;
+                    break;
+                }
+
+                r += rowStep;
+                c += colStep;
+            }
+
+            if (!blocked) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+</script>
+
+</body>
+</html>
