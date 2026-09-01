@@ -108,9 +108,9 @@ if (selectedSquare === null) {
 
 if (
     (whiteTurn &&
-        ["♙", "♘", "♖"].includes(this.textContent)) ||
+        ["♙", "♘", "♖", "♗"].includes(this.textContent)) ||
     (!whiteTurn &&
-        ["♟", "♞", "♜"].includes(this.textContent))
+        ["♟", "♞", "♜", "♝"].includes(this.textContent))
 ) {
     selectedSquare = this;
     this.classList.add("selected");
@@ -290,6 +290,51 @@ if (piece === "♖" || piece === "♜") {
                 ["♙", "♘", "♗", "♕", "♔", "♖"].includes(target)) ||
             (piece === "♜" &&
                 ["♟", "♞", "♝", "♛", "♚", "♜"].includes(target));
+
+        if (!blocked && !sameColor) {
+            validMove = true;
+        }
+    }
+}
+// FILI I BARDHË DHE I ZI
+if (piece === "♗" || piece === "♝") {
+
+    const rowDiff = Math.abs(toRow - fromRow);
+    const colDiff = Math.abs(toCol - fromCol);
+
+    // Fili lëviz vetëm në diagonale
+    if (rowDiff === colDiff && rowDiff !== 0) {
+
+        let blocked = false;
+
+        const rowStep = toRow > fromRow ? 1 : -1;
+        const colStep = toCol > fromCol ? 1 : -1;
+
+        let r = fromRow + rowStep;
+        let c = fromCol + colStep;
+
+        // Kontrollo katrorët ndërmjet
+        while (r !== toRow && c !== toCol) {
+
+            const middleSquare = squares[r * 8 + c];
+
+            if (middleSquare.textContent !== "") {
+                blocked = true;
+                break;
+            }
+
+            r += rowStep;
+            c += colStep;
+        }
+
+        // Mos lejo kapjen e figurës së vet
+        const target = this.textContent;
+
+        const sameColor =
+            (piece === "♗" &&
+                ["♙", "♘", "♗", "♖", "♕", "♔"].includes(target)) ||
+            (piece === "♝" &&
+                ["♟", "♞", "♝", "♜", "♛", "♚"].includes(target));
 
         if (!blocked && !sameColor) {
             validMove = true;
