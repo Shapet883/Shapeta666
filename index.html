@@ -156,13 +156,13 @@ if (piece === "♙") {
     }
 
     // Marrje normale diagonale
-    if (
-        toRow === fromRow - 1 &&
-        Math.abs(toCol - fromCol) === 1 &&
-        this.textContent === "♟"
-    ) {
-        validMove = true;
-    }
+if (
+    toRow === fromRow - 1 &&
+    Math.abs(toCol - fromCol) === 1 &&
+    ["♟", "♞", "♝", "♜", "♛", "♚"].includes(this.textContent)
+) {
+    validMove = true;
+}
 
     // EN PASSANT
     if (
@@ -201,13 +201,13 @@ if (piece === "♟") {
     }
 
     // Marrje normale diagonale
-    if (
-        toRow === fromRow + 1 &&
-        Math.abs(toCol - fromCol) === 1 &&
-        this.textContent === "♙"
-    ) {
-        validMove = true;
-    }
+if (
+    toRow === fromRow + 1 &&
+    Math.abs(toCol - fromCol) === 1 &&
+    ["♙", "♘", "♗", "♖", "♕", "♔"].includes(this.textContent)
+) {
+    validMove = true;
+}
 
     // EN PASSANT
     if (
@@ -420,6 +420,12 @@ if (piece === "♔" || piece === "♚") {
             validMove = true;
         }
     }
+}
+if (
+    (piece !== "♔" && piece !== "♚") &&
+    (this.textContent === "♔" || this.textContent === "♚")
+) {
+    validMove = false;
 }
 // LËVIZJA
 if (validMove) {
