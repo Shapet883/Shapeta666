@@ -108,9 +108,9 @@ if (selectedSquare === null) {
 
 if (
     (whiteTurn &&
-        ["♙", "♘"].includes(this.textContent)) ||
+        ["♙", "♘", "♖"].includes(this.textContent)) ||
     (!whiteTurn &&
-        ["♟", "♞"].includes(this.textContent))
+        ["♟", "♞", "♜"].includes(this.textContent))
 ) {
     selectedSquare = this;
     this.classList.add("selected");
