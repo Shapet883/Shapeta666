@@ -479,8 +479,8 @@ function isKingInCheck(king) {
 
     const enemyPieces =
         king.textContent === "♔"
-            ? ["♟", "♞", "♝", "♜", "♛"]
-            : ["♙", "♘", "♗", "♖", "♕"];
+            ? ["♟", "♞", "♝", "♜", "♛", "♚"]
+            : ["♙", "♘", "♗", "♖", "♕", "♔"];
 
     for (let i = 0; i < 64; i++) {
 
@@ -507,7 +507,7 @@ function isKingInCheck(king) {
             return true;
         }
 
-        // USHTARI
+        // USHTARI I BARDHË
         if (
             piece === "♙" &&
             kingRow === row - 1 &&
@@ -516,12 +516,128 @@ function isKingInCheck(king) {
             return true;
         }
 
+        // USHTARI I ZI
         if (
             piece === "♟" &&
             kingRow === row + 1 &&
             colDiff === 1
         ) {
             return true;
+        }
+
+        // MBRETI
+        if (
+            (piece === "♔" || piece === "♚") &&
+            rowDiff <= 1 &&
+            colDiff <= 1 &&
+            rowDiff + colDiff > 0
+        ) {
+            return true;
+        }
+
+        // TORRA
+        if (
+            (piece === "♖" || piece === "♜") &&
+            (row === kingRow || col === kingCol)
+        ) {
+
+            let blocked = false;
+
+            const rowStep =
+                row === kingRow ? 0 :
+                (kingRow > row ? 1 : -1);
+
+            const colStep =
+                col === kingCol ? 0 :
+                (kingCol > col ? 1 : -1);
+
+            let r = row + rowStep;
+            let c = col + colStep;
+
+            while (r !== kingRow || c !== kingCol) {
+
+                if (squares[r * 8 + c].textContent !== "") {
+                    blocked = true;
+                    break;
+                }
+
+                r += rowStep;
+                c += colStep;
+            }
+
+            if (!blocked) {
+                return true;
+            }
+        }
+
+        // FILI
+        if (
+            (piece === "♗" || piece === "♝") &&
+            rowDiff === colDiff &&
+            rowDiff !== 0
+        ) {
+
+            let blocked = false;
+
+            const rowStep = kingRow > row ? 1 : -1;
+            const colStep = kingCol > col ? 1 : -1;
+
+            let r = row + rowStep;
+            let c = col + colStep;
+
+            while (r !== kingRow || c !== kingCol) {
+
+                if (squares[r * 8 + c].textContent !== "") {
+                    blocked = true;
+                    break;
+                }
+
+                r += rowStep;
+                c += colStep;
+            }
+
+            if (!blocked) {
+                return true;
+            }
+        }
+
+        // MBRETËRESHA
+        if (
+            (piece === "♕" || piece === "♛") &&
+            (
+                row === kingRow ||
+                col === kingCol ||
+                rowDiff === colDiff
+            )
+        ) {
+
+            let blocked = false;
+
+            const rowStep =
+                row === kingRow ? 0 :
+                (kingRow > row ? 1 : -1);
+
+            const colStep =
+                col === kingCol ? 0 :
+                (kingCol > col ? 1 : -1);
+
+            let r = row + rowStep;
+            let c = col + colStep;
+
+            while (r !== kingRow || c !== kingCol) {
+
+                if (squares[r * 8 + c].textContent !== "") {
+                    blocked = true;
+                    break;
+                }
+
+                r += rowStep;
+                c += colStep;
+            }
+
+            if (!blocked) {
+                return true;
+            }
         }
     }
 
