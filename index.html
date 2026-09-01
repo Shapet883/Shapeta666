@@ -448,7 +448,7 @@ if (validMove) {
     if (isEnPassant) {
         lastDoubleStep.textContent = "";
     }
-
+const capturedPiece = this.textContent;
     this.textContent = piece;
     selectedSquare.textContent = "";
 
@@ -461,9 +461,34 @@ if (validMove) {
     } else {
         lastDoubleStep = null;
     }
+ // KONTROLLO NËSE LËVIZJA E LË MBRETIN NË SHAH
+    const allSquares = Array.from(document.querySelectorAll(".square"));
 
-    whiteTurn = !whiteTurn;
-}
+    const ownKing =
+        ["♙", "♘", "♖", "♗", "♕", "♔"].includes(piece)
+            ? allSquares.find(square => square.textContent === "♔")
+            : allSquares.find(square => square.textContent === "♚");
+
+    if (ownKing && isKingInCheck(ownKing)) {
+
+        // KTHE LËVIZJEN MBRAPSHT
+        this.textContent = capturedPiece;
+        selectedSquare.textContent = piece;
+
+        // Nëse ishte En Passant, rikthe ushtarin e kapur
+        if (isEnPassant) {
+            lastDoubleStep.textContent =
+                piece === "♙" ? "♟" : "♙";
+        }
+
+        lastDoubleStep = null;
+
+        alert("Nuk lejohet! Mbreti është në shah.");
+
+    } else {
+        whiteTurn = !whiteTurn;
+    }
+
 // KONTROLLO SHAHUN
 const kings = Array.from(document.querySelectorAll(".square"));
 
