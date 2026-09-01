@@ -52,6 +52,9 @@ h1 {
     
     box-shadow: 0 0 0 3px #888 inset;
 }
+.in-check {
+    background: red !important;
+}
 </style>
 </head>
 
@@ -461,7 +464,23 @@ if (validMove) {
 
     whiteTurn = !whiteTurn;
 }
+// KONTROLLO SHAHUN
+const kings = Array.from(document.querySelectorAll(".square"));
 
+kings.forEach(function(square) {
+    square.classList.remove("in-check");
+});
+
+const whiteKing = kings.find(square => square.textContent === "♔");
+const blackKing = kings.find(square => square.textContent === "♚");
+
+if (whiteKing && isKingInCheck(whiteKing)) {
+    whiteKing.classList.add("in-check");
+}
+
+if (blackKing && isKingInCheck(blackKing)) {
+    blackKing.classList.add("in-check");
+}
 selectedSquare.classList.remove("selected");
 selectedSquare = null;
 
