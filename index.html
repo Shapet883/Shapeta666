@@ -31,27 +31,23 @@ h1 {
     box-sizing: border-box;
 }
 
-.square {
-    width: 65px;
-    height: 65px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 46px;
-    box-sizing: border-box;
-    cursor: pointer;
-    position: relative;
-    font-family: "DejaVu Sans", "Arial Unicode MS", sans-serif;
-    font-weight: bold;
-    color: #111;
+.white-piece {
+    color: #fff;
     text-shadow:
-    1px 1px 0 #777,
-    -1px -1px 0 #777,
-    1px -1px 0 #777,
-    -1px 1px 0 #777;
-        
+        1px 0 0 #222,
+        -1px 0 0 #222,
+        0 1px 0 #222,
+        0 -1px 0 #222;
 }
 
+.black-piece {
+    color: #222;
+    text-shadow:
+        1px 0 0 #fff,
+        -1px 0 0 #fff,
+        0 1px 0 #fff,
+        0 -1px 0 #fff;
+}
 .light {
     background: #f1d9ad;
 }
@@ -210,7 +206,15 @@ for (let row = 0; row < 8; row++) {
 
         square.textContent = pieces[row][col];
 
-        board.appendChild(square);
+if (["♙","♘","♖","♗","♕","♔"].includes(pieces[row][col])) {
+    square.classList.add("white-piece");
+}
+
+if (["♟","♞","♜","♝","♛","♚"].includes(pieces[row][col])) {
+    square.classList.add("black-piece");
+}
+
+board.appendChild(square);  
     }
 }
 
