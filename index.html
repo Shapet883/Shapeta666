@@ -583,7 +583,19 @@ document.querySelectorAll(".square").forEach(function(square) {
             }
 
             this.textContent = piece;
-            selectedSquare.textContent = "";
+
+this.classList.remove("white-piece", "black-piece");
+
+if (["♙","♘","♖","♗","♕","♔"].includes(piece)) {
+    this.classList.add("white-piece");
+}
+
+if (["♟","♞","♜","♝","♛","♚"].includes(piece)) {
+    this.classList.add("black-piece");
+}
+
+selectedSquare.textContent = "";
+selectedSquare.classList.remove("white-piece", "black-piece");
 
             if (
                 (piece === "♙" && fromRow === 6 && toRow === 4) ||
