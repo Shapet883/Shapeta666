@@ -499,31 +499,39 @@ document.querySelectorAll(".square").forEach(function(square) {
 testCheckmate(whiteTurn ? "white" : "black");
 
     }
+}  
+  /*
+ KONTROLLI I SHAHUT
+*/
+
+allSquares.forEach(function(square) {
+
+    square.classList.remove("in-check");
+
+});
+
+const whiteKing =
+    allSquares.find(
+        square => square.textContent === "♔"
+    );
+
+const blackKing =
+    allSquares.find(
+        square => square.textContent === "♚"
+    );
+
+if (whiteKing && isKingInCheck(whiteKing)) {
+
+    whiteKing.classList.add("in-check");
+
 }
-             KONTROLLO SHAHUN
-            */
 
-            allSquares.forEach(function(square) {
-                square.classList.remove("in-check");
-            });
+if (blackKing && isKingInCheck(blackKing)) {
 
-            const whiteKing =
-                allSquares.find(
-                    square => square.textContent === "♔"
-                );
+    blackKing.classList.add("in-check");
 
-            const blackKing =
-                allSquares.find(
-                    square => square.textContent === "♚"
-                );
+}      
 
-            if (whiteKing && isKingInCheck(whiteKing)) {
-                whiteKing.classList.add("in-check");
-            }
-
-            if (blackKing && isKingInCheck(blackKing)) {
-                blackKing.classList.add("in-check");
-            }
         }
 
         if (selectedSquare) {
