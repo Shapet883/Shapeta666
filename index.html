@@ -582,16 +582,14 @@ document.querySelectorAll(".square").forEach(function(square) {
                 lastDoubleStep.textContent = "";
             }
 
-            this.textContent = piece;
+this.textContent = piece;
 
 this.classList.remove("white-piece", "black-piece");
 
-if (["♙","♘","♖","♗","♕","♔"].includes(piece)) {
-    this.classList.add("white-piece");
-}
-
-if (["♟","♞","♜","♝","♛","♚"].includes(piece)) {
+if (blackPieces.includes(piece)) {
     this.classList.add("black-piece");
+} else if (whitePieces.includes(piece)) {
+    this.classList.add("white-piece");
 }
 
 selectedSquare.textContent = "";
