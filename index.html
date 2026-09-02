@@ -109,19 +109,15 @@ document.querySelectorAll(".square").forEach(function(square) {
 
     square.addEventListener("click", function() {
 
-        const squares =
-            Array.from(document.querySelectorAll(".square"));
+        const squares = Array.from(document.querySelectorAll(".square"));
 
         if (selectedSquare === null) {
 
             if (
                 (whiteTurn &&
-                    ["♙","♘","♖","♗","♕","♔"]
-                    .includes(this.textContent)) ||
-
+                    ["♙","♘","♖","♗","♕","♔"].includes(this.textContent)) ||
                 (!whiteTurn &&
-                    ["♟","♞","♝","♜","♛","♚"]
-                    .includes(this.textContent))
+                    ["♟","♞","♜","♝","♛","♚"].includes(this.textContent))
             ) {
 
                 selectedSquare = this;
@@ -149,24 +145,21 @@ document.querySelectorAll(".square").forEach(function(square) {
             ["♙","♘","♖","♗","♕","♔"];
 
         const blackPieces =
-            ["♟","♞","♝","♜","♛","♚"];
+            ["♟","♞","♜","♝","♛","♚"];
 
         const sameColor =
-            (whitePieces.includes(piece) &&
-             whitePieces.includes(target)) ||
-
-            (blackPieces.includes(piece) &&
-             blackPieces.includes(target));
+            (whitePieces.includes(piece) && whitePieces.includes(target)) ||
+            (blackPieces.includes(piece) && blackPieces.includes(target));
 
         if (sameColor) {
-
             selectedSquare.classList.remove("selected");
             selectedSquare = null;
-
             return;
         }
 
-        /* USHTARI I BARDHË */
+        /*
+         USHTARI I BARDHË
+        */
 
         if (piece === "♙") {
 
@@ -201,15 +194,16 @@ document.querySelectorAll(".square").forEach(function(square) {
                 target === "" &&
                 Math.abs(toCol - fromCol) === 1 &&
                 toRow === fromRow - 1 &&
-                lastDoubleStep ===
-                    squares[from + (toCol - fromCol)] &&
+                lastDoubleStep === squares[from + (toCol - fromCol)] &&
                 lastDoubleStep.textContent === "♟"
             ) {
                 validMove = true;
             }
         }
 
-        /* USHTARI I ZI */
+        /*
+         USHTARI I ZI
+        */
 
         if (piece === "♟") {
 
@@ -244,23 +238,21 @@ document.querySelectorAll(".square").forEach(function(square) {
                 target === "" &&
                 Math.abs(toCol - fromCol) === 1 &&
                 toRow === fromRow + 1 &&
-                lastDoubleStep ===
-                    squares[from + (toCol - fromCol)] &&
+                lastDoubleStep === squares[from + (toCol - fromCol)] &&
                 lastDoubleStep.textContent === "♙"
             ) {
                 validMove = true;
             }
         }
 
-        /* KALI */
+        /*
+         KALI
+        */
 
         if (piece === "♘" || piece === "♞") {
 
-            const rowDiff =
-                Math.abs(toRow - fromRow);
-
-            const colDiff =
-                Math.abs(toCol - fromCol);
+            const rowDiff = Math.abs(toRow - fromRow);
+            const colDiff = Math.abs(toCol - fromCol);
 
             if (
                 (
@@ -273,7 +265,9 @@ document.querySelectorAll(".square").forEach(function(square) {
             }
         }
 
-        /* TORRA */
+        /*
+         TORRA
+        */
 
         if (piece === "♖" || piece === "♜") {
 
@@ -285,23 +279,19 @@ document.querySelectorAll(".square").forEach(function(square) {
                 let blocked = false;
 
                 const rowStep =
-                    toRow === fromRow
-                        ? 0
-                        : (toRow > fromRow ? 1 : -1);
+                    toRow === fromRow ? 0 :
+                    (toRow > fromRow ? 1 : -1);
 
                 const colStep =
-                    toCol === fromCol
-                        ? 0
-                        : (toCol > fromCol ? 1 : -1);
+                    toCol === fromCol ? 0 :
+                    (toCol > fromCol ? 1 : -1);
 
                 let r = fromRow + rowStep;
                 let c = fromCol + colStep;
 
                 while (r !== toRow || c !== toCol) {
 
-                    if (
-                        squares[r * 8 + c].textContent !== ""
-                    ) {
+                    if (squares[r * 8 + c].textContent !== "") {
                         blocked = true;
                         break;
                     }
@@ -316,20 +306,16 @@ document.querySelectorAll(".square").forEach(function(square) {
             }
         }
 
-        /* FILI */
+        /*
+         FILI
+        */
 
         if (piece === "♗" || piece === "♝") {
 
-            const rowDiff =
-                Math.abs(toRow - fromRow);
+            const rowDiff = Math.abs(toRow - fromRow);
+            const colDiff = Math.abs(toCol - fromCol);
 
-            const colDiff =
-                Math.abs(toCol - fromCol);
-
-            if (
-                rowDiff === colDiff &&
-                rowDiff !== 0
-            ) {
+            if (rowDiff === colDiff && rowDiff !== 0) {
 
                 let blocked = false;
 
@@ -344,9 +330,7 @@ document.querySelectorAll(".square").forEach(function(square) {
 
                 while (r !== toRow || c !== toCol) {
 
-                    if (
-                        squares[r * 8 + c].textContent !== ""
-                    ) {
+                    if (squares[r * 8 + c].textContent !== "") {
                         blocked = true;
                         break;
                     }
@@ -361,49 +345,40 @@ document.querySelectorAll(".square").forEach(function(square) {
             }
         }
 
-        /* MBRETËRESHA */
+        /*
+         MBRETËRESHA
+        */
 
         if (piece === "♕" || piece === "♛") {
 
-            const rowDiff =
-                Math.abs(toRow - fromRow);
-
-            const colDiff =
-                Math.abs(toCol - fromCol);
+            const rowDiff = Math.abs(toRow - fromRow);
+            const colDiff = Math.abs(toCol - fromCol);
 
             const straight =
-                (toRow === fromRow &&
-                 toCol !== fromCol) ||
-
-                (toCol === fromCol &&
-                 toRow !== fromRow);
+                (toRow === fromRow && toCol !== fromCol) ||
+                (toCol === fromCol && toRow !== fromRow);
 
             const diagonal =
-                rowDiff === colDiff &&
-                rowDiff !== 0;
+                rowDiff === colDiff && rowDiff !== 0;
 
             if (straight || diagonal) {
 
                 let blocked = false;
 
                 const rowStep =
-                    toRow === fromRow
-                        ? 0
-                        : (toRow > fromRow ? 1 : -1);
+                    toRow === fromRow ? 0 :
+                    (toRow > fromRow ? 1 : -1);
 
                 const colStep =
-                    toCol === fromCol
-                        ? 0
-                        : (toCol > fromCol ? 1 : -1);
+                    toCol === fromCol ? 0 :
+                    (toCol > fromCol ? 1 : -1);
 
                 let r = fromRow + rowStep;
                 let c = fromCol + colStep;
 
                 while (r !== toRow || c !== toCol) {
 
-                    if (
-                        squares[r * 8 + c].textContent !== ""
-                    ) {
+                    if (squares[r * 8 + c].textContent !== "") {
                         blocked = true;
                         break;
                     }
@@ -418,15 +393,14 @@ document.querySelectorAll(".square").forEach(function(square) {
             }
         }
 
-        /* MBRETI */
+        /*
+         MBRETI
+        */
 
         if (piece === "♔" || piece === "♚") {
 
-            const rowDiff =
-                Math.abs(toRow - fromRow);
-
-            const colDiff =
-                Math.abs(toCol - fromCol);
+            const rowDiff = Math.abs(toRow - fromRow);
+            const colDiff = Math.abs(toCol - fromCol);
 
             if (
                 rowDiff <= 1 &&
@@ -438,7 +412,9 @@ document.querySelectorAll(".square").forEach(function(square) {
             }
         }
 
-        /* MOS LEJO KAPJEN E MBRETIT */
+        /*
+         MOS LEJO KAPJEN E MBRETIT
+        */
 
         if (
             target === "♔" ||
@@ -447,7 +423,9 @@ document.querySelectorAll(".square").forEach(function(square) {
             validMove = false;
         }
 
-        /* LËVIZJA */
+        /*
+         LËVIZJA
+        */
 
         if (validMove) {
 
@@ -456,14 +434,10 @@ document.querySelectorAll(".square").forEach(function(square) {
                 target === "" &&
                 Math.abs(toCol - fromCol) === 1 &&
                 (
-                    (piece === "♙" &&
-                     toRow === fromRow - 1) ||
-
-                    (piece === "♟" &&
-                     toRow === fromRow + 1)
+                    (piece === "♙" && toRow === fromRow - 1) ||
+                    (piece === "♟" && toRow === fromRow + 1)
                 ) &&
-                lastDoubleStep ===
-                    squares[from + (toCol - fromCol)];
+                lastDoubleStep === squares[from + (toCol - fromCol)];
 
             let capturedPiece = target;
             let capturedSquare = this;
@@ -483,13 +457,8 @@ document.querySelectorAll(".square").forEach(function(square) {
             selectedSquare.textContent = "";
 
             if (
-                (piece === "♙" &&
-                 fromRow === 6 &&
-                 toRow === 4) ||
-
-                (piece === "♟" &&
-                 fromRow === 1 &&
-                 toRow === 3)
+                (piece === "♙" && fromRow === 6 && toRow === 4) ||
+                (piece === "♟" && fromRow === 1 && toRow === 3)
             ) {
                 lastDoubleStep = this;
             } else {
@@ -497,103 +466,78 @@ document.querySelectorAll(".square").forEach(function(square) {
             }
 
             const allSquares =
-                Array.from(
-                    document.querySelectorAll(".square")
-                );
+                Array.from(document.querySelectorAll(".square"));
 
             const ownKing =
                 whitePieces.includes(piece)
                     ? allSquares.find(
-                        square =>
-                            square.textContent === "♔"
+                        square => square.textContent === "♔"
                     )
                     : allSquares.find(
-                        square =>
-                            square.textContent === "♚"
+                        square => square.textContent === "♚"
                     );
 
-            if (
-                ownKing &&
-                isKingInCheck(ownKing)
-            ) {
+            if (ownKing && isKingInCheck(ownKing)) {
 
-                this.textContent =
-                    capturedPiece;
-
-                selectedSquare.textContent =
-                    piece;
+                this.textContent = capturedPiece;
+                selectedSquare.textContent = piece;
 
                 if (isEnPassant) {
-                    capturedSquare.textContent =
-                        capturedPiece;
+                    capturedSquare.textContent = capturedPiece;
                 }
 
                 lastDoubleStep = null;
 
-                alert(
-                    "Nuk lejohet! Mbreti është në shah."
-                );
+                alert("Nuk lejohet! Mbreti është në shah.");
 
             } else {
 
                 whiteTurn = !whiteTurn;
             }
 
-            /* KONTROLLI I SHAHUT */
+            /*
+             KONTROLLO SHAHUN
+            */
 
             allSquares.forEach(function(square) {
-
                 square.classList.remove("in-check");
-
             });
 
             const whiteKing =
                 allSquares.find(
-                    square =>
-                        square.textContent === "♔"
+                    square => square.textContent === "♔"
                 );
 
             const blackKing =
                 allSquares.find(
-                    square =>
-                        square.textContent === "♚"
+                    square => square.textContent === "♚"
                 );
 
-            if (
-                whiteKing &&
-                isKingInCheck(whiteKing)
-            ) {
+            if (whiteKing && isKingInCheck(whiteKing)) {
                 whiteKing.classList.add("in-check");
             }
 
-            if (
-                blackKing &&
-                isKingInCheck(blackKing)
-            ) {
+            if (blackKing && isKingInCheck(blackKing)) {
                 blackKing.classList.add("in-check");
             }
         }
 
         if (selectedSquare) {
-
-            selectedSquare.classList.remove(
-                "selected"
-            );
-
+            selectedSquare.classList.remove("selected");
             selectedSquare = null;
         }
 
     });
 });
 
-/* KONTROLLI I SHAHUT */
+/*
+ KONTROLLI I SHAHUT
+*/
 
 function isKingInCheck(king) {
 
     const squares =
-        Array.from(
-            document.querySelectorAll(".square")
-        );
+        Array.from(document.querySelectorAll(".square"));
 
     const kingIndex =
         squares.indexOf(king);
@@ -607,7 +551,7 @@ function isKingInCheck(king) {
     const enemyPieces =
         king.textContent === "♔"
             ? ["♟","♞","♝","♜","♛","♚"]
-            : ["♙","♘","♗","♖","♕","♔"];
+            : ["♙","♘","♖","♗","♕","♔"];
 
     for (let i = 0; i < 64; i++) {
 
@@ -630,24 +574,23 @@ function isKingInCheck(king) {
         const colDiff =
             Math.abs(kingCol - col);
 
-        /* KALI */
+        /*
+         KALI
+        */
 
         if (
-            (piece === "♘" ||
-             piece === "♞") &&
-
+            (piece === "♘" || piece === "♞") &&
             (
-                (rowDiff === 2 &&
-                 colDiff === 1) ||
-
-                (rowDiff === 1 &&
-                 colDiff === 2)
+                (rowDiff === 2 && colDiff === 1) ||
+                (rowDiff === 1 && colDiff === 2)
             )
         ) {
             return true;
         }
 
-        /* USHTARI */
+        /*
+         USHTARI
+        */
 
         if (
             piece === "♙" &&
@@ -665,12 +608,12 @@ function isKingInCheck(king) {
             return true;
         }
 
-        /* MBRETI */
+        /*
+         MBRETI
+        */
 
         if (
-            (piece === "♔" ||
-             piece === "♚") &&
-
+            (piece === "♔" || piece === "♚") &&
             rowDiff <= 1 &&
             colDiff <= 1 &&
             rowDiff + colDiff > 0
@@ -678,39 +621,32 @@ function isKingInCheck(king) {
             return true;
         }
 
-        /* TORRA */
+        /*
+         TORRA
+        */
 
         if (
-            (piece === "♖" ||
-             piece === "♜") &&
-
-            (row === kingRow ||
-             col === kingCol)
+            (piece === "♖" || piece === "♜") &&
+            (row === kingRow || col === kingCol)
         ) {
 
             let blocked = false;
 
             const rowStep =
-                row === kingRow
-                    ? 0
-                    : (kingRow > row ? 1 : -1);
+                row === kingRow ? 0 :
+                (kingRow > row ? 1 : -1);
 
             const colStep =
-                col === kingCol
-                    ? 0
-                    : (kingCol > col ? 1 : -1);
+                col === kingCol ? 0 :
+                (kingCol > col ? 1 : -1);
 
             let r = row + rowStep;
             let c = col + colStep;
 
-            while (
-                r !== kingRow ||
-                c !== kingCol
-            ) {
+            while (r !== kingRow || c !== kingCol) {
 
                 if (
-                    squares[r * 8 + c]
-                        .textContent !== ""
+                    squares[r * 8 + c].textContent !== ""
                 ) {
                     blocked = true;
                     break;
@@ -725,12 +661,12 @@ function isKingInCheck(king) {
             }
         }
 
-        /* FILI */
+        /*
+         FILI
+        */
 
         if (
-            (piece === "♗" ||
-             piece === "♝") &&
-
+            (piece === "♗" || piece === "♝") &&
             rowDiff === colDiff &&
             rowDiff !== 0
         ) {
@@ -746,14 +682,10 @@ function isKingInCheck(king) {
             let r = row + rowStep;
             let c = col + colStep;
 
-            while (
-                r !== kingRow ||
-                c !== kingCol
-            ) {
+            while (r !== kingRow || c !== kingCol) {
 
                 if (
-                    squares[r * 8 + c]
-                        .textContent !== ""
+                    squares[r * 8 + c].textContent !== ""
                 ) {
                     blocked = true;
                     break;
@@ -768,12 +700,12 @@ function isKingInCheck(king) {
             }
         }
 
-        /* MBRETËRESHA */
+        /*
+         MBRETËRESHA
+        */
 
         if (
-            (piece === "♕" ||
-             piece === "♛") &&
-
+            (piece === "♕" || piece === "♛") &&
             (
                 row === kingRow ||
                 col === kingCol ||
@@ -784,26 +716,20 @@ function isKingInCheck(king) {
             let blocked = false;
 
             const rowStep =
-                row === kingRow
-                    ? 0
-                    : (kingRow > row ? 1 : -1);
+                row === kingRow ? 0 :
+                (kingRow > row ? 1 : -1);
 
             const colStep =
-                col === kingCol
-                    ? 0
-                    : (kingCol > col ? 1 : -1);
+                col === kingCol ? 0 :
+                (kingCol > col ? 1 : -1);
 
             let r = row + rowStep;
             let c = col + colStep;
 
-            while (
-                r !== kingRow ||
-                c !== kingCol
-            ) {
+            while (r !== kingRow || c !== kingCol) {
 
                 if (
-                    squares[r * 8 + c]
-                        .textContent !== ""
+                    squares[r * 8 + c].textContent !== ""
                 ) {
                     blocked = true;
                     break;
@@ -826,3 +752,5 @@ function isKingInCheck(king) {
 
 </body>
 </html>
+
+Tani vetëm bëj Ctrl + V dhe mos kliko Commit changes.
