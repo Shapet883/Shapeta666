@@ -21,28 +21,26 @@ h1 {
 }
 
 #board {
-    width: 480px;
-    height: 480px;
+    width: 520px;
+    height: 520px;
     margin: 20px auto;
     display: grid;
-    grid-template-columns: repeat(8, 60px);
-    grid-template-rows: repeat(8, 60px);
-    border: 4px solid #111;
+    grid-template-columns: repeat(8, 65px);
+    grid-template-rows: repeat(8, 65px);
+    border: 5px solid #111;
+    box-sizing: border-box;
 }
 
 .square {
-    width: 60px;
-    height: 60px;
+    width: 65px;
+    height: 65px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 42px;
+    font-size: 44px;
     box-sizing: border-box;
     cursor: pointer;
-}
-
-.light {
-    background: #d8c09a;
+    position: relative;
 }
 
 .dark {
