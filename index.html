@@ -20,6 +20,7 @@ h1 {
     margin: 20px 0;
 }
 
+/* TABELA E SHAHUT */
 #board {
     width: 520px;
     height: 520px;
@@ -30,6 +31,8 @@ h1 {
     border: 5px solid #111;
     box-sizing: border-box;
 }
+
+/* KATRORËT */
 .square {
     width: 65px;
     height: 65px;
@@ -43,23 +46,28 @@ h1 {
     font-family: "DejaVu Sans", "Arial Unicode MS", sans-serif;
     font-weight: bold;
 }
+
+/* FIGURAT E BARDHA */
 .white-piece {
-    color: #fff;
+    color: #eeeeee;
     text-shadow:
-        1.5px 0 0 #222,
-        -1.5px 0 0 #222,
-        0 1.5px 0 #222,
-        0 -1.5px 0 #222;
+        2px 0 0 #222,
+        -2px 0 0 #222,
+        0 2px 0 #222,
+        0 -2px 0 #222;
 }
 
+/* FIGURAT E ZEZA */
 .black-piece {
-    color: #222;
+    color: #333333;
     text-shadow:
-        1.5px 0 0 #fff,
-        -1.5px 0 0 #fff,
-        0 1.5px 0 #fff,
-        0 -1.5px 0 #fff;
+        2px 0 0 #eeeeee,
+        -2px 0 0 #eeeeee,
+        0 2px 0 #eeeeee,
+        0 -2px 0 #eeeeee;
 }
+
+/* NGJYRAT E TABELËS */
 .light {
     background: #f1d9ad;
 }
@@ -68,80 +76,36 @@ h1 {
     background: #b88e69;
 }
 
+/* KATRORI I ZGJEDHUR */
 .selected {
     background: #cdd45a !important;
     box-shadow: none;
 }
 
+/* SHAH */
 .in-check {
     background: red !important;
 }
 
 /* NUMRAT 8 - 1 */
-.square:nth-child(8)::before {
-    content: "8";
-}
-
-.square:nth-child(16)::before {
-    content: "7";
-}
-
-.square:nth-child(24)::before {
-    content: "6";
-}
-
-.square:nth-child(32)::before {
-    content: "5";
-}
-
-.square:nth-child(40)::before {
-    content: "4";
-}
-
-.square:nth-child(48)::before {
-    content: "3";
-}
-
-.square:nth-child(56)::before {
-    content: "2";
-}
-
-.square:nth-child(64)::before {
-    content: "1";
-}
+.square:nth-child(8)::before  { content: "8"; }
+.square:nth-child(16)::before { content: "7"; }
+.square:nth-child(24)::before { content: "6"; }
+.square:nth-child(32)::before { content: "5"; }
+.square:nth-child(40)::before { content: "4"; }
+.square:nth-child(48)::before { content: "3"; }
+.square:nth-child(56)::before { content: "2"; }
+.square:nth-child(64)::before { content: "1"; }
 
 /* SHKRONJAT a - h */
-.square:nth-child(57)::after {
-    content: "a";
-}
-
-.square:nth-child(58)::after {
-    content: "b";
-}
-
-.square:nth-child(59)::after {
-    content: "c";
-}
-
-.square:nth-child(60)::after {
-    content: "d";
-}
-
-.square:nth-child(61)::after {
-    content: "e";
-}
-
-.square:nth-child(62)::after {
-    content: "f";
-}
-
-.square:nth-child(63)::after {
-    content: "g";
-}
-
-.square:nth-child(64)::after {
-    content: "h";
-}
+.square:nth-child(57)::after { content: "a"; }
+.square:nth-child(58)::after { content: "b"; }
+.square:nth-child(59)::after { content: "c"; }
+.square:nth-child(60)::after { content: "d"; }
+.square:nth-child(61)::after { content: "e"; }
+.square:nth-child(62)::after { content: "f"; }
+.square:nth-child(63)::after { content: "g"; }
+.square:nth-child(64)::after { content: "h"; }
 
 /* PAMJA E KOORDINATAVE */
 .square:nth-child(8)::before,
