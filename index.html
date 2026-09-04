@@ -1197,8 +1197,9 @@ if (target === enemyKing) {
             squares[to].textContent = originalTarget;
 
             if (!stillInCheck) {
-                return true;
-            }
+    alert("Lëvizje e gjetur: " + from + " → " + to);
+    return true;
+}
         }
     }
 
