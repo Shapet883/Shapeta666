@@ -925,7 +925,11 @@ function hasAnyLegalMove(isWhite) {
             if (ownPieces.includes(target)) {
                 continue;
             }
+const enemyKing = isWhite ? "♚" : "♔";
 
+if (target === enemyKing) {
+    continue;
+}
             const toRow = Math.floor(to / 8);
             const toCol = to % 8;
 
