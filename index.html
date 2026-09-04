@@ -593,7 +593,49 @@ selectedSquare.classList.remove("white-piece", "black-piece");
                 alert("Nuk lejohet! Mbreti është në shah.");
 
             } else {
+/* PROMOVIMI I USHTARIT */
 
+if (piece === "♙" && toRow === 0) {
+
+    const choice = prompt(
+        "Promovimi:\n1 = ♕\n2 = ♖\n3 = ♗\n4 = ♘",
+        "1"
+    );
+
+    if (choice === "2") {
+        this.textContent = "♖";
+    } else if (choice === "3") {
+        this.textContent = "♗";
+    } else if (choice === "4") {
+        this.textContent = "♘";
+    } else {
+        this.textContent = "♕";
+    }
+
+    this.classList.remove("white-piece", "black-piece");
+    this.classList.add("white-piece");
+}
+
+if (piece === "♟" && toRow === 7) {
+
+    const choice = prompt(
+        "Promovimi:\n1 = ♛\n2 = ♜\n3 = ♝\n4 = ♞",
+        "1"
+    );
+
+    if (choice === "2") {
+        this.textContent = "♜";
+    } else if (choice === "3") {
+        this.textContent = "♝";
+    } else if (choice === "4") {
+        this.textContent = "♞";
+    } else {
+        this.textContent = "♛";
+    }
+
+    this.classList.remove("white-piece", "black-piece");
+    this.classList.add("black-piece");
+}
                 whiteTurn = !whiteTurn;
             }
 
