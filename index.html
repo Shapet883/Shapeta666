@@ -1227,16 +1227,10 @@ function isCheckmate(isWhite) {
     }
 
     if (!hasAnyLegalMove(isWhite)) {
-    alert(
-        isWhite
-            ? "SHAH-MAT! Fiton lojtari i zi."
-            : "SHAH-MAT! Fiton lojtari i bardhë."
-    );
+        return true;
+    }
 
-    return true;
-}
-
-return false;
+    return false;
 }
 </script>
 
