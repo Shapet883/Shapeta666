@@ -157,7 +157,7 @@ const board = document.getElementById("board");
 const pieces = [
     ["♜","♞","♝","♛","♚","♝","♞","♜"],
     ["♟","♟","♟","♟","♟","♟","♟","♟"],
-    ["","","","","","","",""],
+    ["","","","","","","",""],                  
     ["","","","","","","",""],
     ["","","","","","","",""],
     ["","","","","","","",""],
@@ -1208,7 +1208,7 @@ if (target === enemyKing) {
 
 
 function isCheckmate(isWhite) {
-alert("KONTROLLI I SHAH-MATIT U THIRR");
+
     const squares =
         Array.from(document.querySelectorAll(".square"));
 
@@ -1227,9 +1227,13 @@ alert("KONTROLLI I SHAH-MATIT U THIRR");
         return false;
     }
 
-    if (!hasAnyLegalMove(isWhite)) {
-        return true;
-    }
+   const legalMove = hasAnyLegalMove(isWhite);
+
+alert("Ka lëvizje të ligjshme: " + legalMove);
+
+if (!legalMove) {
+    return true;
+} 
 
     return false;
 }
