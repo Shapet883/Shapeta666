@@ -662,15 +662,17 @@ if (piece === "♟" && toRow === 7) {
             }
 
             if (blackKing && isKingInCheck(blackKing)) {
-                blackKing.classList.add("in-check");
-            }if (whiteKing && isCheckmate(true)) {
+    blackKing.classList.add("in-check");
+}
+
+if (whiteTurn && whiteKing && isCheckmate(true)) {
     alert("SHAH-MAT! Fiton lojtari i zi.");
 }
 
-if (blackKing && isCheckmate(false)) {
+if (!whiteTurn && blackKing && isCheckmate(false)) {
     alert("SHAH-MAT! Fiton lojtari i bardhë.");
 }
-        }
+        
 
         if (selectedSquare) {
             selectedSquare.classList.remove("selected");
