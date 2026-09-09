@@ -668,17 +668,19 @@ if (piece === "♟" && toRow === 7) {
 
  if (whiteTurn) {
     if (isCheckmate(true)) {
-        alert("SHAH-MAT! Fiton lojtari i zi.");
+        setTimeout(function() {
+            alert("SHAH-MAT! Fiton lojtari i zi.");
+        }, 100);
     }
 }
 
 if (!whiteTurn) {
     if (isCheckmate(false)) {
-        alert("SHAH-MAT! Fiton lojtari i bardhë.");
+        setTimeout(function() {
+            alert("SHAH-MAT! Fiton lojtari i bardhë.");
+        }, 100);
     }
-}         
-
-}        
+}     
 
         
 
