@@ -1246,9 +1246,9 @@ function isCheckmate(isWhite) {
     if (!isKingInCheck(king)) {
         return false;
     }
+const legalMove = hasAnyLegalMove(isWhite);
 
-   const legalMove = hasAnyLegalMove(isWhite);
-
+alert("MAT TEST: " + legalMove);
 
 if (!legalMove) {
     alert("KONTROLLI: NUK KA LËVIZJE!");
