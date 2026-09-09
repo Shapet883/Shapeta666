@@ -665,12 +665,16 @@ if (piece === "♟" && toRow === 7) {
     blackKing.classList.add("in-check");
 }
 
-if (whiteTurn && isCheckmate(true)) {
-    alert("SHAH-MAT! Fiton lojtari i zi.");
+if (whiteTurn) {
+    if (isCheckmate(true)) {
+        alert("SHAH-MAT! Fiton lojtari i zi.");
+    }
 }
 
-if (!whiteTurn && isCheckmate(false)) {
-    alert("SHAH-MAT! Fiton lojtari i bardhë.");
+if (!whiteTurn) {
+    if (isCheckmate(false)) {
+        alert("SHAH-MAT! Fiton lojtari i bardhë.");
+    }
 }
 
 }        
