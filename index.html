@@ -1206,6 +1206,14 @@ if (target === enemyKing) {
             squares[to].textContent = originalTarget;
 
     if (!stillInCheck) {
+    const fromName =
+        String.fromCharCode(97 + fromCol) + (8 - fromRow);
+
+    const toName =
+        String.fromCharCode(97 + toCol) + (8 - toRow);
+
+    alert("Lëvizje e mundshme: " + fromName + " → " + toName);
+
     return true;
 }
         }
