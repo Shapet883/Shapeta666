@@ -915,7 +915,11 @@ function hasAnyLegalMove(isWhite) {
 
     const squares =
         Array.from(document.querySelectorAll(".square"));
+const whitePieces =
+        ["♙","♘","♖","♗","♕","♔"];
 
+    const blackPieces =
+        ["♟","♞","♝","♜","♛","♚"];
     const ownPieces =
         isWhite ? whitePieces : blackPieces;
 
