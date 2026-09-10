@@ -20,7 +20,6 @@ h1 {
     margin: 20px 0;
 }
 
-/* TABELA E SHAHUT */
 #board {
     width: 520px;
     height: 520px;
@@ -32,7 +31,6 @@ h1 {
     box-sizing: border-box;
 }
 
-/* KATRORËT */
 .square {
     width: 65px;
     height: 65px;
@@ -47,7 +45,6 @@ h1 {
     font-weight: bold;
 }
 
-/* FIGURAT E BARDHA */
 .white-piece {
     color: #f5f5f5;
     text-shadow:
@@ -57,7 +54,6 @@ h1 {
         0 -3px 0 #000;
 }
 
-/* FIGURAT E ZEZA */
 .black-piece {
     color: #111;
     text-shadow:
@@ -66,7 +62,7 @@ h1 {
         0 3px 0 #f5f5f5,
         0 -3px 0 #f5f5f5;
 }
-/* NGJYRAT E TABELËS */
+
 .light {
     background: #b98f58;
 }
@@ -75,18 +71,14 @@ h1 {
     background: #684526;
 }
 
-/* KATRORI I ZGJEDHUR */
 .selected {
     background: #cdd45a !important;
-    box-shadow: none;
 }
 
-/* SHAH */
 .in-check {
     background: red !important;
 }
 
-/* NUMRAT 8 - 1 */
 .square:nth-child(8)::before  { content: "8"; }
 .square:nth-child(16)::before { content: "7"; }
 .square:nth-child(24)::before { content: "6"; }
@@ -96,7 +88,6 @@ h1 {
 .square:nth-child(56)::before { content: "2"; }
 .square:nth-child(64)::before { content: "1"; }
 
-/* SHKRONJAT a - h */
 .square:nth-child(57)::after { content: "a"; }
 .square:nth-child(58)::after { content: "b"; }
 .square:nth-child(59)::after { content: "c"; }
@@ -106,7 +97,6 @@ h1 {
 .square:nth-child(63)::after { content: "g"; }
 .square:nth-child(64)::after { content: "h"; }
 
-/* PAMJA E KOORDINATAVE */
 .square:nth-child(8)::before,
 .square:nth-child(16)::before,
 .square:nth-child(24)::before,
@@ -157,7 +147,7 @@ const board = document.getElementById("board");
 const pieces = [
     ["♜","♞","♝","♛","♚","♝","♞","♜"],
     ["♟","♟","♟","♟","♟","♟","♟","♟"],
-    ["","","","","","","",""],                  
+    ["","","","","","","",""],
     ["","","","","","","",""],
     ["","","","","","","",""],
     ["","","","","","","",""],
@@ -181,15 +171,15 @@ for (let row = 0; row < 8; row++) {
 
         square.textContent = pieces[row][col];
 
-if (["♙","♘","♖","♗","♕","♔"].includes(pieces[row][col])) {
-    square.classList.add("white-piece");
-}
+        if (["♙","♘","♖","♗","♕","♔"].includes(pieces[row][col])) {
+            square.classList.add("white-piece");
+        }
 
-if (["♟","♞","♜","♝","♛","♚"].includes(pieces[row][col])) {
-    square.classList.add("black-piece");
-}
+        if (["♟","♞","♜","♝","♛","♚"].includes(pieces[row][col])) {
+            square.classList.add("black-piece");
+        }
 
-board.appendChild(square);  
+        board.appendChild(square);
     }
 }
 
@@ -209,7 +199,7 @@ document.querySelectorAll(".square").forEach(function(square) {
                 (whiteTurn &&
                     ["♙","♘","♖","♗","♕","♔"].includes(this.textContent)) ||
                 (!whiteTurn &&
-                    ["♟","♞","♜","♝","♛","♚"].includes(this.textContent))
+                    ["♟","♞","♝","♜","♛","♚"].includes(this.textContent))
             ) {
 
                 selectedSquare = this;
@@ -237,7 +227,7 @@ document.querySelectorAll(".square").forEach(function(square) {
             ["♙","♘","♖","♗","♕","♔"];
 
         const blackPieces =
-            ["♟","♞","♜","♝","♛","♚"];
+            ["♟","♞","♝","♜","♛","♚"];
 
         const sameColor =
             (whitePieces.includes(piece) && whitePieces.includes(target)) ||
@@ -248,10 +238,6 @@ document.querySelectorAll(".square").forEach(function(square) {
             selectedSquare = null;
             return;
         }
-
-        /*
-         USHTARI I BARDHË
-        */
 
         if (piece === "♙") {
 
@@ -293,10 +279,6 @@ document.querySelectorAll(".square").forEach(function(square) {
             }
         }
 
-        /*
-         USHTARI I ZI
-        */
-
         if (piece === "♟") {
 
             if (
@@ -337,10 +319,6 @@ document.querySelectorAll(".square").forEach(function(square) {
             }
         }
 
-        /*
-         KALI
-        */
-
         if (piece === "♘" || piece === "♞") {
 
             const rowDiff = Math.abs(toRow - fromRow);
@@ -356,10 +334,6 @@ document.querySelectorAll(".square").forEach(function(square) {
                 validMove = true;
             }
         }
-
-        /*
-         TORRA
-        */
 
         if (piece === "♖" || piece === "♜") {
 
@@ -398,10 +372,6 @@ document.querySelectorAll(".square").forEach(function(square) {
             }
         }
 
-        /*
-         FILI
-        */
-
         if (piece === "♗" || piece === "♝") {
 
             const rowDiff = Math.abs(toRow - fromRow);
@@ -436,10 +406,6 @@ document.querySelectorAll(".square").forEach(function(square) {
                 }
             }
         }
-
-        /*
-         MBRETËRESHA
-        */
 
         if (piece === "♕" || piece === "♛") {
 
@@ -485,10 +451,6 @@ document.querySelectorAll(".square").forEach(function(square) {
             }
         }
 
-        /*
-         MBRETI
-        */
-
         if (piece === "♔" || piece === "♚") {
 
             const rowDiff = Math.abs(toRow - fromRow);
@@ -504,20 +466,12 @@ document.querySelectorAll(".square").forEach(function(square) {
             }
         }
 
-        /*
-         MOS LEJO KAPJEN E MBRETIT
-        */
-
         if (
             target === "♔" ||
             target === "♚"
         ) {
             validMove = false;
         }
-
-        /*
-         LËVIZJA
-        */
 
         if (validMove) {
 
@@ -545,18 +499,18 @@ document.querySelectorAll(".square").forEach(function(square) {
                 lastDoubleStep.textContent = "";
             }
 
-this.textContent = piece;
+            this.textContent = piece;
 
-this.classList.remove("white-piece", "black-piece");
+            this.classList.remove("white-piece", "black-piece");
 
-if (blackPieces.includes(piece)) {
-    this.classList.add("black-piece");
-} else if (whitePieces.includes(piece)) {
-    this.classList.add("white-piece");
-}
+            if (blackPieces.includes(piece)) {
+                this.classList.add("black-piece");
+            } else if (whitePieces.includes(piece)) {
+                this.classList.add("white-piece");
+            }
 
-selectedSquare.textContent = "";
-selectedSquare.classList.remove("white-piece", "black-piece");
+            selectedSquare.textContent = "";
+            selectedSquare.classList.remove("white-piece", "black-piece");
 
             if (
                 (piece === "♙" && fromRow === 6 && toRow === 4) ||
@@ -590,59 +544,55 @@ selectedSquare.classList.remove("white-piece", "black-piece");
 
                 lastDoubleStep = null;
 
-            alert("Nuk lejohet! Mbreti është në shah.");
-            return;
+                alert("Nuk lejohet! Mbreti është në shah.");
+                return;
 
             } else {
-/* PROMOVIMI I USHTARIT */
 
-if (piece === "♙" && toRow === 0) {
+                if (piece === "♙" && toRow === 0) {
 
-    const choice = prompt(
-        "Promovimi:\n1 = ♕\n2 = ♖\n3 = ♗\n4 = ♘",
-        "1"
-    );
+                    const choice = prompt(
+                        "Promovimi:\n1 = ♕\n2 = ♖\n3 = ♗\n4 = ♘",
+                        "1"
+                    );
 
-    if (choice === "2") {
-        this.textContent = "♖";
-    } else if (choice === "3") {
-        this.textContent = "♗";
-    } else if (choice === "4") {
-        this.textContent = "♘";
-    } else {
-        this.textContent = "♕";
-    }
+                    if (choice === "2") {
+                        this.textContent = "♖";
+                    } else if (choice === "3") {
+                        this.textContent = "♗";
+                    } else if (choice === "4") {
+                        this.textContent = "♘";
+                    } else {
+                        this.textContent = "♕";
+                    }
 
-    this.classList.remove("white-piece", "black-piece");
-    this.classList.add("white-piece");
-}
+                    this.classList.remove("white-piece", "black-piece");
+                    this.classList.add("white-piece");
+                }
 
-if (piece === "♟" && toRow === 7) {
+                if (piece === "♟" && toRow === 7) {
 
-    const choice = prompt(
-        "Promovimi:\n1 = ♛\n2 = ♜\n3 = ♝\n4 = ♞",
-        "1"
-    );
+                    const choice = prompt(
+                        "Promovimi:\n1 = ♛\n2 = ♜\n3 = ♝\n4 = ♞",
+                        "1"
+                    );
 
-    if (choice === "2") {
-        this.textContent = "♜";
-    } else if (choice === "3") {
-        this.textContent = "♝";
-    } else if (choice === "4") {
-        this.textContent = "♞";
-    } else {
-        this.textContent = "♛";
-    }
+                    if (choice === "2") {
+                        this.textContent = "♜";
+                    } else if (choice === "3") {
+                        this.textContent = "♝";
+                    } else if (choice === "4") {
+                        this.textContent = "♞";
+                    } else {
+                        this.textContent = "♛";
+                    }
 
-    this.classList.remove("white-piece", "black-piece");
-    this.classList.add("black-piece");
-}
+                    this.classList.remove("white-piece", "black-piece");
+                    this.classList.add("black-piece");
+                }
+
                 whiteTurn = !whiteTurn;
             }
-
-            /*
-             KONTROLLO SHAHUN
-            */
 
             allSquares.forEach(function(square) {
                 square.classList.remove("in-check");
@@ -663,38 +613,38 @@ if (piece === "♟" && toRow === 7) {
             }
 
             if (blackKing && isKingInCheck(blackKing)) {
-    blackKing.classList.add("in-check");
-}
+                blackKing.classList.add("in-check");
+            }
 
- if (whiteTurn) {
-    if (isCheckmate(true)) {
-        
-            alert("SHAH-MAT! Fiton lojtari i zi.");
-        
-    }
-}
+            if (whiteTurn) {
 
-if (!whiteTurn) {
-    if (isCheckmate(false)) {
-        
-            alert("SHAH-MAT! Fiton lojtari i bardhë.");
-    
-    }
-}     
+                if (isCheckmate(true)) {
 
-        
+                    alert("SHAH-MAT! Fiton lojtari i zi.");
 
-        if (selectedSquare) {
-            selectedSquare.classList.remove("selected");
-            selectedSquare = null;
+                }
+
+            }
+
+            if (!whiteTurn) {
+
+                if (isCheckmate(false)) {
+
+                    alert("SHAH-MAT! Fiton lojtari i bardhë.");
+
+                }
+            }
+
+            if (selectedSquare) {
+                selectedSquare.classList.remove("selected");
+                selectedSquare = null;
+            }
         }
 
     });
 });
 
-/*
- KONTROLLI I SHAH-MATIT
-*/
+
 function hasAnyLegalMove(isWhite) {
 
     const squares =
@@ -758,10 +708,6 @@ function hasAnyLegalMove(isWhite) {
 
             let valid = false;
 
-            /*
-             USHTARI I BARDHË
-            */
-
             if (piece === "♙") {
 
                 if (
@@ -791,10 +737,6 @@ function hasAnyLegalMove(isWhite) {
                     valid = true;
                 }
             }
-
-            /*
-             USHTARI I ZI
-            */
 
             if (piece === "♟") {
 
@@ -826,10 +768,6 @@ function hasAnyLegalMove(isWhite) {
                 }
             }
 
-            /*
-             KALI
-            */
-
             if (
                 (piece === "♘" || piece === "♞") &&
                 (
@@ -840,10 +778,6 @@ function hasAnyLegalMove(isWhite) {
                 valid = true;
             }
 
-            /*
-             MBRETI
-            */
-
             if (
                 (piece === "♔" || piece === "♚") &&
                 rowDiff <= 1 &&
@@ -852,10 +786,6 @@ function hasAnyLegalMove(isWhite) {
             ) {
                 valid = true;
             }
-
-            /*
-             TORRA
-            */
 
             if (
                 (piece === "♖" || piece === "♜") &&
@@ -898,10 +828,6 @@ function hasAnyLegalMove(isWhite) {
                 }
             }
 
-            /*
-             FILI
-            */
-
             if (
                 (piece === "♗" || piece === "♝") &&
                 rowDiff === colDiff &&
@@ -936,10 +862,6 @@ function hasAnyLegalMove(isWhite) {
                     valid = true;
                 }
             }
-
-            /*
-             MBRETËRESHA
-            */
 
             if (
                 (piece === "♕" || piece === "♛") &&
@@ -987,10 +909,6 @@ function hasAnyLegalMove(isWhite) {
                 continue;
             }
 
-            /*
-             PROVO LËVIZJEN
-            */
-
             const originalTarget =
                 squares[to].textContent;
 
@@ -1019,7 +937,8 @@ function hasAnyLegalMove(isWhite) {
 
     return false;
 }
-   
+
+
 function isCheckmate(isWhite) {
 
     const squares =
@@ -1048,7 +967,9 @@ function isCheckmate(isWhite) {
     }
 
     return false;
-} 
+}
+
+
 function isKingInCheck(kingSquare) {
 
     const squares =
@@ -1085,8 +1006,6 @@ function isKingInCheck(kingSquare) {
         isWhiteKing ? "♚" : "♔";
 
 
-    /* PAWN */
-
     const pawnRow =
         isWhiteKing ? kingRow + 1 : kingRow - 1;
 
@@ -1108,8 +1027,6 @@ function isKingInCheck(kingSquare) {
         }
     }
 
-
-    /* KNIGHT */
 
     const knightMoves = [
         [-2, -1], [-2, 1],
@@ -1143,8 +1060,6 @@ function isKingInCheck(kingSquare) {
     }
 
 
-    /* MBRETI ARMiq */
-
     for (const [rowMove, colMove] of [
         [-1, -1], [-1, 0], [-1, 1],
         [0, -1],           [0, 1],
@@ -1173,8 +1088,6 @@ function isKingInCheck(kingSquare) {
         }
     }
 
-
-    /* TORRE / MBRETËRESHË */
 
     const straightDirections = [
         [-1, 0],
@@ -1215,8 +1128,6 @@ function isKingInCheck(kingSquare) {
         }
     }
 
-
-    /* FILLE / MBRETËRESHË */
 
     const diagonalDirections = [
         [-1, -1],
@@ -1259,8 +1170,8 @@ function isKingInCheck(kingSquare) {
 
     return false;
 }
+
 </script>
 
 </body>
 </html>
-
