@@ -693,250 +693,36 @@ if (!whiteTurn) {
 });
 
 /*
- KONTROLLI I SHAHUT
+ KONTROLLI I SHAH-MATIT
 */
-
-function isKingInCheck(king) {
+function hasAnyLegalMove(isWhite) {
 
     const squares =
         Array.from(document.querySelectorAll(".square"));
 
-    const kingIndex =
-        squares.indexOf(king);
+    const whitePieces =
+        ["♙","♘","♖","♗","♕","♔"];
 
-    const kingRow =
-        Math.floor(kingIndex / 8);
+    const blackPieces =
+        ["♟","♞","♝","♜","♛","♚"];
 
-    const kingCol =
-        kingIndex % 8;
+    const ownPieces =
+        isWhite ? whitePieces : blackPieces;
 
-    const enemyPieces =
-        king.textContent === "♔"
-            ? ["♟","♞","♝","♜","♛","♚"]
-            : ["♙","♘","♖","♗","♕","♔"];
-
-    for (let i = 0; i < 64; i++) {
+    for (let from = 0; from < 64; from++) {
 
         const piece =
-            squares[i].textContent;
-
-        if (!enemyPieces.includes(piece)) {
-            continue;
-        }
-
-        const row =
-            Math.floor(i / 8);
-
-        const col =
-            i % 8;
-
-        const rowDiff =
-            Math.abs(kingRow - row);
-
-        const colDiff =
-            Math.abs(kingCol - col);
-
-        /*
-         KALI
-        */
-
-        if (
-            (piece === "♘" || piece === "♞") &&
-            (
-                (rowDiff === 2 && colDiff === 1) ||
-                (rowDiff === 1 && colDiff === 2)
-            )
-        ) {
-            return true;
-        }
-
-        /*
-         USHTARI
-        */
-
-        if (
-            piece === "♙" &&
-            kingRow === row - 1 &&
-            colDiff === 1
-        ) {
-            return true;
-        }
-
-        if (
-            piece === "♟" &&
-            kingRow === row + 1 &&
-            colDiff === 1
-        ) {
-            return true;
-        }
-
-        /*
-         MBRETI
-        */
-
-        if (
-            (piece === "♔" || piece === "♚") &&
-            rowDiff <= 1 &&
-            colDiff <= 1 &&
-            rowDiff + colDiff > 0
-        ) {
-            return true;
-        }
-
-        /*
-         TORRA
-        */
-
-        if (
-            (piece === "♖" || piece === "♜") &&
-            (row === kingRow || col === kingCol)
-        ) {
-
-            let blocked = false;
-
-            const rowStep =
-                row === kingRow ? 0 :
-                (kingRow > row ? 1 : -1);
-
-            const colStep =
-                col === kingCol ? 0 :
-                (kingCol > col ? 1 : -1);
-
-            let r = row + rowStep;
-            let c = col + colStep;
-
-            while (r !== kingRow || c !== kingCol) {
-
-                if (
-                    squares[r * 8 + c].textContent !== ""
-                ) {
-                    blocked = true;
-                    break;
-                }
-
-                r += rowStep;
-                c += colStep;
-            }
-
-            if (!blocked) {
-                return true;
-            }
-        }
-
-        /*
-         FILI
-        */
-
-        if (
-            (piece === "♗" || piece === "♝") &&
-            rowDiff === colDiff &&
-            rowDiff !== 0
-        ) {
-
-            let blocked = false;
-
-            const rowStep =
-                kingRow > row ? 1 : -1;
-
-            const colStep =
-                kingCol > col ? 1 : -1;
-
-            let r = row + rowStep;
-            let c = col + colStep;
-
-            while (r !== kingRow || c !== kingCol) {
-
-                if (
-                    squares[r * 8 + c].textContent !== ""
-                ) {
-                    blocked = true;
-                    break;
-                }
-
-                r += rowStep;
-                c += colStep;
-            }
-
-            if (!blocked) {
-                return true;
-            }
-        }
-
-        /*
-         MBRETËRESHA
-        */
-
-        if (
-            (piece === "♕" || piece === "♛") &&
-            (
-                row === kingRow ||
-                col === kingCol ||
-                rowDiff === colDiff
-            )
-        ) {
-
-            let blocked = false;
-
-            const rowStep =
-                row === kingRow ? 0 :
-                (kingRow > row ? 1 : -1);
-
-            const colStep =
-                col === kingCol ? 0 :
-                (kingCol > col ? 1 : -1);
-
-            let r = row + rowStep;
-            let c = col + colStep;
-
-            while (r !== kingRow || c !== kingCol) {
-
-                if (
-                    squares[r * 8 + c].textContent !== ""
-                ) {
-                    blocked = true;
-                    break;
-                }
-
-                r += rowStep;
-                c += colStep;
-            }
-
-            if (!blocked) {
-                return true;
-            }
-        }
-    }
-
-    return false;
-}
-/*
- KONTROLLI I SHAH-MATIT
-/*
- KONTROLLI I SHAH-MATIT
-*/
-
-function hasAnyLegalMove(isWhite) {
-
-    const squares =
-        Array.from(document.querySelectorAll(".square"));
-const whitePieces =
-        ["♙","♘","♖","♗","♕","♔"];
-
-    const blackPieces =
-        ["♟","♞","♝","♜","♛","♚"];
-    const ownPieces =
-        isWhite ? whitePieces : blackPieces;
-
-    for (let from = 0; from < 64; from++) {
-
-        const piece = squares[from].textContent;
+            squares[from].textContent;
 
         if (!ownPieces.includes(piece)) {
             continue;
         }
 
-        const fromRow = Math.floor(from / 8);
-        const fromCol = from % 8;
+        const fromRow =
+            Math.floor(from / 8);
+
+        const fromCol =
+            from % 8;
 
         for (let to = 0; to < 64; to++) {
 
@@ -944,21 +730,31 @@ const whitePieces =
                 continue;
             }
 
-            const target = squares[to].textContent;
+            const target =
+                squares[to].textContent;
 
             if (ownPieces.includes(target)) {
                 continue;
             }
-const enemyKing = isWhite ? "♚" : "♔";
 
-if (target === enemyKing) {
-    continue;
-}
-            const toRow = Math.floor(to / 8);
-            const toCol = to % 8;
+            const enemyKing =
+                isWhite ? "♚" : "♔";
 
-            const rowDiff = Math.abs(toRow - fromRow);
-            const colDiff = Math.abs(toCol - fromCol);
+            if (target === enemyKing) {
+                continue;
+            }
+
+            const toRow =
+                Math.floor(to / 8);
+
+            const toCol =
+                to % 8;
+
+            const rowDiff =
+                Math.abs(toRow - fromRow);
+
+            const colDiff =
+                Math.abs(toCol - fromCol);
 
             let valid = false;
 
@@ -990,7 +786,6 @@ if (target === enemyKing) {
                     rowDiff === 1 &&
                     colDiff === 1 &&
                     toRow === fromRow - 1 &&
-                    target !== "" &&
                     blackPieces.includes(target)
                 ) {
                     valid = true;
@@ -1025,7 +820,6 @@ if (target === enemyKing) {
                     rowDiff === 1 &&
                     colDiff === 1 &&
                     toRow === fromRow + 1 &&
-                    target !== "" &&
                     whitePieces.includes(target)
                 ) {
                     valid = true;
@@ -1053,7 +847,8 @@ if (target === enemyKing) {
             if (
                 (piece === "♔" || piece === "♚") &&
                 rowDiff <= 1 &&
-                colDiff <= 1
+                colDiff <= 1 &&
+                rowDiff + colDiff > 0
             ) {
                 valid = true;
             }
@@ -1073,12 +868,14 @@ if (target === enemyKing) {
                 let blocked = false;
 
                 const rowStep =
-                    toRow === fromRow ? 0 :
-                    (toRow > fromRow ? 1 : -1);
+                    toRow === fromRow
+                        ? 0
+                        : (toRow > fromRow ? 1 : -1);
 
                 const colStep =
-                    toCol === fromCol ? 0 :
-                    (toCol > fromCol ? 1 : -1);
+                    toCol === fromCol
+                        ? 0
+                        : (toCol > fromCol ? 1 : -1);
 
                 let r = fromRow + rowStep;
                 let c = fromCol + colStep;
@@ -1156,321 +953,14 @@ if (target === enemyKing) {
                 let blocked = false;
 
                 const rowStep =
-                    toRow === fromRow ? 0 :
-                    (toRow > fromRow ? 1 : -1);
+                    toRow === fromRow
+                        ? 0
+                        : (toRow > fromRow ? 1 : -1);
 
                 const colStep =
-                    toCol === fromCol ? 0 :
-                    (toCol > fromCol ? 1 : -1);
-
-                let r = fromRow + rowStep;
-                let c = fromCol + colStep;
-
-                while (r !== toRow || c !== toCol) {
-
-                    if (
-                        squares[r * 8 + c].textContent !== ""
-                    ) {
-                        blocked = true;
-                        break;
-                    }
-
-                    r += rowStep;
-                    c += colStep;
-                }
-
-                if (!blocked) {
-                    valid = true;
-                }
-            }
-
-            if (!valid) {
-                continue;
-            }
-
-            /*
-             PROVO LËVIZJEN
-            */
-
-            const originalTarget = squares[to].textContent;
-
-            squares[to].textContent = piece;
-            squares[from].textContent = "";
-
-            const king =
-                squares.find(
-                    square =>
-                        square.textContent ===
-                        (isWhite ? "♔" : "♚")
-                );
-
-            const stillInCheck =
-                king && isKingInCheck(king);
-
-            /*
-             KTHEJE TABELËN SIÇ ISHTE
-            */
-
-            squares[from].textContent = piece;
-            squares[to].textContent = originalTarget;
-
-    if (!stillInCheck) {
-    return true;
-}
-        }
-    }
-
-    return false;
-}
-*/
-
-function hasAnyLegalMove(isWhite) {
-
-    const squares =
-        Array.from(document.querySelectorAll(".square"));
-const whitePieces =
-        ["♙","♘","♖","♗","♕","♔"];
-
-    const blackPieces =
-        ["♟","♞","♝","♜","♛","♚"];
-    const ownPieces =
-        isWhite ? whitePieces : blackPieces;
-
-    for (let from = 0; from < 64; from++) {
-
-        const piece = squares[from].textContent;
-
-        if (!ownPieces.includes(piece)) {
-            continue;
-        }
-
-        const fromRow = Math.floor(from / 8);
-        const fromCol = from % 8;
-
-        for (let to = 0; to < 64; to++) {
-
-            if (from === to) {
-                continue;
-            }
-
-            const target = squares[to].textContent;
-
-            if (ownPieces.includes(target)) {
-                continue;
-            }
-const enemyKing = isWhite ? "♚" : "♔";
-
-if (target === enemyKing) {
-    continue;
-}
-            const toRow = Math.floor(to / 8);
-            const toCol = to % 8;
-
-            const rowDiff = Math.abs(toRow - fromRow);
-            const colDiff = Math.abs(toCol - fromCol);
-
-            let valid = false;
-
-            /*
-             USHTARI I BARDHË
-            */
-
-            if (piece === "♙") {
-
-                if (
-                    toCol === fromCol &&
-                    target === "" &&
-                    toRow === fromRow - 1
-                ) {
-                    valid = true;
-                }
-
-                if (
-                    toCol === fromCol &&
-                    target === "" &&
-                    fromRow === 6 &&
-                    toRow === 4 &&
-                    squares[(fromRow - 1) * 8 + fromCol].textContent === ""
-                ) {
-                    valid = true;
-                }
-
-                if (
-                    rowDiff === 1 &&
-                    colDiff === 1 &&
-                    toRow === fromRow - 1 &&
-                    target !== "" &&
-                    blackPieces.includes(target)
-                ) {
-                    valid = true;
-                }
-            }
-
-            /*
-             USHTARI I ZI
-            */
-
-            if (piece === "♟") {
-
-                if (
-                    toCol === fromCol &&
-                    target === "" &&
-                    toRow === fromRow + 1
-                ) {
-                    valid = true;
-                }
-
-                if (
-                    toCol === fromCol &&
-                    target === "" &&
-                    fromRow === 1 &&
-                    toRow === 3 &&
-                    squares[(fromRow + 1) * 8 + fromCol].textContent === ""
-                ) {
-                    valid = true;
-                }
-
-                if (
-                    rowDiff === 1 &&
-                    colDiff === 1 &&
-                    toRow === fromRow + 1 &&
-                    target !== "" &&
-                    whitePieces.includes(target)
-                ) {
-                    valid = true;
-                }
-            }
-
-            /*
-             KALI
-            */
-
-            if (
-                (piece === "♘" || piece === "♞") &&
-                (
-                    (rowDiff === 2 && colDiff === 1) ||
-                    (rowDiff === 1 && colDiff === 2)
-                )
-            ) {
-                valid = true;
-            }
-
-            /*
-             MBRETI
-            */
-
-            if (
-                (piece === "♔" || piece === "♚") &&
-                rowDiff <= 1 &&
-                colDiff <= 1
-            ) {
-                valid = true;
-            }
-
-            /*
-             TORRA
-            */
-
-            if (
-                (piece === "♖" || piece === "♜") &&
-                (
-                    toRow === fromRow ||
                     toCol === fromCol
-                )
-            ) {
-
-                let blocked = false;
-
-                const rowStep =
-                    toRow === fromRow ? 0 :
-                    (toRow > fromRow ? 1 : -1);
-
-                const colStep =
-                    toCol === fromCol ? 0 :
-                    (toCol > fromCol ? 1 : -1);
-
-                let r = fromRow + rowStep;
-                let c = fromCol + colStep;
-
-                while (r !== toRow || c !== toCol) {
-
-                    if (
-                        squares[r * 8 + c].textContent !== ""
-                    ) {
-                        blocked = true;
-                        break;
-                    }
-
-                    r += rowStep;
-                    c += colStep;
-                }
-
-                if (!blocked) {
-                    valid = true;
-                }
-            }
-
-            /*
-             FILI
-            */
-
-            if (
-                (piece === "♗" || piece === "♝") &&
-                rowDiff === colDiff &&
-                rowDiff !== 0
-            ) {
-
-                let blocked = false;
-
-                const rowStep =
-                    toRow > fromRow ? 1 : -1;
-
-                const colStep =
-                    toCol > fromCol ? 1 : -1;
-
-                let r = fromRow + rowStep;
-                let c = fromCol + colStep;
-
-                while (r !== toRow || c !== toCol) {
-
-                    if (
-                        squares[r * 8 + c].textContent !== ""
-                    ) {
-                        blocked = true;
-                        break;
-                    }
-
-                    r += rowStep;
-                    c += colStep;
-                }
-
-                if (!blocked) {
-                    valid = true;
-                }
-            }
-
-            /*
-             MBRETËRESHA
-            */
-
-            if (
-                (piece === "♕" || piece === "♛") &&
-                (
-                    toRow === fromRow ||
-                    toCol === fromCol ||
-                    rowDiff === colDiff
-                )
-            ) {
-
-                let blocked = false;
-
-                const rowStep =
-                    toRow === fromRow ? 0 :
-                    (toRow > fromRow ? 1 : -1);
-
-                const colStep =
-                    toCol === fromCol ? 0 :
-                    (toCol > fromCol ? 1 : -1);
+                        ? 0
+                        : (toCol > fromCol ? 1 : -1);
 
                 let r = fromRow + rowStep;
                 let c = fromCol + colStep;
@@ -1501,7 +991,8 @@ if (target === enemyKing) {
              PROVO LËVIZJEN
             */
 
-            const originalTarget = squares[to].textContent;
+            const originalTarget =
+                squares[to].textContent;
 
             squares[to].textContent = piece;
             squares[from].textContent = "";
@@ -1516,21 +1007,18 @@ if (target === enemyKing) {
             const stillInCheck =
                 king && isKingInCheck(king);
 
-            /*
-             KTHEJE TABELËN SIÇ ISHTE
-            */
-
             squares[from].textContent = piece;
             squares[to].textContent = originalTarget;
 
-    if (!stillInCheck) {
-    return true;
-}
+            if (!stillInCheck) {
+                return true;
+            }
         }
     }
 
     return false;
 }
+   
 function isCheckmate(isWhite) {
 
     const squares =
@@ -1551,13 +1039,151 @@ function isCheckmate(isWhite) {
         return false;
     }
 
-const legalMove = hasAnyLegalMove(isWhite);
+    const legalMove =
+        hasAnyLegalMove(isWhite);
 
-if (!legalMove) {
-     return true;
+    if (!legalMove) {
+        return true;
+    }
+
+    return false;
+} 
+     /*
+     PROVO LËVIZJEN
+     */
+
+            const originalTarget =
+                squares[to].textContent;
+
+            squares[to].textContent = piece;
+            squares[from].textContent = "";
+
+            const king =
+                squares.find(
+                    square =>
+                        square.textContent ===
+                        (isWhite ? "♔" : "♚")
+                );
+
+            const stillInCheck =
+                king && isKingInCheck(king);
+
+            squares[from].textContent = piece;
+            squares[to].textContent = originalTarget;
+
+            if (!stillInCheck) {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
+     /*
+             PROVO LËVIZJEN
+            */
 
-return false;
+            const originalTarget =
+                squares[to].textContent;
+
+            squares[to].textContent = piece;
+            squares[from].textContent = "";
+
+            const king =
+                squares.find(
+                    square =>
+                        square.textContent ===
+                        (isWhite ? "♔" : "♚")
+                );
+
+            const stillInCheck =
+                king && isKingInCheck(king);
+
+            squares[from].textContent = piece;
+            squares[to].textContent = originalTarget;
+
+            if (!stillInCheck) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+    const squares =
+        Array.from(document.querySelectorAll(".square"));
+
+    const king =
+        squares.find(
+            square =>
+                square.textContent ===
+                (isWhite ? "♔" : "♚")
+        );
+
+    if (!king) {
+        return false;
+    }
+
+    if (!isKingInCheck(king)) {
+        return false;
+    }
+
+    const legalMove =
+        hasAnyLegalMove(isWhite);
+
+    if (!legalMove) {
+        return true;
+    }
+
+    return false;
+}
+</script>
+
+</body>
+</html>
+
+   
+    const squares =
+        Array.from(document.querySelectorAll(".square"));
+
+    const king =
+        squares.find(
+            square =>
+                square.textContent ===
+                (isWhite ? "♔" : "♚")
+        );
+
+    if (!king) {
+        return false;
+    }
+
+    if (!isKingInCheck(king)) {
+        return false;
+    }
+
+   const legalMove =
+
+
+    if (!legalMove) {
+        return true;
+    }
+
+    return false;
+}
+</script>
+
+</body>
+</html>
+
+
+    const legalMove =
+    
+
+    if (!legalMove) {
+        return true;
+    }
+
+    return false;
 }
 </script>
 
