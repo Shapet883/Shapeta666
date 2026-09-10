@@ -1049,139 +1049,212 @@ function isCheckmate(isWhite) {
 
     return false;
 } 
-     /*
-     PROVO LËVIZJEN
-     */
+function isKingInCheck(kingSquare) {
 
-            const originalTarget =
-                squares[to].textContent;
+    const squares =
+        Array.from(document.querySelectorAll(".square"));
 
-            squares[to].textContent = piece;
-            squares[from].textContent = "";
+    const kingIndex =
+        squares.indexOf(kingSquare);
 
-            const king =
-                squares.find(
-                    square =>
-                        square.textContent ===
-                        (isWhite ? "♔" : "♚")
-                );
+    const kingRow =
+        Math.floor(kingIndex / 8);
 
-            const stillInCheck =
-                king && isKingInCheck(king);
+    const kingCol =
+        kingIndex % 8;
 
-            squares[from].textContent = piece;
-            squares[to].textContent = originalTarget;
+    const isWhiteKing =
+        kingSquare.textContent === "♔";
 
-            if (!stillInCheck) {
+    const enemyPawn =
+        isWhiteKing ? "♟" : "♙";
+
+    const enemyKnight =
+        isWhiteKing ? "♞" : "♘";
+
+    const enemyBishop =
+        isWhiteKing ? "♝" : "♗";
+
+    const enemyRook =
+        isWhiteKing ? "♜" : "♖";
+
+    const enemyQueen =
+        isWhiteKing ? "♛" : "♕";
+
+    const enemyKing =
+        isWhiteKing ? "♚" : "♔";
+
+
+    /* PAWN */
+
+    const pawnRow =
+        isWhiteKing ? kingRow + 1 : kingRow - 1;
+
+    for (const col of [kingCol - 1, kingCol + 1]) {
+
+        if (
+            pawnRow >= 0 &&
+            pawnRow < 8 &&
+            col >= 0 &&
+            col < 8
+        ) {
+
+            const square =
+                squares[pawnRow * 8 + col];
+
+            if (square.textContent === enemyPawn) {
                 return true;
             }
         }
     }
 
-    return false;
-}
-     /*
-             PROVO LËVIZJEN
-            */
 
-            const originalTarget =
-                squares[to].textContent;
+    /* KNIGHT */
 
-            squares[to].textContent = piece;
-            squares[from].textContent = "";
+    const knightMoves = [
+        [-2, -1], [-2, 1],
+        [-1, -2], [-1, 2],
+        [1, -2], [1, 2],
+        [2, -1], [2, 1]
+    ];
 
-            const king =
-                squares.find(
-                    square =>
-                        square.textContent ===
-                        (isWhite ? "♔" : "♚")
-                );
+    for (const [rowMove, colMove] of knightMoves) {
 
-            const stillInCheck =
-                king && isKingInCheck(king);
+        const row =
+            kingRow + rowMove;
 
-            squares[from].textContent = piece;
-            squares[to].textContent = originalTarget;
+        const col =
+            kingCol + colMove;
 
-            if (!stillInCheck) {
+        if (
+            row >= 0 &&
+            row < 8 &&
+            col >= 0 &&
+            col < 8
+        ) {
+
+            const square =
+                squares[row * 8 + col];
+
+            if (square.textContent === enemyKnight) {
                 return true;
             }
         }
     }
 
-    return false;
-}
-    const squares =
-        Array.from(document.querySelectorAll(".square"));
 
-    const king =
-        squares.find(
-            square =>
-                square.textContent ===
-                (isWhite ? "♔" : "♚")
-        );
+    /* MBRETI ARMiq */
 
-    if (!king) {
-        return false;
+    for (const [rowMove, colMove] of [
+        [-1, -1], [-1, 0], [-1, 1],
+        [0, -1],           [0, 1],
+        [1, -1],  [1, 0],  [1, 1]
+    ]) {
+
+        const row =
+            kingRow + rowMove;
+
+        const col =
+            kingCol + colMove;
+
+        if (
+            row >= 0 &&
+            row < 8 &&
+            col >= 0 &&
+            col < 8
+        ) {
+
+            const square =
+                squares[row * 8 + col];
+
+            if (square.textContent === enemyKing) {
+                return true;
+            }
+        }
     }
 
-    if (!isKingInCheck(king)) {
-        return false;
+
+    /* TORRE / MBRETËRESHË */
+
+    const straightDirections = [
+        [-1, 0],
+        [1, 0],
+        [0, -1],
+        [0, 1]
+    ];
+
+    for (const [rowMove, colMove] of straightDirections) {
+
+        let row = kingRow + rowMove;
+        let col = kingCol + colMove;
+
+        while (
+            row >= 0 &&
+            row < 8 &&
+            col >= 0 &&
+            col < 8
+        ) {
+
+            const square =
+                squares[row * 8 + col];
+
+            if (square.textContent !== "") {
+
+                if (
+                    square.textContent === enemyRook ||
+                    square.textContent === enemyQueen
+                ) {
+                    return true;
+                }
+
+                break;
+            }
+
+            row += rowMove;
+            col += colMove;
+        }
     }
 
-    const legalMove =
-        hasAnyLegalMove(isWhite);
 
-    if (!legalMove) {
-        return true;
-    }
+    /* FILLE / MBRETËRESHË */
 
-    return false;
-}
-</script>
+    const diagonalDirections = [
+        [-1, -1],
+        [-1, 1],
+        [1, -1],
+        [1, 1]
+    ];
 
-</body>
-</html>
+    for (const [rowMove, colMove] of diagonalDirections) {
 
-   
-    const squares =
-        Array.from(document.querySelectorAll(".square"));
+        let row = kingRow + rowMove;
+        let col = kingCol + colMove;
 
-    const king =
-        squares.find(
-            square =>
-                square.textContent ===
-                (isWhite ? "♔" : "♚")
-        );
+        while (
+            row >= 0 &&
+            row < 8 &&
+            col >= 0 &&
+            col < 8
+        ) {
 
-    if (!king) {
-        return false;
-    }
+            const square =
+                squares[row * 8 + col];
 
-    if (!isKingInCheck(king)) {
-        return false;
-    }
+            if (square.textContent !== "") {
 
-   const legalMove =
+                if (
+                    square.textContent === enemyBishop ||
+                    square.textContent === enemyQueen
+                ) {
+                    return true;
+                }
 
+                break;
+            }
 
-    if (!legalMove) {
-        return true;
-    }
-
-    return false;
-}
-</script>
-
-</body>
-</html>
-
-
-    const legalMove =
-    
-
-    if (!legalMove) {
-        return true;
+            row += rowMove;
+            col += colMove;
+        }
     }
 
     return false;
