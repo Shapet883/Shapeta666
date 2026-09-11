@@ -616,29 +616,36 @@ document.querySelectorAll(".square").forEach(function(square) {
                 blackKing.classList.add("in-check");
             }
 
-            if (whiteTurn) {
-
-                if (isCheckmate(true)) {
-
-                    alert("SHAH-MAT! Fiton lojtari i zi.");
-
-                }
-
-            }
-
-            if (!whiteTurn) {
-
-                if (isCheckmate(false)) {
-
-                    alert("SHAH-MAT! Fiton lojtari i bardhë.");
-
-                }
-            }
-
             if (selectedSquare) {
-                selectedSquare.classList.remove("selected");
-                selectedSquare = null;
-            }
+    selectedSquare.classList.remove("selected");
+    selectedSquare = null;
+}
+
+if (whiteTurn) {
+
+    if (isCheckmate(true)) {
+
+        setTimeout(function() {
+            alert("SHAH-MAT! Fiton lojtari i zi.");
+        }, 800);
+
+        return;
+    }
+}
+
+if (!whiteTurn) {
+
+    if (isCheckmate(false)) {
+
+        setTimeout(function() {
+            alert("SHAH-MAT! Fiton lojtari i bardhë.");
+        }, 800);
+
+        return;
+    }
+}
+
+    
         }
 
     });
