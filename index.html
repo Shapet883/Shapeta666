@@ -1177,7 +1177,45 @@ function isKingInCheck(kingSquare) {
 
     return false;
 }
+document.getElementById("newGameButton").addEventListener("click", function() {
 
+    const squares = Array.from(document.querySelectorAll(".square"));
+
+    const startPosition = [
+        "♜","♞","♝","♛","♚","♝","♞","♜",
+        "♟","♟","♟","♟","♟","♟","♟","♟",
+        "","","","","","","","",
+        "","","","","","","","",
+        "","","","","","","","",
+        "","","","","","","","",
+        "♙","♙","♙","♙","♙","♙","♙","♙",
+        "♖","♘","♗","♕","♔","♗","♘","♖"
+    ];
+
+    squares.forEach(function(square, index) {
+
+        square.textContent = startPosition[index];
+
+        square.classList.remove(
+            "selected",
+            "in-check",
+            "white-piece",
+            "black-piece"
+        );
+
+        if (["♙","♘","♖","♗","♕","♔"].includes(startPosition[index])) {
+            square.classList.add("white-piece");
+        }
+
+        if (["♟","♞","♜","♝","♛","♚"].includes(startPosition[index])) {
+            square.classList.add("black-piece");
+        }
+    });
+
+    selectedSquare = null;
+    whiteTurn = true;
+    lastDoubleStep = null;
+});
 </script>
 
 </body>
