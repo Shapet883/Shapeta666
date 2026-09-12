@@ -716,15 +716,21 @@ function handleSquareClick(square, index) {
 
                 /* ROKADA E GJATË */
 
-                if (
-    toCol === 2 &&
-    !blackKingMoved &&
-    !blackRookLeftMoved &&
-    canCastle(false, false)
-) {
+              /* ROKADA E GJATË */
 
-    validMove = true;
-}
+                if (
+                    toCol === 2 &&
+                    !blackKingMoved &&
+                    !blackRookLeftMoved &&
+                    canCastle(false, false)
+                ) {
+
+                    validMove = true;
+                }
+            }
+        }
+    }
+ 
 
 
     /* NUK LEJOHET KAPJA E MBRETIT */
