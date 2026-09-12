@@ -1911,10 +1911,10 @@ function canCastle(
     squares[kingIndex].textContent =
         oldKingText;
 
-
-    if (destinationInCheck) {
-        return false;
-    }
+if (destinationInCheck) {
+    alert("Rokada ndalet: c8 është në sulm.");
+    return false;
+}
 
 
     return true;
