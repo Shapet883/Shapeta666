@@ -1811,11 +1811,12 @@ function canCastle(
 
 
     if (
-        squares[rookIndex]
-            .textContent !== rookPiece
-    ) {
-        return false;
-    }
+    squares[rookIndex]
+        .textContent
+        .replace(/[a-h1-8]/g, "") !== rookPiece
+) {
+    return false;
+}
 
 
     for (
