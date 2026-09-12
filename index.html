@@ -187,6 +187,13 @@ let selectedSquare = null;
 let whiteTurn = true;
 let lastDoubleStep = null;
 
+let whiteKingMoved = false;
+let blackKingMoved = false;
+let whiteRookLeftMoved = false;
+let whiteRookRightMoved = false;
+let blackRookLeftMoved = false;
+let blackRookRightMoved = false;
+
 document.querySelectorAll(".square").forEach(function(square) {
 
     square.addEventListener("click", function() {
@@ -451,20 +458,59 @@ document.querySelectorAll(".square").forEach(function(square) {
             }
         }
 
-        if (piece === "♔" || piece === "♚") {
+       if (piece === "♔" || piece === "♚") {
 
-            const rowDiff = Math.abs(toRow - fromRow);
-            const colDiff = Math.abs(toCol - fromCol);
+    const rowDiff = Math.abs(toRow - fromRow);
+    const colDiff = Math.abs(toCol - fromCol);
 
+    if (
+        rowDiff <= 1 &&
+        colDiff <= 1 &&
+        rowDiff + colDiff > 0 &&
+        !sameColor
+    ) {
+        validMove = true;
+    }
+
+    // ROKADA
+    if (rowDiff === 0 && colDiff === 2) {
+
+        if (piece === "♔" && fromRow === 7 && fromCol === 4) {
+
+            // Rokada e shkurtër
             if (
-                rowDiff <= 1 &&
-                colDiff <= 1 &&
-                rowDiff + colDiff > 0 &&
-                !sameColor
+                toCol === 6 &&
+                !whiteKingMoved &&
+                !whiteRookRightMoved &&
+                squares[61].textContent === "" &&
+                squares[62].textContent === "" &&
+                squares[63].textContent === "♖"
             ) {
                 validMove = true;
             }
-        }
+
+            // Rokada e gjatë
+if (
+    toCol === 2 &&
+    !whiteKingMoved &&
+    !whiteRookLeftMoved &&
+    canCastle(true, false)
+) {
+    validMove = true;
+}
+
+        if (piece === "♚" && fromRow === 0 && fromCol === 4) {
+
+ 
+        // Rokada e gjatë
+if (
+    toCol === 2 &&
+    !blackKingMoved &&
+    !blackRookLeftMoved &&
+    canCastle(false, false)
+) {
+    validMove = true;
+}
 
         if (
             target === "♔" ||
@@ -498,7 +544,77 @@ document.querySelectorAll(".square").forEach(function(square) {
 
                 lastDoubleStep.textContent = "";
             }
+// Lëvizja e torres gjatë rokadës
+let isCastling = false;
 
+if (
+    (piece === "♔" || piece === "♚") &&
+    Math.abs(toCol - fromCol) === 2 &&
+    fromRow === toRow
+) {
+    isCastling = true;
+
+    // Bardhi - rokadë e shkurtër
+    if (piece === "♔" && toCol === 6) {
+        squares[63].textContent = "";
+        squares[61].textContent = "♖";
+
+        squares[63].classList.remove("white-piece");
+        squares[61].classList.add("white-piece");
+    }
+
+    // Bardhi - rokadë e gjatë
+    if (piece === "♔" && toCol === 2) {
+        squares[56].textContent = "";
+        squares[59].textContent = "♖";
+
+        squares[56].classList.remove("white-piece");
+        squares[59].classList.add("white-piece");
+    }
+
+    // Ziu - rokadë e shkurtër
+    if (piece === "♚" && toCol === 6) {
+        squares[7].textContent = "";
+        squares[5].textContent = "♜";
+
+        squares[7].classList.remove("black-piece");
+        squares[5].classList.add("black-piece");
+    }
+
+    // Ziu - rokadë e gjatë
+    if (piece === "♚" && toCol === 2) {
+        squares[0].textContent = "";
+        squares[3].textContent = "♜";
+
+        squares[0].classList.remove("black-piece");
+        squares[3].classList.add("black-piece");
+    }
+}
+          // Regjistrojmë lëvizjen e mbretit dhe torrave
+
+if (piece === "♔") {
+    whiteKingMoved = true;
+}
+
+if (piece === "♚") {
+    blackKingMoved = true;
+}
+
+if (piece === "♖" && from === 56) {
+    whiteRookLeftMoved = true;
+}
+
+if (piece === "♖" && from === 63) {
+    whiteRookRightMoved = true;
+}
+
+if (piece === "♜" && from === 0) {
+    blackRookLeftMoved = true;
+}
+
+if (piece === "♜" && from === 7) {
+    blackRookRightMoved = true;
+} 
             this.textContent = piece;
 
             this.classList.remove("white-piece", "black-piece");
@@ -674,7 +790,17 @@ function hasAnyLegalMove(isWhite) {
         if (!ownPieces.includes(piece)) {
             continue;
         }
+// Kontrollo rokadën
+if (piece === (isWhite ? "♔" : "♚")) {
 
+    if (canCastle(isWhite, true)) {
+        return true;
+    }
+
+    if (canCastle(isWhite, false)) {
+        return true;
+    }
+}
         const fromRow =
             Math.floor(from / 8);
 
@@ -976,7 +1102,88 @@ function isCheckmate(isWhite) {
     return false;
 }
 
+function canCastle(isWhite, shortCastle) {
 
+    const squares =
+        Array.from(document.querySelectorAll(".square"));
+
+    const kingIndex = isWhite ? 60 : 4;
+    const rookIndex =
+        isWhite
+            ? (shortCastle ? 63 : 56)
+            : (shortCastle ? 7 : 0);
+
+    const emptySquares =
+        isWhite
+            ? (shortCastle ? [61, 62] : [57, 58, 59])
+            : (shortCastle ? [5, 6] : [1, 2, 3]);
+
+    const kingPiece =
+        isWhite ? "♔" : "♚";
+
+    const rookPiece =
+        isWhite ? "♖" : "♜";
+
+    if (squares[kingIndex].textContent !== kingPiece) {
+        return false;
+    }
+
+    if (squares[rookIndex].textContent !== rookPiece) {
+        return false;
+    }
+
+    for (const index of emptySquares) {
+        if (squares[index].textContent !== "") {
+            return false;
+        }
+    }
+
+    // Mbreti nuk guxon të jetë në shah
+    if (isKingInCheck(squares[kingIndex])) {
+        return false;
+    }
+
+    // Kontrollojmë katrorin ku kalon mbreti
+    const middleIndex =
+        shortCastle
+            ? (isWhite ? 61 : 5)
+            : (isWhite ? 59 : 3);
+
+    const destinationIndex =
+        shortCastle
+            ? (isWhite ? 62 : 6)
+            : (isWhite ? 58 : 2);
+
+    // Kontrolli i katrorit të mesëm
+    squares[kingIndex].textContent = "";
+    squares[middleIndex].textContent = kingPiece;
+
+    const middleInCheck =
+        isKingInCheck(squares[middleIndex]);
+
+    squares[middleIndex].textContent = "";
+    squares[kingIndex].textContent = kingPiece;
+
+    if (middleInCheck) {
+        return false;
+    }
+
+    // Kontrolli i katrorit ku përfundon mbreti
+    squares[kingIndex].textContent = "";
+    squares[destinationIndex].textContent = kingPiece;
+
+    const destinationInCheck =
+        isKingInCheck(squares[destinationIndex]);
+
+    squares[destinationIndex].textContent = "";
+    squares[kingIndex].textContent = kingPiece;
+
+    if (destinationInCheck) {
+        return false;
+    }
+
+    return true;
+}
 function isKingInCheck(kingSquare) {
 
     const squares =
@@ -1215,6 +1422,12 @@ document.getElementById("newGameButton").addEventListener("click", function() {
     selectedSquare = null;
     whiteTurn = true;
     lastDoubleStep = null;
+whiteKingMoved = false;
+blackKingMoved = false;
+whiteRookLeftMoved = false;
+whiteRookRightMoved = false;
+blackRookLeftMoved = false;
+blackRookRightMoved = false;
 });
 </script>
 
