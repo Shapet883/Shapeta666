@@ -1886,10 +1886,10 @@ function canCastle(
     squares[kingIndex].textContent =
         oldKingText;
 
-
-    if (middleInCheck) {
-        return false;
-    }
+if (middleInCheck) {
+    alert("Rokada ndalet: d8 është në sulm.");
+    return false;
+}
 
 
     /* KONTROLLI I KATRORIT TË FUNDIT */
