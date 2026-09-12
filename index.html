@@ -714,22 +714,16 @@ function handleSquareClick(square, index) {
                 }
 
               /* ROKADA E GJATË */
-
-                if (
+if (
     toCol === 2 &&
-    fromCol === 4 &&
-    fromRow === 0 &&
     !blackKingMoved &&
     !blackRookLeftMoved &&
-    squares[0].textContent === "♜" &&
-    squares[1].textContent === "" &&
-    squares[2].textContent === "" &&
-    squares[3].textContent === "" &&
     canCastle(false, false)
 ) {
 
     validMove = true;
 }
+        
             }
         }
     }
