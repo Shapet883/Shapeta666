@@ -714,13 +714,12 @@ function handleSquareClick(square, index) {
                 }
 
               /* ROKADA E GJATË */
-                if (
+    if (
     toCol === 2 &&
     !blackKingMoved &&
     !blackRookLeftMoved &&
-    true
+    canCastle(false, false)
 ) {
-
     validMove = true;
 }
         
