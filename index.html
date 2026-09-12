@@ -28,6 +28,7 @@ h1 {
     grid-template-columns: repeat(8, 65px);
     grid-template-rows: repeat(8, 65px);
     border: 5px solid #111;
+    box-sizing: content-box;
 }
 
 .square {
@@ -178,13 +179,12 @@ for (let i = 0; i < 64; i++) {
     square.classList.add("square");
 
     if (
-        Math.floor(i / 8) + i % 8
-        % 2 === 0
-    ) {
-        square.classList.add("light");
-    } else {
-        square.classList.add("dark");
-    }
+    (Math.floor(i / 8) + i % 8) % 2 === 0
+) {
+    square.classList.add("light");
+} else {
+    square.classList.add("dark");
+}
 
     const row = Math.floor(i / 8);
     const col = i % 8;
