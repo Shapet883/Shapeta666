@@ -1802,13 +1802,13 @@ function canCastle(
         isWhite ? "♖" : "♜";
 
 
-    if (
-        squares[kingIndex]
-            .textContent !== kingPiece
-    ) {
-        return false;
-    }
-
+if (
+    squares[kingIndex]
+        .textContent
+        .replace(/[a-h1-8]/g, "") !== kingPiece
+) {
+    return false;
+}
 
     if (
     squares[rookIndex]
