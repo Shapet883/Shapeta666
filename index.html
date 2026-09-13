@@ -121,7 +121,16 @@ h1 {
     border-radius: 8px;
     border: 2px solid #111;
 }
-
+#turnIndicator {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+    padding: 8px 18px;
+    display: inline-block;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    background: #333;
+}
 @media (max-width: 600px) {
 
     #board {
@@ -144,7 +153,7 @@ h1 {
 <body>
 
 <h1>♟️ SHAPETA CHESS KOSOVA 🇽🇰</h1>
-
+<div id="turnIndicator">RADHA: BARDHI</div>
 <div id="board"></div>
 
 <button id="newGameButton">🔄 LOJA E RE</button>
@@ -1157,7 +1166,8 @@ function handleSquareClick(square, index) {
     /* NDËRRO RADHËN */
 
     whiteTurn = !whiteTurn;
-
+document.getElementById("turnIndicator").textContent =
+    whiteTurn ? "RADHA: BARDHI" : "RADHA: ZI";
 
     /* HIQ SHAHUN E VJETËR */
 
@@ -2177,7 +2187,8 @@ document.getElementById(
         selectedSquare = null;
 
         whiteTurn = true;
-
+document.getElementById("turnIndicator").textContent =
+    "RADHA: BARDHI";
         lastDoubleStep = null;
 
         whiteKingMoved = false;
