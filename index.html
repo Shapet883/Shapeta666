@@ -1168,7 +1168,18 @@ function handleSquareClick(square, index) {
     whiteTurn = !whiteTurn;
 document.getElementById("turnIndicator").textContent =
     whiteTurn ? "RADHA: BARDHI" : "RADHA: ZI";
+/* KONTROLLO REMIN - VETËM DY MBRETËR */
 
+if (isKingVsKing()) {
+
+    alert(
+        "REMI! Mbetën vetëm dy mbretërit."
+    );
+
+    selectedSquare = null;
+
+    return;
+}
     /* HIQ SHAHUN E VJETËR */
 
     squares.forEach(
@@ -1708,7 +1719,36 @@ function isCheckmate(isWhite) {
 
     return !hasAnyLegalMove(isWhite);
 }
+/* REMI - VETËM DY MBRETËR */
 
+function isKingVsKing() {
+
+    const squares =
+        Array.from(
+            document.querySelectorAll(".square")
+        );
+
+    let piecesOnBoard = 0;
+
+    for (const square of squares) {
+
+        const piece = getPiece(square);
+
+        if (piece !== "") {
+            piecesOnBoard++;
+        }
+
+        if (
+            piece !== "" &&
+            piece !== "♔" &&
+            piece !== "♚"
+        ) {
+            return false;
+        }
+    }
+
+    return piecesOnBoard === 2;
+}
 
 /* ROKADA */
 
