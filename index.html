@@ -1253,16 +1253,24 @@ function handleSquareClick(square, index) {
 
             }, 800);
         }
-        else {
 
-            alert(
-                "Nuk lejohet! Mbreti është në shah."
-            );
-        }
+      else {
+        alert(
+            "Nuk lejohet! Mbreti është në shah."
+        );
     }
 }
 
+else if (
+    enemyKingIndex !== -1 &&
+    !hasAnyLegalMove(whiteTurn)
+) {
+    alert("PAT! BARAZIM!");
+}
 
+}
+
+    
 /* A KA NDONJË LËVIZJE TË LEJUAR? */
 
 function hasAnyLegalMove(isWhite) {
