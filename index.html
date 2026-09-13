@@ -77,8 +77,14 @@ h1 {
     background: red !important;
 }
 
-.coordinate {
+
+/* KOORDINATAT */
+
+.square[data-file]::after {
+    content: attr(data-file);
     position: absolute;
+    bottom: 2px;
+    right: 4px;
     font-size: 13px;
     font-weight: bold;
     color: #fff;
@@ -90,14 +96,20 @@ h1 {
     pointer-events: none;
 }
 
-.file {
-    bottom: 2px;
-    right: 4px;
-}
-
-.rank {
+.square[data-rank]::before {
+    content: attr(data-rank);
+    position: absolute;
     top: 2px;
     left: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow:
+        1px 1px 2px #000,
+        -1px -1px 2px #000,
+        1px -1px 2px #000,
+        -1px 1px 2px #000;
+    pointer-events: none;
 }
 
 #newGameButton {
@@ -184,27 +196,38 @@ for (let i = 0; i < 64; i++) {
     square.classList.add("square");
 
     if (
-    (Math.floor(i / 8) + i % 8) % 2 === 0
-) {
-    square.classList.add("light");
-} else {
-    square.classList.add("dark");
-}
+        (Math.floor(i / 8) + i % 8) % 2 === 0
+    ) {
+        square.classList.add("light");
+    } else {
+        square.classList.add("dark");
+    }
 
     const row = Math.floor(i / 8);
     const col = i % 8;
+
+
+    /* KOORDINATAT */
+
+    if (row === 7) {
+        square.dataset.file =
+            String.fromCharCode(97 + col);
+    }
+
+    if (col === 0) {
+        square.dataset.rank =
+            8 - row;
+    }
+
+
+    /* FIGURAT */
 
     if (pieces[i] !== "") {
 
         square.textContent = pieces[i];
 
         if (
-            pieces[i] === "♔" ||
-            pieces[i] === "♕" ||
-            pieces[i] === "♖" ||
-            pieces[i] === "♗" ||
-            pieces[i] === "♘" ||
-            pieces[i] === "♙"
+            "♔♕♖♗♘♙".includes(pieces[i])
         ) {
             square.classList.add("white-piece");
         } else {
@@ -212,40 +235,22 @@ for (let i = 0; i < 64; i++) {
         }
     }
 
-    /* SHKRONJAT A-H */
 
-    if (row === 7) {
-
-        const file = document.createElement("span");
-
-        file.classList.add("coordinate", "file");
-
-        file.textContent =
-            String.fromCharCode(97 + col);
-
-        square.appendChild(file);
-    }
-
-    /* NUMRAT 8-1 */
-
-    if (col === 0) {
-
-        const rank = document.createElement("span");
-
-        rank.classList.add("coordinate", "rank");
-
-        rank.textContent = 8 - row;
-
-        square.appendChild(rank);
-    }
-
-    square.addEventListener("click", function () {
-
-        handleSquareClick(this, i);
-
-    });
+    square.addEventListener(
+        "click",
+        function () {
+            handleSquareClick(this, i);
+        }
+    );
 
     board.appendChild(square);
+}
+
+
+/* MERR FIGURËN PA KOORDINATA */
+
+function getPiece(square) {
+    return square.textContent;
 }
 
 
@@ -254,9 +259,13 @@ for (let i = 0; i < 64; i++) {
 function handleSquareClick(square, index) {
 
     const squares =
-        Array.from(document.querySelectorAll(".square"));
+        Array.from(
+            document.querySelectorAll(".square")
+        );
 
-    const piece = square.textContent.replace(/[a-h1-8]/g, "");
+    const piece =
+        getPiece(square);
+
 
     /* ZGJIDH FIGURËN */
 
@@ -281,7 +290,7 @@ function handleSquareClick(square, index) {
     }
 
 
-    /* KLIKIMI PËRSËRI MBI TË NJËJTËN FIGURË */
+    /* KLIKIM PËRSËRI */
 
     if (selectedSquare === index) {
 
@@ -303,15 +312,13 @@ function handleSquareClick(square, index) {
     const toCol = to % 8;
 
     const movingSquare = squares[from];
-
     const targetSquare = squares[to];
 
     const movingPiece =
-        movingSquare.textContent.replace(/[a-h1-8]/g, "");
+        getPiece(movingSquare);
 
     const target =
-        targetSquare.textContent.replace(/[a-h1-8]/g, "");
-
+        getPiece(targetSquare);
 
     const isWhitePiece =
         "♔♕♖♗♘♙".includes(movingPiece);
@@ -324,14 +331,15 @@ function handleSquareClick(square, index) {
     const sameColor =
         target !== "" &&
         (
-            "♔♕♖♗♘♙".includes(target) === isWhitePiece
+            "♔♕♖♗♘♙".includes(target)
+            === isWhitePiece
         );
 
 
     let validMove = false;
 
 
-    /* PAWN */
+    /* PIONI */
 
     if (
         movingPiece === "♙" ||
@@ -344,7 +352,6 @@ function handleSquareClick(square, index) {
         const startRow =
             movingPiece === "♙" ? 6 : 1;
 
-        /* NJË HAP */
 
         if (
             toCol === fromCol &&
@@ -354,19 +361,19 @@ function handleSquareClick(square, index) {
             validMove = true;
         }
 
-        /* DY HAPA */
 
         if (
             toCol === fromCol &&
             fromRow === startRow &&
             toRow - fromRow === direction * 2 &&
             target === "" &&
-            squares[from + direction * 8].textContent === ""
+            getPiece(
+                squares[from + direction * 8]
+            ) === ""
         ) {
             validMove = true;
         }
 
-        /* KAPJE */
 
         if (
             Math.abs(toCol - fromCol) === 1 &&
@@ -377,46 +384,51 @@ function handleSquareClick(square, index) {
             validMove = true;
         }
 
+
         /* EN PASSANT */
 
         if (
             Math.abs(toCol - fromCol) === 1 &&
             toRow - fromRow === direction &&
-            target === ""
+            target === "" &&
+            lastDoubleStep !== null
         ) {
 
-            if (lastDoubleStep !== null) {
+            const lastIndex =
+                lastDoubleStep.index;
 
-                const lastIndex =
-                    lastDoubleStep.index;
+            const lastPiece =
+                lastDoubleStep.piece;
 
-                const lastPiece =
-                    lastDoubleStep.piece;
+            const expectedIndex =
+                fromRow * 8 +
+                fromCol +
+                (toCol - fromCol);
 
-                if (
-                    lastIndex === fromCol + fromRow * 8 + (toCol - fromCol) &&
-                    (
-                        lastPiece === "♙" ||
-                        lastPiece === "♟"
-                    )
-                ) {
+            if (
+                lastIndex === expectedIndex &&
+                (
+                    lastPiece === "♙" ||
+                    lastPiece === "♟"
+                )
+            ) {
 
-                    validMove = true;
+                validMove = true;
 
-                    squares[lastIndex].textContent = "";
+                squares[lastIndex].textContent = "";
 
-                    squares[lastIndex]
-                        .classList.remove(
-                            "white-piece",
-                            "black-piece"
-                        );
-                }
+                squares[lastIndex]
+                    .classList
+                    .remove(
+                        "white-piece",
+                        "black-piece"
+                    );
             }
         }
     }
 
 
-    /* KALËS */
+    /* KALI */
 
     if (
         movingPiece === "♘" ||
@@ -479,15 +491,11 @@ function handleSquareClick(square, index) {
                 c !== toCol
             ) {
 
-                const checkIndex =
-                    r * 8 + c;
-
                 if (
-                    squares[checkIndex]
-                        .textContent
-                        .replace(/[a-h1-8]/g, "") !== ""
+                    getPiece(
+                        squares[r * 8 + c]
+                    ) !== ""
                 ) {
-
                     clear = false;
                     break;
                 }
@@ -534,15 +542,11 @@ function handleSquareClick(square, index) {
                 c !== toCol
             ) {
 
-                const checkIndex =
-                    r * 8 + c;
-
                 if (
-                    squares[checkIndex]
-                        .textContent
-                        .replace(/[a-h1-8]/g, "") !== ""
+                    getPiece(
+                        squares[r * 8 + c]
+                    ) !== ""
                 ) {
-
                     clear = false;
                     break;
                 }
@@ -600,15 +604,11 @@ function handleSquareClick(square, index) {
                 c !== toCol
             ) {
 
-                const checkIndex =
-                    r * 8 + c;
-
                 if (
-                    squares[checkIndex]
-                        .textContent
-                        .replace(/[a-h1-8]/g, "") !== ""
+                    getPiece(
+                        squares[r * 8 + c]
+                    ) !== ""
                 ) {
-
                     clear = false;
                     break;
                 }
@@ -624,7 +624,7 @@ function handleSquareClick(square, index) {
     }
 
 
-    /* MBRETI + ROKADA */
+    /* MBRETI */
 
     if (
         movingPiece === "♔" ||
@@ -638,15 +638,12 @@ function handleSquareClick(square, index) {
             Math.abs(toCol - fromCol);
 
 
-        /* LËVIZJE NORMALE */
-
         if (
             rowDiff <= 1 &&
             colDiff <= 1 &&
             rowDiff + colDiff > 0 &&
             !sameColor
         ) {
-
             validMove = true;
         }
 
@@ -658,15 +655,11 @@ function handleSquareClick(square, index) {
             colDiff === 2
         ) {
 
-            /* MBRETI I BARDHË */
-
             if (
                 movingPiece === "♔" &&
                 fromRow === 7 &&
                 fromCol === 4
             ) {
-
-                /* ROKADA E SHKURTËR */
 
                 if (
                     toCol === 6 &&
@@ -674,12 +667,8 @@ function handleSquareClick(square, index) {
                     !whiteRookRightMoved &&
                     canCastle(true, true)
                 ) {
-
                     validMove = true;
                 }
-
-
-                /* ROKADA E GJATË */
 
                 if (
                     toCol === 2 &&
@@ -687,13 +676,10 @@ function handleSquareClick(square, index) {
                     !whiteRookLeftMoved &&
                     canCastle(true, false)
                 ) {
-
                     validMove = true;
                 }
             }
 
-
-            /* MBRETI I ZI */
 
             if (
                 movingPiece === "♚" &&
@@ -701,41 +687,34 @@ function handleSquareClick(square, index) {
                 fromCol === 4
             ) {
 
-                /* ROKADA E SHKURTËR */
-
                 if (
                     toCol === 6 &&
                     !blackKingMoved &&
                     !blackRookRightMoved &&
                     canCastle(false, true)
                 ) {
-
                     validMove = true;
                 }
 
-              /* ROKADA E GJATË */
-    if (
-    toCol === 2 &&
-    !blackKingMoved &&
-    !blackRookLeftMoved &&
-    canCastle(false, false)
-) {
-    validMove = true;
-}
-        
+                if (
+                    toCol === 2 &&
+                    !blackKingMoved &&
+                    !blackRookLeftMoved &&
+                    canCastle(false, false)
+                ) {
+                    validMove = true;
+                }
             }
         }
     }
- 
 
 
-    /* NUK LEJOHET KAPJA E MBRETIT */
+    /* MOS KAP MBRETIN */
 
     if (
         target === "♔" ||
         target === "♚"
     ) {
-
         validMove = false;
     }
 
@@ -745,7 +724,7 @@ function handleSquareClick(square, index) {
     }
 
 
-    /* RUAJ GJENDJEN PËR KONTROLL */
+    /* RUAJ GJENDJEN */
 
     const oldFromText =
         squares[from].textContent;
@@ -760,7 +739,7 @@ function handleSquareClick(square, index) {
         squares[to].className;
 
 
-    /* LËVIZJA E TORRES GJATË ROKADËS */
+    /* ROKADA */
 
     let isCastling = false;
 
@@ -769,14 +748,11 @@ function handleSquareClick(square, index) {
             movingPiece === "♔" ||
             movingPiece === "♚"
         ) &&
-        Math.abs(toCol - fromCol) === 2 &&
-        fromRow === toRow
+        Math.abs(toCol - fromCol) === 2
     ) {
 
         isCastling = true;
 
-
-        /* BARDHI - SHKURTËR */
 
         if (
             movingPiece === "♔" &&
@@ -784,7 +760,6 @@ function handleSquareClick(square, index) {
         ) {
 
             squares[63].textContent = "";
-
             squares[61].textContent = "♖";
 
             squares[63]
@@ -807,15 +782,12 @@ function handleSquareClick(square, index) {
         }
 
 
-        /* BARDHI - GJATË */
-
         if (
             movingPiece === "♔" &&
             toCol === 2
         ) {
 
             squares[56].textContent = "";
-
             squares[59].textContent = "♖";
 
             squares[56]
@@ -838,15 +810,12 @@ function handleSquareClick(square, index) {
         }
 
 
-        /* ZI - SHKURTËR */
-
         if (
             movingPiece === "♚" &&
             toCol === 6
         ) {
 
             squares[7].textContent = "";
-
             squares[5].textContent = "♜";
 
             squares[7]
@@ -869,15 +838,12 @@ function handleSquareClick(square, index) {
         }
 
 
-        /* ZI - GJATË */
-
         if (
             movingPiece === "♚" &&
             toCol === 2
         ) {
 
             squares[0].textContent = "";
-
             squares[3].textContent = "♜";
 
             squares[0]
@@ -901,7 +867,7 @@ function handleSquareClick(square, index) {
     }
 
 
-    /* SHËNO FIGURAT QË JANË LËVIZUR */
+    /* SHËNO LËVIZJET */
 
     if (movingPiece === "♔") {
         whiteKingMoved = true;
@@ -940,7 +906,7 @@ function handleSquareClick(square, index) {
     }
 
 
-    /* BËJ LËVIZJEN */
+    /* LËVIZ FIGURËN */
 
     squares[from].textContent = "";
 
@@ -952,7 +918,8 @@ function handleSquareClick(square, index) {
             "selected"
         );
 
-    squares[to].textContent = movingPiece;
+    squares[to].textContent =
+        movingPiece;
 
     squares[to]
         .classList
@@ -961,18 +928,13 @@ function handleSquareClick(square, index) {
             "black-piece"
         );
 
-    if (isWhitePiece) {
-
-        squares[to]
-            .classList
-            .add("white-piece");
-
-    } else {
-
-        squares[to]
-            .classList
-            .add("black-piece");
-    }
+    squares[to]
+        .classList
+        .add(
+            isWhitePiece
+                ? "white-piece"
+                : "black-piece"
+        );
 
 
     /* DY HAPA I PIONIT */
@@ -996,7 +958,7 @@ function handleSquareClick(square, index) {
     }
 
 
-    /* KONTROLLO SHAHUN E MBRETIT TË VET */
+    /* KONTROLLO MBRETIN */
 
     const ownKing =
         isWhitePiece ? "♔" : "♚";
@@ -1004,17 +966,16 @@ function handleSquareClick(square, index) {
     const ownKingIndex =
         squares.findIndex(
             s =>
-                s.textContent
-                    .replace(/[a-h1-8]/g, "") === ownKing
+                getPiece(s) === ownKing
         );
 
 
     if (
         ownKingIndex !== -1 &&
-        isKingInCheck(squares[ownKingIndex])
+        isKingInCheck(
+            squares[ownKingIndex]
+        )
     ) {
-
-        /* KTHE LËVIZJEN MBRAPSHT */
 
         squares[from].textContent =
             oldFromText;
@@ -1029,7 +990,7 @@ function handleSquareClick(square, index) {
             oldToClasses;
 
 
-        /* KTHE TORREN NË VEND GJATË ROKADËS */
+        /* KTHE TORREN */
 
         if (isCastling) {
 
@@ -1039,7 +1000,6 @@ function handleSquareClick(square, index) {
             ) {
 
                 squares[61].textContent = "";
-
                 squares[63].textContent = "♖";
 
                 squares[61]
@@ -1057,7 +1017,6 @@ function handleSquareClick(square, index) {
             ) {
 
                 squares[59].textContent = "";
-
                 squares[56].textContent = "♖";
 
                 squares[59]
@@ -1075,7 +1034,6 @@ function handleSquareClick(square, index) {
             ) {
 
                 squares[5].textContent = "";
-
                 squares[7].textContent = "♜";
 
                 squares[5]
@@ -1093,7 +1051,6 @@ function handleSquareClick(square, index) {
             ) {
 
                 squares[3].textContent = "";
-
                 squares[0].textContent = "♜";
 
                 squares[3]
@@ -1113,7 +1070,7 @@ function handleSquareClick(square, index) {
     selectedSquare = null;
 
 
-    /* PROMOVIMI I PIONIT */
+    /* PROMOVIMI I BARDHË */
 
     if (
         movingPiece === "♙" &&
@@ -1155,6 +1112,8 @@ function handleSquareClick(square, index) {
     }
 
 
+    /* PROMOVIMI I ZI */
+
     if (
         movingPiece === "♟" &&
         toRow === 7
@@ -1195,15 +1154,16 @@ function handleSquareClick(square, index) {
     }
 
 
-    /* NDRYSHO RADHËN */
+    /* NDËRRO RADHËN */
 
     whiteTurn = !whiteTurn;
 
 
-    /* HIQ SHENJAT E SHAHUT */
+    /* HIQ SHAHUN E VJETËR */
 
-    squares.forEach(s =>
-        s.classList.remove("in-check")
+    squares.forEach(
+        s =>
+            s.classList.remove("in-check")
     );
 
 
@@ -1215,8 +1175,7 @@ function handleSquareClick(square, index) {
     const enemyKingIndex =
         squares.findIndex(
             s =>
-                s.textContent
-                    .replace(/[a-h1-8]/g, "") === enemyKing
+                getPiece(s) === enemyKing
         );
 
 
@@ -1232,46 +1191,50 @@ function handleSquareClick(square, index) {
             .add("in-check");
 
 
-        /* KONTROLLO SHAH-MATIN */
+        /* SHAH-MAT */
 
         if (isCheckmate(whiteTurn)) {
 
-            setTimeout(() => {
+            setTimeout(
+                function () {
 
-                if (whiteTurn) {
+                    if (whiteTurn) {
 
-                    alert(
-                        "SHAH-MAT! Fiton lojtari i zi."
-                    );
+                        alert(
+                            "SHAH-MAT! Fiton lojtari i zi."
+                        );
 
-                } else {
+                    } else {
 
-                    alert(
-                        "SHAH-MAT! Fiton lojtari i bardhë."
-                    );
-                }
+                        alert(
+                            "SHAH-MAT! Fiton lojtari i bardhë."
+                        );
+                    }
 
-            }, 800);
+                },
+                800
+            );
+
+        } else {
+
+            alert(
+                "Nuk lejohet! Mbreti është në shah."
+            );
         }
 
-      else {
+
+    } else if (
+        !hasAnyLegalMove(whiteTurn)
+    ) {
+
         alert(
-            "Nuk lejohet! Mbreti është në shah."
+            "PAT! BARAZIM!"
         );
     }
 }
 
-else if (
-    enemyKingIndex !== -1 &&
-    !hasAnyLegalMove(whiteTurn)
-) {
-    alert("PAT! BARAZIM!");
-}
 
-}
-
-    
-/* A KA NDONJË LËVIZJE TË LEJUAR? */
+/* A KA LËVIZJE TË LEJUAR? */
 
 function hasAnyLegalMove(isWhite) {
 
@@ -1289,33 +1252,10 @@ function hasAnyLegalMove(isWhite) {
     for (let from = 0; from < 64; from++) {
 
         const piece =
-            squares[from]
-                .textContent
-                .replace(/[a-h1-8]/g, "");
+            getPiece(squares[from]);
 
         if (!ownPieces.includes(piece)) {
             continue;
-        }
-
-
-        /* KONTROLLO ROKADËN */
-
-        if (
-            piece ===
-            (isWhite ? "♔" : "♚")
-        ) {
-
-            if (
-                canCastle(isWhite, true)
-            ) {
-                return true;
-            }
-
-            if (
-                canCastle(isWhite, false)
-            ) {
-                return true;
-            }
         }
 
 
@@ -1326,9 +1266,7 @@ function hasAnyLegalMove(isWhite) {
             }
 
             const target =
-                squares[to]
-                    .textContent
-                    .replace(/[a-h1-8]/g, "");
+                getPiece(squares[to]);
 
             if (
                 target === "♔" ||
@@ -1356,10 +1294,8 @@ function hasAnyLegalMove(isWhite) {
                 (
                     "♔♕♖♗♘♙"
                     .includes(target)
-                    ===
-                    isWhite
+                    === isWhite
                 );
-
 
             if (sameColor) {
                 continue;
@@ -1369,7 +1305,7 @@ function hasAnyLegalMove(isWhite) {
             let valid = false;
 
 
-            /* PAWN */
+            /* PION */
 
             if (
                 piece === "♙" ||
@@ -1397,11 +1333,11 @@ function hasAnyLegalMove(isWhite) {
                     fromRow === startRow &&
                     toRow - fromRow === direction * 2 &&
                     target === "" &&
-                    squares[
-                        from + direction * 8
-                    ]
-                    .textContent
-                    .replace(/[a-h1-8]/g, "") === ""
+                    getPiece(
+                        squares[
+                            from + direction * 8
+                        ]
+                    ) === ""
                 ) {
                     valid = true;
                 }
@@ -1419,7 +1355,7 @@ function hasAnyLegalMove(isWhite) {
             }
 
 
-            /* KALËS */
+            /* KALI */
 
             if (
                 piece === "♘" ||
@@ -1468,12 +1404,20 @@ function hasAnyLegalMove(isWhite) {
                     const rowStep =
                         toRow === fromRow
                             ? 0
-                            : (toRow > fromRow ? 1 : -1);
+                            : (
+                                toRow > fromRow
+                                    ? 1
+                                    : -1
+                            );
 
                     const colStep =
                         toCol === fromCol
                             ? 0
-                            : (toCol > fromCol ? 1 : -1);
+                            : (
+                                toCol > fromCol
+                                    ? 1
+                                    : -1
+                            );
 
                     let r =
                         fromRow + rowStep;
@@ -1487,11 +1431,9 @@ function hasAnyLegalMove(isWhite) {
                     ) {
 
                         if (
-                            squares[
-                                r * 8 + c
-                            ]
-                            .textContent
-                            .replace(/[a-h1-8]/g, "") !== ""
+                            getPiece(
+                                squares[r * 8 + c]
+                            ) !== ""
                         ) {
 
                             clear = false;
@@ -1531,10 +1473,14 @@ function hasAnyLegalMove(isWhite) {
                     let clear = true;
 
                     const rowStep =
-                        toRow > fromRow ? 1 : -1;
+                        toRow > fromRow
+                            ? 1
+                            : -1;
 
                     const colStep =
-                        toCol > fromCol ? 1 : -1;
+                        toCol > fromCol
+                            ? 1
+                            : -1;
 
                     let r =
                         fromRow + rowStep;
@@ -1548,11 +1494,9 @@ function hasAnyLegalMove(isWhite) {
                     ) {
 
                         if (
-                            squares[
-                                r * 8 + c
-                            ]
-                            .textContent
-                            .replace(/[a-h1-8]/g, "") !== ""
+                            getPiece(
+                                squares[r * 8 + c]
+                            ) !== ""
                         ) {
 
                             clear = false;
@@ -1601,12 +1545,20 @@ function hasAnyLegalMove(isWhite) {
                     const rowStep =
                         toRow === fromRow
                             ? 0
-                            : (toRow > fromRow ? 1 : -1);
+                            : (
+                                toRow > fromRow
+                                    ? 1
+                                    : -1
+                            );
 
                     const colStep =
                         toCol === fromCol
                             ? 0
-                            : (toCol > fromCol ? 1 : -1);
+                            : (
+                                toCol > fromCol
+                                    ? 1
+                                    : -1
+                            );
 
                     let r =
                         fromRow + rowStep;
@@ -1620,11 +1572,9 @@ function hasAnyLegalMove(isWhite) {
                     ) {
 
                         if (
-                            squares[
-                                r * 8 + c
-                            ]
-                            .textContent
-                            .replace(/[a-h1-8]/g, "") !== ""
+                            getPiece(
+                                squares[r * 8 + c]
+                            ) !== ""
                         ) {
 
                             clear = false;
@@ -1683,7 +1633,6 @@ function hasAnyLegalMove(isWhite) {
                 squares[to].textContent;
 
             squares[from].textContent = "";
-
             squares[to].textContent = piece;
 
 
@@ -1693,9 +1642,7 @@ function hasAnyLegalMove(isWhite) {
             const kingIndex =
                 squares.findIndex(
                     s =>
-                        s.textContent
-                            .replace(/[a-h1-8]/g, "") ===
-                        kingPiece
+                        getPiece(s) === kingPiece
                 );
 
 
@@ -1738,21 +1685,16 @@ function isCheckmate(isWhite) {
     const kingSquare =
         squares.find(
             s =>
-                s.textContent
-                    .replace(/[a-h1-8]/g, "") ===
-                kingPiece
+                getPiece(s) === kingPiece
         );
-
 
     if (!kingSquare) {
         return false;
     }
 
-
     if (!isKingInCheck(kingSquare)) {
         return false;
     }
-
 
     return !hasAnyLegalMove(isWhite);
 }
@@ -1810,21 +1752,22 @@ function canCastle(
         isWhite ? "♖" : "♜";
 
 
-if (
-    squares[kingIndex]
-        .textContent
-        .replace(/[a-h1-8]/g, "") !== kingPiece
-) {
-    return false;
-}
+    if (
+        getPiece(
+            squares[kingIndex]
+        ) !== kingPiece
+    ) {
+        return false;
+    }
+
 
     if (
-    squares[rookIndex]
-        .textContent
-        .replace(/[a-h1-8]/g, "") !== rookPiece
-) {
-    return false;
-}
+        getPiece(
+            squares[rookIndex]
+        ) !== rookPiece
+    ) {
+        return false;
+    }
 
 
     for (
@@ -1832,16 +1775,14 @@ if (
     ) {
 
         if (
-            squares[index]
-                .textContent
-                .replace(/[a-h1-8]/g, "") !== ""
+            getPiece(
+                squares[index]
+            ) !== ""
         ) {
             return false;
         }
     }
 
-
-    /* MBRETI NUK GUZON TË JETË NË SHAH */
 
     if (
         isKingInCheck(
@@ -1872,7 +1813,7 @@ if (
             );
 
 
-    /* KONTROLLI I KATRORIT TË MESËM */
+    /* KATRORI I MESËM */
 
     const oldKingText =
         squares[kingIndex].textContent;
@@ -1894,13 +1835,13 @@ if (
     squares[kingIndex].textContent =
         oldKingText;
 
-if (middleInCheck) {
-    alert("Rokada ndalet: d8 është në sulm.");
-    return false;
-}
+
+    if (middleInCheck) {
+        return false;
+    }
 
 
-    /* KONTROLLI I KATRORIT TË FUNDIT */
+    /* KATRORI I FUNDIT */
 
     squares[kingIndex].textContent = "";
 
@@ -1919,10 +1860,10 @@ if (middleInCheck) {
     squares[kingIndex].textContent =
         oldKingText;
 
-if (destinationInCheck) {
-    alert("Rokada ndalet: c8 është në sulm.");
-    return false;
-}
+
+    if (destinationInCheck) {
+        return false;
+    }
 
 
     return true;
@@ -1948,10 +1889,7 @@ function isKingInCheck(kingSquare) {
 
 
     const kingPiece =
-        kingSquare
-            .textContent
-            .replace(/[a-h1-8]/g, "");
-
+        getPiece(kingSquare);
 
     const isWhiteKing =
         kingPiece === "♔";
@@ -1970,8 +1908,6 @@ function isKingInCheck(kingSquare) {
         kingIndex % 8;
 
 
-    /* KONTROLLO TË GJITHA FIGURAT E ARMIKUT */
-
     for (
         let i = 0;
         i < 64;
@@ -1979,9 +1915,7 @@ function isKingInCheck(kingSquare) {
     ) {
 
         const piece =
-            squares[i]
-                .textContent
-                .replace(/[a-h1-8]/g, "");
+            getPiece(squares[i]);
 
 
         if (!enemyPieces.includes(piece)) {
@@ -2008,14 +1942,16 @@ function isKingInCheck(kingSquare) {
 
             if (
                 row + direction === kingRow &&
-                Math.abs(col - kingCol) === 1
+                Math.abs(
+                    col - kingCol
+                ) === 1
             ) {
                 return true;
             }
         }
 
 
-        /* KALËS */
+        /* KALI */
 
         if (
             piece === "♘" ||
@@ -2062,7 +1998,7 @@ function isKingInCheck(kingSquare) {
 
             if (straight) {
 
-                let rowStep =
+                const rowStep =
                     row === kingRow
                         ? 0
                         : (
@@ -2071,7 +2007,7 @@ function isKingInCheck(kingSquare) {
                                 : -1
                         );
 
-                let colStep =
+                const colStep =
                     col === kingCol
                         ? 0
                         : (
@@ -2080,16 +2016,13 @@ function isKingInCheck(kingSquare) {
                                 : -1
                         );
 
-
                 let r =
                     row + rowStep;
 
                 let c =
                     col + colStep;
 
-
                 let clear = true;
-
 
                 while (
                     r !== kingRow ||
@@ -2097,11 +2030,9 @@ function isKingInCheck(kingSquare) {
                 ) {
 
                     if (
-                        squares[
-                            r * 8 + c
-                        ]
-                        .textContent
-                        .replace(/[a-h1-8]/g, "") !== ""
+                        getPiece(
+                            squares[r * 8 + c]
+                        ) !== ""
                     ) {
 
                         clear = false;
@@ -2112,22 +2043,8 @@ function isKingInCheck(kingSquare) {
                     c += colStep;
                 }
 
-
                 if (clear) {
-
-                    if (
-                        piece === "♖" ||
-                        piece === "♜"
-                    ) {
-                        return true;
-                    }
-
-                    if (
-                        piece === "♕" ||
-                        piece === "♛"
-                    ) {
-                        return true;
-                    }
+                    return true;
                 }
             }
         }
@@ -2152,15 +2069,17 @@ function isKingInCheck(kingSquare) {
                     col - kingCol
                 );
 
-
             if (rd === cd) {
 
                 const rowStep =
-                    kingRow > row ? 1 : -1;
+                    kingRow > row
+                        ? 1
+                        : -1;
 
                 const colStep =
-                    kingCol > col ? 1 : -1;
-
+                    kingCol > col
+                        ? 1
+                        : -1;
 
                 let r =
                     row + rowStep;
@@ -2168,9 +2087,7 @@ function isKingInCheck(kingSquare) {
                 let c =
                     col + colStep;
 
-
                 let clear = true;
-
 
                 while (
                     r !== kingRow ||
@@ -2178,11 +2095,9 @@ function isKingInCheck(kingSquare) {
                 ) {
 
                     if (
-                        squares[
-                            r * 8 + c
-                        ]
-                        .textContent
-                        .replace(/[a-h1-8]/g, "") !== ""
+                        getPiece(
+                            squares[r * 8 + c]
+                        ) !== ""
                     ) {
 
                         clear = false;
@@ -2192,7 +2107,6 @@ function isKingInCheck(kingSquare) {
                     r += rowStep;
                     c += colStep;
                 }
-
 
                 if (clear) {
                     return true;
@@ -2229,6 +2143,7 @@ document.getElementById(
             squares[i].textContent =
                 pieces[i];
 
+
             squares[i]
                 .classList
                 .remove(
@@ -2240,73 +2155,21 @@ document.getElementById(
 
 
             if (
-                pieces[i] === "♔" ||
-                pieces[i] === "♕" ||
-                pieces[i] === "♖" ||
-                pieces[i] === "♗" ||
-                pieces[i] === "♘" ||
-                pieces[i] === "♙"
+                "♔♕♖♗♘♙"
+                .includes(pieces[i])
             ) {
 
                 squares[i]
                     .classList
                     .add("white-piece");
 
-            }
-            else if (
+            } else if (
                 pieces[i] !== ""
             ) {
 
                 squares[i]
                     .classList
                     .add("black-piece");
-            }
-
-
-            /* RIVENDOS KOORDINATAT */
-
-            const row =
-                Math.floor(i / 8);
-
-            const col =
-                i % 8;
-
-
-            if (row === 7) {
-
-                const file =
-                    document.createElement("span");
-
-                file.classList.add(
-                    "coordinate",
-                    "file"
-                );
-
-                file.textContent =
-                    String.fromCharCode(
-                        97 + col
-                    );
-
-                squares[i]
-                    .appendChild(file);
-            }
-
-
-            if (col === 0) {
-
-                const rank =
-                    document.createElement("span");
-
-                rank.classList.add(
-                    "coordinate",
-                    "rank"
-                );
-
-                rank.textContent =
-                    8 - row;
-
-                squares[i]
-                    .appendChild(rank);
             }
         }
 
@@ -2316,7 +2179,6 @@ document.getElementById(
         whiteTurn = true;
 
         lastDoubleStep = null;
-
 
         whiteKingMoved = false;
         blackKingMoved = false;
