@@ -147,7 +147,19 @@ h1 {
         font-size: 42px;
     }
 }
-
+#moveHistory {
+    width: 500px;
+    max-width: 90%;
+    margin: 10px auto 30px auto;
+    padding: 12px;
+    box-sizing: border-box;
+    background: #333;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.6;
+}
 </style>
 </head>
 
@@ -158,7 +170,9 @@ h1 {
 <div id="board"></div>
 
 <button id="newGameButton">🔄 LOJA E RE</button>
-
+<div id="moveHistory">
+    <strong>LËVIZJET</strong>
+</div>
 <script>
 
 const board = document.getElementById("board");
@@ -187,7 +201,7 @@ let selectedSquare = null;
 let whiteTurn = true;
 let lastMoveFrom = null;
 let lastMoveTo = null;
-
+let moveHistory = [];
 let whiteKingMoved = false;
 let blackKingMoved = false;
 
@@ -197,7 +211,24 @@ let whiteRookRightMoved = false;
 let blackRookLeftMoved = false;
 let blackRookRightMoved = false;
 
+function renderMoveHistory() {
+    const box = document.getElementById("moveHistory");
 
+    box.innerHTML = "<strong>LËVIZJET</strong>";
+
+    for (let i = 0; i < moveHistory.length; i += 2) {
+        const row = document.createElement("div");
+
+        row.textContent =
+            (Math.floor(i / 2) + 1) + ". " +
+            moveHistory[i] +
+            (moveHistory[i + 1]
+                ? "    " + moveHistory[i + 1]
+                : "");
+
+        box.appendChild(row);
+    }
+}
 /* KRIJO TABELËN */
 
 for (let i = 0; i < 64; i++) {
@@ -1180,7 +1211,18 @@ selectedSquare = null;
             .add("black-piece");
     }
 
+  /* HISTORIA E LËVIZJEVE */
 
+    const files = "abcdefgh";
+
+    const moveText =
+        files[fromCol] + (8 - fromRow) +
+        "-" +
+        files[toCol] + (8 - toRow);
+
+    moveHistory.push(moveText);
+
+    renderMoveHistory();
     /* NDËRRO RADHËN */
 
     whiteTurn = !whiteTurn;
@@ -2249,7 +2291,8 @@ lastMoveTo = null;
 document.getElementById("turnIndicator").textContent =
     "RADHA: BARDHI";
         lastDoubleStep = null;
-
+moveHistory = [];
+renderMoveHistory();
         whiteKingMoved = false;
         blackKingMoved = false;
 
