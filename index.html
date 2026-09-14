@@ -7,6 +7,17 @@
 <title>Shapeta Chess Kosova</title>
 
 <style>
+#gameResult {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 10px 0;
+    padding: 8px 18px;
+    display: inline-block;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    background: #333;
+    min-height: 26px;
+}
 
 body {
     margin: 0;
@@ -167,6 +178,7 @@ h1 {
 
 <h1>♟️ SHAPETA CHESS KOSOVA 🇽🇰</h1>
 <div id="turnIndicator">RADHA: BARDHI</div>
+<div id="gameResult"></div>
 <div id="board"></div>
 
 <button id="newGameButton">🔄 LOJA E RE</button>
@@ -1236,6 +1248,9 @@ if (isKingVsKing()) {
         "REMI! Mbetën vetëm dy mbretërit."
     );
 
+    document.getElementById("gameResult").textContent =
+        "🤝 REMI! MBETËN VETËM DY MBRETËR!";
+
     selectedSquare = null;
 
     return;
@@ -1284,12 +1299,15 @@ if (isKingVsKing()) {
                         alert(
                             "SHAH-MAT! Fiton lojtari i zi."
                         );
-
+document.getElementById("gameResult").textContent =
+    "🏆 SHAH-MAT! FITON LOJTARI I ZI!";
                     } else {
 
                         alert(
                             "SHAH-MAT! Fiton lojtari i bardhë."
                         );
+                document.getElementById("gameResult").textContent =
+    "🏆 SHAH-MAT! FITON LOJTARI I BARDHË!";
                     }
 
                 },
@@ -1311,6 +1329,8 @@ if (isKingVsKing()) {
         alert(
             "PAT! BARAZIM!"
         );
+   document.getElementById("gameResult").textContent =
+    "🤝 PAT! BARAZIM!";
     }
 }
 
@@ -2290,6 +2310,7 @@ lastMoveTo = null;
         whiteTurn = true;
 document.getElementById("turnIndicator").textContent =
     "RADHA: BARDHI";
+  document.getElementById("gameResult").textContent = "";      
         lastDoubleStep = null;
 moveHistory = [];
 renderMoveHistory();
