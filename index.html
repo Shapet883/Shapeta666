@@ -184,7 +184,8 @@ const pieces = [
 
 let selectedSquare = null;
 let whiteTurn = true;
-let lastDoubleStep = null;
+let lastMoveFrom = null;
+let lastMoveTo = null;
 
 let whiteKingMoved = false;
 let blackKingMoved = false;
@@ -1076,7 +1077,23 @@ function handleSquareClick(square, index) {
     }
 
 
-    selectedSquare = null;
+   /* SHËNO LËVIZJEN E FUNDIT */
+
+if (lastMoveFrom !== null) {
+    squares[lastMoveFrom].classList.remove("selected");
+}
+
+if (lastMoveTo !== null) {
+    squares[lastMoveTo].classList.remove("selected");
+}
+
+lastMoveFrom = from;
+lastMoveTo = to;
+
+squares[lastMoveFrom].classList.add("selected");
+squares[lastMoveTo].classList.add("selected");
+
+selectedSquare = null; 
 
 
     /* PROMOVIMI I BARDHË */
@@ -2225,7 +2242,8 @@ document.getElementById(
 
 
         selectedSquare = null;
-
+lastMoveFrom = null;
+lastMoveTo = null;
         whiteTurn = true;
 document.getElementById("turnIndicator").textContent =
     "RADHA: BARDHI";
