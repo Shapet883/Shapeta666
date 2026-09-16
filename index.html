@@ -238,6 +238,7 @@ let whiteTime = 5 * 60;
 let blackTime = 5 * 60;
 let clockInterval = null;
 let clockStarted = false;
+let gameOver = false;
 let whiteKingMoved = false;
 let blackKingMoved = false;
 function updateClocks() {
@@ -278,11 +279,12 @@ function startClock() {
         if (whiteTime <= 0 || blackTime <= 0) {
             clearInterval(clockInterval);
             clockInterval = null;
-
+clockStarted = true;
+           gameOver = true; 
             document.getElementById("gameResult").textContent =
                 whiteTime <= 0
                     ? "🏆 KOHA MBAROI! FITON LOJTARI I ZI!"
-                    : "🏆 KOHA Mbaroi! FITON LOJTARI I BARDHË!";
+                    : "🏆 KOHA MBAROI! FITON LOJTARI I BARDHË!";
         }
 
     }, 1000);
@@ -307,7 +309,7 @@ function renderMoveHistory() {
             (Math.floor(i / 2) + 1) + ". " +
             moveHistory[i] +
             (moveHistory[i + 1]
-                ? "    " + moveHistory[i + 1]
+                ? "    " + moveHistory[i + 1] 
                 : "");
 
         box.appendChild(row);
@@ -383,7 +385,9 @@ function getPiece(square) {
 /* KLIKO KATRORIN */
 
 function handleSquareClick(square, index) {
-
+if (gameOver) {
+    return;
+}
     const squares =
         Array.from(
             document.querySelectorAll(".square")
@@ -2378,10 +2382,17 @@ document.getElementById(
         }
 
 
-        selectedSquare = null;
+selectedSquare = null;
 lastMoveFrom = null;
 lastMoveTo = null;
-        whiteTurn = true;
+whiteTurn = true;
+gameOver = false;
+whiteTime = 5 * 60;
+blackTime = 5 * 60;
+clockStarted = false;
+clearInterval(clockInterval);
+clockInterval = null;
+updateClocks();
 document.getElementById("turnIndicator").textContent =
     "RADHA: BARDHI";
   document.getElementById("gameResult").textContent = "";      
