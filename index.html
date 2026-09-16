@@ -171,6 +171,18 @@ h1 {
     font-size: 16px;
     line-height: 1.6;
 }
+#blackClock,
+#whiteClock {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 8px auto;
+    padding: 8px 20px;
+    display: block;
+    width: fit-content;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    background: #333;
+}
 </style>
 </head>
 
@@ -178,8 +190,14 @@ h1 {
 
 <h1>♟️ SHAPETA CHESS KOSOVA 🇽🇰</h1>
 <div id="turnIndicator">RADHA: BARDHI</div>
+
+<div id="blackClock">ZI: 05:00</div>
+
 <div id="gameResult"></div>
+
 <div id="board"></div>
+
+<div id="whiteClock">BARDHI: 05:00</div>
 
 <button id="newGameButton">🔄 LOJA E RE</button>
 <div id="moveHistory">
@@ -214,9 +232,61 @@ let whiteTurn = true;
 let lastMoveFrom = null;
 let lastMoveTo = null;
 let moveHistory = [];
+let whiteTime = 5 * 60;
+let blackTime = 5 * 60;
+let clockInterval = null;
+let clockStarted = false;
 let whiteKingMoved = false;
 let blackKingMoved = false;
+function updateClocks() {
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
 
+        return String(minutes).padStart(2, "0") +
+            ":" +
+            String(secs).padStart(2, "0");
+    }
+
+    document.getElementById("whiteClock").textContent =
+        "BARDHI: " + formatTime(whiteTime);
+
+    document.getElementById("blackClock").textContent =
+        "ZI: " + formatTime(blackTime);
+}
+
+function startClock() {
+
+    if (clockStarted) {
+        return;
+    }
+
+    clockStarted = true;
+
+    clockInterval = setInterval(function () {
+
+        if (whiteTurn) {
+            whiteTime--;
+        } else {
+            blackTime--;
+        }
+
+        updateClocks();
+
+        if (whiteTime <= 0 || blackTime <= 0) {
+            clearInterval(clockInterval);
+            clockInterval = null;
+
+            document.getElementById("gameResult").textContent =
+                whiteTime <= 0
+                    ? "🏆 KOHA MBAROI! FITON LOJTARI I ZI!"
+                    : "🏆 KOHA Mbaroi! FITON LOJTARI I BARDHË!";
+        }
+
+    }, 1000);
+}
+
+updateClocks();
 let whiteRookLeftMoved = false;
 let whiteRookRightMoved = false;
 
@@ -1222,7 +1292,9 @@ selectedSquare = null;
             .classList
             .add("black-piece");
     }
-
+if (!clockStarted) {
+    startClock();
+}
   /* HISTORIA E LËVIZJEVE */
 
     const files = "abcdefgh";
