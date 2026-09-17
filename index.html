@@ -32,7 +32,20 @@ body {
 h1 {
     margin: 20px 0;
 }
+#gameArea {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+    margin: 20px auto;
+}
 
+#sidePanel {
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 #board {
     width: 520px;
     height: 520px;
@@ -197,14 +210,23 @@ h1 {
 
 <div id="gameResult"></div>
 
-<div id="board"></div>
+<div id="gameArea">
+
+    <div id="board"></div>
+
+    <div id="sidePanel">
+
+        <button id="newGameButton">🔄 LOJA E RE</button>
+
+        <div id="moveHistory">
+            <strong>LËVIZJET</strong>
+        </div>
+
+    </div>
+
+</div>
 
 <div id="whiteClock">BARDHI: 05:00</div>
-
-<button id="newGameButton">🔄 LOJA E RE</button>
-<div id="moveHistory">
-    <strong>LËVIZJET</strong>
-</div>
 <script>
 
 const board = document.getElementById("board");
