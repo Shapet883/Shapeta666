@@ -1368,15 +1368,17 @@ if (isKingVsKing()) {
         /* SHAH-MAT */
 
         if (isCheckmate(whiteTurn)) {
+gameOver = true;
+    clearInterval(clockInterval);
+clockInterval = null;        
+    setTimeout(
+    function () {
 
-            setTimeout(
-                function () {
+    if (whiteTurn) {
 
-                    if (whiteTurn) {
-
-                        alert(
-                            "SHAH-MAT! Fiton lojtari i zi."
-                        );
+     alert(
+ "SHAH-MAT! Fiton lojtari i zi."
+ );
 document.getElementById("gameResult").textContent =
     "🏆 SHAH-MAT! FITON LOJTARI I ZI!";
                     } else {
@@ -1403,7 +1405,9 @@ document.getElementById("gameResult").textContent =
     } else if (
         !hasAnyLegalMove(whiteTurn)
     ) {
-
+gameOver = true;
+clearInterval(clockInterval);
+clockInterval = null;
         alert(
             "PAT! BARAZIM!"
         );
