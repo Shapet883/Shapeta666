@@ -33,7 +33,32 @@ h1 {
     font-size: 30px;
     text-shadow: 2px 2px 4px #000;
 }
-#gameArea {
+.s-logo {
+    position: relative;
+    display: inline-block;
+    font-size: 30px;
+    font-weight: bold;
+    margin-right: 4px;
+}
+
+.s-logo::before,
+.s-logo::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    bottom: -3px;
+    width: 2px;
+    background: #fff;
+}
+
+.s-logo::before {
+    left: 9px;
+}
+
+.s-logo::after {
+    left: 14px;
+}
+    #gameArea {
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -223,7 +248,7 @@ font-size: 14px;
 
 <body>
 
-<h1>♟️ SHAPETA CHESS KOSOVA</h1>
+<h1><span class="s-logo">S</span> ♟️ SHAPETA CHESS KOSOVA</h1>
 <div id="turnIndicator">RADHA: BARDHI</div>
 
 <div id="blackClock">ZI: 05:00</div>
