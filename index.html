@@ -1272,20 +1272,18 @@ if (gameOver) {
    /* SHËNO LËVIZJEN E FUNDIT */
 
 if (lastMoveFrom !== null) {
-    squares[lastMoveFrom].classList.remove("selected");
+    squares[lastMoveFrom].classList.remove("last-move");
 }
 
 if (lastMoveTo !== null) {
-    squares[lastMoveTo].classList.remove("selected");
+    squares[lastMoveTo].classList.remove("last-move");
 }
 
 lastMoveFrom = from;
 lastMoveTo = to;
 
-squares[lastMoveFrom].classList.add("selected");
-squares[lastMoveTo].classList.add("selected");
-
-selectedSquare = null; 
+squares[lastMoveFrom].classList.add("last-move");
+squares[lastMoveTo].classList.add("last-move");
 
 
     /* PROMOVIMI I BARDHË */
