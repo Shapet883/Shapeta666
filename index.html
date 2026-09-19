@@ -290,27 +290,31 @@ white-space: nowrap;
 <h1><span class="s-logo">S</span> ♟️ SHAPETA CHESS KOSOVA</h1>
 <div id="turnIndicator">RADHA: BARDHI</div>
 
-<div id="blackClock">ZI: 05:00</div>
+<div id="clockBoardArea">
 
-<div id="gameResult"></div>
+    <div id="blackClock">ZI: 05:00</div>
 
-<div id="gameArea">
+    <div id="gameResult"></div>
 
-    <div id="board"></div>
+    <div id="gameArea">
 
-    <div id="sidePanel">
+        <div id="board"></div>
 
-        <button id="newGameButton">🔄 LOJA E RE</button>
+        <div id="sidePanel">
 
-        <div id="moveHistory">
-            <strong>LËVIZJET</strong>
+            <button id="newGameButton">🔄 LOJA E RE</button>
+
+            <div id="moveHistory">
+                <strong>LËVIZJET</strong>
+            </div>
+
         </div>
 
     </div>
 
-</div>
+    <div id="whiteClock">BARDHI: 05:00</div>
 
-<div id="whiteClock">BARDHI: 05:00</div>
+</div>
 <script>
 
 const board = document.getElementById("board");
@@ -2459,7 +2463,11 @@ document.getElementById("board").classList.toggle(
     "board-flipped",
     boardFlipped
 );
-        const squares =
+  document.getElementById("clockBoardArea").classList.toggle(
+    "clock-flipped",
+    boardFlipped
+);     
+     const squares =
             Array.from(
                 document.querySelectorAll(".square")
             );
