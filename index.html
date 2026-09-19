@@ -117,7 +117,13 @@ outline-offset: 3px;
      0 3px 0 #000,
      0 -3px 0 #000;
 }
+#board.board-flipped {
+    transform: rotate(180deg);
+}
 
+#board.board-flipped .square {
+    transform: rotate(180deg);
+}
 .black-piece {
     color: #000000;
     text-shadow:
@@ -2449,8 +2455,10 @@ document.getElementById(
     function () {
 boardFlipped = !boardFlipped;
 
-document.getElementById("board").style.transform =
-    boardFlipped ? "rotate(180deg)" : "rotate(0deg)";
+document.getElementById("board").classList.toggle(
+    "board-flipped",
+    boardFlipped
+);
         const squares =
             Array.from(
                 document.querySelectorAll(".square")
