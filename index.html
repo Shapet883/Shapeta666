@@ -134,6 +134,13 @@ outline-offset: 3px;
 .in-check {
     animation: checkSpark 0.7s infinite alternate;
 }
+
+.checkmate {
+    background: #d00000 !important;
+    animation: none !important;
+    box-shadow: none !important;
+}
+
 .checkmate-result {
     background: #d00000 !important;
     color: #fff;
@@ -1464,6 +1471,7 @@ if (isKingVsKing()) {
 gameOver = true;
    document.querySelectorAll(".in-check").forEach(function (square) {
     square.classList.remove("in-check");
+    square.classList.add("checkmate");
 });
          clearInterval(clockInterval);
 clockInterval = null;        
