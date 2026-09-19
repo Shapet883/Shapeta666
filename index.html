@@ -213,18 +213,19 @@ color: #fff;
 }
 @media (max-width: 600px) {
 
-    #board {
-        width: 400px;
-        height: 400px;
-        grid-template-columns: repeat(8, 50px);
-        grid-template-rows: repeat(8, 50px);
-    }
+   #board {
+    width: min(400px, 92vw);
+    height: min(400px, 92vw);
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+} 
 
-    .square {
-        width: 50px;
-        height: 50px;
-        font-size: 42px;
-    }
+ .square {
+    width: auto;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    font-size: clamp(32px, 10vw, 42px);
+}
 }
 #moveHistory {
     width: 220px;
