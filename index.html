@@ -1466,14 +1466,16 @@ clockInterval = null;
      alert(
  "SHAH-MAT! Fiton lojtari i zi."
  );
-document.getElementById("gameResult").textContent =
+    document.getElementById("gameResult").classList.add("checkmate-result"); 
+     document.getElementById("gameResult").textContent =
     "🏆 SHAH-MAT! FITON LOJTARI I ZI!";
                     } else {
 
                         alert(
                             "SHAH-MAT! Fiton lojtari i bardhë."
                         );
-                document.getElementById("gameResult").textContent =
+         document.getElementById("gameResult").classList.add("checkmate-result");       
+     document.getElementById("gameResult").textContent =
     "🏆 SHAH-MAT! FITON LOJTARI I BARDHË!";
                     }
 
