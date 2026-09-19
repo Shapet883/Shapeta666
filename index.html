@@ -1461,7 +1461,10 @@ if (isKingVsKing()) {
 
         if (isCheckmate(whiteTurn)) {
 gameOver = true;
-    clearInterval(clockInterval);
+   document.querySelectorAll(".in-check").forEach(function (square) {
+    square.classList.remove("in-check");
+});
+         clearInterval(clockInterval);
 clockInterval = null;        
     setTimeout(
     function () {
