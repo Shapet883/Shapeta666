@@ -2447,7 +2447,10 @@ document.getElementById(
 ).addEventListener(
     "click",
     function () {
+boardFlipped = !boardFlipped;
 
+document.getElementById("board").style.transform =
+    boardFlipped ? "rotate(180deg)" : "rotate(0deg)";
         const squares =
             Array.from(
                 document.querySelectorAll(".square")
