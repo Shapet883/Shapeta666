@@ -75,7 +75,36 @@ body {
    flex-direction: column;
    align-items: center;
 }
-#board {
+#clockBoardArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#clockBoardArea.clock-flipped #blackClock {
+    order: 3;
+}
+
+#clockBoardArea.clock-flipped #whiteClock {
+    order: 1;
+}
+
+#blackClock {
+    order: 1;
+}
+
+#gameResult {
+    order: 2;
+}
+
+#gameArea {
+    order: 2;
+}
+
+#whiteClock {
+    order: 3;
+}
+ #board {
     width: 520px;
     height: 520px;
     margin: 20px 0;
