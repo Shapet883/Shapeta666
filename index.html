@@ -1470,9 +1470,8 @@ document.getElementById("turnIndicator").textContent =
 
 if (isKingVsKing()) {
 
-    alert(
-        "REMI! Mbetën vetëm dy mbretërit."
-    );
+    document.getElementById("gameResult")
+        .classList.add("checkmate-result");
 
     document.getElementById("gameResult").textContent =
         "🤝 REMI! MBETËN VETËM DY MBRETËR!";
@@ -1549,17 +1548,20 @@ clockInterval = null;
 
 
     } else if (
-        !hasAnyLegalMove(whiteTurn)
-    ) {
-gameOver = true;
-clearInterval(clockInterval);
-clockInterval = null;
-        alert(
-            "PAT! BARAZIM!"
-        );
-   document.getElementById("gameResult").textContent =
-    "🤝 PAT! BARAZIM!";
-    }
+    
+    !hasAnyLegalMove(whiteTurn)
+) {
+    gameOver = true;
+
+    clearInterval(clockInterval);
+    clockInterval = null;
+
+    document.getElementById("gameResult")
+        .classList.add("checkmate-result");
+
+    document.getElementById("gameResult").textContent =
+        "🤝 PAT! BARAZIM!";
+}
 }
 
 
