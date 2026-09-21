@@ -79,16 +79,50 @@ body {
     flex-direction: column;
     align-items: center;
 }
-
-#clockBoardArea.clock-flipped #blackClock {
+#clockBoardArea.clock-flipped #blackClockArea {
     order: 3;
 }
 
-#clockBoardArea.clock-flipped #whiteClock {
+#clockBoardArea.clock-flipped #whiteClockArea {
     order: 1;
 }
 
+#blackClockArea {
+    order: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#whiteClockArea {
+    order: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#blackFirstMove,
+#whiteFirstMove {
+    width: 38px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #222;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 #blackClock {
+    order: 1;
+}
+
+#whiteClock {
     order: 1;
 }
 
@@ -98,10 +132,6 @@ body {
 
 #gameArea {
     order: 2;
-}
-
-#whiteClock {
-    order: 3;
 }
  #board {
     width: 520px;
@@ -320,7 +350,10 @@ white-space: nowrap;
 
 <div id="clockBoardArea">
 
+  <div id="blackClockArea">
+    <div id="blackFirstMove">25</div>
     <div id="blackClock">ZI: 05:00</div>
+</div>
 
     <div id="gameResult"></div>
 
@@ -340,7 +373,10 @@ white-space: nowrap;
 
     </div>
 
+  <div id="whiteClockArea">
     <div id="whiteClock">BARDHI: 05:00</div>
+    <div id="whiteFirstMove">25</div>
+</div>
 
 </div>
 <script>
@@ -372,39 +408,203 @@ let whiteTurn = true;
 let lastMoveFrom = null;
 let lastMoveTo = null;
 let moveHistory = [];
+
 let whiteTime = 5 * 60;
 let blackTime = 5 * 60;
+
 let clockInterval = null;
 let clockStarted = false;
 let gameOver = false;
+
 let boardFlipped = false;
 let whiteKingMoved = false;
 let blackKingMoved = false;
+
+
+/* 25 SEKONDA PËR LËVIZJEN E PARË */
+
+let whiteFirstMoveTime = 25;
+let blackFirstMoveTime = 25;
+
+let whiteFirstMoveDone = false;
+let blackFirstMoveDone = false;
+
+let firstMoveInterval = null;
+
+
+/* FORMATI I ORËS */
+
+function formatTime(seconds) {
+
+    const minutes =
+        Math.floor(seconds / 60);
+
+    const secs =
+        seconds % 60;
+
+    return String(minutes).padStart(2, "0") +
+        ":" +
+        String(secs).padStart(2, "0");
+}
+
+
+/* ORËT NORMALE */
+
 function updateClocks() {
-    function formatTime(seconds) {
-        const minutes = Math.floor(seconds / 60);
-        const secs = seconds % 60;
 
-        return String(minutes).padStart(2, "0") +
-            ":" +
-           String(secs).padStart(2, "0");
-    }
-
-      document.getElementById("whiteClock").textContent =
-     "I BARDHI: " + formatTime(whiteTime);
+    document.getElementById("whiteClock").textContent =
+        "I BARDHI: " + formatTime(whiteTime);
 
     document.getElementById("blackClock").textContent =
-    "I ZIU: " + formatTime(blackTime);
+        "I ZIU: " + formatTime(blackTime);
 
-    document.getElementById("whiteClock").classList.remove("clock-active");
-    document.getElementById("blackClock").classList.remove("clock-active");
+
+    document.getElementById("whiteClock")
+        .classList.remove("clock-active");
+
+    document.getElementById("blackClock")
+        .classList.remove("clock-active");
+
 
     if (whiteTurn) {
-        document.getElementById("whiteClock").classList.add("clock-active");
+
+        document.getElementById("whiteClock")
+            .classList.add("clock-active");
+
     } else {
-        document.getElementById("blackClock").classList.add("clock-active");
+
+        document.getElementById("blackClock")
+            .classList.add("clock-active");
     }
-} 
+}
+
+
+/* 25 SEKONDAT */
+
+function updateFirstMoveClock() {
+
+    document.getElementById("whiteFirstMove").textContent =
+        whiteFirstMoveTime;
+
+    document.getElementById("blackFirstMove").textContent =
+        blackFirstMoveTime;
+
+
+    document.getElementById("whiteFirstMove")
+        .classList.remove("first-move-danger");
+
+    document.getElementById("blackFirstMove")
+        .classList.remove("first-move-danger");
+
+
+    if (
+        !whiteFirstMoveDone &&
+        whiteFirstMoveTime <= 10
+    ) {
+
+        document.getElementById("whiteFirstMove")
+            .classList.add("first-move-danger");
+    }
+
+
+    if (
+        !blackFirstMoveDone &&
+        blackFirstMoveTime <= 10
+    ) {
+
+        document.getElementById("blackFirstMove")
+            .classList.add("first-move-danger");
+    }
+}
+
+
+/* FILLON NUMËRIMI 25 SEKONDA */
+
+function startFirstMoveClock() {
+
+    if (firstMoveInterval !== null) {
+        return;
+    }
+
+
+    firstMoveInterval = setInterval(function () {
+
+        if (gameOver) {
+
+            clearInterval(firstMoveInterval);
+            firstMoveInterval = null;
+
+            return;
+        }
+
+
+        /* BARDHI */
+
+        if (
+            whiteTurn &&
+            !whiteFirstMoveDone
+        ) {
+
+            whiteFirstMoveTime--;
+
+            updateFirstMoveClock();
+
+
+            if (whiteFirstMoveTime <= 0) {
+
+                clearInterval(firstMoveInterval);
+                firstMoveInterval = null;
+
+                gameOver = true;
+
+                document.getElementById("gameResult")
+                    .classList.add("checkmate-result");
+
+                document.getElementById("gameResult")
+                    .textContent =
+                    "🏆 KOHA MBAROI! FITON LOJTARI I ZI!";
+
+                return;
+            }
+        }
+
+
+        /* ZI */
+
+        if (
+            !whiteTurn &&
+            !blackFirstMoveDone
+        ) {
+
+            blackFirstMoveTime--;
+
+            updateFirstMoveClock();
+
+
+            if (blackFirstMoveTime <= 0) {
+
+                clearInterval(firstMoveInterval);
+                firstMoveInterval = null;
+
+                gameOver = true;
+
+                document.getElementById("gameResult")
+                    .classList.add("checkmate-result");
+
+                document.getElementById("gameResult")
+                    .textContent =
+                    "🏆 KOHA MBAROI! FITON LOJTARI I BARDHË!";
+
+                return;
+            }
+        }
+
+
+    }, 1000);
+}
+
+
+/* ORA NORMALE */
 
 function startClock() {
 
@@ -412,9 +612,16 @@ function startClock() {
         return;
     }
 
+
     clockStarted = true;
 
+
     clockInterval = setInterval(function () {
+
+        if (gameOver) {
+            return;
+        }
+
 
         if (whiteTurn) {
             whiteTime--;
@@ -422,23 +629,45 @@ function startClock() {
             blackTime--;
         }
 
+
         updateClocks();
 
-        if (whiteTime <= 0 || blackTime <= 0) {
+
+        if (
+            whiteTime <= 0 ||
+            blackTime <= 0
+        ) {
+
             clearInterval(clockInterval);
             clockInterval = null;
-clockStarted = true;
-           gameOver = true; 
-            document.getElementById("gameResult").textContent =
+
+            gameOver = true;
+
+
+            document.getElementById("gameResult")
+                .classList.add("checkmate-result");
+
+            document.getElementById("gameResult")
+                .textContent =
                 whiteTime <= 0
                     ? "🏆 KOHA MBAROI! FITON LOJTARI I ZI!"
                     : "🏆 KOHA MBAROI! FITON LOJTARI I BARDHË!";
         }
 
+
     }, 1000);
 }
 
+
+/* FILLIMI */
+
 updateClocks();
+
+updateFirstMoveClock();
+
+startFirstMoveClock();
+
+
 let whiteRookLeftMoved = false;
 let whiteRookRightMoved = false;
 
@@ -1461,11 +1690,52 @@ if (!clockStarted) {
     moveHistory.push(moveText);
 
     renderMoveHistory();
-    /* NDËRRO RADHËN */
 
-    whiteTurn = !whiteTurn;
+ /* PËRFUNDO LËVIZJEN E PARË TË BARDHIT */
+
+if (whiteTurn && !whiteFirstMoveDone) {
+
+    whiteFirstMoveDone = true;
+
+    updateFirstMoveClock();
+}
+
+
+/* PËRFUNDO LËVIZJEN E PARË TË ZIUT */
+
+if (!whiteTurn && !blackFirstMoveDone) {
+
+    blackFirstMoveDone = true;
+
+    updateFirstMoveClock();
+}
+
+
+/* NDËRRO RADHËN */
+
+whiteTurn = !whiteTurn;
+
+
+/* TREGUESI I RADHËS */
+
 document.getElementById("turnIndicator").textContent =
     whiteTurn ? "RADHA: BARDHI" : "RADHA: ZI";
+
+
+/* TË DY KANË BËRË LËVIZJEN E PARË */
+
+if (
+    whiteFirstMoveDone &&
+    blackFirstMoveDone
+) {
+
+    clearInterval(firstMoveInterval);
+    firstMoveInterval = null;
+
+    startClock();
+}
+
+
 /* KONTROLLO REMIN - VETËM DY MBRETËR */
 
 if (isKingVsKing()) {
@@ -1480,15 +1750,9 @@ if (isKingVsKing()) {
 
     return;
 }
-    /* HIQ SHAHUN E VJETËR */
-
-    squares.forEach(
-        s =>
-            s.classList.remove("in-check")
-    );
 
 
-    /* KONTROLLO SHAHUN */
+/* KONTROLLO SHAHUN */
 
     const enemyKing =
         whiteTurn ? "♔" : "♚";
