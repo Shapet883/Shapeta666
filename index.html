@@ -2264,7 +2264,34 @@ function isKingInCheck(kingSquare) {
 
     const kingCol =
         kingIndex % 8;
+/* MBRETI KUNDËRSHTAR */
 
+const enemyKing =
+    isWhiteKing ? "♚" : "♔";
+
+for (let i = 0; i < 64; i++) {
+
+    if (getPiece(squares[i]) !== enemyKing) {
+        continue;
+    }
+
+    const enemyRow =
+        Math.floor(i / 8);
+
+    const enemyCol =
+        i % 8;
+
+    if (
+        Math.abs(enemyRow - kingRow) <= 1 &&
+        Math.abs(enemyCol - kingCol) <= 1 &&
+        (
+            Math.abs(enemyRow - kingRow) +
+            Math.abs(enemyCol - kingCol)
+        ) > 0
+    ) {
+        return true;
+    }
+}
 
     for (
         let i = 0;
