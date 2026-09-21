@@ -344,12 +344,24 @@ white-space: nowrap;
 #whiteFirstMove.first-move-danger {
     color: #fff !important;
     background: #222 !important;
-    border: 2px solid #e05555 !important;
+    border: 2px solid #ff2222 !important;
     font-weight: bold;
     text-shadow:
-        0 0 4px #e05555;
+        0 0 4px #ff2222;
     box-shadow:
-        0 0 5px rgba(224, 85, 85, 0.7);
+        0 0 7px rgba(255, 34, 34, 0.9),
+        0 0 12px rgba(255, 34, 34, 0.5);
+}
+#blackClock.clock-danger,
+#whiteClock.clock-danger {
+    color: #fff !important;
+    background: #222 !important;
+    border: 2px solid #ff2222 !important;
+    text-shadow:
+        0 0 4px #ff2222;
+    box-shadow:
+        0 0 7px rgba(255, 34, 34, 0.9),
+        0 0 12px rgba(255, 34, 34, 0.5);
 }
 </style>
 </head>
@@ -477,6 +489,17 @@ function updateClocks() {
         .classList.remove("clock-active");
 
 
+    /* HIQ ALARMEN E KUQE */
+
+    document.getElementById("whiteClock")
+        .classList.remove("clock-danger");
+
+    document.getElementById("blackClock")
+        .classList.remove("clock-danger");
+
+
+    /* AKTIVIZO ORËN E RADHËS */
+
     if (whiteTurn) {
 
         document.getElementById("whiteClock")
@@ -487,6 +510,25 @@ function updateClocks() {
         document.getElementById("blackClock")
             .classList.add("clock-active");
     }
+
+
+    /* 10 SEKONDAT E FUNDIT */
+
+if (whiteTurn && whiteTime <= 10) {
+
+    document.getElementById("whiteClock")
+        .classList.add("clock-danger");
+
+}
+
+
+if (!whiteTurn && blackTime <= 10) {
+
+    document.getElementById("blackClock")
+        .classList.add("clock-danger");
+
+}
+
 }
 
 
