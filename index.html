@@ -2846,6 +2846,20 @@ clockStarted = false;
 clearInterval(clockInterval);
 clockInterval = null;
 updateClocks();
+
+/* RESET 25 SEKONDAT E LËVIZJES SË PARË */
+
+clearInterval(firstMoveInterval);
+firstMoveInterval = null;
+
+whiteFirstMoveTime = 25;
+blackFirstMoveTime = 25;
+
+whiteFirstMoveDone = false;
+blackFirstMoveDone = false;
+
+updateFirstMoveClock();
+
 document.getElementById("turnIndicator").textContent =
     "RADHA: BARDHI";
   document.getElementById("gameResult").textContent = "";      
