@@ -363,6 +363,94 @@ white-space: nowrap;
         0 0 7px rgba(255, 34, 34, 0.9),
         0 0 12px rgba(255, 34, 34, 0.5);
 }
+/* ============================= */
+/* RREGULLAT E SHAHUT             */
+/* ============================= */
+
+#chessRules {
+    width: min(950px, 94%);
+    margin: 45px auto 35px;
+    padding: 25px;
+    box-sizing: border-box;
+
+    background: #222;
+    border: 2px solid #ffffff;
+    border-radius: 14px;
+
+    box-shadow: 0 0 15px rgba(255,255,255,0.15);
+
+    text-align: left;
+}
+
+#chessRules h2 {
+    margin: 0 0 25px;
+    text-align: center;
+
+    font-size: 28px;
+    color: #ffffff;
+}
+
+.rules-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.rule-card {
+    background: #303030;
+
+    border: 1px solid #777;
+    border-radius: 10px;
+
+    padding: 16px;
+}
+
+.rule-card h3 {
+    margin: 0 0 9px;
+
+    font-size: 19px;
+    color: #ffffff;
+}
+
+.rule-card p {
+    margin: 0;
+
+    font-size: 15px;
+    line-height: 1.6;
+
+    color: #eeeeee;
+}
+
+/* Telefoni */
+
+@media (max-width: 600px) {
+
+    #chessRules {
+        width: 94%;
+        padding: 16px;
+        margin-top: 30px;
+    }
+
+    #chessRules h2 {
+        font-size: 23px;
+    }
+
+    .rules-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rule-card {
+        padding: 14px;
+    }
+
+    .rule-card h3 {
+        font-size: 18px;
+    }
+
+    .rule-card p {
+        font-size: 14px;
+    }
+}
 </style>
 </head>
 
@@ -2934,6 +3022,190 @@ renderMoveHistory();
 );
 
 </script>
+<!-- ============================= -->
+<!-- RREGULLAT E SHAHUT             -->
+<!-- ============================= -->
 
+<section id="chessRules">
+
+    <h2>⚔️ RREGULLAT E SHAHUT</h2>
+
+    <div class="rules-grid">
+
+        <div class="rule-card">
+            <h3>1. ♟️ Qëllimi i lojës</h3>
+            <p>
+                Shahu luhet nga dy lojtarë: i Bardhi dhe i Ziu.
+                Qëllimi është të vendosësh mbretin e kundërshtarit
+                në shah-mat.
+            </p>
+        </div>
+
+        <div class="rule-card">
+            <h3>2. ♟️ Tabela e shahut</h3>
+            <p>
+                Tabela ka 64 katrorë, 8 rreshta dhe 8 kolona.
+                Secili lojtar fillon me 16 figura:
+                një mbret, një mbretëreshë, dy torre, dy fila,
+                dy kuaj dhe tetë pionë.
+            </p>
+        </div>
+
+        <div class="rule-card">
+            <h3>3. ♙ Pioni</h3>
+            <p>
+                Pioni lëviz përpara dhe kap diagonalisht.
+                Nga pozicioni fillestar mund të lëvizë një ose
+                dy katrorë, nëse rruga është e lirë.
+            </p>
+        </div>
+
+        <div class="rule-card">
+            <h3>4. ♘ Kali</h3>
+            <p>
+                Kali lëviz në formën e shkronjës L:
+                dy katrorë në një drejtim dhe një katror anash.
+                Kali mund të kërcejë mbi figura të tjera.
+            </p>
+        </div>
+
+        <div class="rule-card">
+            <h3>5. ♗ Fili</h3>
+            <p>
+                Fili lëviz vetëm diagonalisht, për aq katrorë
+                sa është e lirë rruga. Çdo fil qëndron gjatë
+                gjithë lojës në katrorë të së njëjtës ngjyrë.
+            </p>
+        </div>
+
+        <div class="rule-card">
+            <h3>6. ♖ Torra</h3>
+            <p>
+                Torra lëviz horizontalisht ose vertikalisht,
+                për aq katrorë sa është e lirë rruga.
+            </p>
+        </div>
+
+        <div class="rule-card">
+            <h3>7. ♕ Mbretëresha</h3>
+            <p>
+                Mbretëresha mund të lëvizë horizontalisht,
+                vertikalisht dhe diagonalisht.
+            </p>
+        </div>
+
+        <div class="rule-card">
+            <h3>8. ♔ Mbreti</h3>
+            <p>
+                Mbreti lëviz vetëm një katror në çdo drejtim.
+                Nuk lejohet të lëvizë në një katror ku kërcënohet
+                nga një figurë kundërshtare.
+            </p>
+        </div>
+
+        <div class="rule-card">
+            <h3>9. ⚔️ Kapja e figurave</h3>
+            <p>
+                Një figurë kapet kur një figurë kundërshtare
+                lëviz në katrorin ku ajo ndodhet.
+                Një lojtar nuk mund të kapë figurat e veta.
+            </p>
+        </div>
+
+        <div class="rule-card">
+            <h3>10. 👑 Shahu</h3>
+            <p>
+                Mbreti është në shah kur kërcënohet drejtpërdrejt
+                nga një figurë kundërshtare. Shahu duhet të
+                largohet me një lëvizje të ligjshme.
+            </p>
+        </div>
+
+        <div class="rule-card">
+            <h3>11. 🏆 Shah-mati</h3>
+            <p>
+                Kur mbreti është në shah dhe nuk ka asnjë
+                lëvizje të ligjshme për të shpëtuar,
+                kemi shah-mat dhe loja përfundon.
+            </p>
+        </div>
+
+        <div class="rule-card">
+            <h3>12. 🤝 Pat</h3>
+            <p>
+                Pat ndodh kur lojtari nuk ka asnjë lëvizje
+                të ligjshme, por mbreti i tij nuk është në shah.
+                Loja përfundon me barazim.
+            </p>
+        </div>
+
+        <div class="rule-card">
+            <h3>13. 🔄 Rokada</h3>
+            <p>
+                Rokada është një lëvizje speciale e mbretit
+                dhe torrës. Ekziston rokada e shkurtër dhe
+                rokada e gjatë. Ajo lejohet vetëm kur plotësohen
+                të gjitha kushtet e rokadës.
+            </p>
+        </div>
+
+        <div class="rule-card">
+            <h3>14. 🐾 Promovimi</h3>
+            <p>
+                Kur pioni arrin në rreshtin e fundit, ai duhet
+                të promovohet në mbretëreshë, torrë, fil ose kalë.
+            </p>
+        </div>
+
+        <div class="rule-card">
+            <h3>15. ⚡ En passant</h3>
+            <p>
+                En passant është një kapje speciale e pionit.
+                Ajo lejohet vetëm në një situatë të caktuar dhe
+                duhet të bëhet menjëherë pas lëvizjes së pionit
+                kundërshtar me dy katrorë.
+            </p>
+        </div>
+
+        <div class="rule-card">
+            <h3>16. 🚫 Lëvizjet e palejuara</h3>
+            <p>
+                Nuk lejohet të lëvizësh një figurë në mënyrë
+                të gabuar, të kalosh përmes figurave të tjera
+                përveç kalit, ose të lësh mbretin tënd në shah.
+            </p>
+        </div>
+
+        <div class="rule-card">
+            <h3>17. 🤝 Remi / Barazimi</h3>
+            <p>
+                Loja mund të përfundojë barazim me pat,
+                marrëveshje mes lojtarëve, përsëritje të pozicionit,
+                rregullin e 50 lëvizjeve ose në raste të tjera
+                të përcaktuara nga rregullat e shahut.
+            </p>
+        </div>
+
+        <div class="rule-card">
+            <h3>18. ⏱️ Ora e shahut</h3>
+            <p>
+                Secili lojtar ka kohën e tij. Pas lëvizjes,
+                koha kalon te kundërshtari. Kur koha përfundon,
+                lojtari humbet në kohë, sipas rregullave përkatëse.
+            </p>
+        </div>
+
+        <div class="rule-card">
+            <h3>19. 🏁 Përfundimi i lojës</h3>
+            <p>
+                Loja mund të përfundojë me shah-mat, dorëzim,
+                humbje në kohë, pat ose barazim sipas rregullave
+                të shahut.
+            </p>
+        </div>
+
+    </div>
+
+</section>
 </body>
 </html>
