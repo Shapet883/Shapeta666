@@ -516,7 +516,47 @@ white-space: nowrap;
     }
 }
 
+/* FOOTER */
+
+#siteFooter {
+    width: 100%;
+    margin-top: 45px;
+    padding: 25px 10px;
+    box-sizing: border-box;
+
+    background: #111;
+    border-top: 2px solid #ffffff;
+
+    text-align: center;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+#siteFooter span {
+    display: inline-block;
+    margin-top: 8px;
+
+    font-size: 15px;
+    font-weight: normal;
+    color: #dddddd;
+}
+
+@media (max-width: 600px) {
+
+    #siteFooter {
+        font-size: 16px;
+        padding: 22px 8px;
+    }
+
+    #siteFooter span {
+        font-size: 14px;
+    }
+}
+
 </style>
+
 </head>
 
 <body>
@@ -3323,6 +3363,13 @@ renderMoveHistory();
     </div>
 
 </section>
+<!-- FOOTER -->
+
+<footer id="siteFooter">
+    ♟️ SHAPETA CHESS KOSOVA 🇽🇰
+    <br>
+    <span>Dashamirët e shahut në Kosovë e më gjerë</span>
+</footer>
 
 </body>
 </html>
