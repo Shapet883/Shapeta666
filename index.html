@@ -451,6 +451,71 @@ white-space: nowrap;
         font-size: 14px;
     }
 }
+/* KËSHILLA PËR FILLESTARË */
+
+#beginnerTips {
+    width: min(950px, 94%);
+    margin: 35px auto;
+    padding: 25px;
+    box-sizing: border-box;
+
+    background: #222;
+    border: 2px solid #ffffff;
+    border-radius: 14px;
+
+    box-shadow: 0 0 15px rgba(255,255,255,0.15);
+
+    text-align: left;
+}
+
+#beginnerTips h2 {
+    margin: 0 0 25px;
+    text-align: center;
+
+    font-size: 28px;
+    color: #ffffff;
+}
+
+.tips-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.tip-item {
+    background: #303030;
+
+    border: 1px solid #777;
+    border-radius: 10px;
+
+    padding: 14px;
+
+    font-size: 16px;
+    line-height: 1.5;
+
+    color: #eeeeee;
+}
+
+@media (max-width: 600px) {
+
+    #beginnerTips {
+        width: 94%;
+        padding: 16px;
+    }
+
+    #beginnerTips h2 {
+        font-size: 23px;
+    }
+
+    .tips-list {
+        grid-template-columns: 1fr;
+    }
+
+    .tip-item {
+        font-size: 15px;
+    }
+}
+
 </style>
 </head>
 
@@ -3207,5 +3272,57 @@ renderMoveHistory();
     </div>
 
 </section>
+<!-- KËSHILLA PËR FILLESTARË -->
+
+<section id="beginnerTips">
+
+    <h2>💡 KËSHILLA PËR FILLESTARË</h2>
+
+    <div class="tips-list">
+
+        <div class="tip-item">
+            ♟️ Mëso lëvizjen e çdo figure.
+        </div>
+
+        <div class="tip-item">
+            🎯 Përpiqu të kontrollosh qendrën e tabelës.
+        </div>
+
+        <div class="tip-item">
+            ♞ Nxirr kuajt dhe filat në fillim të lojës.
+        </div>
+
+        <div class="tip-item">
+            👑 Mos e nxirr mbretëreshën shumë herët.
+        </div>
+
+        <div class="tip-item">
+            🏰 Bëj rokadë për ta mbrojtur mbretin.
+        </div>
+
+        <div class="tip-item">
+            🛡️ Mos i lër figurat pa mbrojtje.
+        </div>
+
+        <div class="tip-item">
+            👀 Para se të lëvizësh, shiko çfarë kërcënon kundërshtari.
+        </div>
+
+        <div class="tip-item">
+            🤔 Mendo pak para çdo lëvizjeje.
+        </div>
+
+        <div class="tip-item">
+            ⚔️ Mos kap një figurë pa kontrolluar nëse mund të të kapet.
+        </div>
+
+        <div class="tip-item">
+            ♟️ Luaj shpesh dhe mëso nga gabimet.
+        </div>
+
+    </div>
+
+</section>
+
 </body>
 </html>
