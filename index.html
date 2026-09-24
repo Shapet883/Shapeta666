@@ -2175,13 +2175,13 @@ function playMoveSound() {
     filter.frequency.value = 1800;
 
     gain.gain.setValueAtTime(
-        0.40,
+        0.90,
         now
     );
 
     gain.gain.exponentialRampToValueAtTime(
         0.001,
-        now + 0.035
+        now + 0.50
     );
 
     source.buffer = buffer;
