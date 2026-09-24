@@ -1991,9 +1991,11 @@ if (!clockStarted) {
         "-" +
         files[toCol] + (8 - toRow);
 
-    moveHistory.push(moveText);
+moveHistory.push(moveText);
 
-    renderMoveHistory();
+renderMoveHistory();
+
+playMoveSound();
 
  /* PËRFUNDO LËVIZJEN E PARË TË BARDHIT */
 
@@ -2132,7 +2134,38 @@ clockInterval = null;
 }
 }
 
+function playMoveSound() {
+    const audioContext =
+        new (window.AudioContext || window.webkitAudioContext)();
 
+    const oscillator =
+        audioContext.createOscillator();
+
+    const gain =
+        audioContext.createGain();
+
+    oscillator.type = "sine";
+    oscillator.frequency.value = 520;
+
+    gain.gain.setValueAtTime(
+        0.12,
+        audioContext.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        audioContext.currentTime + 0.12
+    );
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    oscillator.start();
+
+    oscillator.stop(
+        audioContext.currentTime + 0.12
+    );
+}
 /* A KA LËVIZJE TË LEJUAR? */
 
 function hasAnyLegalMove(isWhite) {
