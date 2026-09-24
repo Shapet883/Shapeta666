@@ -164,7 +164,13 @@ h1 {
         0 0 12px rgba(0,0,0,0.6);
     box-sizing: content-box;
 }
+#board.board-flipped {
+    transform: rotate(180deg);
+}
 
+#board.board-flipped .square {
+    transform: rotate(180deg);
+}
 .square {
     width: 65px;
     height: 65px;
