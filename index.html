@@ -285,10 +285,18 @@ box-shadow: inset 0 0 0 2px rgba(255, 0, 0, 0.3);
     pointer-events: none;
 }
 #board.board-flipped .square[data-file]::after {
+    top: 3px;
+    bottom: auto;
+    left: 4px;
+    right: auto;
     transform: rotate(180deg);
 }
 
 #board.board-flipped .square[data-rank]::before {
+    bottom: 3px;
+    top: auto;
+    right: 4px;
+    left: auto;
     transform: rotate(180deg);
 }
 #newGameButton {
