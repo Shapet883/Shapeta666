@@ -2142,75 +2142,55 @@ function playMoveSound() {
     const now =
         audioContext.currentTime;
 
-    const oscillator =
-        audioContext.createOscillator();
+    const bufferSize =
+        audioContext.sampleRate * 0.035;
+
+    const buffer =
+        audioContext.createBuffer(
+            1,
+            bufferSize,
+            audioContext.sampleRate
+        );
+
+    const data =
+        buffer.getChannelData(0);
+
+    for (let i = 0; i < bufferSize; i++) {
+
+        data[i] =
+            (Math.random() * 2 - 1) *
+            Math.pow(1 - i / bufferSize, 8);
+    }
+
+    const source =
+        audioContext.createBufferSource();
+
+    const filter =
+        audioContext.createBiquadFilter();
 
     const gain =
         audioContext.createGain();
 
-    oscillator.type = "triangle";
-
-    oscillator.frequency.setValueAtTime(
-        180,
-        now
-    );
-
-    oscillator.frequency.exponentialRampToValueAtTime(
-        75,
-        now + 0.08
-    );
+    filter.type = "lowpass";
+    filter.frequency.value = 1800;
 
     gain.gain.setValueAtTime(
-        0.28,
+        0.45,
         now
     );
 
     gain.gain.exponentialRampToValueAtTime(
         0.001,
-        now + 0.09
+        now + 0.035
     );
 
-    oscillator.connect(gain);
+    source.buffer = buffer;
+
+    source.connect(filter);
+    filter.connect(gain);
     gain.connect(audioContext.destination);
 
-    oscillator.start(now);
-
-    oscillator.stop(
-        now + 0.09
-    );
-
-
-    const click =
-        audioContext.createOscillator();
-
-    const clickGain =
-        audioContext.createGain();
-
-    click.type = "square";
-
-    click.frequency.setValueAtTime(
-        90,
-        now
-    );
-
-    clickGain.gain.setValueAtTime(
-        0.10,
-        now
-    );
-
-    clickGain.gain.exponentialRampToValueAtTime(
-        0.001,
-        now + 0.035
-    );
-
-    click.connect(clickGain);
-    clickGain.connect(audioContext.destination);
-
-    click.start(now);
-
-    click.stop(
-        now + 0.035
-    );
+    source.start(now);
 }
 /* A KA LËVIZJE TË LEJUAR? */
 
