@@ -3165,40 +3165,8 @@ document.getElementById("board").classList.toggle(
     "clock-flipped",
     boardFlipped
 );     
-    /* KOORDINATAT KUR TABELA KTHEHET */
 
-const flippedSquares =
-    document.querySelectorAll(".square");
 
-flippedSquares.forEach(function (square) {
-    square.removeAttribute("data-file");
-    square.removeAttribute("data-rank");
-});
-
-if (boardFlipped) {
-
-    for (let col = 0; col < 8; col++) {
-        flippedSquares[col].dataset.file =
-            String.fromCharCode(104 - col);
-    }
-
-    for (let row = 0; row < 8; row++) {
-        flippedSquares[row * 8 + 7].dataset.rank =
-            row + 1;
-    }
-
-} else {
-
-    for (let col = 0; col < 8; col++) {
-        flippedSquares[56 + col].dataset.file =
-            String.fromCharCode(97 + col);
-    }
-
-    for (let row = 0; row < 8; row++) {
-        flippedSquares[row * 8].dataset.rank =
-            8 - row;
-    }
-}
         const squares =
             Array.from(
                 document.querySelectorAll(".square")
