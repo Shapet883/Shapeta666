@@ -2135,8 +2135,12 @@ clockInterval = null;
 }
 
 function playMoveSound() {
+
     const audioContext =
         new (window.AudioContext || window.webkitAudioContext)();
+
+    const now =
+        audioContext.currentTime;
 
     const oscillator =
         audioContext.createOscillator();
@@ -2144,26 +2148,68 @@ function playMoveSound() {
     const gain =
         audioContext.createGain();
 
-    oscillator.type = "sine";
-    oscillator.frequency.value = 520;
+    oscillator.type = "triangle";
+
+    oscillator.frequency.setValueAtTime(
+        180,
+        now
+    );
+
+    oscillator.frequency.exponentialRampToValueAtTime(
+        75,
+        now + 0.08
+    );
 
     gain.gain.setValueAtTime(
-        0.12,
-        audioContext.currentTime
+        0.28,
+        now
     );
 
     gain.gain.exponentialRampToValueAtTime(
         0.001,
-        audioContext.currentTime + 0.12
+        now + 0.09
     );
 
     oscillator.connect(gain);
     gain.connect(audioContext.destination);
 
-    oscillator.start();
+    oscillator.start(now);
 
     oscillator.stop(
-        audioContext.currentTime + 0.12
+        now + 0.09
+    );
+
+
+    const click =
+        audioContext.createOscillator();
+
+    const clickGain =
+        audioContext.createGain();
+
+    click.type = "square";
+
+    click.frequency.setValueAtTime(
+        90,
+        now
+    );
+
+    clickGain.gain.setValueAtTime(
+        0.10,
+        now
+    );
+
+    clickGain.gain.exponentialRampToValueAtTime(
+        0.001,
+        now + 0.035
+    );
+
+    click.connect(clickGain);
+    clickGain.connect(audioContext.destination);
+
+    click.start(now);
+
+    click.stop(
+        now + 0.035
     );
 }
 /* A KA LËVIZJE TË LEJUAR? */
