@@ -628,7 +628,43 @@ box-shadow: inset 0 0 0 2px rgba(255, 0, 0, 0.3);
         font-size: 14px;
     }
 }
+/* KUTIA E PROMOVIMIT */
 
+.promotion-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+}
+
+.promotion-box {
+    display: flex;
+    gap: 6px;
+    padding: 8px;
+    background: white;
+    border: 3px solid #222;
+    border-radius: 10px;
+}
+
+.promotion-piece {
+    width: 58px;
+    height: 58px;
+    padding: 0;
+    border: 2px solid #777;
+    border-radius: 7px;
+    background: #eee;
+    font-family: "Times New Roman", serif;
+    font-size: 42px;
+    cursor: pointer;
+}
+
+.promotion-piece:hover {
+    background: #ddd;
+    transform: scale(1.08);
+}
 </style>
 
 </head>
@@ -1078,10 +1114,60 @@ function getPiece(square) {
     return square.textContent;
 }
 
+/* ZGJEDHJA E PROMOVIMIT */
 
+function showPromotionChoice(isWhite) {
+
+    return new Promise(function(resolve) {
+
+        const overlay =
+            document.createElement("div");
+
+        overlay.className =
+            "promotion-overlay";
+
+        const box =
+            document.createElement("div");
+
+        box.className =
+            "promotion-box";
+
+        const pieces =
+            isWhite
+                ? ["♕", "♖", "♗", "♘"]
+                : ["♛", "♜", "♝", "♞"];
+
+        pieces.forEach(function(piece) {
+
+            const button =
+                document.createElement("button");
+
+            button.className =
+                "promotion-piece";
+
+            button.textContent =
+                piece;
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    overlay.remove();
+
+                    resolve(piece);
+                }
+            );
+
+            box.appendChild(button);
+        });
+
+        overlay.appendChild(box);
+
+        document.body.appendChild(overlay);
+    });
+}
 /* KLIKO KATRORIN */
-
-function handleSquareClick(square, index) {
+async function handleSquareClick(square, index) {
 if (gameOver) {
     return;
 }
@@ -1913,88 +1999,56 @@ squares[lastMoveTo].classList.add("selected");
 selectedSquare = null;
 
 
-    /* PROMOVIMI I BARDHË */
+/* PROMOVIMI I BARDHË */
 
-    if (
-        movingPiece === "♙" &&
-        toRow === 0
-    ) {
+if (
+    movingPiece === "♙" &&
+    toRow === 0
+) {
 
-        const choice =
-            prompt(
-                "Promovim: q = Mbretëreshë, r = Torra, b = Fil, n = Kalë"
-            );
+    const newPiece =
+        await showPromotionChoice(true);
 
-        let newPiece = "♕";
+    squares[to].textContent =
+        newPiece;
 
-        if (choice === "r") {
-            newPiece = "♖";
-        }
+    squares[to]
+        .classList
+        .remove(
+            "white-piece",
+            "black-piece"
+        );
 
-        if (choice === "b") {
-            newPiece = "♗";
-        }
-
-        if (choice === "n") {
-            newPiece = "♘";
-        }
-
-        squares[to].textContent =
-            newPiece;
-
-        squares[to]
-            .classList
-            .remove(
-                "white-piece",
-                "black-piece"
-            );
-
-        squares[to]
-            .classList
-            .add("white-piece");
-    }
+    squares[to]
+        .classList
+        .add("white-piece");
+}
 
 
-    /* PROMOVIMI I ZI */
+/* PROMOVIMI I ZI */
 
-    if (
-        movingPiece === "♟" &&
-        toRow === 7
-    ) {
+if (
+    movingPiece === "♟" &&
+    toRow === 7
+) {
 
-        const choice =
-            prompt(
-                "Promovim: q = Mbretëreshë, r = Torra, b = Fil, n = Kalë"
-            );
+    const newPiece =
+        await showPromotionChoice(false);
 
-        let newPiece = "♛";
+    squares[to].textContent =
+        newPiece;
 
-        if (choice === "r") {
-            newPiece = "♜";
-        }
+    squares[to]
+        .classList
+        .remove(
+            "white-piece",
+            "black-piece"
+        );
 
-        if (choice === "b") {
-            newPiece = "♝";
-        }
-
-        if (choice === "n") {
-            newPiece = "♞";
-        }
-
-        squares[to].textContent =
-            newPiece;
-
-        squares[to]
-            .classList
-            .remove(
-                "white-piece",
-                "black-piece"
-            );
-
-        squares[to]
-            .classList
-            .add("black-piece");
-    }
+    squares[to]
+        .classList
+        .add("black-piece");
+}
 if (!clockStarted) {
     startClock();
 }
