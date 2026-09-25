@@ -3168,7 +3168,50 @@ document.getElementById("board").classList.toggle(
     boardFlipped
 );     
 
+/* NDRYSHO KOORDINATAT SIPAS ORIENTIMIT */
 
+const coordinateSquares =
+    Array.from(
+        document.querySelectorAll(".square")
+    );
+
+coordinateSquares.forEach(function (square, index) {
+
+    const row = Math.floor(index / 8);
+    const col = index % 8;
+
+    delete square.dataset.file;
+    delete square.dataset.rank;
+
+    if (!boardFlipped) {
+
+        /* BARDHI POSHTË */
+
+        if (row === 7) {
+            square.dataset.file =
+                String.fromCharCode(97 + col);
+        }
+
+        if (col === 7) {
+            square.dataset.rank =
+                8 - row;
+        }
+
+    } else {
+
+        /* ZI POSHTË */
+
+        if (row === 0) {
+            square.dataset.file =
+                String.fromCharCode(97 + col);
+        }
+
+        if (col === 0) {
+            square.dataset.rank =
+                8 - row;
+        }
+    }
+});
         const squares =
             Array.from(
                 document.querySelectorAll(".square")
