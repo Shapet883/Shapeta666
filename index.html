@@ -634,8 +634,8 @@ box-shadow: inset 0 0 0 2px rgba(255, 0, 0, 0.3);
     position: fixed;
     inset: 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+justify-content: flex-start;
     background: rgba(0, 0, 0, 0.25);
     z-index: 9999;
 }
@@ -1116,7 +1116,7 @@ function getPiece(square) {
 
 /* ZGJEDHJA E PROMOVIMIT */
 
-function showPromotionChoice(isWhite) {
+    function showPromotionChoice(isWhite, targetSquare) {
 
     return new Promise(function(resolve) {
 
@@ -1132,6 +1132,15 @@ function showPromotionChoice(isWhite) {
         box.className =
             "promotion-box";
 
+      const rect =
+    targetSquare.getBoundingClientRect();
+
+box.style.position = "fixed";
+box.style.left = rect.left + "px";
+box.style.top =
+    (isWhite
+        ? rect.bottom + 6
+        : rect.top - 82) + "px";
         const pieces =
             isWhite
                 ? ["♕", "♖", "♗", "♘"]
@@ -2006,8 +2015,8 @@ if (
     toRow === 0
 ) {
 
-    const newPiece =
-        await showPromotionChoice(true);
+const newPiece =
+    await showPromotionChoice(true, squares[to]);
 
     squares[to].textContent =
         newPiece;
@@ -2032,8 +2041,8 @@ if (
     toRow === 7
 ) {
 
-    const newPiece =
-        await showPromotionChoice(false);
+const newPiece =
+    await showPromotionChoice(false, squares[to]);
 
     squares[to].textContent =
         newPiece;
