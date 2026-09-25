@@ -2072,7 +2072,11 @@ if (isKingVsKing()) {
 
     return;
 }
+/* PASTRO SHAHUN E VJETËR */
 
+document.querySelectorAll(".in-check").forEach(function (square) {
+    square.classList.remove("in-check");
+});
 
 /* KONTROLLO SHAHUN */
 
@@ -2086,16 +2090,23 @@ if (isKingVsKing()) {
         );
 
 
-    if (
-        enemyKingIndex !== -1 &&
-        isKingInCheck(
-            squares[enemyKingIndex]
-        )
-    ) {
+/* PASTRO SHAHUN E VJETËR */
 
+document.querySelectorAll(".in-check").forEach(function (square) {
+    square.classList.remove("in-check");
+});
+
+
+if (
+    enemyKingIndex !== -1 &&
+    isKingInCheck(
         squares[enemyKingIndex]
-            .classList
-            .add("in-check");
+    )
+) {
+
+    squares[enemyKingIndex]
+        .classList
+        .add("in-check");
 
 
         /* SHAH-MAT */
