@@ -724,6 +724,13 @@ color: #66b3ff !important;
     padding: 6px 12px !important;
     margin: 8px auto !important;
 }
+#whiteClock.turn-active,
+#blackClock.turn-active {
+    box-shadow:
+        0 0 8px rgba(255,255,255,0.9),
+        0 0 16px rgba(255,255,255,0.5);
+}
+
 </style>
 
 </head>
@@ -2155,7 +2162,13 @@ if (!whiteTurn && !blackFirstMoveDone) {
 
 whiteTurn = !whiteTurn;
 
+document.getElementById("whiteClock")
+    .classList.toggle("turn-active", whiteTurn);
 
+document.getElementById("blackClock")
+.classList.toggle("turn-active", !whiteTurn);   
+
+                      
 /* TË DY KANË BËRË LËVIZJEN E PARË */
 
 if (
