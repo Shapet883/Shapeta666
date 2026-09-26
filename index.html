@@ -333,9 +333,15 @@ box-shadow: inset 0 0 0 2px rgba(255, 0, 0, 0.3);
 
 @media (max-width: 600px) {
 
-   #board {
-    width: min(400px, 92vw);
-    height: min(400px, 92vw);
+  #gameArea {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+    #board {
+    width: min(500px, 92vw);
+    height: min(500px, 92vw);
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
 } 
@@ -353,15 +359,13 @@ box-shadow: inset 0 0 0 2px rgba(255, 0, 0, 0.3);
     padding: 6px 10px;
     color: #b98f58 !important;
 }
-
-}
 #moveHistory {
-    width: 220px;
-    height: 300px;
-    overflow-y: auto;
+width: min(500px, 92vw);
+height: 220px;
+overflow-y: auto;
 
     margin: 0;
-    padding: 12px;
+    padding: 8px;
 
     box-sizing: border-box;
 
@@ -383,11 +387,10 @@ box-shadow: inset 0 0 0 2px rgba(255, 0, 0, 0.3);
 #moveHistory strong {
     display: block;
     text-align: center;
-
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 
-    margin-bottom: 10px;
+    margin-bottom: 6px;
     padding-bottom: 8px;
 
     border-bottom: 1px solid #777;
@@ -395,6 +398,7 @@ box-shadow: inset 0 0 0 2px rgba(255, 0, 0, 0.3);
     letter-spacing: 0.3px;
 }
 #blackClock,
+    
 #whiteClock {
     font-size: 22px;
     font-weight: bold;
@@ -479,7 +483,24 @@ box-shadow: inset 0 0 0 2px rgba(255, 0, 0, 0.3);
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
 }
+.rules-button {
+    display: inline-flex;
+    width: 30px;
+    height: 30px;
 
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    margin-right: 8px;
+
+    box-sizing: border-box;
+}
 .rule-card {
     background: #303030;
 
@@ -518,7 +539,9 @@ box-shadow: inset 0 0 0 2px rgba(255, 0, 0, 0.3);
     #chessRules h2 {
         font-size: 23px;
     }
-
+  #chessRules .rules-grid {
+        display: none;
+    }
     .rules-grid {
         grid-template-columns: 1fr;
     }
@@ -3381,7 +3404,14 @@ renderMoveHistory();
         blackRookRightMoved = false;
     }
 );
+document.getElementById("rulesToggle").addEventListener("click", function () {
 
+    document.querySelector("#chessRules .rules-grid").style.display =
+        document.querySelector("#chessRules .rules-grid").style.display === "none"
+            ? "grid"
+            : "none";
+
+});
 </script>
 <!-- ============================= -->
 <!-- RREGULLAT E SHAHUT             -->
@@ -3389,7 +3419,7 @@ renderMoveHistory();
 
 <section id="chessRules">
 
-    <h2>⚔️ RREGULLAT E SHAHUT</h2>
+<h2 id="rulesToggle"><span class="rules-button">S</span> ⚔️ RREGULLAT E SHAHUT</h2>
 
     <div class="rules-grid">
 
