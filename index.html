@@ -540,8 +540,12 @@ overflow-y: auto;
         font-size: 23px;
     }
   #chessRules .rules-grid {
-        display: none;
-    }
+    display: none !important;
+}
+
+#chessRules .rules-grid.rules-open {
+    display: grid !important;
+}
     .rules-grid {
         grid-template-columns: 1fr;
     }
@@ -3405,11 +3409,10 @@ renderMoveHistory();
     }
 );
 document.getElementById("rulesToggle").addEventListener("click", function () {
+const rulesGrid =
+    document.querySelector("#chessRules .rules-grid");
 
-    document.querySelector("#chessRules .rules-grid").style.display =
-        document.querySelector("#chessRules .rules-grid").style.display === "none"
-            ? "grid"
-            : "none";
+rulesGrid.classList.toggle("rules-open");
 
 });
 </script>
