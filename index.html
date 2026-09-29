@@ -846,7 +846,6 @@ function formatTime(seconds) {
         String(secs).padStart(2, "0");
 }
 
-
 /* ORËT NORMALE */
 
 function updateClocks() {
@@ -902,26 +901,6 @@ function updateClocks() {
             .classList.add("clock-danger");
 
     }
-
-}
-
-
-    /* 10 SEKONDAT E FUNDIT */
-
-if (whiteTurn && whiteTime <= 10) {
-
-    document.getElementById("whiteClock")
-        .classList.add("clock-danger");
-
-}
-
-
-if (!whiteTurn && blackTime <= 10) {
-
-    document.getElementById("blackClock")
-        .classList.add("clock-danger");
-
-}
 
 }
 
