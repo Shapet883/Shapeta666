@@ -858,33 +858,22 @@ function updateClocks() {
         "I ZIU: " + formatTime(blackTime);
 
 
+    /* HIQ NGJYRAT E VJETRA */
+
     document.getElementById("whiteClock")
         .classList.remove("clock-active");
 
     document.getElementById("blackClock")
         .classList.remove("clock-active");
 
-
-    /* HIQ ALARMEN E KUQE */
-
     document.getElementById("whiteClock")
         .classList.remove("clock-danger");
 
     document.getElementById("blackClock")
         .classList.remove("clock-danger");
-/* ALARMI I KUQ – 10 SEKONDAT E FUNDIT */
 
-if (whiteTurn && whiteTime <= 10 && whiteTime > 0) {
-    document.getElementById("whiteClock")
-        .classList.add("clock-danger");
-}
 
-if (!whiteTurn && blackTime <= 10 && blackTime > 0) {
-    document.getElementById("blackClock")
-        .classList.add("clock-danger");
-}
-
-    /* AKTIVIZO ORËN E RADHËS */
+    /* ORA AKTIVE */
 
     if (whiteTurn) {
 
@@ -896,6 +885,25 @@ if (!whiteTurn && blackTime <= 10 && blackTime > 0) {
         document.getElementById("blackClock")
             .classList.add("clock-active");
     }
+
+
+    /* KUQ NË 10 SEKONDAT E FUNDIT */
+
+    if (whiteTurn && whiteTime <= 10 && whiteTime > 0) {
+
+        document.getElementById("whiteClock")
+            .classList.add("clock-danger");
+
+    }
+
+    if (!whiteTurn && blackTime <= 10 && blackTime > 0) {
+
+        document.getElementById("blackClock")
+            .classList.add("clock-danger");
+
+    }
+
+}
 
 
     /* 10 SEKONDAT E FUNDIT */
@@ -916,9 +924,6 @@ if (!whiteTurn && blackTime <= 10) {
 }
 
 }
-
-
-/* 25 SEKONDAT */
 
 function updateFirstMoveClock() {
 
