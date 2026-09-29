@@ -1107,9 +1107,11 @@ function renderMoveHistory() {
     for (let i = 0; i < moveHistory.length; i += 2) {
         const row = document.createElement("div");
 
-        row.style.display = "flex";
-        row.style.justifyContent = "space-between";
+        row.style.display = "grid";
+        row.style.gridTemplateColumns = "40px 1fr 1fr";
         row.style.width = "100%";
+        row.style.boxSizing = "border-box";
+        row.style.marginBottom = "3px";
 
         const number = document.createElement("span");
         number.textContent =
@@ -1118,14 +1120,12 @@ function renderMoveHistory() {
         const whiteMove = document.createElement("span");
         whiteMove.textContent = moveHistory[i];
 
+        const blackMove = document.createElement("span");
+        blackMove.textContent = moveHistory[i + 1] || "";
+
         row.appendChild(number);
         row.appendChild(whiteMove);
-
-        if (moveHistory[i + 1]) {
-            const blackMove = document.createElement("span");
-            blackMove.textContent = moveHistory[i + 1];
-            row.appendChild(blackMove);
-        }
+        row.appendChild(blackMove);
 
         box.appendChild(row);
     }
