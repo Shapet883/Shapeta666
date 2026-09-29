@@ -888,19 +888,19 @@ function updateClocks() {
 
     /* KUQ NË 10 SEKONDAT E FUNDIT */
 
-    if (whiteTurn && whiteTime <= 10 && whiteTime > 0) {
+   if (whiteTurn && whiteTime <= 10) {
 
-        document.getElementById("whiteClock")
-            .classList.add("clock-danger");
+    document.getElementById("whiteClock")
+        .classList.add("clock-danger");
 
-    }
+}
 
-    if (!whiteTurn && blackTime <= 10 && blackTime > 0) {
+if (!whiteTurn && blackTime <= 10) {
 
-        document.getElementById("blackClock")
-            .classList.add("clock-danger");
+    document.getElementById("blackClock")
+        .classList.add("clock-danger");
 
-    }
+} 
 
 }
 
