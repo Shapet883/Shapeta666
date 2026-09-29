@@ -1107,12 +1107,25 @@ function renderMoveHistory() {
     for (let i = 0; i < moveHistory.length; i += 2) {
         const row = document.createElement("div");
 
-        row.textContent =
-            (Math.floor(i / 2) + 1) + ". " +
-            moveHistory[i] +
-            (moveHistory[i + 1]
-                ? "    " + moveHistory[i + 1] 
-                : "");
+        row.style.display = "flex";
+        row.style.justifyContent = "space-between";
+        row.style.width = "100%";
+
+        const number = document.createElement("span");
+        number.textContent =
+            (Math.floor(i / 2) + 1) + ".";
+
+        const whiteMove = document.createElement("span");
+        whiteMove.textContent = moveHistory[i];
+
+        row.appendChild(number);
+        row.appendChild(whiteMove);
+
+        if (moveHistory[i + 1]) {
+            const blackMove = document.createElement("span");
+            blackMove.textContent = moveHistory[i + 1];
+            row.appendChild(blackMove);
+        }
 
         box.appendChild(row);
     }
