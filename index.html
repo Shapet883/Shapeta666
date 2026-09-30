@@ -1337,7 +1337,9 @@ box.style.top =
 }
 /* KLIKO KATRORIN */
 async function handleSquareClick(square, index) {
-
+    if (gameOver) {
+        return;
+    }
     const squares =
         Array.from(
             document.querySelectorAll(".square")
