@@ -867,19 +867,32 @@ function updateClocks() {
         "I ZIU: " + formatTime(blackTime);
 
 
-    /* HIQ NGJYRAT E VJETRA */
+   /* HIQ NGJYRAT E VJETRA */
 
-    document.getElementById("whiteClock")
-        .classList.remove("clock-active");
+document.getElementById("whiteClock")
+    .classList.remove("clock-active");
 
-    document.getElementById("blackClock")
-        .classList.remove("clock-active");
+document.getElementById("blackClock")
+    .classList.remove("clock-active");
 
-    document.getElementById("whiteClock")
-        .classList.remove("clock-danger");
+document.getElementById("whiteClock")
+    .classList.remove("clock-danger");
 
-    document.getElementById("blackClock")
-        .classList.remove("clock-danger");
+document.getElementById("blackClock")
+    .classList.remove("clock-danger");
+
+
+document.getElementById("whiteClock")
+    .style.removeProperty("border");
+
+document.getElementById("whiteClock")
+    .style.removeProperty("box-shadow");
+
+document.getElementById("blackClock")
+    .style.removeProperty("border");
+
+document.getElementById("blackClock")
+    .style.removeProperty("box-shadow");
 
 
     /* ORA AKTIVE */
