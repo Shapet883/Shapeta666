@@ -897,14 +897,14 @@ function updateClocks() {
 
 /* KUQ NË 10 SEKONDAT E FUNDIT */
 
-if (whiteTurn && whiteTime <= 10) {
+if (whiteTurn && whiteTime <= 60) {
 
     document.getElementById("whiteClock")
         .classList.add("clock-danger");
 
 }
 
-if (!whiteTurn && blackTime <= 10) {
+if (!whiteTurn && blackTime <= 60) {
 
     document.getElementById("blackClock")
         .classList.add("clock-danger");
