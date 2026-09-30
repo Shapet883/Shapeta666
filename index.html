@@ -1262,21 +1262,14 @@ if (col === 7) {
             square.classList.add("black-piece");
         }
     }
-
  square.addEventListener(
     "click",
     function () {
-
-        if (gameOver) {
-            return;
-        }
-
         handleSquareClick(this, i);
     }
 );
 
-    board.appendChild(square);
-}
+board.appendChild(square);
 
 
 /* MERR FIGURËN PA KOORDINATA */
