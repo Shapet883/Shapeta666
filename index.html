@@ -894,20 +894,19 @@ function updateClocks() {
             .classList.add("clock-active");
     }
 
+/* KUQ NË 10 SEKONDAT E FUNDIT */
 
-    /* KUQ NË 10 SEKONDAT E FUNDIT */
-
-  if (whiteTurn && whiteTime <= 10) {
+if (whiteTurn && whiteTime <= 10) {
 
     document.getElementById("whiteClock")
-        .style.border = "3px solid red";
+        .classList.add("clock-danger");
 
-} 
+}
 
 if (!whiteTurn && blackTime <= 10) {
 
     document.getElementById("blackClock")
-        .style.border = "3px solid red";
+        .classList.add("clock-danger");
 
 }
 
