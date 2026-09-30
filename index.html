@@ -900,16 +900,40 @@ function updateClocks() {
 
 if (whiteTurn && whiteTime <= 60) {
 
-    document.getElementById("whiteClock")
-        .classList.add("clock-danger");
+    const clock = document.getElementById("whiteClock");
 
+    clock.classList.add("clock-danger");
+
+    clock.style.setProperty(
+        "border",
+        "3px solid #ff2222",
+        "important"
+    );
+
+    clock.style.setProperty(
+        "box-shadow",
+        "0 0 8px #ff2222, 0 0 18px #ff2222, 0 0 30px rgba(255,34,34,0.8)",
+        "important"
+    );
 }
 
 if (!whiteTurn && blackTime <= 60) {
 
-    document.getElementById("blackClock")
-        .classList.add("clock-danger");
+    const clock = document.getElementById("blackClock");
 
+    clock.classList.add("clock-danger");
+
+    clock.style.setProperty(
+        "border",
+        "3px solid #ff2222",
+        "important"
+    );
+
+    clock.style.setProperty(
+        "box-shadow",
+        "0 0 8px #ff2222, 0 0 18px #ff2222, 0 0 30px rgba(255,34,34,0.8)",
+        "important"
+    );
 }
 
 }
