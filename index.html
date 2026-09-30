@@ -936,7 +936,6 @@ if (!whiteTurn && blackTime <= 10) {
 }
 
 }
-
 function updateFirstMoveClock() {
 
     document.getElementById("whiteFirstMove").textContent =
@@ -946,20 +945,45 @@ function updateFirstMoveClock() {
         blackFirstMoveTime;
 
 
-    document.getElementById("whiteFirstMove")
-        .classList.remove("first-move-danger");
+    const whiteClock =
+        document.getElementById("whiteFirstMove");
 
-    document.getElementById("blackFirstMove")
-        .classList.remove("first-move-danger");
+    const blackClock =
+        document.getElementById("blackFirstMove");
 
+
+    /* HIQ ALARMIN */
+
+    whiteClock.classList.remove("first-move-danger");
+    blackClock.classList.remove("first-move-danger");
+
+    whiteClock.style.removeProperty("border");
+    whiteClock.style.removeProperty("box-shadow");
+
+    blackClock.style.removeProperty("border");
+    blackClock.style.removeProperty("box-shadow");
+
+
+    /* KUQ - 10 SEKONDAT E FUNDIT */
 
     if (
         !whiteFirstMoveDone &&
         whiteFirstMoveTime <= 10
     ) {
 
-        document.getElementById("whiteFirstMove")
-            .classList.add("first-move-danger");
+        whiteClock.classList.add("first-move-danger");
+
+        whiteClock.style.setProperty(
+            "border",
+            "3px solid #ff2222",
+            "important"
+        );
+
+        whiteClock.style.setProperty(
+            "box-shadow",
+            "0 0 8px #ff2222, 0 0 18px #ff2222, 0 0 30px rgba(255,34,34,0.8)",
+            "important"
+        );
     }
 
 
@@ -968,10 +992,22 @@ function updateFirstMoveClock() {
         blackFirstMoveTime <= 10
     ) {
 
-        document.getElementById("blackFirstMove")
-            .classList.add("first-move-danger");
+        blackClock.classList.add("first-move-danger");
+
+        blackClock.style.setProperty(
+            "border",
+            "3px solid #ff2222",
+            "important"
+        );
+
+        blackClock.style.setProperty(
+            "box-shadow",
+            "0 0 8px #ff2222, 0 0 18px #ff2222, 0 0 30px rgba(255,34,34,0.8)",
+            "important"
+        );
     }
 }
+
 
 
 /* FILLON NUMËRIMI 25 SEKONDA */
