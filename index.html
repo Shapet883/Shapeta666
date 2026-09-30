@@ -1272,7 +1272,9 @@ if (col === 7) {
 board.appendChild(square);
 
 
-/* MERR FIGURËN PA KOORDINATA */
+
+if (gameOver) {
+    return;/* MERR FIGURËN PA KOORDINATA */
 
 function getPiece(square) {
     return square.textContent;
@@ -1341,9 +1343,7 @@ box.style.top =
 }
 /* KLIKO KATRORIN */
 async function handleSquareClick(square, index) {
-if (gameOver) {
-    return;
-}
+
     const squares =
         Array.from(
             document.querySelectorAll(".square")
