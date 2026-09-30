@@ -1061,7 +1061,12 @@ function startClock() {
             blackTime--;
         }
 
-
+console.log(
+    "ORA:",
+    whiteTurn ? "BARDHI" : "ZI",
+    "B:", whiteTime,
+    "Z:", blackTime
+);
         updateClocks();
 
 
@@ -2186,7 +2191,7 @@ if (!whiteTurn && !blackFirstMoveDone) {
 /* NDËRRO RADHËN */
 
 whiteTurn = !whiteTurn;
-
+console.log("RADHA:", whiteTurn ? "BARDHI" : "ZI");
 document.getElementById("whiteClock")
     .classList.toggle("clock-active", whiteTurn);
 
