@@ -1268,13 +1268,11 @@ if (col === 7) {
         handleSquareClick(this, i);
     }
 );
+    board.appendChild(square);
+}
 
-board.appendChild(square);
 
-
-
-if (gameOver) {
-    return;/* MERR FIGURËN PA KOORDINATA */
+/* MERR FIGURËN PA KOORDINATA */
 
 function getPiece(square) {
     return square.textContent;
