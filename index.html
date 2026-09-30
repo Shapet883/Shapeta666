@@ -744,7 +744,13 @@ color: #66b3ff !important;
         0 0 8px #66b3ff,
         0 0 18px #66b3ff !important;
 }
-
+#whiteClock.turn-active.clock-danger,
+#blackClock.turn-active.clock-danger {
+    border-color: #ff2222 !important;
+    box-shadow:
+        0 0 8px #ff2222,
+        0 0 18px #ff2222 !important;
+}
 </style>
 
 </head>
@@ -891,19 +897,19 @@ function updateClocks() {
 
     /* KUQ NË 10 SEKONDAT E FUNDIT */
 
-   if (whiteTurn && whiteTime <= 10) {
+  if (whiteTurn && whiteTime <= 10) {
 
     document.getElementById("whiteClock")
-        .classList.add("clock-danger");
+        .style.border = "3px solid red";
 
-}
+} 
 
 if (!whiteTurn && blackTime <= 10) {
 
     document.getElementById("blackClock")
-        .classList.add("clock-danger");
+        .style.border = "3px solid red";
 
-} 
+}
 
 }
 
