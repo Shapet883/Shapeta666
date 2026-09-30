@@ -1169,7 +1169,7 @@ console.log(
 }
 
 
-/* FILLIMI */
+I */* FILLIM/
 
 updateClocks();
 
@@ -1263,13 +1263,17 @@ if (col === 7) {
         }
     }
 
+ square.addEventListener(
+    "click",
+    function () {
 
-    square.addEventListener(
-        "click",
-        function () {
-            handleSquareClick(this, i);
+        if (gameOver) {
+            return;
         }
-    );
+
+        handleSquareClick(this, i);
+    }
+);
 
     board.appendChild(square);
 }
@@ -2284,10 +2288,14 @@ if (
     startClock();
 }
 
-
 /* KONTROLLO REMIN - VETËM DY MBRETËR */
 
 if (isKingVsKing()) {
+
+    gameOver = true;
+
+    clearInterval(clockInterval);
+    clearInterval(firstMoveInterval);
 
     document.getElementById("gameResult")
         .classList.add("checkmate-result");
