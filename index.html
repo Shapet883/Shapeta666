@@ -52,11 +52,20 @@ body {
     justify-content: space-between;
     width: 100%;
     box-sizing: border-box;
+   }
+.title-flag {
+    width: 48px;
+    height: 34px;
+    object-fit: cover;
+    flex-shrink: 0;
 }
 
-.main-title span {
-    font-size: 24px;
-    font-weight: bold;
+.main-title .title-flag:first-child {
+    margin-left: 18px;
+}
+
+.main-title .title-flag:last-child {
+    margin-right: 18px;
 }
 
 .main-title strong {
@@ -68,32 +77,6 @@ body {
     margin-top: -12px;
     margin-bottom: 12px;
     font-style: italic;
-}
-.s-logo {
-    position: relative;
-    display: inline-block;
-    font-size: 34px;
-    font-weight: bold;
-    margin-right: 4px;
-}
-.s-logo::before,
-.s-logo::after {
-    content: "";
-    position: absolute;
-    top: 2px;
-    bottom: 2px;
-    width: 2px;
-    background: #fff;
-}
-
- .s-logo::before {
-    left: 6px;
-    transform: rotate(15deg);
-}
-
-.s-logo::after {
-   left: 10px;
-   transform: rotate(15deg);
 }
 
 #gameArea {
@@ -776,9 +759,9 @@ color: #66b3ff !important;
 
 <body>
  <h1 class="main-title">
-    <span>AL</span>
+    <img class="title-flag" src="https://flagcdn.com/w80/al.png" alt="Flamuri i Shqipërisë">
     <strong>SHAPETA CHESS KOSOVA</strong>
-    <span>XK</span>
+    <img class="title-flag" src="https://flagcdn.com/w80/xk.png" alt="Flamuri i Kosovës">
 </h1>
 <div id="subtitle">Dashamirët e shahut në Kosovë, Shqipëri e më gjerë</div>
 <div id="clockBoardArea">
