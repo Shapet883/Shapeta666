@@ -455,132 +455,68 @@ overflow-y: auto;
         0 0 7px rgba(255, 34, 34, 0.9),
         0 0 12px rgba(255, 34, 34, 0.5);
 }
-/* ALARMI I KUQ - 10 SEKONDAT E FUNDIT */
+.main-title {
+    font-size: 21px;
+    transform: translateX(0);
+    padding: 0 4px;
+}
+
+.main-title strong {
+    margin: 0 4px;
+    white-space: nowrap;
+}
+
+.title-flag {
+    width: 38px;
+    height: 27px;
+}
+
+#subtitle {
+    font-size: 14px;
+    transform: translateX(0);
+}
+#blackFirstMove.first-move-danger,
+#whiteFirstMove.first-move-danger {
+    color: #fff !important;
+    background: #222 !important;
+    border: 2px solid #ff2222 !important;
+    font-weight: bold;
+    text-shadow:
+        0 0 4px #ff2222;
+    box-shadow:
+        0 0 7px rgba(255, 34, 34, 0.9),
+        0 0 12px rgba(255, 34, 34, 0.5);
+}
+.main-title {
+    font-size: 21px;
+    transform: translateX(0);
+    padding: 0 4px;
+}
+
+.main-title strong {
+    margin: 0 4px;
+    white-space: nowrap;
+}
+
+.title-flag {
+    width: 38px;
+    height: 27px;
+}
+
+#subtitle {
+    font-size: 14px;
+    transform: translateX(0);
+}
+ /* ALARMI I KUQ - 10 SEKONDAT E FUNDIT */
 
 #whiteClock.clock-danger,
 #blackClock.clock-danger {
     border: 3px solid #ff2222 !important;
     background: #222 !important;
-    color: #fff !important;
-
-    box-shadow:
-        0 0 8px #ff2222 !important,
-        0 0 18px #ff2222 !important,
-        0 0 30px rgba(255, 34, 34, 0.8) !important;
-}
-    /* ============================= */
-/* RREGULLAT E SHAHUT             */
-/* ============================= */
-
-#chessRules {
-    width: min(950px, 94%);
-    margin: 45px auto 35px;
-    padding: 25px;
-    box-sizing: border-box;
-
-    background: #222;
-    border: 2px solid #ffffff;
-    border-radius: 14px;
-
-    box-shadow: 0 0 15px rgba(255,255,255,0.15);
-
-    text-align: left;
 }
 
-#chessRules h2 {
-    margin: 0 0 25px;
-    text-align: center;
-
-    font-size: 28px;
-    color: #ffffff;
 }
-
-.rules-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-}
-.rules-button {
-    display: inline-flex;
-    width: 30px;
-    height: 30px;
-
-    align-items: center;
-    justify-content: center;
-
-    border: 2px solid #ffffff;
-    border-radius: 50%;
-
-    font-size: 18px;
-    font-weight: bold;
-
-    margin-right: 8px;
-
-    box-sizing: border-box;
-}
-.rule-card {
-    background: #303030;
-
-    border: 1px solid #777;
-    border-radius: 10px;
-
-    padding: 16px;
-}
-
-.rule-card h3 {
-    margin: 0 0 9px;
-
-    font-size: 19px;
-    color: #ffffff;
-}
-
-.rule-card p {
-    margin: 0;
-
-    font-size: 15px;
-    line-height: 1.6;
-
-    color: #eeeeee;
-}
-}
-/* Telefoni */
-
-@media (max-width: 600px) {
-
-    #chessRules {
-        width: 94%;
-        padding: 16px;
-        margin-top: 30px;
-    }
-
-    #chessRules h2 {
-        font-size: 23px;
-    }
-  #chessRules .rules-grid {
-    display: none !important;
-}
-
-#chessRules .rules-grid.rules-open {
-    display: grid !important;
-}
-    .rules-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .rule-card {
-        padding: 14px;
-    }
-
-    .rule-card h3 {
-        font-size: 18px;
-    }
-
-    .rule-card p {
-        font-size: 14px;
-    }
-}
-/* KËSHILLA PËR FILLESTARË */
-
+ 
 #beginnerTips {
     width: min(950px, 94%);
     margin: 35px auto;
