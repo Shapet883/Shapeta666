@@ -367,6 +367,34 @@ box-shadow: inset 0 0 0 2px rgba(255, 0, 0, 0.3);
     aspect-ratio: 1 / 1;
     font-size: clamp(32px, 10vw, 42px);
 }
+
+.square:nth-child(odd) {
+    background: #d8b27a !important;
+}
+
+.square:nth-child(even) {
+    background: #7a5635 !important;
+}
+
+.white-piece {
+    color: #ffffff !important;
+    text-shadow:
+        2px 0 0 #000,
+        -2px 0 0 #000,
+        0 2px 0 #000,
+        0 -2px 0 #000,
+        1px 1px 2px #000 !important;
+}
+
+.black-piece {
+    color: #000000 !important;
+    text-shadow:
+        2px 0 0 #fff,
+        -2px 0 0 #fff,
+        0 2px 0 #fff,
+        0 -2px 0 #fff !important;
+}
+
 #blackClock,
 #whiteClock {
     width: 180px;
@@ -374,6 +402,7 @@ box-shadow: inset 0 0 0 2px rgba(255, 0, 0, 0.3);
     padding: 6px 10px;
     color: #b98f58 !important;
 }
+
 #moveHistory {
 width: min(500px, 92vw);
 height: 220px;
