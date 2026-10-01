@@ -38,7 +38,7 @@ body {
     text-align: center;
 }
     
-   h1 {
+  h1 {
     margin: 20px 0;
     font-size: 30px;
     font-weight: bold;
@@ -46,8 +46,23 @@ body {
     text-shadow:
         2px 2px 4px #000,
         0 0 8px rgba(255,255,255,0.15);
-    transform: translateX(-3%);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
 }
+
+.main-title span {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.main-title strong {
+    flex: 1;
+    text-align: center;
+} 
 #subtitle {
     font-size: 17px;
     margin-top: -12px;
@@ -760,7 +775,11 @@ color: #66b3ff !important;
 </head>
 
 <body>
- <h1>AL SHAPETA CHESS KOSOVA XK</h1>
+ <h1 class="main-title">
+    <span>AL</span>
+    <strong>SHAPETA CHESS KOSOVA</strong>
+    <span>XK</span>
+</h1>
 <div id="subtitle">Dashamirët e shahut në Kosovë, Shqipëri e më gjerë</div>
 <div id="clockBoardArea">
  <div id="blackClockArea">
