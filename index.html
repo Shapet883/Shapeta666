@@ -1218,20 +1218,24 @@ if (col === 7) {
 }
 
 
-    /* FIGURAT */
+   /* FIGURAT */
 
-    if (pieces[i] !== "") {
+if (pieces[i] !== "") {
 
-        square.textContent = pieces[i];
+    square.textContent = pieces[i];
 
-        if (
-            "♔♕♖♗♘♙".includes(pieces[i])
-        ) {
-            square.classList.add("white-piece");
-        } else {
-            square.classList.add("black-piece");
-        }
+    if (
+        "♔♕♖♗♘♙".includes(pieces[i])
+    ) {
+        square.classList.add("white-piece");
+    } else {
+        square.classList.add("black-piece");
     }
+
+    if (pieces[i] === "♔" || pieces[i] === "♚") {
+        square.classList.add("king-piece");
+    }
+} 
  square.addEventListener(
     "click",
     function () {
