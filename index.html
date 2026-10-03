@@ -374,7 +374,15 @@ box-shadow: inset 0 0 0 2px rgba(255, 0, 0, 0.3);
     box-sizing: border-box;
     border: none !important;
 }
-
+.white-piece,
+.black-piece {
+    font-family: "Times New Roman", serif !important;
+    font-size: clamp(50px, 16vw, 100px) !important;
+    line-height: 1 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .light {
     background: #ddd3c4 !important;
     opacity: 1 !important;
@@ -547,9 +555,6 @@ overflow: hidden;
 #blackClock.clock-danger {
     border: 3px solid #ff2222 !important;
     background: #222 !important;
-}
-.king-piece {
-    font-size: 70px !important;
 }
 }
  
