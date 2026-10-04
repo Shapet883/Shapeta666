@@ -873,7 +873,11 @@ document.getElementById("blackClock")
 
 document.getElementById("blackClock")
     .style.removeProperty("box-shadow");
+document.getElementById("whiteClock")
+    .style.removeProperty("border");
 
+document.getElementById("whiteClock")
+    .style.removeProperty("box-shadow");
 /* ORA AKTIVE */
 
 if (whiteTurn) {
@@ -884,7 +888,7 @@ if (whiteTurn) {
 
     clock.style.setProperty(
         "border",
-        "8px solid #66b3ff",
+        "6px solid #66b3ff",
         "important"
     );
 
@@ -902,7 +906,7 @@ if (whiteTurn) {
 
     clock.style.setProperty(
         "border",
-        "8px solid #66b3ff",
+        "6px solid #66b3ff",
         "important"
     );
 
