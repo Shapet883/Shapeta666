@@ -874,19 +874,44 @@ document.getElementById("blackClock")
 document.getElementById("blackClock")
     .style.removeProperty("box-shadow");
 
+/* ORA AKTIVE */
 
-    /* ORA AKTIVE */
+if (whiteTurn) {
 
-    if (whiteTurn) {
+    const clock = document.getElementById("whiteClock");
 
-        document.getElementById("whiteClock")
-            .classList.add("clock-active");
+    clock.classList.add("clock-active");
 
-    } else {
+    clock.style.setProperty(
+        "border",
+        "3px solid #66b3ff",
+        "important"
+    );
 
-        document.getElementById("blackClock")
-            .classList.add("clock-active");
-    }
+    clock.style.setProperty(
+        "box-shadow",
+        "0 0 8px #66b3ff, 0 0 18px #66b3ff",
+        "important"
+    );
+
+} else {
+
+    const clock = document.getElementById("blackClock");
+
+    clock.classList.add("clock-active");
+
+    clock.style.setProperty(
+        "border",
+        "3px solid #66b3ff",
+        "important"
+    );
+
+    clock.style.setProperty(
+        "box-shadow",
+        "0 0 8px #66b3ff, 0 0 18px #66b3ff",
+        "important"
+    );
+}
 
 /* KUQ NË 10 SEKONDAT E FUNDIT */
 
