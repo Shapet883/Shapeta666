@@ -556,6 +556,14 @@ overflow: hidden;
     border: 3px solid #ff2222 !important;
     background: #222 !important;
 }
+
+/* HIJA E LËVIZJES SË FUNDIT */
+.last-move {
+    box-shadow:
+        inset 0 0 0 3px rgba(255, 255, 255, 0.45),
+        inset 0 0 12px rgba(255, 255, 255, 0.25);
+}
+
 }
  
 #beginnerTips {
@@ -1977,37 +1985,44 @@ async function handleSquareClick(square, index) {
         blackRookRightMoved = true;
     }
 
+/* LËVIZ FIGURËN */
 
-    /* LËVIZ FIGURËN */
+/* HIQ SHENJËN E LËVIZJES SË MËPARSHME */
+squares.forEach(function (sq) {
+    sq.classList.remove("last-move");
+});
 
-    squares[from].textContent = "";
+squares[from].textContent = "";
 
-    squares[from]
-        .classList
-        .remove(
-            "white-piece",
-            "black-piece",
-            "selected"
-        );
+squares[from]
+    .classList
+    .remove(
+        "white-piece",
+        "black-piece",
+        "selected"
+    );
 
-    squares[to].textContent =
-        movingPiece;
+squares[to].textContent =
+    movingPiece;
 
-    squares[to]
-        .classList
-        .remove(
-            "white-piece",
-            "black-piece"
-        );
+squares[to]
+    .classList
+    .remove(
+        "white-piece",
+        "black-piece"
+    );
 
-    squares[to]
-        .classList
-        .add(
-            isWhitePiece
-                ? "white-piece"
-                : "black-piece"
-        );
+squares[to]
+    .classList
+    .add(
+        isWhitePiece
+            ? "white-piece"
+            : "black-piece"
+    );
 
+/* SHËNO KUTITË E LËVIZJES SË FUNDIT */
+squares[from].classList.add("last-move");
+squares[to].classList.add("last-move");
 
     /* DY HAPA I PIONIT */
 
