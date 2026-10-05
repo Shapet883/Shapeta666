@@ -1190,35 +1190,52 @@ let blackRookLeftMoved = false;
 let blackRookRightMoved = false;
 
 function renderMoveHistory() {
+
     const box = document.getElementById("moveHistory");
 
     box.innerHTML = "<strong>LËVIZJET</strong>";
 
-    for (let i = 0; i < moveHistory.length; i += 2) {
-        const row = document.createElement("div");
+    /* RRESHTI I BARDHIT */
+    const whiteRow = document.createElement("div");
 
-        row.style.display = "grid";
-        row.style.gridTemplateColumns = "40px 1fr 1fr";
-        row.style.width = "100%";
-        row.style.boxSizing = "border-box";
-        row.style.marginBottom = "3px";
+    whiteRow.style.display = "flex";
+    whiteRow.style.flexWrap = "wrap";
+    whiteRow.style.width = "100%";
+    whiteRow.style.boxSizing = "border-box";
+    whiteRow.style.gap = "8px";
+    whiteRow.style.marginBottom = "4px";
 
-        const number = document.createElement("span");
-        number.textContent =
-            (Math.floor(i / 2) + 1) + ".";
+    /* RRESHTI I ZIUT */
+    const blackRow = document.createElement("div");
 
-        const whiteMove = document.createElement("span");
-        whiteMove.textContent = moveHistory[i];
+    blackRow.style.display = "flex";
+    blackRow.style.flexWrap = "wrap";
+    blackRow.style.width = "100%";
+    blackRow.style.boxSizing = "border-box";
+    blackRow.style.gap = "8px";
 
-        const blackMove = document.createElement("span");
-        blackMove.textContent = moveHistory[i + 1] || "";
+    /* LËVIZJET */
+    for (let i = 0; i < moveHistory.length; i++) {
 
-        row.appendChild(number);
-        row.appendChild(whiteMove);
-        row.appendChild(blackMove);
+        const move = document.createElement("span");
 
-        box.appendChild(row);
+        move.textContent = moveHistory[i];
+
+        /* BARDHI */
+        if (i % 2 === 0) {
+            move.style.color = "#ffffff";
+            whiteRow.appendChild(move);
+        }
+
+        /* ZIU */
+        else {
+            move.style.color = "#d6a96c";
+            blackRow.appendChild(move);
+        }
     }
+
+    box.appendChild(whiteRow);
+    box.appendChild(blackRow);
 }
 /* KRIJO TABELËN */
 
