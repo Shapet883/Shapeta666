@@ -803,8 +803,23 @@ color: #66b3ff !important;
 <script>
 
 const board = document.getElementById("board");
+if (window.innerWidth <= 600) {
 
-const pieces = [
+    const clockBoardArea = document.getElementById("clockBoardArea");
+    const gameArea = document.getElementById("gameArea");
+    const newGameButton = document.getElementById("newGameButton");
+    const whiteClockArea = document.getElementById("whiteClockArea");
+    const sidePanel = document.getElementById("sidePanel");
+    const moveHistory = document.getElementById("moveHistory");
+    const blackClockArea = document.getElementById("blackClockArea");
+
+    clockBoardArea.insertBefore(newGameButton, blackClockArea.nextSibling);
+    clockBoardArea.insertBefore(board, newGameButton.nextSibling);
+    clockBoardArea.insertBefore(whiteClockArea, board.nextSibling);
+    clockBoardArea.appendChild(moveHistory);
+}
+
+ const pieces = [
 
     "♜","♞","♝","♛","♚","♝","♞","♜",
 
