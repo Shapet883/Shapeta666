@@ -731,7 +731,31 @@ color: #66b3ff !important;
     border-radius: 8px !important;
     box-sizing: border-box !important;
 }
+@media (max-width: 600px) {
 
+    #clockBoardArea {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #blackClockArea {
+        order: 2;
+    }
+
+    #gameArea {
+        order: 3;
+    }
+
+    #whiteClockArea {
+        order: 4;
+    }
+
+    #moveHistory {
+        order: 5;
+    }
+
+}
 #moveHistory {
     border: 2px solid #ffffff !important;
     border-radius: 10px !important;
@@ -750,6 +774,37 @@ color: #66b3ff !important;
     box-shadow:
         0 0 8px #66b3ff,
         0 0 18px #66b3ff !important;
+}
+
+/* KËTU FILLON PJESA E RE PËR TELEFON */
+
+@media (max-width: 600px) {
+
+    #gameArea,
+    #sidePanel {
+        display: contents;
+    }
+
+    #newGameButton {
+        order: 1;
+    }
+
+    #blackClockArea {
+        order: 2;
+    }
+
+    #board {
+        order: 3;
+    }
+
+    #whiteClockArea {
+        order: 4;
+    }
+
+    #moveHistory {
+        order: 5;
+    }
+
 }
 
 #whiteClock.clock-active.clock-danger,
