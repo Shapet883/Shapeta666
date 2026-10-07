@@ -780,46 +780,53 @@ color: #66b3ff !important;
 
 @media (max-width: 600px) {
 
-    #gameArea,
-    #sidePanel {
-        display: contents;
-    }
+ #gameArea,
+#sidePanel {
+    display: contents;
+}
 
-    #newGameButton {
-        order: 1;
-        width: 150px !important;
-        padding: 6px 10px !important;
-        font-size: 14px !important;
-    }
+#clockBoardArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-    #blackClockArea {
-        order: 2;
-    }
+#blackClockArea {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
 
-    #board {
-        order: 3;
-    }
+#blackClockArea #blackFirstMove {
+    order: 1;
+}
 
-    #whiteClockArea {
-        order: 4;
-    }
+#blackClockArea #blackClock {
+    order: 2;
+}
 
-    #moveHistory {
-        order: 5;
+#newGameButton {
+    order: 3;
+    width: 150px !important;
+    padding: 6px 10px !important;
+    font-size: 14px !important;
+}
+
+  #whiteClock.clock-active.clock-danger,
+    #blackClock.clock-active.clock-danger {
+        border: 3px solid #ff2222 !important;
+        background: #222 !important;
+        color: #fff !important;
+        box-shadow:
+            0 0 8px #ff2222 !important,
+            0 0 18px #ff2222 !important,
+            0 0 30px rgba(255, 34, 34, 0.8) !important;
     }
 
 }
 
-#whiteClock.clock-active.clock-danger,
-#blackClock.clock-active.clock-danger {
-    border: 3px solid #ff2222 !important;
-    background: #222 !important;
-    color: #fff !important;
-    box-shadow:
-        0 0 8px #ff2222 !important,
-        0 0 18px #ff2222 !important,
-        0 0 30px rgba(255, 34, 34, 0.8) !important;
-}
 </style>
 
 </head>
