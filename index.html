@@ -780,18 +780,18 @@ color: #66b3ff !important;
 
 @media (max-width: 600px) {
 
-    #clockBoardArea {
-        display: grid;
-        grid-template-columns: 70px 1fr 150px;
-        grid-template-areas:
-            "blackFirst blackClock newGame"
-            "board board board"
-            "whiteFirst whiteClock moveHistory";
-        align-items: center;
-        justify-items: center;
-        width: 100%;
-        gap: 8px;
-    }
+   #clockBoardArea {
+    display: grid;
+    grid-template-columns: 70px 1fr 150px;
+    grid-template-areas:
+        "blackFirst blackClock newGame"
+        "board board board"
+        "whiteFirst whiteClock moveHistory";
+    align-items: end;
+    justify-items: center;
+    width: 100%;
+    gap: 8px;
+} 
 
     #gameArea,
     #sidePanel,
