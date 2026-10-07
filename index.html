@@ -810,8 +810,8 @@ color: #66b3ff !important;
 
     #newGameButton {
     grid-area: newGame;
-    width: 45px !important;
-    height: 45px !important;
+    width: 50px !important;
+    height: 50px !important;
     padding: 0 !important;
     font-size: 40px !important;
     margin: 0 !important;
@@ -819,10 +819,20 @@ color: #66b3ff !important;
     background: transparent !important;
     box-shadow: none !important;
 }
+
 #blackFirstMove,
 #blackClock,
 #newGameButton {
     align-self: center !important;
+}
+
+#blackFirstMove,
+#blackClock {
+    transform: translateX(15px);
+}
+
+#newGameButton {
+    transform: translateY(-6px);
 }
    
  #board {
