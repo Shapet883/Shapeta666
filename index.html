@@ -780,22 +780,61 @@ color: #66b3ff !important;
 
 @media (max-width: 600px) {
 
-#gameArea {
-    display: contents;
-}
+    #clockBoardArea {
+        display: grid;
+        grid-template-columns: 70px 1fr 150px;
+        grid-template-areas:
+            "blackFirst blackClock newGame"
+            "board board board"
+            "whiteFirst whiteClock moveHistory";
+        align-items: center;
+        justify-items: center;
+        width: 100%;
+        gap: 8px;
+    }
 
-#sidePanel {
-    display: contents;
-}
+    #gameArea,
+    #sidePanel,
+    #blackClockArea,
+    #whiteClockArea {
+        display: contents;
+    }
 
-#newGameButton {
-    order: 3;
-    width: 150px !important;
-    padding: 6px 10px !important;
-    font-size: 14px !important;
-}
+    #blackFirstMove {
+        grid-area: blackFirst;
+    }
 
-  #whiteClock.clock-active.clock-danger,
+    #blackClock {
+        grid-area: blackClock;
+    }
+
+    #newGameButton {
+        grid-area: newGame;
+        width: 150px !important;
+        padding: 6px 10px !important;
+        font-size: 14px !important;
+        margin: 0 !important;
+    }
+
+    #board {
+        grid-area: board;
+    }
+
+    #whiteFirstMove {
+        grid-area: whiteFirst;
+    }
+
+    #whiteClock {
+        grid-area: whiteClock;
+    }
+
+    #moveHistory {
+        grid-area: moveHistory;
+        width: 150px !important;
+        margin: 0 !important;
+    }
+
+    #whiteClock.clock-active.clock-danger,
     #blackClock.clock-active.clock-danger {
         border: 3px solid #ff2222 !important;
         background: #222 !important;
