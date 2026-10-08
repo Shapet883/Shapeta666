@@ -836,7 +836,11 @@ transform: translateX(-10px);
     box-shadow: none !important;
     color: #28a745 !important;
 }
-
+.new-game-icon {
+    color: #28a745 !important;
+    font-size: 44px;
+    font-weight: bold;
+}
 #blackFirstMove,
 #blackClock,
 #newGameButton {
@@ -944,7 +948,9 @@ transform: translateX(-10px);
 
 <div id="sidePanel">
 
-<button id="newGameButton">🔄</button> 
+<button id="newGameButton">
+    <span class="new-game-icon">↻</span>
+</button>
 
     <div id="moveHistory">
         <strong>LËVIZJET</strong>
