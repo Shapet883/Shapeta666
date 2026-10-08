@@ -875,8 +875,14 @@ transform: translateX(-10px);
 
 #clockBoardArea.clock-flipped #whiteClock {
     grid-area: blackClock;
+    transform: translateX(50px);
 }
-    #whiteClock.clock-active.clock-danger,
+
+#clockBoardArea.clock-flipped #blackClock {
+    grid-area: whiteClock;
+    transform: translateX(-20px);
+}    
+ #whiteClock.clock-active.clock-danger,
     #blackClock.clock-active.clock-danger {
         border: 3px solid #ff2222 !important;
         background: #222 !important;
