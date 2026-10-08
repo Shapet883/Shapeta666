@@ -897,7 +897,7 @@ transform: translateX(-10px);
     grid-area: whiteClock;
     transform: translateX(-20px);
 }    
- #whiteClock.clock-active.clock-danger,
+  #whiteClock.clock-active.clock-danger,
     #blackClock.clock-active.clock-danger {
         border: 3px solid #ff2222 !important;
         background: #222 !important;
@@ -908,8 +908,17 @@ transform: translateX(-10px);
             0 0 30px rgba(255, 34, 34, 0.8) !important;
     }
 
-}
+    /* FIGURA E ZGJEDHUR */
+    .light.selected,
+    .dark.selected {
+        background: rgba(255, 215, 80, 0.55) !important;
 
+        box-shadow:
+            inset 0 0 0 3px rgba(255, 255, 255, 0.75),
+            inset 0 0 10px rgba(0, 0, 0, 0.25) !important;
+    }
+
+} 
 </style>
 
 </head>
