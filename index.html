@@ -861,7 +861,21 @@ transform: translateX(-10px);
     box-sizing: border-box;
     margin: 0 auto !important;
 }
+#clockBoardArea.clock-flipped #blackFirstMove {
+    grid-area: whiteFirst;
+}
 
+#clockBoardArea.clock-flipped #blackClock {
+    grid-area: whiteClock;
+}
+
+#clockBoardArea.clock-flipped #whiteFirstMove {
+    grid-area: blackFirst;
+}
+
+#clockBoardArea.clock-flipped #whiteClock {
+    grid-area: blackClock;
+}
     #whiteClock.clock-active.clock-danger,
     #blackClock.clock-active.clock-danger {
         border: 3px solid #ff2222 !important;
