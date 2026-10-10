@@ -3740,7 +3740,9 @@ coordinateSquares.forEach(function (square, index) {
             }
         }
 
-
+document.querySelectorAll(".square").forEach(function(square) {
+    square.classList.remove("last-move");
+});
 selectedSquare = null;
 lastMoveFrom = null;
 lastMoveTo = null;
