@@ -1519,11 +1519,28 @@ function getPiece(square) {
 
         box.className =
             "promotion-box";
-
-      const rect =
+const rect =
     targetSquare.getBoundingClientRect();
+
 box.style.position = "fixed";
- box.style.left = (rect.left - 40) + "px";    
+
+const isPhone = window.innerWidth <= 600;
+const boxWidth = isPhone ? 100 : 390;
+
+let left = rect.left;
+
+if (isPhone) {
+    left = Math.max(
+        0,
+        Math.min(
+            rect.left - 40,
+            window.innerWidth - boxWidth
+        )
+    );
+}
+
+box.style.left = left + "px";
+
 box.style.top =
     (isWhite
         ? rect.bottom + 6
