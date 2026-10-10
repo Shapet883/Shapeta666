@@ -1523,7 +1523,7 @@ function getPiece(square) {
       const rect =
     targetSquare.getBoundingClientRect();
 box.style.position = "fixed";
-box.style.left = rect.left + "px";
+ box.style.left = (rect.left - 40) + "px";    
 box.style.top =
     (isWhite
         ? rect.bottom + 6
