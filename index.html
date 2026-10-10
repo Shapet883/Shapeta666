@@ -21,6 +21,7 @@ border-radius: 14px;
 background: #333333;
 color: #ffffff;
 
+ 
 min-height: 28px;
 box-shadow: 0 0 12px rgba(255,255,255,0.15);
 
@@ -1504,78 +1505,63 @@ function getPiece(square) {
 
 /* ZGJEDHJA E PROMOVIMIT */
 
-    function showPromotionChoice(isWhite, targetSquare) {
+function showPromotionChoice(isWhite, targetSquare) {
 
     return new Promise(function(resolve) {
 
-        const overlay =
-            document.createElement("div");
+        const overlay = document.createElement("div");
+        overlay.className = "promotion-overlay";
 
-        overlay.className =
-            "promotion-overlay";
+        const box = document.createElement("div");
+        box.className = "promotion-box";
+        box.style.position = "fixed";
 
-        const box =
-            document.createElement("div");
-
-        box.className =
-            "promotion-box";
-const rect = targetSquare.getBoundingClientRect();
-const board = document.getElementById("board");
-const boardRect = board.getBoundingClientRect();
-box.style.position = "fixed";
-
-const isPhone = window.innerWidth <= 600;
-const boxWidth = isPhone ? 145 : box.offsetWidth;
-
-let left = rect.left - 40;
-
-if (isPhone) {
-    left = Math.max(
-        boardRect.left + 4,
-        Math.min(left, boardRect.right - boxWidth - 4)
-    );
-}
-
-box.style.left = left + "px";
-
-box.style.top =
-    (isWhite
-        ? rect.bottom + 6
-        : rect.top - 82) + "px";
-        const pieces =
-            isWhite
-                ? ["♕", "♖", "♗", "♘"]
-                : ["♛", "♜", "♝", "♞"];
+        const pieces = isWhite
+            ? ["♕", "♖", "♗", "♘"]
+            : ["♛", "♜", "♝", "♞"];
 
         pieces.forEach(function(piece) {
 
-            const button =
-                document.createElement("button");
+            const button = document.createElement("button");
+            button.className = "promotion-piece";
+            button.textContent = piece;
 
-            button.className =
-                "promotion-piece";
-
-            button.textContent =
-                piece;
-
-            button.addEventListener(
-                "click",
-                function() {
-
-                    overlay.remove();
-
-                    resolve(piece);
-                }
-            );
+            button.addEventListener("click", function() {
+                overlay.remove();
+                resolve(piece);
+            });
 
             box.appendChild(button);
         });
 
         overlay.appendChild(box);
-
         document.body.appendChild(overlay);
+
+        const rect = targetSquare.getBoundingClientRect();
+        const board = document.getElementById("board");
+        const boardRect = board.getBoundingClientRect();
+        const boxRect = box.getBoundingClientRect();
+
+        let left = rect.left - 40;
+        let top = isWhite
+            ? rect.bottom + 6
+            : rect.top - boxRect.height - 6;
+
+        left = Math.max(
+            boardRect.left + 4,
+            Math.min(left, boardRect.right - boxRect.width - 4)
+        );
+
+        top = Math.max(
+            boardRect.top + 4,
+            Math.min(top, boardRect.bottom - boxRect.height - 4)
+        );
+
+        box.style.left = left + "px";
+        box.style.top = top + "px";
     });
 }
+
 /* KLIKO KATRORIN */
 async function handleSquareClick(square, index) {
     if (gameOver) {
