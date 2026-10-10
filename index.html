@@ -1519,23 +1519,21 @@ function getPiece(square) {
 
         box.className =
             "promotion-box";
-const rect =
-    targetSquare.getBoundingClientRect();
+const rect = targetSquare.getBoundingClientRect();
+const board = document.getElementById("board");
+const boardRect = board.getBoundingClientRect();
 
 box.style.position = "fixed";
 
 const isPhone = window.innerWidth <= 600;
-const boxWidth = isPhone ? 100 : 390;
+const boxWidth = isPhone ? 145 : box.offsetWidth;
 
-let left = rect.left;
+let left = rect.left - 40;
 
 if (isPhone) {
     left = Math.max(
-        0,
-        Math.min(
-            rect.left - 40,
-            window.innerWidth - boxWidth
-        )
+        boardRect.left + 4,
+        Math.min(left, boardRect.right - boxWidth - 4)
     );
 }
 
