@@ -3739,7 +3739,9 @@ coordinateSquares.forEach(function (square, index) {
                     .add("black-piece");
             }
         }
-     
+ squares.forEach(function (square) {
+    square.classList.remove("last-move", "selected");
+});    
 selectedSquare = null;
 lastMoveFrom = null;
 lastMoveTo = null;
