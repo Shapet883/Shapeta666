@@ -1497,13 +1497,17 @@ function getPiece(square) {
 
       const rect =
     targetSquare.getBoundingClientRect();
-
 box.style.position = "fixed";
 box.style.left = rect.left + "px";
 box.style.top =
     (isWhite
         ? rect.bottom + 6
-        : rect.top - 82) + "px";
+        : rect.top - 100) + "px";
+
+box.style.minWidth = "360px";
+box.style.minHeight = "140px";
+box.style.padding = "24px";
+box.style.gap = "20px";
         const pieces =
             isWhite
                 ? ["♕", "♖", "♗", "♘"]
