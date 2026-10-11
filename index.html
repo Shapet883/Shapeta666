@@ -546,12 +546,29 @@ overflow: hidden;
     width: 38px;
     height: 27px;
 }
-
-#subtitle {
-    font-size: 14px;
-    transform: translateX(0);
+ .chess-logo {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+vertical-align: middle;
+width: 54px;
+height: 54px;
+margin: 0 5px;
+flex-shrink: 0;
+color: #D4AF37;
+font-size: 42px;
+line-height: 1;
+ }
+.king-emblem {
+    display: block;
+    width: 54px;
+    height: 54px;
+    vertical-align: middle;
+    flex-shrink: 0;
+    margin: 0 5px;
 }
-#blackFirstMove.first-move-danger,
+
+ #blackFirstMove.first-move-danger,
 #whiteFirstMove.first-move-danger {
     color: #fff !important;
     background: #222 !important;
@@ -967,12 +984,19 @@ transform: translateX(-10px);
 
 <body>
  <h1 class="main-title">
-    <img class="title-flag" src="https://flagcdn.com/w80/al.png" alt="Flamuri i Shqipërisë">
-   <strong>ÇUBRELI CHESS KOSOVA</strong> 
-    <img class="title-flag" src="https://flagcdn.com/w80/xk.png" alt="Flamuri i Kosovës">
+  <img class="title-flag" src="https://flagcdn.com/w80/al.png" alt="Flamuri i Shqipërisë">
+  <strong>ÇUBRELI CHESS KOSOVA</strong>
+  <svg class="king-emblem" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="46" fill="none" stroke="#D4AF37" stroke-width="2"/>
+    <circle cx="50" cy="50" r="39" fill="none" stroke="#D4AF37" stroke-width="2"/>
+    <circle cx="50" cy="50" r="32" fill="none" stroke="#D4AF37" stroke-width="2"/>
+   <text x="50" y="67" text-anchor="middle" font-size="48" fill="#D4AF37">♚</text>
+  </svg>
+<img class="title-flag" src="https://flagcdn.com/w80/xk.png" alt="Flamuri i Kosovës">
 </h1>
-<div id="subtitle">Dashamirët e shahut në Kosovë, Shqipëri e më gjerë</div>
-<div id="clockBoardArea">
+   <div id="subtitle">Dashamirët e shahut në Kosovë, Shqipëri e më gjerë</div>
+
+   <div id="clockBoardArea">
  <div id="blackClockArea">
  <div id="blackFirstMove">25</div>
 <div id="blackClock">ZI: 05:00</div>
