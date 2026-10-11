@@ -529,12 +529,12 @@ overflow-y: auto;
 }
 .main-title {
     font-size: 21px;
-    transform: translateX(15px);
+    transform: none;
     padding: 0;
     width: 100%;
     box-sizing: border-box;
     text-align: center;
-overflow: hidden;
+overflow: visible;
 }
 
 .main-title strong {
@@ -599,6 +599,25 @@ line-height: 1;
 #subtitle {
     font-size: 14px;
     transform: translateX(0);
+}
+@media (min-width: 700px) {
+    .main-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+  gap: 10px;
+        transform: none;
+        padding: 0 10px;
+        overflow: visible;
+    }
+
+    .main-title strong {
+        white-space: nowrap;
+    }
+     .king-emblem {
+        width: 36px;
+        height: 36px;
+    }
 }
  /* ALARMI I KUQ - 10 SEKONDAT E FUNDIT */
 
