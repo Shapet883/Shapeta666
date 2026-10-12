@@ -628,7 +628,10 @@ line-height: 1;
         overflow: visible;
         font-size: 24px !important;
     }
-
+ .main-title .chess-queen {
+        margin-right: 12px;
+        flex-shrink: 0;
+    }
     .main-title strong {
         white-space: nowrap;
         font-size: 24px !important;
@@ -819,6 +822,37 @@ min-height: 130px;
         width: 76px;
         height: 76px;
         font-size: 56px;
+    }
+}
+/* QENDRIMI I TITULLIT NE KOMPJUTER */
+@media (min-width: 700px) {
+    .main-title {
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: center;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .main-title .chess-queen {
+        margin-right: 4px;
+    }
+
+    .main-title .title-flag:first-of-type {
+        margin-left: 0;
+        margin-right: 4px;
+    }
+
+    .main-title .title-flag:last-of-type {
+        margin-left: 4px;
+        margin-right: 0;
+    }
+
+    .main-title strong {
+        margin-left: 4px;
+        margin-right: 4px;
     }
 }
  /* PROMOVIMI NE TELEFON */
