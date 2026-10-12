@@ -58,15 +58,15 @@ transform: none;
 .title-flag {
     width: 32px;
     height: 22px;
-    object-fit: cover;
+    object-fit: contain;
     flex-shrink: 0;
 }
-.main-title .title-flag:first-child {
-    margin-left: 18px;
+
+.main-title .title-flag:first-of-type {
+    margin-left: 8px;
     margin-right: 8px;
 }
-
-.main-title .title-flag:last-child {
+.main-title .title-flag:last-of-type {
     margin-left: 8px;
     margin-right: 18px;
 }
@@ -75,7 +75,11 @@ transform: none;
     text-align: center;
     margin: 0 8px;
 }
-#subtitle {
+
+.main-title .chess-queen {
+    margin-right: 10px;
+}
+ #subtitle {
     font-size: 17px;
     margin-top: -12px;
     margin-bottom: 12px;
@@ -572,8 +576,12 @@ line-height: 1;
     line-height: 1;
 }
 .chess-queen {
+    display: inline-block;
     color: #D4AF37 !important;
-    font-size: 36px !important;
+    -webkit-text-fill-color: #D4AF37 !important;
+    font-size: 32px !important;
+    line-height: 1;
+    margin-right: 12px;
     text-shadow: 0 0 3px #D4AF37;
 }
 
