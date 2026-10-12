@@ -616,11 +616,20 @@ line-height: 1;
         font-size: 24px !important;
     }
 
-    .king-emblem {
+     .king-emblem {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         width: 44px;
         height: 44px;
+        margin: 0 5px;
         flex-shrink: 0;
-    }
+        font-family: "Times New Roman", serif;
+        font-size: 48px;
+        line-height: 1;
+        color: #D4AF37;
+        text-shadow: 1px 2px 3px #000;
+    } 
 
     .title-flag {
         width: 32px;
@@ -1014,13 +1023,8 @@ transform: translateX(-10px);
  <h1 class="main-title">
   <img class="title-flag" src="https://flagcdn.com/w80/al.png" alt="Flamuri i Shqipërisë">
   <strong>ÇUBRELI CHESS KOSOVA</strong>
-  <svg class="king-emblem" viewBox="0 0 100 100">
-  <circle cx="50" cy="50" r="24" fill="none" stroke="#D4AF37" stroke-width="2"/>
-    <circle cx="50" cy="50" r="20" fill="none" stroke="#D4AF37" stroke-width="2"/>
-    <circle cx="50" cy="50" r="16" fill="none" stroke="#D4AF37" stroke-width="2"/>
-   <text x="50" y="67" text-anchor="middle" font-size="28" fill="#D4AF37">♚</text>
-  </svg>
-<img class="title-flag" src="https://flagcdn.com/w80/xk.png" alt="Flamuri i Kosovës">
+  <span class="king-emblem chess-queen">♛</span>
+  <img class="title-flag" src="https://flagcdn.com/w80/xk.png" alt="Flamuri i Kosovës">
 </h1>
    <div id="subtitle">Dashamirët e shahut në Kosovë, Shqipëri e më gjerë</div>
 
