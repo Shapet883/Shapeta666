@@ -573,8 +573,16 @@ line-height: 1;
 }
 .chess-queen {
     color: #D4AF37 !important;
-    font-size: 30px !important;
-    text-shadow: 0 0 2px #D4AF37;
+    font-size: 36px !important;
+    text-shadow: 0 0 3px #D4AF37;
+}
+ @media (min-width: 700px) {
+    .main-title .chess-queen {
+        color: #D4AF37 !important;
+        -webkit-text-fill-color: #D4AF37 !important;
+        font-size: 36px !important;
+        text-shadow: 0 0 3px #D4AF37;
+    }
 }
  #blackFirstMove.first-move-danger,
 #whiteFirstMove.first-move-danger {
