@@ -232,21 +232,60 @@ box-shadow: inset 0 0 0 2px rgba(255, 0, 0, 0.3);
     border-radius: 10px;
 }
 
-@media (max-width: 600px) {
+  /* TABELA NË KOMPJUTER */
+@media (min-width: 601px) {
+    #board {
+        width: 520px;
+        height: 520px;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(8, 1fr);
+        box-sizing: border-box;
+    }
 
-  #gameArea {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    margin: 10px auto;
-  width: 100%;
- } 
-#sidePanel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+    .square {
+        width: 65px;
+        height: 65px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        font-size: 56px;
+    }
+
+    .light {
+        background: #ddd3c4;
+    }
+
+    .dark {
+        background: #9b7048;
+    }
+
+    .white-piece,
+    .black-piece {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 56px;
+        line-height: 1;
+    }
 }
+@media (max-width: 600px) {
+    #gameArea {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin: 10px auto;
+        width: 100%;
+    }
+
+    #sidePanel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
  #board {
   display: grid; 
   width: min(500px, 92vw);
