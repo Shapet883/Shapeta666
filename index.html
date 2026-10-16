@@ -1009,17 +1009,18 @@ transform: translateX(-10px);
             0 0 18px #ff2222 !important,
             0 0 30px rgba(255, 34, 34, 0.8) !important;
     }
-
-    /* FIGURA E ZGJEDHUR */
-    .light.selected,
-    .dark.selected {
-        background: rgba(255, 215, 80, 0.55) !important;
-
-        box-shadow:
-            inset 0 0 0 3px rgba(255, 255, 255, 0.75),
-            inset 0 0 10px rgba(0, 0, 0, 0.25) !important;
-    }
+#blackFirstMove {
+    grid-area: blackFirst;
 }
+
+.light.selected,
+.dark.selected {
+    background: rgba(255, 215, 80, 0.55) !important;
+    box-shadow:
+        inset 0 0 0 3px rgba(255, 255, 255, 0.75),
+        inset 0 0 10px rgba(0, 0, 0, 0.25) !important;
+}
+}  
 /* RREGULLIMI STATIK NË KOMPJUTER */
 @media (min-width: 601px) {
 
