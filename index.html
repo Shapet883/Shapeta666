@@ -1006,26 +1006,50 @@ transform: translateX(-10px);
             inset 0 0 10px rgba(0, 0, 0, 0.25) !important;
     }
 }
-/* HISTORIA ME MADHËSI FIKSE NË KOMPJUTER */
+/* RREGULLIMI STATIK NË KOMPJUTER */
 @media (min-width: 601px) {
+
+    #gameArea {
+        display: flex !important;
+        align-items: flex-start !important;
+        justify-content: center !important;
+        gap: 25px !important;
+    }
+
+    #board {
+        flex: 0 0 520px !important;
+    }
+
     #sidePanel {
-        width: 300px;
-        min-width: 300px;
-        flex-shrink: 0;
+        display: flex !important;
+        flex: 0 0 300px !important;
+        width: 300px !important;
+        min-width: 300px !important;
+        max-width: 300px !important;
+        align-items: stretch !important;
     }
 
     #moveHistory {
-        width: 300px;
-        height: 300px;
-        min-height: 300px;
-        max-height: 300px;
-        overflow-y: auto;
-        overflow-x: hidden;
-        box-sizing: border-box;
-        flex-shrink: 0;
+        display: block !important;
+        flex: 0 0 300px !important;
+        width: 300px !important;
+        min-width: 300px !important;
+        max-width: 300px !important;
+        height: 300px !important;
+        min-height: 300px !important;
+        max-height: 300px !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+    }
+
+    #blackClock,
+    #whiteClock {
+        width: 190px !important;
+        max-width: 190px !important;
+        box-sizing: border-box !important;
     }
 }
-
 </style>
 </head>
 <body>
