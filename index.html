@@ -1089,6 +1089,40 @@ transform: translateX(-10px);
         margin: 0 !important;
     }
 }
+@media (min-width: 601px) {
+    #blackClockArea,
+    #whiteClockArea {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        width: auto !important;
+    }
+
+    #blackClock,
+    #whiteClock {
+        width: 100px !important;
+        min-width: 100px !important;
+        max-width: 100px !important;
+        height: 30px !important;
+        padding: 3px 5px !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        line-height: 1 !important;
+    }
+
+    #blackFirstMove,
+    #whiteFirstMove {
+        width: 30px !important;
+        height: 30px !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+}
 </style>
 </head>
 <body>
