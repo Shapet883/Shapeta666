@@ -240,7 +240,7 @@ margin: 0 0 5px 0;
     flex-shrink: 0;
 }
 
-  /* TABELA NË KOMPJUTER */
+/* TABELA NË KOMPJUTER */
 @media (min-width: 601px) {
     #board {
         width: 520px;
@@ -248,6 +248,9 @@ margin: 0 0 5px 0;
         display: grid;
         grid-template-columns: repeat(8, 1fr);
         grid-template-rows: repeat(8, 1fr);
+        border: 5px solid #111;
+        outline: 2px solid #d4af37;
+        outline-offset: 2px;
         box-sizing: border-box;
     }
 
@@ -277,7 +280,7 @@ margin: 0 0 5px 0;
         font-size: 56px;
         line-height: 1;
     }
-}
+}  
 @media (max-width: 600px) {
     #gameArea {
         flex-direction: column;
