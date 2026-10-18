@@ -1050,14 +1050,14 @@ transform: translateX(-10px);
     }
 
     #blackClockArea,
-    #whiteClockArea {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 8px !important;
-        width: auto !important;
-    }
+#whiteClockArea {
+    display: grid !important;
+    grid-template-columns: 45px 110px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: max-content !important;
+}
 
     #blackClock,
     #whiteClock {
