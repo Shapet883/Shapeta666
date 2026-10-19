@@ -1094,13 +1094,11 @@ transform: translateX(-10px);
     margin: 0 !important;
 }
 } 
-#board {
-    border: 7px solid #111 !important;
-    outline: 3px solid #d4af37 !important;
-    outline-offset: 0 !important;
-    box-sizing: border-box !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+@media (min-width: 601px) {
+    #board {
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
 }
 </style>
 </head>
