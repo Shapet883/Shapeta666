@@ -830,7 +830,7 @@ color: #66b3ff !important;
     box-sizing: border-box;
 }
 
-  #blackClockArea,
+#blackClockArea,
 #whiteClockArea {
     display: flex;
     flex-direction: row;
@@ -839,6 +839,12 @@ color: #66b3ff !important;
     gap: 8px;
     width: auto;
     margin: 8px auto;
+}
+
+#blackClockArea #blackFirstMove,
+#whiteClockArea #whiteFirstMove {
+    margin: 0;
+    flex-shrink: 0;
 }
 }
  @media (max-width: 600px) {
