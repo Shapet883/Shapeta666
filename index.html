@@ -1060,12 +1060,12 @@ transform: translateX(-10px);
 
  #blackClockArea,
 #whiteClockArea {
-    display: grid !important;
-    grid-template-columns: 45px 110px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    width: max-content !important;
+   display: flex !important; 
+   grid-template-columns: 45px 110px !important;
+   align-items: center !important;
+   justify-content: center !important;
+   gap: 8px !important;
+   width: max-content !important;
 }
 
 #blackClock,
@@ -3886,7 +3886,6 @@ clockStarted = false;
 clearInterval(clockInterval);
 clockInterval = null;
 updateClocks();
-
 /* RESET 25 SEKONDAT E LËVIZJES SË PARË */
 
 clearInterval(firstMoveInterval);
