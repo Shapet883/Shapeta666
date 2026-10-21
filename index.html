@@ -298,15 +298,16 @@ margin: 0 0 5px 0;
     }
 
  #board {
-  display: grid; 
-  width: min(500px, 92vw);
+    display: grid;
+    width: min(500px, 92vw);
     height: min(500px, 92vw);
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
 
-    border: 4px solid #d4af37 !important;
+    border: 7px solid #111 !important;
     border-style: solid !important;
-    outline: none !important;
+    outline: 3px solid #d4af37 !important;
+    outline-offset: 3px;
     box-shadow: none !important;
 
     margin: 15px 0 0 0;
