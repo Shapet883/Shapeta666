@@ -1243,30 +1243,16 @@ document.getElementById("whiteClock")
     .style.removeProperty("box-shadow");
 /* ORA AKTIVE */
 
-if (whiteTurn) {
+const clock = document.getElementById(
+    whiteTurn ? "whiteClock" : "blackClock"
+);
 
-    const clock = document.getElementById("whiteClock");
+clock.classList.add("clock-active");
 
-    clock.classList.add("clock-active");
-
-    clock.style.setProperty(
-        "border",
-        "3px solid #72c98a",
-        "important"
-    );
-
-    clock.style.setProperty(
-        "box-shadow",
-        "0 0 6px #8acfa0, 0 0 12px #72c98a",
-        "important"
-    );
-
+if (window.matchMedia("(min-width: 601px)").matches) {
+    clock.style.setProperty("border", "none", "important");
+    clock.style.setProperty("box-shadow", "none", "important");
 } else {
-
-    const clock = document.getElementById("blackClock");
-
-    clock.classList.add("clock-active");
-
     clock.style.setProperty(
         "border",
         "3px solid #72c98a",
