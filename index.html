@@ -897,15 +897,15 @@ color: #66b3ff !important;
     padding: 6px 12px !important;
     margin: 8px auto !important;
 }
-#whiteClock.clock-active,
-#blackClock.clock-active {
-    border: 3px solid #66b3ff !important;
-    border-radius: 8px !important;
-    box-shadow:
-        0 0 8px #66b3ff,
-        0 0 18px #66b3ff !important;
+/* KORNIZA E ORËS VETËM NË KOMPJUTER */
+@media (min-width: 601px) {
+    #whiteClock.clock-active,
+    #blackClock.clock-active {
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
 }
-
 /* KËTU FILLON PJESA E RE PËR TELEFON */
 
 @media (max-width: 600px) {
