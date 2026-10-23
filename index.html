@@ -1678,10 +1678,10 @@ function showPromotionChoice(isWhite, targetSquare) {
         overlay.className = "promotion-overlay";
 
         const box = document.createElement("div");
-        box.className = "promotion-box";
+        box.style.cssText = "display:flex;gap:6px;padding:8px;min-width:0;width:max-content;box-sizing:border-box;";
+     box.className = "promotion-box";
         box.style.position = "fixed";
-
-        const pieces = isWhite
+const pieces = isWhite
             ? ["♕", "♖", "♗", "♘"]
             : ["♛", "♜", "♝", "♞"];
 
