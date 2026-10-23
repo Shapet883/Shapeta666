@@ -1127,7 +1127,37 @@ transform: translateX(-10px);
         flex: 0 0 520px !important;
     }
 }
+@media (min-width: 700px) {
+    #blackClockArea,
+    #whiteClockArea {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        flex-wrap: nowrap !important;
+    }
 
+    #blackClockArea #blackFirstMove,
+    #whiteClockArea #whiteFirstMove {
+        display: inline-block !important;
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        font-size: 11px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        white-space: nowrap !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    #blackClockArea #blackClock,
+    #whiteClockArea #whiteClock {
+        flex: 0 0 auto !important;
+        margin: 0 !important;
+    }
+}
 </style>
 </head>
 <body>
