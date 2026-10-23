@@ -377,7 +377,16 @@ margin: 0 0 5px 0;
     padding: 6px 10px;
     color: #b98f58 !important;
 }
-
+@media (min-width: 601px) {
+    #blackClock,
+    #whiteClock {
+        width: 150px !important;
+        max-width: 150px !important;
+        box-sizing: border-box;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
 #moveHistory {
 width: min(500px, 92vw);
 height: 220px;
