@@ -1687,9 +1687,10 @@ function showPromotionChoice(isWhite, targetSquare) {
 
         pieces.forEach(function(piece) {
 
-            const button = document.createElement("button");
-            button.className = "promotion-piece";
-            button.textContent = piece;
+         const button = document.createElement("button");
+         button.className = "promotion-piece";
+         button.style.cssText = "width:120px;height:120px;font-size:88px;flex:0 0 120px;";
+         button.textContent = piece;
 
             button.addEventListener("click", function() {
                 overlay.remove();
