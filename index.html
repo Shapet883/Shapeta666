@@ -1399,83 +1399,62 @@ function updateFirstMoveClock() {
 
 function startFirstMoveClock() {
 
+    /* NDALO NUMËRIMIN NË KOMPJUTER */
+    if (window.matchMedia("(min-width: 601px)").matches) {
+        return;
+    }
+
     if (firstMoveInterval !== null) {
         return;
     }
 
-
     firstMoveInterval = setInterval(function () {
 
         if (gameOver) {
-
             clearInterval(firstMoveInterval);
             firstMoveInterval = null;
-
             return;
         }
 
-
         /* BARDHI */
-
-        if (
-            whiteTurn &&
-            !whiteFirstMoveDone
-        ) {
-
+        if (whiteTurn && !whiteFirstMoveDone) {
             whiteFirstMoveTime--;
-
             updateFirstMoveClock();
 
-
             if (whiteFirstMoveTime <= 0) {
-
                 clearInterval(firstMoveInterval);
                 firstMoveInterval = null;
-
                 gameOver = true;
 
                 document.getElementById("gameResult")
                     .classList.add("checkmate-result");
 
-                document.getElementById("gameResult")
-                    .textContent =
+                document.getElementById("gameResult").textContent =
                     "🏆 KOHA MBAROI! FITON LOJTARI I ZI!";
 
                 return;
             }
         }
 
-
         /* ZI */
-
-        if (
-            !whiteTurn &&
-            !blackFirstMoveDone
-        ) {
-
+        if (!whiteTurn && !blackFirstMoveDone) {
             blackFirstMoveTime--;
-
             updateFirstMoveClock();
 
-
             if (blackFirstMoveTime <= 0) {
-
                 clearInterval(firstMoveInterval);
                 firstMoveInterval = null;
-
                 gameOver = true;
 
                 document.getElementById("gameResult")
                     .classList.add("checkmate-result");
 
-                document.getElementById("gameResult")
-                    .textContent =
+                document.getElementById("gameResult").textContent =
                     "🏆 KOHA MBAROI! FITON LOJTARI I BARDHË!";
 
                 return;
             }
         }
-
 
     }, 1000);
 }
