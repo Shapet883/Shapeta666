@@ -1127,9 +1127,16 @@ transform: translateX(-10px);
 }
 /* FSHEH NUMRAT 25 VETËM NË KOMPJUTER */
 @media screen and (min-width: 601px) {
-    #blackClockArea #blackFirstMove,
-    #whiteClockArea #whiteFirstMove {
-        display: none !important;
+    #blackFirstMove,
+    #whiteFirstMove {
+        visibility: hidden !important;
+        width: 0 !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        overflow: hidden !important;
     }
 }
 </style>
