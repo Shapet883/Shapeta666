@@ -1320,8 +1320,11 @@ if (!whiteTurn && blackTime <= 10) {
 }
 function updateFirstMoveClock() {
 
-    document.getElementById("whiteFirstMove").textContent =
-        whiteFirstMoveTime;
+    if (window.matchMedia("(min-width: 601px)").matches) {
+        document.getElementById("whiteFirstMove").style.display = "none";
+        document.getElementById("blackFirstMove").style.display = "none";
+        return;
+    }
 
     document.getElementById("blackFirstMove").textContent =
         blackFirstMoveTime;
