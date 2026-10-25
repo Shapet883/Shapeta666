@@ -1006,29 +1006,6 @@ transform: translateX(0);
 #clockBoardArea.clock-flipped #whiteClock {
     grid-area: blackClock;
 }
-@media (max-width: 600px) {
-    #blackClock,
-    #whiteClock {
-        position: relative;
-    }
-
-    #blackFirstMove,
-    #whiteFirstMove {
-        position: relative;
-        z-index: 2;
-        width: 28px !important;
-        min-width: 28px !important;
-        margin-right: -28px !important;
-        transform: none !important;
-        text-align: center !important;
-        pointer-events: none;
-    }
-
-    #blackClock,
-    #whiteClock {
-        padding-left: 34px !important;
-    }
-}
 #whiteClock.clock-active.clock-danger,
 #blackClock.clock-active.clock-danger {
     border: 3px solid #ff2222 !important;
