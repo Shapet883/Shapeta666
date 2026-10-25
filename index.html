@@ -1106,9 +1106,16 @@ transform: translateX(-10px);
 #blackFirstMove,
 #whiteFirstMove {
     display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     width: 45px !important;
+    min-width: 45px !important;
+    color: #ffffff !important;
+    font-size: 18px !important;
     text-align: center !important;
     margin: 0 !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
 }
 @media (min-width: 601px) {
     #gameArea {
@@ -1122,18 +1129,20 @@ transform: translateX(-10px);
 }
 /* SHFAQ NUMRAT 25 NË KOMPJUTER */
 @media screen and (min-width: 601px) {
-    #blackFirstMove,
-    #whiteFirstMove {
-        visibility: visible !important;
-        width: 45px !important;
-        min-width: 45px !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        border: none !important;
-        box-shadow: none !important;
-        overflow: visible !important;
-        text-align: center !important;
-    }
+#blackFirstMove,
+#whiteFirstMove {
+visibility: visible !important;
+display: block !important;
+opacity: 1 !important;    
+width: 45px !important;
+min-width: 45px !important;
+margin: 0 !important;
+padding: 0 !important;
+border: none !important;
+box-shadow: none !important;
+overflow: visible !important;
+text-align: center !important;
+  }
 }
 </style>
 </head>
