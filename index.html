@@ -930,10 +930,7 @@ transform: translateX(0);
     #whiteClockArea {
         display: contents;
     }
-
-    #blackFirstMove {
-        grid-area: blackFirst;
-    }
+#blackFirstMove { grid-area: blackClock; }
 
     #blackClock {
         grid-area: blackClock;
@@ -961,6 +958,14 @@ transform: translateX(0);
     transform: translateX(50px);
 }
 
+#blackFirstMove {
+    position: relative;
+    left: -45px;
+    z-index: 2;
+    width: 28px;
+    text-align: center;
+}
+
 #newGameButton {
     transform: translateY(00);
 }
@@ -969,15 +974,18 @@ transform: translateX(0);
         grid-area: board;
     }
 
-    #whiteFirstMove {
-        grid-area: whiteFirst;
-    }
+#whiteFirstMove { grid-area: whiteClock; } 
 
     #whiteClock {
         grid-area: whiteClock;
     }
 #whiteFirstMove {
-    transform: translate(50px, -6px);
+    transform: translate(-20px, -6px);
+    position: relative;
+    left: -45px;
+    z-index: 2;
+    width: 28px;
+    text-align: center;
 }
 #whiteClock {
     transform: translateX(-20px);
@@ -1005,7 +1013,9 @@ transform: translateX(0);
     grid-area: blackClock;
 }
 #whiteClock.clock-active.clock-danger,
-#blackClock.clock-active.clock-danger {
+#blackClock.clock-active.clock-danger,
+#whiteClock.first-move-danger,
+#blackClock.first-move-danger {
     border: 3px solid #ff2222 !important;
     background: #222 !important;
     color: #fff !important;
@@ -1014,9 +1024,8 @@ transform: translateX(0);
         0 0 18px #ff2222 !important,
         0 0 30px rgba(255, 34, 34, 0.8) !important;
 }
-
 #blackFirstMove {
-    grid-area: blackFirst;
+    grid-area: blackClock;
 }
 
 .light.selected,
@@ -1344,80 +1353,40 @@ function updateFirstMoveClock() {
         return;
     }
 
-    document.getElementById("blackFirstMove").textContent =
-        blackFirstMoveTime;
+    const whiteCount = document.getElementById("whiteFirstMove");
+    const blackCount = document.getElementById("blackFirstMove");
+    const whiteClock = document.getElementById("whiteClock");
+    const blackClock = document.getElementById("blackClock");
 
+    whiteCount.textContent = whiteFirstMoveTime;
+    blackCount.textContent = blackFirstMoveTime;
 
-    const whiteClock =
-        document.getElementById("whiteFirstMove");
+    whiteCount.style.display =
+        !whiteFirstMoveDone && whiteTurn ? "block" : "none";
 
-    const blackClock =
-        document.getElementById("blackFirstMove");
+    blackCount.style.display =
+        !blackFirstMoveDone && !whiteTurn ? "block" : "none";
 
-
-    /* HIQ ALARMIN */
-
-    whiteClock.classList.remove("first-move-danger");
-    blackClock.classList.remove("first-move-danger");
-
-    whiteClock.style.removeProperty("border");
-    whiteClock.style.removeProperty("box-shadow");
-
-    blackClock.style.removeProperty("border");
-    blackClock.style.removeProperty("box-shadow");
-
-
-    /* KUQ - 10 SEKONDAT E FUNDIT */
-
-    if (
+    whiteClock.classList.toggle(
+        "first-move-danger",
         !whiteFirstMoveDone &&
-        whiteFirstMoveTime <= 10
-    ) {
+        whiteFirstMoveTime <= 45 &&
+        whiteFirstMoveTime >= 35
+    );
 
-        whiteClock.classList.add("first-move-danger");
-
-        whiteClock.style.setProperty(
-            "border",
-            "3px solid #ff2222",
-            "important"
-        );
-
-        whiteClock.style.setProperty(
-            "box-shadow",
-            "0 0 8px #ff2222, 0 0 18px #ff2222, 0 0 30px rgba(255,34,34,0.8)",
-            "important"
-        );
-    }
-
-
-    if (
+    blackClock.classList.toggle(
+        "first-move-danger",
         !blackFirstMoveDone &&
-        blackFirstMoveTime <= 10
-    ) {
-
-        blackClock.classList.add("first-move-danger");
-
-        blackClock.style.setProperty(
-            "border",
-            "3px solid #ff2222",
-            "important"
-        );
-
-        blackClock.style.setProperty(
-            "box-shadow",
-            "0 0 8px #ff2222, 0 0 18px #ff2222, 0 0 30px rgba(255,34,34,0.8)",
-            "important"
-        );
-    }
+        blackFirstMoveTime <= 45 &&
+        blackFirstMoveTime >= 35
+    );
 }
-
-
 
 /* FILLON NUMËRIMI 25 SEKONDA */
 
 function startFirstMoveClock() {
 
-    /* NDALO NUMËRIMIN NË KOMPJUTER */
+    /* VETËM NË TELEFON */
     if (window.matchMedia("(min-width: 601px)").matches) {
         return;
     }
@@ -1434,44 +1403,32 @@ function startFirstMoveClock() {
             return;
         }
 
-        /* BARDHI */
+        /* AFATI I BARDHIT */
         if (whiteTurn && !whiteFirstMoveDone) {
+            if (whiteFirstMoveTime <= 35) {
+                clearInterval(firstMoveInterval);
+                firstMoveInterval = null;
+                gameOver = true;
+                updateFirstMoveClock();
+                return;
+            }
+
             whiteFirstMoveTime--;
             updateFirstMoveClock();
-
-            if (whiteFirstMoveTime <= 0) {
-                clearInterval(firstMoveInterval);
-                firstMoveInterval = null;
-                gameOver = true;
-
-                document.getElementById("gameResult")
-                    .classList.add("checkmate-result");
-
-                document.getElementById("gameResult").textContent =
-                    "🏆 KOHA MBAROI! FITON LOJTARI I ZI!";
-
-                return;
-            }
         }
 
-        /* ZI */
+        /* AFATI I ZIUT */
         if (!whiteTurn && !blackFirstMoveDone) {
-            blackFirstMoveTime--;
-            updateFirstMoveClock();
-
-            if (blackFirstMoveTime <= 0) {
+            if (blackFirstMoveTime <= 35) {
                 clearInterval(firstMoveInterval);
                 firstMoveInterval = null;
                 gameOver = true;
-
-                document.getElementById("gameResult")
-                    .classList.add("checkmate-result");
-
-                document.getElementById("gameResult").textContent =
-                    "🏆 KOHA MBAROI! FITON LOJTARI I BARDHË!";
-
+                updateFirstMoveClock();
                 return;
             }
+
+            blackFirstMoveTime--;
+            updateFirstMoveClock();
         }
 
     }, 1000);
@@ -3905,9 +3862,8 @@ updateClocks();
 
 clearInterval(firstMoveInterval);
 firstMoveInterval = null;
-
-whiteFirstMoveTime = 25;
-blackFirstMoveTime = 25;
+whiteFirstMoveTime = 59;
+blackFirstMoveTime = 59;
 
 whiteFirstMoveDone = false;
 blackFirstMoveDone = false;
