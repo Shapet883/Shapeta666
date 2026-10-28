@@ -1574,17 +1574,11 @@ for (let i = 0; i < 64; i++) {
 
     const row = Math.floor(i / 8);
     const col = i % 8;
-
- /* KOORDINATAT NË TË GJITHË TABELËN */
-
-square.dataset.file =
-    String.fromCharCode(97 + col);
-
-square.dataset.rank =
-    8 - row;
-
-
-   /* FIGURAT */
+/* KOORDINATAT NË TË GJITHË TABELËN */
+square.dataset.file = String.fromCharCode(97 + col);
+square.dataset.rank = 8 - row;
+ 
+/* FIGURAT */
 
 if (pieces[i] !== "") {
 
