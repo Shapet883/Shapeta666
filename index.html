@@ -1354,10 +1354,12 @@ if (!whiteTurn && blackTime <= 10) {
 function updateFirstMoveClock() {
 
     if (window.matchMedia("(min-width: 601px)").matches) {
-        document.getElementById("whiteFirstMove").style.display = "none";
-        document.getElementById("blackFirstMove").style.display = "none";
-        return;
-    }
+    document.getElementById("whiteFirstMove").style.display =
+        !whiteFirstMoveDone && whiteTurn ? "block" : "none";
+
+    document.getElementById("blackFirstMove").style.display =
+        !blackFirstMoveDone && !whiteTurn ? "block" : "none";
+}
 
     const whiteCount = document.getElementById("whiteFirstMove");
     const blackCount = document.getElementById("blackFirstMove");
@@ -1392,11 +1394,6 @@ function updateFirstMoveClock() {
 
 function startFirstMoveClock() {
 
-    /* VETËM NË TELEFON */
-    if (window.matchMedia("(min-width: 601px)").matches) {
-        return;
-    }
-
     if (firstMoveInterval !== null) {
         return;
     }
@@ -1411,7 +1408,7 @@ function startFirstMoveClock() {
 
         /* AFATI I BARDHIT */
         if (whiteTurn && !whiteFirstMoveDone) {
-            if (whiteFirstMoveTime <= 35) {
+            if (whiteFirstMoveTime <= 25) {
                 clearInterval(firstMoveInterval);
                 firstMoveInterval = null;
                 gameOver = true;
