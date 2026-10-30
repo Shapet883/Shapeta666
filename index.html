@@ -1577,13 +1577,24 @@ for (let i = 0; i < 64; i++) {
 
     const row = Math.floor(i / 8);
     const col = i % 8;
-/* KOORDINATAT NË TË GJITHË TABELËN */
-if (row === 7) {
-    square.dataset.file = String.fromCharCode(97 + col);
-}
+/* KOORDINATAT SIPAS ORIENTIMIT */
 
-if (col === 0) {
-    square.dataset.rank = 8 - row;
+if (!boardFlipped) {
+    if (row === 7) {
+        square.dataset.file = String.fromCharCode(97 + col);
+    }
+
+    if (col === 7) {
+        square.dataset.rank = 8 - row;
+    }
+} else {
+    if (row === 0) {
+        square.dataset.file = String.fromCharCode(97 + col);
+    }
+
+    if (col === 0) {
+        square.dataset.rank = 8 - row;
+    }
 }
  
 /* FIGURAT */
