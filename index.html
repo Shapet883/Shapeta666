@@ -1278,8 +1278,10 @@ const clock = document.getElementById(
 clock.classList.add("clock-active");
 
 if (window.matchMedia("(min-width: 601px)").matches) {
-    clock.style.setProperty("border", "none", "important");
-    clock.style.setProperty("box-shadow", "none", "important");
+    if (!clock.classList.contains("first-move-danger")) {
+        clock.style.setProperty("border", "none", "important");
+        clock.style.setProperty("box-shadow", "none", "important");
+    }
 } else {
     clock.style.setProperty(
         "border",
@@ -3868,7 +3870,7 @@ blackFirstMoveDone = false;
 
 updateFirstMoveClock();
 
-/* RINIS 25 SEKONDAT */
+/* RINIS 59 SEKONDAT */
 startFirstMoveClock();
 
   document.getElementById("gameResult").textContent = "";      
