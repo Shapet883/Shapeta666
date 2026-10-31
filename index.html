@@ -3756,11 +3756,7 @@ document.getElementById(
 ).addEventListener(
     "click",
     function () {
-if (window.matchMedia("(max-width: 600px)").matches) {
-    boardFlipped = false;
-} else {
-   boardFlipped = !boardFlipped;
-}
+boardFlipped = !boardFlipped;
 
 document.getElementById("board").classList.toggle(
     "board-flipped",
