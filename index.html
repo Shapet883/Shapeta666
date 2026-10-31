@@ -1337,14 +1337,6 @@ if (!whiteTurn && blackTime <= 10) {
 }
 function updateFirstMoveClock() {
 
-    if (window.matchMedia("(min-width: 601px)").matches) {
-    document.getElementById("whiteFirstMove").style.display =
-        !whiteFirstMoveDone && whiteTurn ? "block" : "none";
-
-    document.getElementById("blackFirstMove").style.display =
-        !blackFirstMoveDone && !whiteTurn ? "block" : "none";
-}
-
     const whiteCount = document.getElementById("whiteFirstMove");
     const blackCount = document.getElementById("blackFirstMove");
     const whiteClock = document.getElementById("whiteClock");
@@ -1353,11 +1345,25 @@ function updateFirstMoveClock() {
     whiteCount.textContent = whiteFirstMoveTime;
     blackCount.textContent = blackFirstMoveTime;
 
-    whiteCount.style.display =
-        !whiteFirstMoveDone && whiteTurn ? "block" : "none";
+    if (window.matchMedia("(min-width: 601px)").matches) {
 
-    blackCount.style.display =
-        !blackFirstMoveDone && !whiteTurn ? "block" : "none";
+        whiteCount.style.display = "block";
+        blackCount.style.display = "block";
+
+        whiteCount.style.visibility =
+            !whiteFirstMoveDone && whiteTurn ? "visible" : "hidden";
+
+        blackCount.style.visibility =
+            !blackFirstMoveDone && !whiteTurn ? "visible" : "hidden";
+
+    } else {
+
+        whiteCount.style.display =
+            !whiteFirstMoveDone && whiteTurn ? "block" : "none";
+
+        blackCount.style.display =
+            !blackFirstMoveDone && !whiteTurn ? "block" : "none";
+    }
 
     whiteClock.classList.toggle(
         "first-move-danger",
