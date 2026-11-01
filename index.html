@@ -31,7 +31,19 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
 }
-      h1 {
+@media (max-width: 600px) {
+    #gameResult:not(:empty) {
+        font-size: 32px;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        margin: 8px 0;
+        min-height: auto;
+        background: transparent !important;
+        color: red !important;
+    }
+}     
+ h1 {
     margin: 20px 0;
     font-size: 15px;
     font-weight: bold;
@@ -1233,9 +1245,12 @@ let blackKingMoved = false;
 
 
 /* 25 SEKONDA PËR LËVIZJEN E PARË */
+let whiteFirstMoveTime =
+    window.matchMedia("(max-width: 600px)").matches ? 25 : 59;
 
-let whiteFirstMoveTime = 59;
-let blackFirstMoveTime = 59;
+let blackFirstMoveTime =
+    window.matchMedia("(max-width: 600px)").matches ? 25 : 59;
+
 
 let whiteFirstMoveDone = false;
 let blackFirstMoveDone = false;
@@ -1379,6 +1394,27 @@ function updateFirstMoveClock() {
             !blackFirstMoveDone && !whiteTurn ? "block" : "none";
     }
 
+  if (window.matchMedia("(max-width: 600px)").matches) {
+
+    whiteCount.classList.toggle(
+        "first-move-danger",
+        !whiteFirstMoveDone &&
+        whiteFirstMoveTime <= 10 &&
+        whiteFirstMoveTime >= 1
+    );
+
+    blackCount.classList.toggle(
+        "first-move-danger",
+        !blackFirstMoveDone &&
+        blackFirstMoveTime <= 10 &&
+        blackFirstMoveTime >= 1
+    );
+
+    whiteClock.classList.remove("first-move-danger");
+    blackClock.classList.remove("first-move-danger");
+
+} else {
+
     whiteClock.classList.toggle(
         "first-move-danger",
         !whiteFirstMoveDone &&
@@ -1392,6 +1428,7 @@ function updateFirstMoveClock() {
         blackFirstMoveTime <= 45 &&
         blackFirstMoveTime >= 35
     );
+}
 }
 
 /* FILLON NUMËRIMI 25 SEKONDA */
@@ -1410,37 +1447,53 @@ function startFirstMoveClock() {
             return;
         }
 
-        /* AFATI I BARDHIT */
-        if (whiteTurn && !whiteFirstMoveDone) {
-            if (whiteFirstMoveTime <= 35) {
-                clearInterval(firstMoveInterval);
-                firstMoveInterval = null;
-                gameOver = true;
-                updateFirstMoveClock();
-                return;
-            }
+/* AFATI I BARDHIT */
+if (whiteTurn && !whiteFirstMoveDone) {
 
-            whiteFirstMoveTime--;
-            updateFirstMoveClock();
+    if (whiteFirstMoveTime <= (window.matchMedia("(max-width: 600px)").matches ? 0 : 35)) {
+
+        clearInterval(firstMoveInterval);
+        firstMoveInterval = null;
+        gameOver = true;
+
+        if (window.matchMedia("(max-width: 600px)").matches) {
+        document.getElementById("gameResult").textContent = "⊘";
+document.getElementById("gameResult").style.color = "red";
+document.getElementById("gameResult").style.background = "transparent";
+document.getElementById("gameResult").classList.remove("checkmate-result");    
         }
 
-        /* AFATI I ZIUT */
-        if (!whiteTurn && !blackFirstMoveDone) {
-            if (blackFirstMoveTime <= 35) {
-                clearInterval(firstMoveInterval);
-                firstMoveInterval = null;
-                gameOver = true;
-                updateFirstMoveClock();
-                return;
-            }
+        updateFirstMoveClock();
+        return;
+    }
 
-            blackFirstMoveTime--;
-            updateFirstMoveClock();
-        }
-
-    }, 1000);
+    whiteFirstMoveTime--;
+    updateFirstMoveClock();
 }
 
+ /* AFATI I ZIUT */
+if (!whiteTurn && !blackFirstMoveDone) {
+
+    if (blackFirstMoveTime <= (window.matchMedia("(max-width: 600px)").matches ? 0 : 35)) {
+
+        clearInterval(firstMoveInterval);
+        firstMoveInterval = null;
+        gameOver = true;
+
+        if (window.matchMedia("(max-width: 600px)").matches) {
+            document.getElementById("gameResult").textContent = "⊘";
+document.getElementById("gameResult").style.color = "red";
+document.getElementById("gameResult").style.background = "transparent";
+document.getElementById("gameResult").classList.remove("checkmate-result");
+        }
+
+        updateFirstMoveClock();
+        return;
+    }
+
+    blackFirstMoveTime--;
+    updateFirstMoveClock();
+}
 
 /* ORA NORMALE */
 
@@ -1460,12 +1513,14 @@ function startClock() {
             return;
         }
 
+if (whiteTurn && whiteFirstMoveDone) {
+    whiteTime--;
+}
 
-        if (whiteTurn) {
-            whiteTime--;
-        } else {
-            blackTime--;
-        }
+if (!whiteTurn && blackFirstMoveDone) {
+    blackTime--;
+}
+   
 
 console.log(
     "ORA:",
@@ -2629,16 +2684,26 @@ document.getElementById("blackClock")
     .classList.toggle("clock-active", !whiteTurn);  
 
                       
-/* TË DY KANË BËRË LËVIZJEN E PARË */
+/* NIS ORËN SIPAS PAJISJES */
 
-if (
-    whiteFirstMoveDone &&
-    blackFirstMoveDone
-) {
+if (window.matchMedia("(max-width: 600px)").matches) {
 
-    clearInterval(firstMoveInterval);
-    firstMoveInterval = null;
-    startClock();
+    if (whiteFirstMoveDone || blackFirstMoveDone) {
+        startClock();
+    }
+
+    if (whiteFirstMoveDone && blackFirstMoveDone) {
+        clearInterval(firstMoveInterval);
+        firstMoveInterval = null;
+    }
+
+} else {
+
+    if (whiteFirstMoveDone && blackFirstMoveDone) {
+        clearInterval(firstMoveInterval);
+        firstMoveInterval = null;
+        startClock();
+    }
 }
 
 /* KONTROLLO REMIN - VETËM DY MBRETËR */
@@ -3870,19 +3935,24 @@ clockStarted = false;
 clearInterval(clockInterval);
 clockInterval = null;
 updateClocks();
+
 /* RESET 25 SEKONDAT E LËVIZJES SË PARË */
 
 clearInterval(firstMoveInterval);
 firstMoveInterval = null;
-whiteFirstMoveTime = 59;
-blackFirstMoveTime = 59;
+
+whiteFirstMoveTime =
+    window.matchMedia("(max-width: 600px)").matches ? 25 : 59;
+
+blackFirstMoveTime =
+    window.matchMedia("(max-width: 600px)").matches ? 25 : 59;
 
 whiteFirstMoveDone = false;
 blackFirstMoveDone = false;
 
 updateFirstMoveClock();
 
-/* RINIS 59 SEKONDAT */
+ /* RINIS AFATIN E LËVIZJES SË PARË */
 startFirstMoveClock();
 
   document.getElementById("gameResult").textContent = "";      
