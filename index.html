@@ -1361,15 +1361,15 @@ function updateFirstMoveClock() {
 
     if (window.matchMedia("(min-width: 601px)").matches) {
 
-        whiteCount.style.display = "block";
-        blackCount.style.display = "block";
+    whiteCount.style.setProperty("display", "none", "important");
 
-    whiteCount.style.visibility = "hidden"; 
+    blackCount.style.setProperty(
+        "display",
+        !blackFirstMoveDone && !whiteTurn ? "block" : "none",
+        "important"
+    );
 
-        blackCount.style.visibility =
-            !blackFirstMoveDone && !whiteTurn ? "visible" : "hidden";
-
-    } else {
+} else {
 
         whiteCount.style.display =
             !whiteFirstMoveDone && whiteTurn ? "block" : "none";
