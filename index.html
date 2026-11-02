@@ -1361,13 +1361,13 @@ function updateFirstMoveClock() {
 
     if (window.matchMedia("(min-width: 601px)").matches) {
 
-    whiteCount.style.setProperty("display", "none", "important");
+    whiteCount.style.display = "block";
+    blackCount.style.display = "block";
 
-    blackCount.style.setProperty(
-        "display",
-        !blackFirstMoveDone && !whiteTurn ? "block" : "none",
-        "important"
-    );
+    whiteCount.style.visibility = "hidden";
+
+    blackCount.style.visibility =
+        !blackFirstMoveDone && !whiteTurn ? "visible" : "hidden";
 
 } else {
 
@@ -3873,8 +3873,8 @@ updateClocks();
 
 clearInterval(firstMoveInterval);
 firstMoveInterval = null;
-whiteFirstMoveTime = 25;
-blackFirstMoveTime = 25;
+whiteFirstMoveTime = 59;
+blackFirstMoveTime = 59;
 
 whiteFirstMoveDone = false;
 blackFirstMoveDone = false;
