@@ -1361,7 +1361,11 @@ function updateFirstMoveClock() {
    if (window.matchMedia("(min-width: 601px)").matches) {
 
     whiteCount.style.setProperty("display", "block", "important");
-    whiteCount.style.setProperty("visibility", "hidden", "important");
+    whiteCount.style.setProperty(
+    "visibility",
+    !whiteFirstMoveDone && whiteTurn ? "visible" : "hidden",
+    "important"
+);
 
     blackCount.style.setProperty("display", "block", "important");
     blackCount.style.setProperty(
