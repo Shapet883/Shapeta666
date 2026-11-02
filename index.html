@@ -2628,14 +2628,6 @@ whiteTurn = !whiteTurn;
 console.log("RADHA:", whiteTurn ? "BARDHI" : "ZI");
 document.getElementById("whiteClock")
     .classList.toggle("clock-active", whiteTurn);
-/* NDRYSHO POZICIONIN E ORËS AKTIVE – VETËM KOMPJUTER */
-if (window.matchMedia("(min-width: 601px)").matches) {
-    const blackArea = document.getElementById("blackClockArea");
-    const whiteArea = document.getElementById("whiteClockArea");
-
-    blackArea.style.order = whiteTurn ? "2" : "-1";
-    whiteArea.style.order = whiteTurn ? "-1" : "2";
-}
 document.getElementById("blackClock")
     .classList.toggle("clock-active", !whiteTurn);  
 
