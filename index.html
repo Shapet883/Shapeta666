@@ -1359,15 +1359,17 @@ function updateFirstMoveClock() {
     whiteCount.textContent = whiteFirstMoveTime;
     blackCount.textContent = blackFirstMoveTime;
 
-    if (window.matchMedia("(min-width: 601px)").matches) {
+   if (window.matchMedia("(min-width: 601px)").matches) {
 
-    whiteCount.style.display = "block";
-    blackCount.style.display = "block";
+    whiteCount.style.setProperty("display", "block", "important");
+    whiteCount.style.setProperty("visibility", "hidden", "important");
 
-    whiteCount.style.visibility = "hidden";
-
-    blackCount.style.visibility =
-        !blackFirstMoveDone && !whiteTurn ? "visible" : "hidden";
+    blackCount.style.setProperty("display", "block", "important");
+    blackCount.style.setProperty(
+        "visibility",
+        !blackFirstMoveDone && !whiteTurn ? "visible" : "hidden",
+        "important"
+    );
 
 } else {
 
