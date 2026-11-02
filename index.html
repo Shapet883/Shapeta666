@@ -818,13 +818,10 @@ color: #66b3ff !important;
     width: fit-content;
     margin: 0 auto;
 }
-#blackClockArea { order: 1; }
-#gameArea { order: 2; }
-#whiteClockArea { order: 3; }
  
  #gameArea {
     display: flex;
-   flex-direction: row; 
+    flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     gap: 0;
@@ -2631,14 +2628,6 @@ whiteTurn = !whiteTurn;
 console.log("RADHA:", whiteTurn ? "BARDHI" : "ZI");
 document.getElementById("whiteClock")
     .classList.toggle("clock-active", whiteTurn);
-/* NDËRRIMI I POZICIONIT TË ORËVE – KOMPJUTER */
-if (window.matchMedia("(min-width: 601px)").matches) {
-    const blackArea = document.getElementById("blackClockArea");
-    const whiteArea = document.getElementById("whiteClockArea");
-
-    blackArea.style.order = whiteTurn ? "1" : "3";
-    whiteArea.style.order = whiteTurn ? "3" : "1";
-}
  document.getElementById("blackClock")
     .classList.toggle("clock-active", !whiteTurn);  
 
