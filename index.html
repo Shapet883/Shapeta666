@@ -1383,15 +1383,15 @@ function updateFirstMoveClock() {
     whiteClock.classList.toggle(
         "first-move-danger",
         !whiteFirstMoveDone &&
-        whiteFirstMoveTime <= 45 &&
-        whiteFirstMoveTime >= 35
+        whiteFirstMoveTime <= 10 &&
+        whiteFirstMoveTime >= 1
     );
 
     blackClock.classList.toggle(
         "first-move-danger",
         !blackFirstMoveDone &&
-        blackFirstMoveTime <= 45 &&
-        blackFirstMoveTime >= 35
+        blackFirstMoveTime <= 10 &&
+        blackFirstMoveTime >= 1
     );
 }
 
@@ -1413,7 +1413,7 @@ function startFirstMoveClock() {
 
         /* AFATI I BARDHIT */
         if (whiteTurn && !whiteFirstMoveDone) {
-            if (whiteFirstMoveTime <= 1) {
+            if (whiteFirstMoveTime <= 0) {
                 clearInterval(firstMoveInterval);
                 firstMoveInterval = null;
                 gameOver = true;
@@ -1427,7 +1427,7 @@ function startFirstMoveClock() {
 
         /* AFATI I ZIUT */
         if (!whiteTurn && !blackFirstMoveDone) {
-            if (blackFirstMoveTime <= 1) {
+            if (blackFirstMoveTime <= 0) {
                 clearInterval(firstMoveInterval);
                 firstMoveInterval = null;
                 gameOver = true;
