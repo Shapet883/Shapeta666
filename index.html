@@ -1234,8 +1234,8 @@ let blackKingMoved = false;
 
 /* 25 SEKONDA PËR LËVIZJEN E PARË */
 
-let whiteFirstMoveTime = 59;
-let blackFirstMoveTime = 59;
+let whiteFirstMoveTime = 25;
+let blackFirstMoveTime = 25;
 
 let whiteFirstMoveDone = false;
 let blackFirstMoveDone = false;
@@ -1413,7 +1413,7 @@ function startFirstMoveClock() {
 
         /* AFATI I BARDHIT */
         if (whiteTurn && !whiteFirstMoveDone) {
-            if (whiteFirstMoveTime <= 35) {
+            if (whiteFirstMoveTime <= 1) {
                 clearInterval(firstMoveInterval);
                 firstMoveInterval = null;
                 gameOver = true;
@@ -1427,7 +1427,7 @@ function startFirstMoveClock() {
 
         /* AFATI I ZIUT */
         if (!whiteTurn && !blackFirstMoveDone) {
-            if (blackFirstMoveTime <= 35) {
+            if (blackFirstMoveTime <= 1) {
                 clearInterval(firstMoveInterval);
                 firstMoveInterval = null;
                 gameOver = true;
@@ -3875,8 +3875,8 @@ updateClocks();
 
 clearInterval(firstMoveInterval);
 firstMoveInterval = null;
-whiteFirstMoveTime = 59;
-blackFirstMoveTime = 59;
+whiteFirstMoveTime = 25;
+blackFirstMoveTime = 25;
 
 whiteFirstMoveDone = false;
 blackFirstMoveDone = false;
