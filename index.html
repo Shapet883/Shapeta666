@@ -1687,36 +1687,90 @@ border: 3px solid #d4af37;
         width: 320px;
         max-width: 85vw;
         text-align: left;
+        max-height: 85vh;
+        overflow-y: auto;
         box-shadow: 0 5px 20px #000;
     `;
 
     rulesBox.innerHTML = `
-    <div style="text-align:center;">
-        <img src="Hyjnesha.pgn..jpg"
-             alt="Hyjnesha në Fron"
-             width="65"
-             height="65"
-             style="border-radius:50%; object-fit:cover;">
-        <div style="font-size:22px;font-weight:bold;">
-            🇦🇱 RREGULLAT E SHAHUT
-        </div>
+<div style="text-align:center;">
+    <img src="Hyjnesha.pgn..jpg"
+         width="65" height="65"
+         style="border-radius:50%;object-fit:cover;">
+    <div style="font-size:22px;font-weight:bold;">
+        🇦🇱 RREGULLAT E SHAHUT
     </div>
-        <hr>
-        <p>♟ Çdo lojtar luan me radhë nga një lëvizje.</p>
-        <p>♟ Qëllimi është matimi i mbretit kundërshtar.</p>
-        <p>♟ Mbreti lëviz një fushë në çdo drejtim.</p>
-        <p>♟ Mbretëresha lëviz në çdo drejtim.</p>
-        <p>♟ Torra lëviz drejt.</p>
-        <p>♟ Fili lëviz diagonalisht.</p>
-        <p>♟ Kali lëviz në formë L.</p>
-        <p>♟ Ushtari lëviz përpara dhe merr diagonalisht.</p>
-        <button id="closeChessRules"
-            style="display:block;margin:18px auto 0;padding:8px 22px;
-            background:#111;color:white;border:0;border-radius:5px;
-            font-weight:bold;cursor:pointer;">
-            ✕ MBYLL
-        </button>
-    `;
+</div>
+<hr>
+
+<div class="chess-rule-list">
+
+<details><summary>1. ♟️ Qëllimi i lojës</summary>
+<p>Shahu luhet nga dy lojtarë: i Bardhi dhe i Ziu. Qëllimi është të vendosësh mbretin e kundërshtarit në shah-mat.</p></details>
+
+<details><summary>2. ♟️ Tabela e shahut</summary>
+<p>Tabela ka 64 katrorë, 8 rreshta dhe 8 kolona. Secili lojtar fillon me 16 figura: një mbret, një mbretëreshë, dy torre, dy fila, dy kuaj dhe tetë pionë.</p></details>
+
+<details><summary>3. ♙ Pioni</summary>
+<p>Pioni lëviz përpara dhe kap diagonalisht. Nga pozicioni fillestar mund të lëvizë një ose dy katrorë, nëse rruga është e lirë.</p></details>
+
+<details><summary>4. ♘ Kali</summary>
+<p>Kali lëviz në formën e shkronjës L: dy katrorë në një drejtim dhe një katror anash. Kali mund të kërcejë mbi figura të tjera.</p></details>
+
+<details><summary>5. ♗ Fili</summary>
+<p>Fili lëviz vetëm diagonalisht, për aq katrorë sa është e lirë rruga. Çdo fil qëndron gjatë gjithë lojës në katrorë të së njëjtës ngjyrë.</p></details>
+
+<details><summary>6. ♖ Torra</summary>
+<p>Torra lëviz horizontalisht ose vertikalisht, për aq katrorë sa është e lirë rruga.</p></details>
+
+<details><summary>7. ♕ Mbretëresha</summary>
+<p>Mbretëresha mund të lëvizë horizontalisht, vertikalisht dhe diagonalisht.</p></details>
+
+<details><summary>8. ♔ Mbreti</summary>
+<p>Mbreti lëviz vetëm një katror në çdo drejtim. Nuk lejohet të lëvizë në një katror ku kërcënohet nga një figurë kundërshtare.</p></details>
+
+<details><summary>9. ⚔️ Kapja e figurave</summary>
+<p>Një figurë kapet kur një figurë kundërshtare lëviz në katrorin ku ajo ndodhet. Një lojtar nuk mund të kapë figurat e veta.</p></details>
+
+<details><summary>10. 👑 Shahu</summary>
+<p>Mbreti është në shah kur kërcënohet drejtpërdrejt nga një figurë kundërshtare. Shahu duhet të largohet me një lëvizje të ligjshme.</p></details>
+
+<details><summary>11. 🏆 Shah-mati</summary>
+<p>Kur mbreti është në shah dhe nuk ka asnjë lëvizje të ligjshme për të shpëtuar, kemi shah-mat dhe loja përfundon.</p></details>
+
+<details><summary>12. 🤝 Pat</summary>
+<p>Pat ndodh kur lojtari nuk ka asnjë lëvizje të ligjshme, por mbreti i tij nuk është në shah. Loja përfundon me barazim.</p></details>
+
+<details><summary>13. 🔄 Rokada</summary>
+<p>Rokada është një lëvizje speciale e mbretit dhe torrës. Ekziston rokada e shkurtër dhe rokada e gjatë. Ajo lejohet vetëm kur plotësohen të gjitha kushtet.</p></details>
+
+<details><summary>14. 🐾 Promovimi</summary>
+<p>Kur pioni arrin në rreshtin e fundit, ai duhet të promovohet në mbretëreshë, torrë, fil ose kalë.</p></details>
+
+<details><summary>15. ⚡ En passant</summary>
+<p>En passant është një kapje speciale e pionit. Ajo lejohet vetëm në një situatë të caktuar dhe duhet të bëhet menjëherë pas lëvizjes së pionit kundërshtar me dy katrorë.</p></details>
+
+<details><summary>16. 🚫 Lëvizjet e palejuara</summary>
+<p>Nuk lejohet të lëvizësh një figurë në mënyrë të gabuar, të kalosh përmes figurave të tjera përveç kalit, ose të lësh mbretin tënd në shah.</p></details>
+
+<details><summary>17. 🤝 Remi / Barazimi</summary>
+<p>Loja mund të përfundojë barazim me pat, marrëveshje mes lojtarëve, përsëritje të pozicionit, rregullin e 50 lëvizjeve ose në raste të tjera të përcaktuara nga rregullat e shahut.</p></details>
+
+<details><summary>18. ⏱️ Ora e shahut</summary>
+<p>Secili lojtar ka kohën e tij. Pas lëvizjes, koha kalon te kundërshtari. Kur koha përfundon, lojtari humbet në kohë, sipas rregullave përkatëse.</p></details>
+
+<details><summary>19. 🏁 Përfundimi i lojës</summary>
+<p>Loja mund të përfundojë me shah-mat, dorëzim, humbje në kohë, pat ose barazim sipas rregullave të shahut.</p></details>
+
+</div>
+
+<button id="closeChessRules"
+    style="display:block;margin:18px auto 0;padding:8px 22px;
+    background:#444;color:white;border:0;border-radius:5px;
+    font-weight:bold;cursor:pointer;">
+    ✕ MBYLL
+</button>
+`;
 
     rulesOverlay.appendChild(rulesBox);
     document.body.appendChild(rulesOverlay);
