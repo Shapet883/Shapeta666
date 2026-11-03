@@ -1138,7 +1138,13 @@ transform: translateX(0);
         flex: 0 0 520px !important;
     }
 }
-/* ALARMI I KUQ NË KOMPJUTER */
+/* FSHEH RREGULLAT POSHTË TABELËS - VETËM KOMPJUTER */
+@media (min-width: 601px) {
+    #chessRules {
+        display: none !important;
+    }
+}
+ /* ALARMI I KUQ NË KOMPJUTER */
 @media (min-width: 601px) {
     #whiteClock.first-move-danger,
     #blackClock.first-move-danger {
@@ -1684,8 +1690,8 @@ color: #444;
 border: 3px solid #d4af37;
         border-radius: 10px;
         padding: 22px;
-        width: 320px;
-        max-width: 85vw;
+        width: 520px;
+        max-width: 90vw;
         text-align: left;
         max-height: 85vh;
         overflow-y: auto;
