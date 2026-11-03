@@ -1643,22 +1643,21 @@ if (window.matchMedia("(min-width: 601px)").matches) {
     const rulesButton = document.createElement("button");
     rulesButton.id = "chessRulesButton";
     rulesButton.innerHTML = `
-    <img src="Hyjnesha.pgn..jpg" alt="Hyjnesha në Fron" width="32" height="32" style="vertical-align:middle;">
-    RREGULLAT
+    <img src="Hyjnesha.pgn..jpg"
+         alt="Hyjnesha në Fron"
+         width="42"
+         height="42">
 `;
 
     rulesButton.style.cssText = `
-        position: fixed;
-        z-index: 5000;
-        background: #c90000;
-        color: #fff;
-        border: 2px solid #111;
-        border-radius: 6px;
-        padding: 7px 12px;
-        font-size: 15px;
-        font-weight: bold;
-        cursor: pointer;
-    `;
+    position: fixed;
+    z-index: 5000;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+`;
 
     const rulesOverlay = document.createElement("div");
     rulesOverlay.id = "chessRulesOverlay";
