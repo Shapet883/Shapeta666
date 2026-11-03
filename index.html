@@ -1152,8 +1152,10 @@ transform: translateX(0);
             0 0 30px rgba(255, 34, 34, 0.8) !important;
     }
 }
+/* FSHEH RREGULLAT DHE KESHILLAT - VETEM KOMPJUTER */
 @media screen and (min-width: 601px) {
-    body > #chessRules {
+    #chessRules,
+    #beginnerTips {
         display: none !important;
     }
 }
@@ -4044,6 +4046,7 @@ clockStarted = false;
 clearInterval(clockInterval);
 clockInterval = null;
 updateClocks();
+
 /* RESET 25 SEKONDAT E LËVIZJES SË PARË */
 
 clearInterval(firstMoveInterval);
