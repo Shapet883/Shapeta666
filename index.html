@@ -1636,7 +1636,105 @@ if (pieces[i] !== "") {
 function getPiece(square) {
     return square.textContent;
 }
+/* BUTONI DHE RREGULLAT - VETËM KOMPJUTER */
 
+if (window.matchMedia("(min-width: 601px)").matches) {
+
+    const rulesButton = document.createElement("button");
+    rulesButton.id = "chessRulesButton";
+    rulesButton.innerHTML = "🇦🇱 RREGULLAT";
+
+    rulesButton.style.cssText = `
+        position: fixed;
+        z-index: 5000;
+        background: #c90000;
+        color: #fff;
+        border: 2px solid #111;
+        border-radius: 6px;
+        padding: 7px 12px;
+        font-size: 15px;
+        font-weight: bold;
+        cursor: pointer;
+    `;
+
+    const rulesOverlay = document.createElement("div");
+    rulesOverlay.id = "chessRulesOverlay";
+
+    rulesOverlay.style.cssText = `
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        background: rgba(0,0,0,0.75);
+        align-items: center;
+        justify-content: center;
+    `;
+
+    const rulesBox = document.createElement("div");
+
+    rulesBox.style.cssText = `
+        background: #c90000;
+        color: white;
+        border: 3px solid #111;
+        border-radius: 10px;
+        padding: 22px;
+        width: 320px;
+        max-width: 85vw;
+        text-align: left;
+        box-shadow: 0 5px 20px #000;
+    `;
+
+    rulesBox.innerHTML = `
+        <div style="text-align:center;font-size:22px;font-weight:bold;">
+            🇦🇱 RREGULLAT E SHAHUT
+        </div>
+        <hr>
+        <p>♟ Çdo lojtar luan me radhë nga një lëvizje.</p>
+        <p>♟ Qëllimi është matimi i mbretit kundërshtar.</p>
+        <p>♟ Mbreti lëviz një fushë në çdo drejtim.</p>
+        <p>♟ Mbretëresha lëviz në çdo drejtim.</p>
+        <p>♟ Torra lëviz drejt.</p>
+        <p>♟ Fili lëviz diagonalisht.</p>
+        <p>♟ Kali lëviz në formë L.</p>
+        <p>♟ Ushtari lëviz përpara dhe merr diagonalisht.</p>
+        <button id="closeChessRules"
+            style="display:block;margin:18px auto 0;padding:8px 22px;
+            background:#111;color:white;border:0;border-radius:5px;
+            font-weight:bold;cursor:pointer;">
+            ✕ MBYLL
+        </button>
+    `;
+
+    rulesOverlay.appendChild(rulesBox);
+    document.body.appendChild(rulesOverlay);
+    document.body.appendChild(rulesButton);
+
+    function positionRulesButton() {
+        const rect = board.getBoundingClientRect();
+        rulesButton.style.left = rect.left + "px";
+        rulesButton.style.top = Math.max(5, rect.top - 43) + "px";
+    }
+
+    positionRulesButton();
+
+    window.addEventListener("resize", positionRulesButton);
+    window.addEventListener("scroll", positionRulesButton);
+
+    rulesButton.addEventListener("click", function() {
+        rulesOverlay.style.display = "flex";
+    });
+
+    document.getElementById("closeChessRules")
+        .addEventListener("click", function() {
+            rulesOverlay.style.display = "none";
+        });
+
+    rulesOverlay.addEventListener("click", function(event) {
+        if (event.target === rulesOverlay) {
+            rulesOverlay.style.display = "none";
+        }
+    });
+}
 /* ZGJEDHJA E PROMOVIMIT */
 
 function showPromotionChoice(isWhite, targetSquare) {
