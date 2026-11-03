@@ -1642,7 +1642,10 @@ if (window.matchMedia("(min-width: 601px)").matches) {
 
     const rulesButton = document.createElement("button");
     rulesButton.id = "chessRulesButton";
-    rulesButton.innerHTML = "🇦🇱 RREGULLAT";
+    rulesButton.innerHTML = `
+    <img src="hyjnesha.png" alt="Hyjnesha në Fron" width="32" height="32" style="vertical-align:middle;">
+    RREGULLAT
+`;
 
     rulesButton.style.cssText = `
         position: fixed;
@@ -1685,9 +1688,15 @@ if (window.matchMedia("(min-width: 601px)").matches) {
     `;
 
     rulesBox.innerHTML = `
-        <div style="text-align:center;font-size:22px;font-weight:bold;">
-            🇦🇱 RREGULLAT E SHAHUT
-        </div>
+       <div style="text-align:center;">
+    <img src="hyjnesha.png"
+         alt="Hyjnesha në Fron"
+         width="65"
+         height="65">
+    <div style="font-size:22px;font-weight:bold;">
+        🇦🇱 RREGULLAT E SHAHUT
+    </div>
+</div> 
         <hr>
         <p>♟ Çdo lojtar luan me radhë nga një lëvizje.</p>
         <p>♟ Qëllimi është matimi i mbretit kundërshtar.</p>
