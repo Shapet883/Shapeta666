@@ -1779,10 +1779,10 @@ border: 3px solid #d4af37;
     document.body.appendChild(rulesButton);
 
     function positionRulesButton() {
-        const rect = board.getBoundingClientRect();
-        rulesButton.style.left = rect.left + "px";
-        rulesButton.style.top = Math.max(5, rect.top - 43) + "px";
-    }
+    const rect = board.getBoundingClientRect();
+    rulesButton.style.left = (rect.right - 65) + "px";
+    rulesButton.style.top = (rect.top - 43) + "px";
+}
 
     positionRulesButton();
 
