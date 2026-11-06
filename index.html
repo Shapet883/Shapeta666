@@ -1044,25 +1044,28 @@ transform: translateX(0);
 /* RREGULLIMI STATIK NË KOMPJUTER */
 @media (min-width: 601px) {
 
-  #gameArea {
-    display: flex !important;
-    align-items: flex-start !important;
-    justify-content: center !important;
-    gap: 10px !important;
-}
+    #gameArea {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        gap: 10px !important;
+    }
 
     #board {
         flex: 0 0 520px !important;
+        margin: 0 !important;
     }
 
-      #sidePanel {
-    display: flex !important;
-    flex: 0 0 300px !important;
-    width: 300px !important;
-    min-width: 300px !important;
-    max-width: 300px !important;
-    align-items: stretch !important;
- }
+    #sidePanel {
+        display: flex !important;
+        flex: 0 0 300px !important;
+        width: 300px !important;
+        min-width: 300px !important;
+        max-width: 300px !important;
+        align-items: stretch !important;
+    }
+
     #moveHistory {
         display: block !important;
         flex: 0 0 300px !important;
@@ -1077,57 +1080,49 @@ transform: translateX(0);
         box-sizing: border-box !important;
     }
 
-#blackClockArea,
-#whiteClockArea {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    width: max-content !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    flex-wrap: nowrap !important;
-    padding: 0 !important;
-}
-
-#blackClock,
-#whiteClock {
-    width: 110px !important;
-    min-width: 110px !important;
-    max-width: 110px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    margin: 0 !important;
-    padding: 3px 8px !important;
-    line-height: 1 !important;
-    box-sizing: border-box !important;
-}
-
-#blackFirstMove,
-#whiteFirstMove {
-    display: block !important;
-    visibility: hidden !important;
-    opacity: 1 !important;
-    width: 45px !important;
-    min-width: 45px !important;
-    color: #ffffff !important;
-    font-size: 18px !important;
-    text-align: center !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    flex-shrink: 0 !important;
-}
-@media (min-width: 601px) {
-    #gameArea {
-       justify-content: flex-start !important; 
+    #blackClockArea,
+    #whiteClockArea {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        width: max-content !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        flex-wrap: nowrap !important;
+        padding: 0 !important;
     }
 
-    #board {
+    #blackClock,
+    #whiteClock {
+        width: 110px !important;
+        min-width: 110px !important;
+        max-width: 110px !important;
+        height: 30px !important;
+        min-height: 30px !important;
         margin: 0 !important;
-        flex: 0 0 520px !important;
+        padding: 3px 8px !important;
+        line-height: 1 !important;
+        box-sizing: border-box !important;
     }
+
+    #blackFirstMove,
+    #whiteFirstMove {
+        display: block !important;
+        visibility: hidden !important;
+        opacity: 1 !important;
+        width: 45px !important;
+        min-width: 45px !important;
+        color: #ffffff !important;
+        font-size: 18px !important;
+        text-align: center !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        flex-shrink: 0 !important;
+    }
+
 }
 
  /* ALARMI I KUQ NË KOMPJUTER */
