@@ -1899,21 +1899,12 @@ async function handleSquareClick(square, index) {
             return;
         }
 
-        selectedSquare = index;
+       selectedSquare = index;
+square.classList.add("selected");
+return;
+} 
 
-        square.classList.add("selected");
-
-        return;
-    }
-
-
-
-        if (
-            Math.abs(toCol - fromCol) === 1 &&
-            toRow - fromRow === direction &&
-            target === "" &&    /* KLIKIM PËRSËRI */
-
-    if (selectedSquare === index) {
+ if (selectedSquare === index) {
 
         square.classList.remove("selected");
 
@@ -2008,8 +1999,8 @@ async function handleSquareClick(square, index) {
 
         /* EN PASSANT */
 
-            lastDoubleStep !== null
-        ) {
+          if (lastDoubleStep !== null) { 
+        
 
             const lastIndex =
                 lastDoubleStep.index;
