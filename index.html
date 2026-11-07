@@ -1532,7 +1532,9 @@ let blackRookRightMoved = false;
 function renderMoveHistory() {
 
     const box = document.getElementById("moveHistory");
-
+box.style.height = "220px";
+box.style.overflowY = "auto";
+box.style.boxSizing = "border-box";
     box.innerHTML = "<strong>LËVIZJET</strong>";
 
     /* RRESHTI I BARDHIT */
@@ -1911,7 +1913,11 @@ async function handleSquareClick(square, index) {
     }
 
 
-    /* KLIKIM PËRSËRI */
+
+        if (
+            Math.abs(toCol - fromCol) === 1 &&
+            toRow - fromRow === direction &&
+            target === "" &&    /* KLIKIM PËRSËRI */
 
     if (selectedSquare === index) {
 
@@ -2008,10 +2014,6 @@ async function handleSquareClick(square, index) {
 
         /* EN PASSANT */
 
-        if (
-            Math.abs(toCol - fromCol) === 1 &&
-            toRow - fromRow === direction &&
-            target === "" &&
             lastDoubleStep !== null
         ) {
 
@@ -2049,7 +2051,8 @@ async function handleSquareClick(square, index) {
     }
 
 
-    /* KALI */
+ 
+   /* KALI */
 
     if (
         movingPiece === "♘" ||
@@ -2246,7 +2249,6 @@ async function handleSquareClick(square, index) {
 
 
     /* MBRETI */
-
     if (
         movingPiece === "♔" ||
         movingPiece === "♚"
