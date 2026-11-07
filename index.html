@@ -1062,7 +1062,12 @@ transform: translateX(0);
         inset 0 0 0 3px rgba(255, 255, 255, 0.75),
         inset 0 0 10px rgba(0, 0, 0, 0.25) !important;
 }
-
+@media (max-width: 600px) {
+    #clockBoardArea.clock-flipped #newGameButton {
+        grid-row: 3;
+        grid-column: 3;
+    }
+}
 /* RREGULLIMI I ORËVE KUR TABELA RROTULLOHET */
 #clockBoardArea.clock-flipped #blackClock,
 #clockBoardArea.clock-flipped #whiteClock,
