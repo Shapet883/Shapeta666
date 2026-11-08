@@ -32,7 +32,7 @@ body {
     text-align: center;
 }
       h1 {
-    margin: 25px 0;
+    margin: 20px 0;
     font-size: 25px;
     font-weight: bold;
     letter-spacing: 0;
@@ -72,7 +72,7 @@ transform: none;
  #subtitle {
     font-size: 12px;
     margin-top: -12px;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
     font-style: italic;
     transform: translateX(-3%);
 }
@@ -217,7 +217,7 @@ right: auto;
     color: #fff;
     box-sizing: border-box;
     box-shadow: 0 0 8px rgba(255,255,255,0.15);
-    transform: translate(-5px, -60px);
+    transform: translate(-40px, -60px);
 margin: 0 0 5px 0;
 } 
 
@@ -261,7 +261,7 @@ flex-shrink: 0;
         outline-offset: 3px !important;
         box-sizing: border-box;
         box-shadow: none !important;
-        margin-right: 12px !important;
+        margin-right: 10px !important;
     }
     .square {
      position: relative !important;
@@ -843,56 +843,26 @@ color: #66b3ff !important;
     order: 2;
     width: 300px;
     max-width: 300px;
-    margin-top: -10px;
-    box-sizing: border-box;
-}
-
-/* RREGULLIMI NË KOMPJUTER */
-@media (min-width: 601px) {
-
-   #clockBoardArea {
-    display: flex;
-   flex-direction: column; 
-    align-items: center;
-    width: fit-content;
-    margin: 0 auto;
-}
- 
- #gameArea {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 0;
-    width: fit-content;
-    margin: 20px 0;
-}
-
-    #board {
-        flex-shrink: 0;
-    }
-#sidePanel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-    width: 180px;
-    flex-shrink: 0;
-    margin-left: -25px;
-}
-
-#newGameButton {
-    order: 1;
-    margin: 0 auto;
-}
-
-#moveHistory {
-    order: 2;
-    width: 300px;
-    max-width: 300px;
     margin: 0;
     box-sizing: border-box;
-    transform: translateY(-10px) !important;
+}
+
+#blackClockArea,
+#whiteClockArea {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: auto;
+    margin: 8px auto;
+}
+
+#blackClockArea #blackFirstMove,
+#whiteClockArea #whiteFirstMove {
+    margin: 0;
+    flex-shrink: 0;
+}
 }
  @media (max-width: 600px) {
 
@@ -1083,8 +1053,8 @@ transform: translateX(0);
     }
 
     #board {
-       flex: 0 0 520px !important;
-       margin: 0 !important;
+        flex: 0 0 520px !important;
+        margin: 0 !important;
     }
 
     #sidePanel {
@@ -1097,7 +1067,19 @@ transform: translateX(0);
     margin-top: -8px !important;
     }
 
-   
+    #moveHistory {
+        display: block !important;
+        flex: 0 0 300px !important;
+        width: 300px !important;
+        min-width: 300px !important;
+        max-width: 300px !important;
+        height: 300px !important;
+        min-height: 300px !important;
+        max-height: 300px !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+    }
 
     #blackClockArea,
     #whiteClockArea {
@@ -1127,7 +1109,7 @@ transform: translateX(0);
         box-sizing: border-box !important;
     }
 
-     #blackFirstMove,
+    #blackFirstMove,
     #whiteFirstMove {
         display: block !important;
         visibility: hidden !important;
@@ -1142,13 +1124,8 @@ transform: translateX(0);
         flex-shrink: 0 !important;
     }
 
-    #moveHistory {
-        align-self: flex-start !important;
-        margin-top: -20px !important;
-    }
-
 }
- 
+
  /* ALARMI I KUQ NË KOMPJUTER */
 @media (min-width: 601px) {
     #whiteClock.first-move-danger,
@@ -1162,7 +1139,6 @@ transform: translateX(0);
             0 0 30px rgba(255, 34, 34, 0.8) !important;
     }
 }
-
 </style>
 </head>
 <body>
@@ -1528,8 +1504,12 @@ let whiteRookRightMoved = false;
 
 let blackRookLeftMoved = false;
 let blackRookRightMoved = false;
+
 function renderMoveHistory() {
 
+    const box = document.getElementById("moveHistory");
+
+    box.innerHTML = "<strong>LËVIZJET</strong>";
 
     /* RRESHTI I BARDHIT */
     const whiteRow = document.createElement("div");
@@ -1899,12 +1879,17 @@ async function handleSquareClick(square, index) {
             return;
         }
 
-       selectedSquare = index;
-square.classList.add("selected");
-return;
-} 
+        selectedSquare = index;
 
- if (selectedSquare === index) {
+        square.classList.add("selected");
+
+        return;
+    }
+
+
+    /* KLIKIM PËRSËRI */
+
+    if (selectedSquare === index) {
 
         square.classList.remove("selected");
 
@@ -1999,8 +1984,12 @@ return;
 
         /* EN PASSANT */
 
-          if (lastDoubleStep !== null) { 
-        
+        if (
+            Math.abs(toCol - fromCol) === 1 &&
+            toRow - fromRow === direction &&
+            target === "" &&
+            lastDoubleStep !== null
+        ) {
 
             const lastIndex =
                 lastDoubleStep.index;
@@ -2036,8 +2025,7 @@ return;
     }
 
 
- 
-   /* KALI */
+    /* KALI */
 
     if (
         movingPiece === "♘" ||
@@ -2234,6 +2222,7 @@ return;
 
 
     /* MBRETI */
+
     if (
         movingPiece === "♔" ||
         movingPiece === "♚"
