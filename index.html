@@ -1013,13 +1013,13 @@ transform: translateX(0);
 #blackClock.clock-active.clock-danger,
 #whiteClock.first-move-danger,
 #blackClock.first-move-danger {
-    border: 3px solid #ff2222 !important;
-    background: #222 !important;
+    border: 3px solid #00ff00 !important;
+    background: #D4AF37 !important;
     color: #fff !important;
     box-shadow:
-        0 0 8px #ff2222 !important,
-        0 0 18px #ff2222 !important,
-        0 0 30px rgba(255, 34, 34, 0.8) !important;
+        0 0 8px #00ff00 !important,
+        0 0 16px #00ff00 !important,
+        0 0 24px rgba(0, 255, 0, 0.8) !important;
 }
 #blackFirstMove {
     grid-area: blackClock;
@@ -1032,7 +1032,13 @@ transform: translateX(0);
         inset 0 0 0 3px rgba(255, 255, 255, 0.75),
         inset 0 0 10px rgba(0, 0, 0, 0.25) !important;
 }
-
+#blackClock,
+#whiteClock {
+    justify-self: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    transform: none !important;
+}
 /* RREGULLIMI I ORËVE KUR TABELA RROTULLOHET */
 #clockBoardArea.clock-flipped #blackClock,
 #clockBoardArea.clock-flipped #whiteClock,
