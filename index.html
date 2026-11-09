@@ -1768,15 +1768,15 @@ border: 3px solid #d4af37;
     const rect = board.getBoundingClientRect();
 
     if (window.innerWidth <= 600) {
-    rulesButton.style.width = "48px";
-    rulesButton.style.height = "48px";
+    rulesButton.style.width = "40px";
+    rulesButton.style.height = "40px";
     rulesButton.style.left = (rect.left + rect.width * 0.72) + "px";
-    rulesButton.style.top = (rect.top - 58) + "px";
+    rulesButton.style.top = (rect.top - 65) + "px";
 
     const img = rulesButton.querySelector("img");
     if (img) {
-        img.style.width = "48px";
-        img.style.height = "48px";
+        img.style.width = "40px";
+        img.style.height = "40px";
     }
 } else {
     rulesButton.style.left = (rect.right - 58) + "px";
