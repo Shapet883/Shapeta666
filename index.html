@@ -1308,29 +1308,27 @@ function updateFirstMoveClock() {
 
     const whiteCount = document.getElementById("whiteFirstMove");
     const blackCount = document.getElementById("blackFirstMove");
-    const whiteClock = document.getElementById("whiteClock");
-    const blackClock = document.getElementById("blackClock");
 
     whiteCount.textContent = whiteFirstMoveTime;
     blackCount.textContent = blackFirstMoveTime;
 
-   if (window.matchMedia("(min-width: 601px)").matches) {
+    if (window.matchMedia("(min-width: 601px)").matches) {
 
-    whiteCount.style.setProperty("display", "block", "important");
-    whiteCount.style.setProperty(
-    "visibility",
-    !whiteFirstMoveDone && whiteTurn ? "visible" : "hidden",
-    "important"
-);
+        whiteCount.style.setProperty("display", "block", "important");
+        whiteCount.style.setProperty(
+            "visibility",
+            !whiteFirstMoveDone && whiteTurn ? "visible" : "hidden",
+            "important"
+        );
 
-    blackCount.style.setProperty("display", "block", "important");
-    blackCount.style.setProperty(
-        "visibility",
-        !blackFirstMoveDone && !whiteTurn ? "visible" : "hidden",
-        "important"
-    );
+        blackCount.style.setProperty("display", "block", "important");
+        blackCount.style.setProperty(
+            "visibility",
+            !blackFirstMoveDone && !whiteTurn ? "visible" : "hidden",
+            "important"
+        );
 
-} else {
+    } else {
 
         whiteCount.style.display =
             !whiteFirstMoveDone && whiteTurn ? "block" : "none";
@@ -1339,14 +1337,14 @@ function updateFirstMoveClock() {
             !blackFirstMoveDone && !whiteTurn ? "block" : "none";
     }
 
-    whiteClock.classList.toggle(
+    whiteCount.classList.toggle(
         "first-move-danger",
         !whiteFirstMoveDone &&
         whiteFirstMoveTime <= 10 &&
         whiteFirstMoveTime >= 1
     );
 
-    blackClock.classList.toggle(
+    blackCount.classList.toggle(
         "first-move-danger",
         !blackFirstMoveDone &&
         blackFirstMoveTime <= 10 &&
