@@ -1766,8 +1766,22 @@ border: 3px solid #d4af37;
 
     function positionRulesButton() {
     const rect = board.getBoundingClientRect();
-    rulesButton.style.left = (rect.right - 58) + "px";
-    rulesButton.style.top = (rect.top - 75) + "px";
+
+    if (window.innerWidth <= 600) {
+        rulesButton.style.width = "40px";
+        rulesButton.style.height = "40px";
+        rulesButton.style.left = (rect.left + 5) + "px";
+        rulesButton.style.top = (rect.top - 48) + "px";
+
+        const img = rulesButton.querySelector("img");
+        if (img) {
+            img.style.width = "40px";
+            img.style.height = "40px";
+        }
+    } else {
+        rulesButton.style.left = (rect.right - 58) + "px";
+        rulesButton.style.top = (rect.top - 75) + "px";
+    }
 }
 
     positionRulesButton();
