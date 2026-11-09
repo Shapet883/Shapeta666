@@ -1270,38 +1270,33 @@ function formatTime(seconds) {
 
 function updateClocks() {
 
-    document.getElementById("whiteClock").textContent =
-        formatTime(whiteTime);
+    const whiteClock = document.getElementById("whiteClock");
+    const blackClock = document.getElementById("blackClock");
 
-    document.getElementById("blackClock").textContent =
-        formatTime(blackTime);
+    whiteClock.textContent = formatTime(whiteTime);
+    blackClock.textContent = formatTime(blackTime);
 
+    /* HIQ STILET E VJETRA */
+    whiteClock.style.removeProperty("border");
+    whiteClock.style.removeProperty("box-shadow");
+    blackClock.style.removeProperty("border");
+    blackClock.style.removeProperty("box-shadow");
 
-   /* ORA AKTIVE */
+    /* ORA AKTIVE */
+    whiteClock.classList.toggle("clock-active", whiteTurn);
+    blackClock.classList.toggle("clock-active", !whiteTurn);
 
-const whiteClock = document.getElementById("whiteClock");
-const blackClock = document.getElementById("blackClock");
+    /* KUQ NË 10 SEKONDAT E FUNDIT */
+    whiteClock.classList.toggle(
+        "clock-danger",
+        whiteTurn && whiteTime <= 10 && whiteTime > 0
+    );
 
-whiteClock.style.removeProperty("border");
-whiteClock.style.removeProperty("box-shadow");
-blackClock.style.removeProperty("border");
-blackClock.style.removeProperty("box-shadow");
+    blackClock.classList.toggle(
+        "clock-danger",
+        !whiteTurn && blackTime <= 10 && blackTime > 0
+    );
 }
-
-/* KUQ NË 10 SEKONDAT E FUNDIT */
-
-const whiteClock = document.getElementById("whiteClock");
-const blackClock = document.getElementById("blackClock");
-
-whiteClock.classList.toggle(
-    "clock-danger",
-    whiteTurn && whiteTime <= 10 && whiteTime > 0
-);
-
-blackClock.classList.toggle(
-    "clock-danger",
-    !whiteTurn && blackTime <= 10 && blackTime > 0
-);
 function updateFirstMoveClock() {
 
     const whiteCount = document.getElementById("whiteFirstMove");
