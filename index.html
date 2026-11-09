@@ -1014,18 +1014,24 @@ transform: translateX(0);
 #clockBoardArea.clock-flipped #whiteClock {
     grid-area: blackClock;
 }
+/* 10 SEKONDAT E FUNDIT TË ORËS 5-MINUTËSHE */
 #whiteClock.clock-active.clock-danger,
-#blackClock.clock-active.clock-danger,
+#blackClock.clock-active.clock-danger {
+    background: #000000 !important;
+    border: 2px solid #D4AF37 !important;
+    color: #ff2222 !important;
+    font-weight: normal !important;
+    box-shadow: none !important;
+}
+
+/* ALERTI I 25 SEKONDAVE */
 #whiteClock.first-move-danger,
 #blackClock.first-move-danger {
-    border: 3px solid #00ff00 !important;
-    background: #D4AF37 !important;
-    color: #000000 !important;
-    font-weight: bold !important;
-    box-shadow:
-        0 0 8px #00ff00 !important,
-        0 0 16px #00ff00 !important,
-        0 0 24px rgba(0, 255, 0, 0.8) !important;
+    background: #000000 !important;
+    border: 2px solid #D4AF37 !important;
+    color: #ffffff !important;
+    font-weight: normal !important;
+    box-shadow: none !important;
 }
 #blackFirstMove {
     grid-area: blackClock;
@@ -1048,19 +1054,6 @@ transform: translateX(0);
     transform: none !important;
 }
 
-#whiteClock.clock-active.clock-danger,
-#blackClock.clock-active.clock-danger,
-#whiteClock.first-move-danger,
-#blackClock.first-move-danger {
-    border: 3px solid #00ff00 !important;
-    background: #D4AF37 !important;
-    color: #000000 !important;
-    font-weight: bold !important;
-    box-shadow:
-        0 0 8px #00ff00 !important,
-        0 0 16px #00ff00 !important,
-        0 0 24px rgba(0, 255, 0, 0.8) !important;
-}
 /* RREGULLIMI I ORËVE KUR TABELA RROTULLOHET */
 #clockBoardArea.clock-flipped #blackClock,
 #clockBoardArea.clock-flipped #whiteClock,
