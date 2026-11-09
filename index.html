@@ -1626,7 +1626,7 @@ function getPiece(square) {
 }
 /* BUTONI DHE RREGULLAT - VETËM KOMPJUTER */
 
-if (window.matchMedia("(min-width: 601px)").matches) {
+
 
     const rulesButton = document.createElement("button");
     rulesButton.id = "chessRulesButton";
@@ -1789,7 +1789,8 @@ border: 3px solid #d4af37;
             rulesOverlay.style.display = "none";
         }
     });
-}
+
+ 
 /* ZGJEDHJA E PROMOVIMIT */
 
 function showPromotionChoice(isWhite, targetSquare) {
