@@ -1037,7 +1037,23 @@ transform: translateX(0);
     justify-self: center !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    position: relative;
+    left: calc(-1 * min(500px, 92vw) / 16);
     transform: none !important;
+}
+
+#whiteClock.clock-active.clock-danger,
+#blackClock.clock-active.clock-danger,
+#whiteClock.first-move-danger,
+#blackClock.first-move-danger {
+    border: 3px solid #00ff00 !important;
+    background: #D4AF37 !important;
+    color: #000000 !important;
+    font-weight: bold !important;
+    box-shadow:
+        0 0 8px #00ff00 !important,
+        0 0 16px #00ff00 !important,
+        0 0 24px rgba(0, 255, 0, 0.8) !important;
 }
 /* RREGULLIMI I ORËVE KUR TABELA RROTULLOHET */
 #clockBoardArea.clock-flipped #blackClock,
