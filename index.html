@@ -911,7 +911,7 @@ color: #66b3ff !important;
     grid-template-areas:
     "blackFirst blackClock newGame"
     "board board board"
-    "whiteFirst whiteClock whiteClock"
+    "whiteFirst whiteClock ."
     "moveHistory moveHistory moveHistory";
     align-items: end;
     justify-items: center;
@@ -1037,8 +1037,8 @@ transform: translateX(0);
     justify-self: center !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    position: relative;
-    left: calc(-1 * min(500px, 92vw) / 16);
+    position: relative !important;
+    left: -36px !important;
     transform: none !important;
 }
 
