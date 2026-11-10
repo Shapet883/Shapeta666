@@ -1053,7 +1053,7 @@ transform: translateX(0);
  margin-left: auto !important;
  margin-right: auto !important;
  position: relative !important;
- left: -36px !important;
+ left: auto !important;
  transform: none !important;
 }
 
@@ -1090,12 +1090,13 @@ transform: translateX(0);
 
     #sidePanel {
         display: flex !important;
-        flex: 0 0 300px !important;
+        flex-direction: column !important;
+     flex: 0 0 300px !important;
         width: 300px !important;
         min-width: 300px !important;
         max-width: 300px !important;
         align-items: stretch !important;
-    margin-top: -8px !important;
+   margin-top: 0 !important; 
     }
 
     #moveHistory {
