@@ -1074,6 +1074,53 @@ transform: translateX(0);
     border: 1px solid #00cc44 !important;
     box-shadow: 0 0 3px rgba(0, 204, 68, 0.35) !important;
 }
+/* POZICIONIMI I OREVE DHE NUMERUESVE 25 - TELEFON */
+
+#blackClockArea,
+#whiteClockArea {
+    display: contents !important;
+}
+
+/* Pozicioni normal */
+#blackFirstMove {
+    grid-area: blackFirst !important;
+}
+
+#blackClock {
+    grid-area: blackClock !important;
+}
+
+#whiteFirstMove {
+    grid-area: whiteFirst !important;
+}
+
+#whiteClock {
+    grid-area: whiteClock !important;
+}
+
+/* Kur tabela rrotullohet */
+#clockBoardArea.clock-flipped #blackFirstMove {
+    grid-area: whiteFirst !important;
+}
+
+#clockBoardArea.clock-flipped #blackClock {
+    grid-area: whiteClock !important;
+}
+
+#clockBoardArea.clock-flipped #whiteFirstMove {
+    grid-area: blackFirst !important;
+}
+
+#clockBoardArea.clock-flipped #whiteClock {
+    grid-area: blackClock !important;
+}
+
+/* Ruaj pozicionin e oreve 05:00 */
+#blackClock,
+#whiteClock {
+    left: -36px !important;
+    transform: none !important;
+}
 }
 /* RREGULLIMI STATIK NË KOMPJUTER */
 @media (min-width: 601px) {
