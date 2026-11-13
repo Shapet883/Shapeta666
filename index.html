@@ -316,7 +316,55 @@ flex-shrink: 0;
     margin: 15px 0 0 0;
     position: relative !important;
 }
-.square {
+#board {
+    display: grid;
+    width: min(500px, 92vw);
+    height: min(500px, 92vw);
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+
+    border: 7px solid #111 !important;
+    border-style: solid !important;
+    outline: 3px solid #d4af37 !important;
+    outline-offset: 3px;
+    box-shadow: none !important;
+
+    margin: 15px 0 0 0;
+    position: relative !important;
+}
+#board {
+    display: grid;
+    width: min(500px, 92vw);
+    height: min(500px, 92vw);
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+
+    border: 7px solid #111 !important;
+    border-style: solid !important;
+    outline: 3px solid #d4af37 !important;
+    outline-offset: 3px;
+    box-shadow: none !important;
+
+    margin: 15px 0 0 0;
+    position: relative !important;
+} 
+ .mat-board-alert {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background: #000;
+    color: #fff;
+    border: 3px solid red;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 25px;
+    font-weight: bold;
+    white-space: nowrap;
+    pointer-events: none;
+} 
+ .square {
     width: auto;
     height: auto;
     aspect-ratio: 1 / 1;
@@ -2848,32 +2896,48 @@ if (
 
         /* SHAH-MAT */
 
-        if (isCheckmate(whiteTurn)) {
-gameOver = true;
-   document.querySelectorAll(".in-check").forEach(function (square) {
-    square.classList.remove("in-check");
-    square.classList.add("checkmate");
-});
-         clearInterval(clockInterval);
-clockInterval = null;        
-    setTimeout(
-    function () {
+      if (isCheckmate(whiteTurn)) {
 
-    if (whiteTurn) {
+    gameOver = true;
 
-    document.getElementById("gameResult").classList.add("checkmate-result"); 
-     document.getElementById("gameResult").textContent =
-    "🏆 SHAH-MAT! FITON LOJTARI I ZI!";
-                    } else {
+    document.querySelectorAll(".in-check").forEach(function (square) {
+        square.classList.remove("in-check");
+        square.classList.add("checkmate");
+    });
 
-         document.getElementById("gameResult").classList.add("checkmate-result");       
-     document.getElementById("gameResult").textContent =
-    "🏆 SHAH-MAT! FITON LOJTARI I BARDHË!";
-                    }
+    clearInterval(clockInterval);
+    clockInterval = null;
 
-                },
-                800
-            );
+    if (window.matchMedia("(max-width: 600px)").matches) {
+
+        const board = document.getElementById("board");
+        const matAlert = document.createElement("div");
+
+        matAlert.className = "mat-board-alert";
+        matAlert.textContent = "♟️ MAT!";
+
+        board.appendChild(matAlert);
+
+        setTimeout(function () {
+            matAlert.remove();
+        }, 2000);
+
+    } else {
+
+        setTimeout(function () {
+
+            if (whiteTurn) {
+                document.getElementById("gameResult").classList.add("checkmate-result");
+                document.getElementById("gameResult").textContent =
+                    "🏆 SHAH-MAT! FITON LOJTARI I ZI!";
+            } else {
+                document.getElementById("gameResult").classList.add("checkmate-result");
+                document.getElementById("gameResult").textContent =
+                    "🏆 SHAH-MAT! FITON LOJTARI I BARDHË!";
+            }
+
+        }, 800);
+    } 
 
         } else {
 
