@@ -2918,9 +2918,15 @@ if (
 
         board.appendChild(matAlert);
 
-        setTimeout(function () {
-            matAlert.remove();
-        }, 2000);
+       setTimeout(function () {
+
+    matAlert.remove();
+
+    const gameResult = document.getElementById("gameResult");
+    gameResult.textContent = "";
+    gameResult.classList.remove("checkmate-result");
+
+}, 2000); 
 
     } else {
 
