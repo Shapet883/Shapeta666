@@ -2920,7 +2920,11 @@ if (
         const matAlert = document.createElement("div");
 
         matAlert.className = "mat-board-alert";
-        matAlert.textContent = "♟️ MAT!";
+matAlert.textContent = "♟️ MAT!";
+
+if (boardFlipped) {
+    matAlert.style.transform = "translate(-50%, -50%) rotate(180deg)";
+}
 
         board.appendChild(matAlert);
 
