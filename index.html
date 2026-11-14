@@ -1501,91 +1501,51 @@ function startFirstMoveClock() {
 
         /* AFATI I BARDHIT */
         if (whiteTurn && !whiteFirstMoveDone) {
-            if (whiteFirstMoveTime <= 0) {
-                clearInterval(firstMoveInterval);
-                firstMoveInterval = null;
-                gameOver = true;
-                updateFirstMoveClock();
-                return;
-            }
 
             whiteFirstMoveTime--;
             updateFirstMoveClock();
+
+            if (whiteFirstMoveTime <= 0) {
+
+                clearInterval(firstMoveInterval);
+                firstMoveInterval = null;
+
+                gameOver = true;
+
+                document.getElementById("gameResult")
+                    .classList.add("checkmate-result");
+
+                document.getElementById("gameResult")
+                    .textContent =
+                    "🏆 KOHA MBAROI! FITON LOJTARI I ZI!";
+
+                return;
+            }
         }
 
         /* AFATI I ZIUT */
         if (!whiteTurn && !blackFirstMoveDone) {
-            if (blackFirstMoveTime <= 0) {
-                clearInterval(firstMoveInterval);
-                firstMoveInterval = null;
-                gameOver = true;
-                updateFirstMoveClock();
-                return;
-            }
 
             blackFirstMoveTime--;
             updateFirstMoveClock();
+
+            if (blackFirstMoveTime <= 0) {
+
+                clearInterval(firstMoveInterval);
+                firstMoveInterval = null;
+
+                gameOver = true;
+
+                document.getElementById("gameResult")
+                    .classList.add("checkmate-result");
+
+                document.getElementById("gameResult")
+                    .textContent =
+                    "🏆 KOHA MBAROI! FITON LOJTARI I BARDHË!";
+
+                return;
+            }
         }
-
-    }, 1000);
-}
-
-
-/* ORA NORMALE */
-
-function startClock() {
-
-    if (clockStarted) {
-        return;
-    }
-
-
-    clockStarted = true;
-
-
-    clockInterval = setInterval(function () {
-
-        if (gameOver) {
-            return;
-        }
-
-
-        if (whiteTurn) {
-            whiteTime--;
-        } else {
-            blackTime--;
-        }
-
-console.log(
-    "ORA:",
-    whiteTurn ? "BARDHI" : "ZI",
-    "B:", whiteTime,
-    "Z:", blackTime
-);
-        updateClocks();
-
-
-        if (
-            whiteTime <= 0 ||
-            blackTime <= 0
-        ) {
-
-            clearInterval(clockInterval);
-            clockInterval = null;
-
-            gameOver = true;
-
-
-            document.getElementById("gameResult")
-                .classList.add("checkmate-result");
-
-            document.getElementById("gameResult")
-                .textContent =
-                whiteTime <= 0
-                    ? "🏆 KOHA MBAROI! FITON LOJTARI I ZI!"
-                    : "🏆 KOHA MBAROI! FITON LOJTARI I BARDHË!";
-        }
-
 
     }, 1000);
 }
