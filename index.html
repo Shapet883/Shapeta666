@@ -1258,7 +1258,34 @@ left: 125px !important;
         text-shadow: none !important;
     }
 } 
-/* FSHEHJA E LEVIZJEVE VETEM NE TELEFON */
+/* ORA 25 SEKONDA NË TË MAJTË - VETËM KOMPJUTER */
+@media (min-width: 601px) {
+
+    #blackClockArea,
+    #whiteClockArea {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-wrap: nowrap !important;
+        gap: 8px !important;
+    }
+
+    #blackFirstMove,
+    #whiteFirstMove {
+        position: static !important;
+        order: -1 !important;
+        margin: 0 !important;
+        transform: none !important;
+    }
+
+    #blackClock,
+    #whiteClock {
+        order: 0 !important;
+        margin: 0 !important;
+    }
+}
+ /* FSHEHJA E LEVIZJEVE VETEM NE TELEFON */
 @media (max-width: 600px) {
     #moveHistory {
         display: none !important;
