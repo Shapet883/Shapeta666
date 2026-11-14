@@ -1128,8 +1128,28 @@ transform: translateX(0);
     border: 1px solid #00cc44 !important;
     box-shadow: 0 0 3px rgba(0, 204, 68, 0.35) !important;
 }
+
+/* RREGULLIMI I POZICIONIT 25 SEKONDA */
+#blackFirstMove,
+#whiteFirstMove {
+    position: static !important;
+    left: auto !important;
+    transform: none !important;
+    width: 28px !important;
+    margin: 0 !important;
+    justify-self: center !important;
+    align-self: center !important;
 }
-/* RREGULLIMI STATIK NË KOMPJUTER */
+
+#blackFirstMove {
+    grid-area: blackFirst !important;
+}
+
+#whiteFirstMove {
+    grid-area: whiteFirst !important;
+}
+}
+ /* RREGULLIMI STATIK NË KOMPJUTER */
 @media (min-width: 601px) {
 
     #gameArea {
