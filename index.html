@@ -1486,7 +1486,6 @@ blackArea.style.order = boardFlipped ? "1" : "-1";
 /* FILLON NUMËRIMI 25 SEKONDA */
 
 function startFirstMoveClock() {
-
     if (firstMoveInterval !== null) {
         return;
     }
@@ -1501,50 +1500,30 @@ function startFirstMoveClock() {
 
         /* AFATI I BARDHIT */
         if (whiteTurn && !whiteFirstMoveDone) {
+            if (whiteFirstMoveTime <= 0) {
+                clearInterval(firstMoveInterval);
+                firstMoveInterval = null;
+                gameOver = true;
+                updateFirstMoveClock();
+                return;
+            }
 
             whiteFirstMoveTime--;
             updateFirstMoveClock();
-
-            if (whiteFirstMoveTime <= 0) {
-
-                clearInterval(firstMoveInterval);
-                firstMoveInterval = null;
-
-                gameOver = true;
-
-                document.getElementById("gameResult")
-                    .classList.add("checkmate-result");
-
-                document.getElementById("gameResult")
-                    .textContent =
-                    "🏆 KOHA MBAROI! FITON LOJTARI I ZI!";
-
-                return;
-            }
         }
 
         /* AFATI I ZIUT */
         if (!whiteTurn && !blackFirstMoveDone) {
+            if (blackFirstMoveTime <= 0) {
+                clearInterval(firstMoveInterval);
+                firstMoveInterval = null;
+                gameOver = true;
+                updateFirstMoveClock();
+                return;
+            }
 
             blackFirstMoveTime--;
             updateFirstMoveClock();
-
-            if (blackFirstMoveTime <= 0) {
-
-                clearInterval(firstMoveInterval);
-                firstMoveInterval = null;
-
-                gameOver = true;
-
-                document.getElementById("gameResult")
-                    .classList.add("checkmate-result");
-
-                document.getElementById("gameResult")
-                    .textContent =
-                    "🏆 KOHA MBAROI! FITON LOJTARI I BARDHË!";
-
-                return;
-            }
         }
 
     }, 1000);
