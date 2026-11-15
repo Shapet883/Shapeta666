@@ -1456,8 +1456,8 @@ function updateFirstMoveClock() {
         const whiteArea = document.getElementById("whiteClockArea");
         const blackArea = document.getElementById("blackClockArea");
 
-        whiteArea.style.order = boardFlipped ? "-1" : "1";
-        blackArea.style.order = boardFlipped ? "1" : "-1";
+        whiteArea.style.order = "1";
+blackArea.style.order = "-1";
 
     } else {
 
@@ -1628,7 +1628,8 @@ for (let i = 0; i < 64; i++) {
 
     const row = Math.floor(i / 8);
     const col = i % 8;
-/* KOORDINATAT SIPAS ORIENTIMIT */
+
+ /* KOORDINATAT SIPAS ORIENTIMIT */
 
 if (!boardFlipped) {
     if (row === 7) {
