@@ -1456,8 +1456,8 @@ function updateFirstMoveClock() {
         const whiteArea = document.getElementById("whiteClockArea");
         const blackArea = document.getElementById("blackClockArea");
 
-        whiteArea.style.order = "1";
-blackArea.style.order = "-1";
+       whiteArea.style.order = boardFlipped ? "-1" : "1";
+blackArea.style.order = boardFlipped ? "1" : "-1"; 
 
     } else {
 
