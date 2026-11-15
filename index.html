@@ -1258,34 +1258,7 @@ left: 125px !important;
         text-shadow: none !important;
     }
 } 
-/* ORA 25 SEKONDA NË TË MAJTË - VETËM KOMPJUTER */
-@media (min-width: 601px) {
-
-    #blackClockArea,
-    #whiteClockArea {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content: center !important;
-        flex-wrap: nowrap !important;
-        gap: 8px !important;
-    }
-
-    #blackFirstMove,
-    #whiteFirstMove {
-        position: static !important;
-        order: -1 !important;
-        margin: 0 !important;
-        transform: none !important;
-    }
-
-    #blackClock,
-    #whiteClock {
-        order: 0 !important;
-        margin: 0 !important;
-    }
-}
- /* FSHEHJA E LEVIZJEVE VETEM NE TELEFON */
+/* FSHEHJA E LEVIZJEVE VETEM NE TELEFON */
 @media (max-width: 600px) {
     #moveHistory {
         display: none !important;
@@ -1456,8 +1429,8 @@ function updateFirstMoveClock() {
         const whiteArea = document.getElementById("whiteClockArea");
         const blackArea = document.getElementById("blackClockArea");
 
-       whiteArea.style.order = boardFlipped ? "-1" : "1";
-blackArea.style.order = boardFlipped ? "1" : "-1"; 
+        whiteArea.style.order = boardFlipped ? "-1" : "1";
+        blackArea.style.order = boardFlipped ? "1" : "-1";
 
     } else {
 
@@ -1486,6 +1459,7 @@ blackArea.style.order = boardFlipped ? "1" : "-1";
 /* FILLON NUMËRIMI 25 SEKONDA */
 
 function startFirstMoveClock() {
+
     if (firstMoveInterval !== null) {
         return;
     }
@@ -1525,6 +1499,66 @@ function startFirstMoveClock() {
             blackFirstMoveTime--;
             updateFirstMoveClock();
         }
+
+    }, 1000);
+}
+
+
+/* ORA NORMALE */
+
+function startClock() {
+
+    if (clockStarted) {
+        return;
+    }
+
+
+    clockStarted = true;
+
+
+    clockInterval = setInterval(function () {
+
+        if (gameOver) {
+            return;
+        }
+
+
+        if (whiteTurn) {
+            whiteTime--;
+        } else {
+            blackTime--;
+        }
+
+console.log(
+    "ORA:",
+    whiteTurn ? "BARDHI" : "ZI",
+    "B:", whiteTime,
+    "Z:", blackTime
+);
+        updateClocks();
+
+
+        if (
+            whiteTime <= 0 ||
+            blackTime <= 0
+        ) {
+
+            clearInterval(clockInterval);
+            clockInterval = null;
+
+            gameOver = true;
+
+
+            document.getElementById("gameResult")
+                .classList.add("checkmate-result");
+
+            document.getElementById("gameResult")
+                .textContent =
+                whiteTime <= 0
+                    ? "🏆 KOHA MBAROI! FITON LOJTARI I ZI!"
+                    : "🏆 KOHA MBAROI! FITON LOJTARI I BARDHË!";
+        }
+
 
     }, 1000);
 }
@@ -1607,8 +1641,7 @@ for (let i = 0; i < 64; i++) {
 
     const row = Math.floor(i / 8);
     const col = i % 8;
-
- /* KOORDINATAT SIPAS ORIENTIMIT */
+/* KOORDINATAT SIPAS ORIENTIMIT */
 
 if (!boardFlipped) {
     if (row === 7) {
