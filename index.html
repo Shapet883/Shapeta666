@@ -1197,10 +1197,11 @@ left: 125px !important;
     justify-content: center !important;
     gap: 8px !important;
     width: max-content !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
     flex-wrap: nowrap !important;
-    white-space: nowrap !important;
     padding: 0 !important;
-    margin: 8px auto !important;
 }
 
 #blackFirstMove,
@@ -1241,25 +1242,20 @@ left: 125px !important;
     padding: 0 !important;
     flex-shrink: 0 !important;
 }
-/* 25 SEKONDAT PRANE ORES - KOMPJUTER */
 #blackFirstMove,
 #whiteFirstMove {
-    order: 1 !important;
-}
-
-#blackClock,
-#whiteClock {
-    order: 2 !important;
-}
-
-/* ALARMI I KUQ I 25 SEKONDAVE */
-#blackFirstMove.first-move-danger,
-#whiteFirstMove.first-move-danger {
-    color: #ff2222 !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 28px !important;
+    min-width: 28px !important;
+    color: #ffffff !important;
+    font-size: 18px !important;
+    font-weight: normal !important;
+    text-align: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
 }
  
 }
@@ -1291,38 +1287,6 @@ left: 125px !important;
 @media (max-width: 600px) {
     #moveHistory {
         display: none !important;
-    }
-}
-
-/* KORRIGJIMI - VETËM KOMPJUTER */
-@media (min-width: 601px) {
-
-    #blackClockArea,
-    #whiteClockArea {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        align-items: center !important;
-        gap: 8px !important;
-    }
-
-    #blackFirstMove,
-    #whiteFirstMove {
-        order: 1 !important;
-    }
-
-    #blackClock,
-    #whiteClock {
-        order: 2 !important;
-    }
-
-    #clockBoardArea #blackFirstMove.first-move-danger,
-    #clockBoardArea #whiteFirstMove.first-move-danger {
-        color: #ff2222 !important;
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        text-shadow: none !important;
     }
 }
 </style>
