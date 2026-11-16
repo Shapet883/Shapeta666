@@ -1116,6 +1116,127 @@ left: 125px !important;
         display: none !important;
     }
 }
+/* RREGULLIMI I ORËVE - VETËM KOMPJUTER */
+@media (min-width: 601px) {
+
+    #clockBoardArea {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: fit-content !important;
+        margin: 0 auto !important;
+    }
+
+    #gameArea {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        gap: 10px !important;
+        width: fit-content !important;
+        margin: 20px 0 !important;
+    }
+
+    #board {
+        flex: 0 0 520px !important;
+        margin: 0 !important;
+    }
+
+    #sidePanel {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 0 0 300px !important;
+        width: 300px !important;
+        min-width: 300px !important;
+        max-width: 300px !important;
+        align-items: stretch !important;
+        margin-left: -25px !important;
+        margin-top: -8px !important;
+    }
+
+    #newGameButton {
+        order: 1 !important;
+        margin: 0 auto !important;
+    }
+
+    #moveHistory {
+        order: 2 !important;
+        display: block !important;
+        flex: 0 0 300px !important;
+        width: 300px !important;
+        min-width: 300px !important;
+        max-width: 300px !important;
+        height: 300px !important;
+        min-height: 300px !important;
+        max-height: 300px !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+    }
+
+    #blackClockArea,
+    #whiteClockArea {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        width: max-content !important;
+        margin: 8px auto !important;
+        padding: 0 !important;
+    }
+
+    #blackFirstMove,
+    #whiteFirstMove {
+        display: block !important;
+        position: static !important;
+        order: 1 !important;
+        flex: 0 0 28px !important;
+        width: 28px !important;
+        min-width: 28px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        color: #ffffff !important;
+        font-size: 18px !important;
+        font-weight: normal !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+    }
+
+    #blackClock,
+    #whiteClock {
+        display: block !important;
+        position: static !important;
+        order: 2 !important;
+        flex: 0 0 110px !important;
+        width: 110px !important;
+        min-width: 110px !important;
+        max-width: 110px !important;
+        height: 30px !important;
+        min-height: 30px !important;
+        margin: 0 !important;
+        padding: 3px 8px !important;
+        line-height: 1 !important;
+        box-sizing: border-box !important;
+        white-space: nowrap !important;
+    }
+
+    /* ALARMI I KUQ - 25 SEKONDAT */
+    #whiteFirstMove.first-move-danger,
+    #blackFirstMove.first-move-danger {
+        color: #ff2222 !important;
+    }
+
+    /* ALARMI I KUQ - ORA 5-MINUTËSHE */
+    #whiteClock.clock-danger,
+    #blackClock.clock-danger {
+        background: #000000 !important;
+        color: #ff2222 !important;
+        font-weight: normal !important;
+        text-shadow: none !important;
+    }
+}
 </style>
 </head>
 <body>
