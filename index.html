@@ -1293,6 +1293,38 @@ left: 125px !important;
         display: none !important;
     }
 }
+
+/* KORRIGJIMI - VETËM KOMPJUTER */
+@media (min-width: 601px) {
+
+    #blackClockArea,
+    #whiteClockArea {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        gap: 8px !important;
+    }
+
+    #blackFirstMove,
+    #whiteFirstMove {
+        order: 1 !important;
+    }
+
+    #blackClock,
+    #whiteClock {
+        order: 2 !important;
+    }
+
+    #clockBoardArea #blackFirstMove.first-move-danger,
+    #clockBoardArea #whiteFirstMove.first-move-danger {
+        color: #ff2222 !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+}
 </style>
 </head>
 <body>
