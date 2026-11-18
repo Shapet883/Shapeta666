@@ -1182,38 +1182,39 @@ left: 125px !important;
     box-sizing: border-box !important;
    }
 
-    #blackClockArea,
-    #whiteClockArea {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 8px !important;
-        width: max-content !important;
-        margin: 8px 10% 8px 0 !important;
-        padding: 0 !important;
-padding: 0 !important;
-    }
+#blackClockArea,
+#whiteClockArea {
+    display: flex !important;
+    position: relative !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: max-content !important;
+    margin: 8px 10% 8px 0 !important;
+    padding: 0 !important;
+}
 
-    #blackFirstMove,
-    #whiteFirstMove {
-        display: block !important;
-        position: static !important;
-        order: 1 !important;
-        flex: 0 0 28px !important;
-        width: 28px !important;
-        min-width: 28px !important;
-        margin: 0px !important;
-        padding: 0 !important;
-        color: #ffffff !important;
-        font-size: 18px !important;
-        font-weight: normal !important;
-        text-align: center !important;
-        white-space: nowrap !important;
-    }
+#blackFirstMove,
+#whiteFirstMove {
+    display: block !important;
+    position: absolute !important;
+    left: 8px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 2 !important;
+    width: 28px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: #ffffff !important;
+    font-size: 18px !important;
+    font-weight: normal !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+}
 
-    #blackClock,
+#blackClock,
 #whiteClock {
     display: block !important;
     position: static !important;
