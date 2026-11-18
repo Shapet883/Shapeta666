@@ -2956,9 +2956,10 @@ if (
         .classList
         .add("in-check");
 
-      /* SHAH-MAT */
 
-if (isCheckmate(whiteTurn)) {
+        /* SHAH-MAT */
+
+      if (isCheckmate(whiteTurn)) {
 
     gameOver = true;
 
@@ -2970,25 +2971,57 @@ if (isCheckmate(whiteTurn)) {
     clearInterval(clockInterval);
     clockInterval = null;
 
-    const board = document.getElementById("board");
-    const matAlert = document.createElement("div");
+    if (window.matchMedia("(max-width: 600px)").matches) {
 
-    matAlert.className = "mat-board-alert";
-    matAlert.textContent = "♟️ MAT!";
+        const board = document.getElementById("board");
+        const matAlert = document.createElement("div");
 
-    if (boardFlipped) {
-        matAlert.style.transform =
-            "translate(-50%, -50%) rotate(180deg)";
-    }
+        matAlert.className = "mat-board-alert";
+matAlert.textContent = "♟️ MAT!";
 
-    board.appendChild(matAlert);
+if (boardFlipped) {
+    matAlert.style.transform = "translate(-50%, -50%) rotate(180deg)";
+}
 
-    setTimeout(function () {
-        matAlert.remove();
-    }, 2000);
+        board.appendChild(matAlert);
 
-} else if (!hasAnyLegalMove(whiteTurn)) {
+       setTimeout(function () {
 
+    matAlert.remove();
+
+    const gameResult = document.getElementById("gameResult");
+    gameResult.textContent = "";
+    gameResult.classList.remove("checkmate-result");
+
+}, 2000); 
+
+    } else {
+
+        setTimeout(function () {
+
+            if (whiteTurn) {
+                document.getElementById("gameResult").classList.add("checkmate-result");
+                document.getElementById("gameResult").textContent =
+                    "🏆 SHAH-MAT! FITON LOJTARI I ZI!";
+            } else {
+                document.getElementById("gameResult").classList.add("checkmate-result");
+                document.getElementById("gameResult").textContent =
+                    "🏆 SHAH-MAT! FITON LOJTARI I BARDHË!";
+            }
+
+        }, 800);
+    } 
+
+        } else {
+
+     
+        }
+
+
+    } else if (
+    
+    !hasAnyLegalMove(whiteTurn)
+) {
     gameOver = true;
 
     clearInterval(clockInterval);
@@ -2999,7 +3032,6 @@ if (isCheckmate(whiteTurn)) {
 
     document.getElementById("gameResult").textContent =
         "🤝 PAT! BARAZIM!";
-
 }
 }
 
