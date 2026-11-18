@@ -133,11 +133,31 @@ transform: none;
     pointer-events: none;
 }
 .checkmate-result {
-    background: #d00000 !important;
-    color: #fff;
+    background: #000000 !important;
+    color: #ffffff !important;
     animation: none !important;
-    border-color: #ff0000 !important;
-box-shadow: none !important;
+    border: 2px solid #D4AF37 !important;
+    box-shadow: none !important;
+}
+
+/* Vetëm kompjuteri */
+@media (min-width: 601px) {
+    #board {
+        position: relative !important;
+    }
+
+    #board .checkmate-result {
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        z-index: 9999 !important;
+        width: max-content !important;
+        max-width: 90% !important;
+        padding: 12px !important;
+        text-align: center !important;
+        border-radius: 8px !important;
+    }
 }
 @keyframes checkSpark {
     from {
