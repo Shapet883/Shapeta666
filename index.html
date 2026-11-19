@@ -1293,6 +1293,14 @@ border-radius: 8px !important;
     #gameArea {
         position: relative !important;
     }
+
+    #gameArea .mat-board-alert {
+        position: absolute !important;
+        top: 260px !important;
+        left: 310px !important;
+        transform: translate(-50%, -50%) !important;
+        z-index: 999999 !important;
+    }
 }
 </style>
 </head>
@@ -2989,12 +2997,15 @@ if (
     matAlert.className = "mat-board-alert";
     matAlert.textContent = "♟️ MAT!";
 
-   if (boardFlipped) {
-    matAlert.style.transform =
-        "translate(-50%, -50%) rotate(180deg)";
-}
-
+   if (window.matchMedia("(min-width: 601px)").matches) {
+    document.getElementById("gameArea").appendChild(matAlert);
+} else {
+    if (boardFlipped) {
+        matAlert.style.transform =
+            "translate(-50%, -50%) rotate(180deg)";
+    }
     board.appendChild(matAlert);
+}
 
     setTimeout(function () {
         matAlert.remove();
