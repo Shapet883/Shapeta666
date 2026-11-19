@@ -2996,14 +2996,6 @@ if (
 
     matAlert.className = "mat-board-alert";
     matAlert.textContent = "♟️ MAT!";
-
-   if (window.matchMedia("(min-width: 601px)").matches) {
-    document.getElementById("gameArea").appendChild(matAlert);
-} else {
-    if (boardFlipped) {
-        matAlert.style.transform =
-            "translate(-50%, -50%) rotate(180deg)";
-    }
     board.appendChild(matAlert);
 }
 
