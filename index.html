@@ -2974,12 +2974,9 @@ if (
           .add("in-check");
 }
 
-
-       
- 
  /* SHAH-MAT */
 
- if (isCheckmate(whiteTurn)) {
+if (isCheckmate(whiteTurn)) {
 
     gameOver = true;
 
@@ -2996,8 +2993,8 @@ if (
 
     matAlert.className = "mat-board-alert";
     matAlert.textContent = "♟️ MAT!";
+
     board.appendChild(matAlert);
-}
 
     setTimeout(function () {
         matAlert.remove();
