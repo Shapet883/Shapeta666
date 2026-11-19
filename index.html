@@ -2992,13 +2992,18 @@ if (isCheckmate(whiteTurn)) {
     const matAlert = document.createElement("div");
 
     matAlert.className = "mat-board-alert";
-    matAlert.textContent = "♟️ MAT!";
+matAlert.textContent = "♟️ MAT!";
 
-    board.appendChild(matAlert);
+if (boardFlipped) {
+    matAlert.style.transform =
+        "translate(-50%, -50%) rotate(180deg)";
+}
 
-    setTimeout(function () {
-        matAlert.remove();
-    }, 2000);
+board.appendChild(matAlert);
+
+setTimeout(function () {
+    matAlert.remove();
+}, 2000);
 
 } else if (!hasAnyLegalMove(whiteTurn)) {
 
