@@ -3004,10 +3004,15 @@ if (isCheckmate(whiteTurn)) {
 
     matAlert.className = "mat-board-alert";
     matAlert.textContent = "♟️ MAT!";
-matAlert.style.transform = boardFlipped
-    ? "translate(-50%, -50%) rotate(180deg)"
-    : "translate(-50%, -50%)";
-    board.appendChild(matAlert);
+
+    matAlert.style.setProperty(
+    "transform",
+    boardFlipped
+        ? "translate(-50%, -50%) rotate(180deg)"
+        : "translate(-50%, -50%)",
+    "important"
+);
+ board.appendChild(matAlert);
 
     setTimeout(function () {
         matAlert.remove();
