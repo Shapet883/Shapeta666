@@ -122,14 +122,13 @@ transform: none;
 
 .checkmate::after {
     content: "";
-    position: absolute;
-    width: 78%;
-    height: 78%;
-    border: 3px solid #ff3333;
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: absolute !important;
+    inset: 8% !important;
+    width: auto !important;
+    height: auto !important;
+    border: 4px solid #ff2222 !important;
+    border-radius: 50% !important;
+    box-sizing: border-box !important;
     pointer-events: none;
 }
 .checkmate-result {
