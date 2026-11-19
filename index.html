@@ -120,13 +120,17 @@ transform: none;
     animation: checkSpark 0.7s infinite alternate;
 }
 
-.checkmate {
-    background-image: radial-gradient(
-        circle,
-        transparent 0 54%,
-        #ff3333 55% 58%,
-        transparent 59%
-    ) !important;
+.checkmate::after {
+    content: "";
+    position: absolute;
+    width: 78%;
+    height: 78%;
+    border: 3px solid #ff3333;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
 }
 .checkmate-result {
     background: #000000 !important;
@@ -2935,7 +2939,7 @@ if (isKingVsKing()) {
 }
 /* PASTRO SHAHUN E VJETËR */
 
-document.querySelectorAll(".).forEach(function (square) {
+document.querySelectorAll(".in-check").forEach(function (square) {
     square.classList.remove("in-check");
 });
 
@@ -2988,18 +2992,13 @@ if (isCheckmate(whiteTurn)) {
     const matAlert = document.createElement("div");
 
     matAlert.className = "mat-board-alert";
-matAlert.textContent = "♟️ MAT!";
+    matAlert.textContent = "♟️ MAT!";
 
-if (boardFlipped) {
-    matAlert.style.transform =
-        "translate(-50%, -50%) rotate(180deg)";
-}
+    board.appendChild(matAlert);
 
-board.appendChild(matAlert);
-
-setTimeout(function () {
-    matAlert.remove();
-}, 2000);
+    setTimeout(function () {
+        matAlert.remove();
+    }, 2000);
 
 } else if (!hasAnyLegalMove(whiteTurn)) {
 
