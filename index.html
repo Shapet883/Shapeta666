@@ -1325,12 +1325,18 @@ border-radius: 8px !important;
         box-sizing: border-box !important;
     }
 }
-/* RRETHI I GJELBËR I ORËS AKTIVE – KOMPJUTER */
+/* RRETHI I ORËVE – VETËM KOMPJUTERI */
 @media (min-width: 601px) {
     #whiteClock.clock-active,
     #blackClock.clock-active {
         border: 1px solid #00cc44 !important;
         box-shadow: 0 0 3px rgba(0, 204, 68, 0.35) !important;
+    }
+
+    #whiteClock:not(.clock-active),
+    #blackClock:not(.clock-active) {
+        border: 1px solid #D4AF37 !important;
+        box-shadow: 0 0 3px rgba(212, 175, 55, 0.35) !important;
     }
 }
 </style>
