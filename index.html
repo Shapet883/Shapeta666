@@ -1647,29 +1647,55 @@ console.log(
         updateClocks();
 
 
-        if (
-            whiteTime <= 0 ||
-            blackTime <= 0
-        ) {
+       if (
+    whiteTime <= 0 ||
+    blackTime <= 0
+) {
+    clearInterval(clockInterval);
+    clockInterval = null;
+    gameOver = true;
 
-            clearInterval(clockInterval);
-            clockInterval = null;
+    const gameResult = document.getElementById("gameResult");
+    gameResult.classList.remove("checkmate-result");
+    gameResult.textContent = "";
 
-            gameOver = true;
+    const board = document.getElementById("board");
+    const timeAlert = document.createElement("div");
 
+    timeAlert.className = "mat-board-alert";
+    timeAlert.innerHTML = `
+        <svg viewBox="0 0 50 50" width="42" height="42"
+             style="flex-shrink:0">
+            <circle cx="25" cy="25" r="21"
+                    fill="none" stroke="white" stroke-width="3"/>
+            <line x1="25" y1="25" x2="25" y2="12"
+                  stroke="white" stroke-width="3"
+                  stroke-linecap="round"/>
+            <line x1="25" y1="25" x2="36" y2="30"
+                  stroke="white" stroke-width="3"
+                  stroke-linecap="round"/>
+            <circle cx="25" cy="25" r="2.5" fill="white"/>
+        </svg>
+        <span>00:00</span>
+    `;
 
-            document.getElementById("gameResult")
-                .classList.add("checkmate-result");
+    timeAlert.style.setProperty("display", "flex", "important");
+    timeAlert.style.setProperty("align-items", "center", "important");
+    timeAlert.style.setProperty("justify-content", "center", "important");
+    timeAlert.style.setProperty("gap", "12px", "important");
+    timeAlert.style.setProperty(
+        "transform",
+        boardFlipped
+            ? "translate(-50%, -50%) rotate(180deg)"
+            : "translate(-50%, -50%)",
+        "important"
+    );
 
-            document.getElementById("gameResult")
-                .textContent =
-                whiteTime <= 0
-                    ? "🏆 KOHA MBAROI! FITON LOJTARI I ZI!"
-                    : "🏆 KOHA MBAROI! FITON LOJTARI I BARDHË!";
-        }
+    board.appendChild(timeAlert);
 
-
-    }, 1000);
+    setTimeout(function () {
+        timeAlert.remove();
+    }, 5000);
 }
 
 
