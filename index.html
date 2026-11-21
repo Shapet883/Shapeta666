@@ -377,7 +377,7 @@ flex-shrink: 0;
     display: block !important;
     width: max-content !important;
     max-width: none !important;
-    background: #000 !important;
+    background: rgba(90, 90, 90, 0.90) !important;
     color: #fff !important;
     border: 3px solid red !important;
     border-radius: 8px;
@@ -2965,11 +2965,25 @@ if (isKingVsKing()) {
     clearInterval(clockInterval);
     clearInterval(firstMoveInterval);
 
-    document.getElementById("gameResult")
-        .classList.add("checkmate-result");
+    const board = document.getElementById("board");
+const remiAlert = document.createElement("div");
 
-    document.getElementById("gameResult").textContent =
-        "🤝 REMI! MBETËN VETËM DY MBRETËR!";
+remiAlert.className = "mat-board-alert";
+remiAlert.textContent = "REMI ⚖️";
+
+remiAlert.style.setProperty(
+    "transform",
+    boardFlipped
+        ? "translate(-50%, -50%) rotate(180deg)"
+        : "translate(-50%, -50%)",
+    "important"
+);
+
+board.appendChild(remiAlert);
+
+setTimeout(function () {
+    remiAlert.remove();
+}, 2000);
 
     selectedSquare = null;
 
@@ -3052,11 +3066,25 @@ if (isCheckmate(whiteTurn)) {
     clearInterval(clockInterval);
     clockInterval = null;
 
-    document.getElementById("gameResult")
-        .classList.add("checkmate-result");
+     const board = document.getElementById("board");
+    const patAlert = document.createElement("div");
 
-    document.getElementById("gameResult").textContent =
-        "🤝 PAT! BARAZIM!";
+    patAlert.className = "mat-board-alert";
+    patAlert.textContent = "PAT 📴";
+
+    patAlert.style.setProperty(
+        "transform",
+        boardFlipped
+            ? "translate(-50%, -50%) rotate(180deg)"
+            : "translate(-50%, -50%)",
+        "important"
+    );
+
+    board.appendChild(patAlert);
+
+    setTimeout(function () {
+        patAlert.remove();
+    }, 2000);
 }
 
 }
