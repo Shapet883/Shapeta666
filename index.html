@@ -2991,7 +2991,11 @@ if (
 /* KONTROLLO REMIN - VETËM DY MBRETËR */
 
 if (isKingVsKing()) {
+    /* PASTRO SHAHUN KUR MBETEN VETËM DY MBRETËR */
 
+    document.querySelectorAll(".in-check").forEach(function (square) {
+        square.classList.remove("in-check");
+    });
     gameOver = true;
 
     clearInterval(clockInterval);
