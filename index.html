@@ -3114,7 +3114,8 @@ if (isCheckmate(whiteTurn)) {
     const matAlert = document.createElement("div");
 
     matAlert.className = "mat-board-alert";
-    matAlert.innerHTML = '<span style="color:#ff3333; font-weight:bold; font-size:1.1em">MAT!</span>';
+    matAlert.innerHTML = '<span style="color:#ff3333; font-weight:bold">';
+matAlert.innerHTML += '✖ MAT<span style="margin-left:6px">!</span></span>';
 
     matAlert.style.setProperty(
     "transform",
