@@ -918,7 +918,13 @@ padding-left: 0px;
     }
 
     #resignButton {
-    order: 5;
+    order: 5 !important;
+    width: 45px !important;
+    height: 37px !important;
+    font-size: 11px !important;
+    align-self: center !important;
+    margin: 5px auto !important;
+    transform: none !important;
 }
 
 #newGameButton {
@@ -996,6 +1002,12 @@ transform: translateX(0);
         grid-area: blackClock;
     }
 
+#resignButton {
+    grid-column: 1 / -1 !important;
+    justify-self: center !important;
+    align-self: center !important;
+    margin: 5px auto !important;
+}
  #newGameButton {
     grid-area: newGame;
     width: 50px !important;
