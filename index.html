@@ -241,7 +241,22 @@ right: auto;
 margin: 0 0 5px 0;
 } 
 
-#newGameButton:hover {
+#resignButton {
+    width: 110px;
+    height: 37px;
+    margin: 0 0 5px 0;
+    padding: 0;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 1px solid #D4AF37;
+    background: #b22222;
+    color: #fff;
+    box-sizing: border-box;
+    box-shadow: 0 0 8px rgba(255,255,255,0.15);
+}
+ #newGameButton:hover {
     background: #28a745;
 }
 #moveHistory {
@@ -902,9 +917,17 @@ padding-left: 0px;
         order: 4;
     }
 
-    #moveHistory {
-        order: 5;
-    }
+    #resignButton {
+    order: 5;
+}
+
+#newGameButton {
+    order: 6;
+}
+
+#moveHistory {
+    order: 7;
+}
 
 }
 #moveHistory {
@@ -1397,6 +1420,8 @@ border-radius: 8px !important;
 <div id="board"></div>
 
 <div id="sidePanel">
+
+<button id="resignButton">🏳️</button>
 
 <button id="newGameButton">🔄</button>
 
@@ -4159,8 +4184,73 @@ for (let i = 0; i < 64; i++) {
     return false;
 }
 
+/* DORËZIMI I LOJËS */
 
-/* LOJA E RE */
+document.getElementById("resignButton").addEventListener(
+    "click",
+    function () {
+
+        if (gameOver) {
+            return;
+        }
+
+        const confirmed = confirm(
+            "A dëshiron të dorëzohesh?"
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        gameOver = true;
+
+        clearInterval(clockInterval);
+        clockInterval = null;
+
+        clearInterval(firstMoveInterval);
+        firstMoveInterval = null;
+
+        selectedSquare = null;
+
+        document.querySelectorAll(".square").forEach(
+            function (square) {
+                square.classList.remove("selected");
+            }
+        );
+
+        const board = document.getElementById("board");
+        const resignAlert = document.createElement("div");
+
+        resignAlert.className = "mat-board-alert";
+
+        resignAlert.innerHTML = `
+            <div style="display:flex; flex-direction:column; align-items:center; gap:5px;">
+                <span style="color:#D4AF37; font-weight:bold; font-size:1.3em;">
+                    🏳️ DORËZIM!
+                </span>
+                <span style="color:#D4AF37; font-size:28px;">
+                    ${whiteTurn ? "0–1" : "1–0"}
+                </span>
+            </div>
+        `;
+
+        resignAlert.style.setProperty(
+            "transform",
+            boardFlipped
+                ? "translate(-50%, -50%) rotate(180deg)"
+                : "translate(-50%, -50%)",
+            "important"
+        );
+
+        board.appendChild(resignAlert);
+
+        setTimeout(function () {
+            resignAlert.remove();
+        }, 5000);
+    }
+);
+
+ /* LOJA E RE */
 
 document.getElementById(
     "newGameButton"
