@@ -3111,7 +3111,7 @@ if (isCheckmate(whiteTurn)) {
     const patAlert = document.createElement("div");
 
     patAlert.className = "mat-board-alert";
-    patAlert.textContent = "PAT 📴";
+    patAlert.innerHTML = '<span style="color:#87CEFA; font-weight:bold">PAT 🤝</span>';
 
     patAlert.style.setProperty(
         "transform",
