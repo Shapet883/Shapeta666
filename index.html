@@ -1644,38 +1644,67 @@ console.log(
     "B:", whiteTime,
     "Z:", blackTime
 );
-        updateClocks();
+       updateClocks(); 
 
 
-      if (
-            whiteTime <= 0 ||
-            blackTime <= 0
-        ) {
+    if (
+    whiteTime <= 0 ||
+    blackTime <= 0
+) {
 
-            clearInterval(clockInterval);
-            clockInterval = null;
+    clearInterval(clockInterval);
+    clockInterval = null;
 
-            gameOver = true;
+    gameOver = true;
 
+    const board = document.getElementById("board");
+    const timeAlert = document.createElement("div");
 
-            document.getElementById("gameResult")
-                .classList.add("checkmate-result");
+    timeAlert.className = "mat-board-alert";
 
-            document.getElementById("gameResult")
-                .textContent =
-                whiteTime <= 0
-                    ? "🏆 KOHA MBAROI! FITON LOJTARI I ZI!"
-                    : "🏆 KOHA MBAROI! FITON LOJTARI I BARDHË!";
-        }
+    timeAlert.innerHTML = `
+        <div style="display:flex; align-items:center; gap:12px;">
+            <svg width="55" height="55" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="43"
+                    fill="#ffffff" stroke="#D4AF37" stroke-width="6"/>
+                <path d="M50 13 V20 M87 50 H80 M50 87 V80 M13 50 H20"
+                    stroke="#222" stroke-width="4"/>
+                <path d="M50 50 L50 25 M50 50 L70 58"
+                    stroke="#222" stroke-width="6" stroke-linecap="round"/>
+                <circle cx="50" cy="50" r="5" fill="#D4AF37"/>
+            </svg>
+
+            <div style="display:flex; flex-direction:column; align-items:center; gap:5px;">
+                <span style="color:#ff3333; font-weight:bold;">
+                    KOHA MBAROI!
+                </span>
+                <span style="color:#D4AF37; font-size:28px;">
+                    ${whiteTime <= 0 ? "0–1" : "1–0"}
+                </span>
+            </div>
+        </div>
+    `;
+
+    timeAlert.style.setProperty(
+        "transform",
+        boardFlipped
+            ? "translate(-50%, -50%) rotate(180deg)"
+            : "translate(-50%, -50%)",
+        "important"
+    );
+
+    board.appendChild(timeAlert);
+
+    setTimeout(function () {
+        timeAlert.remove();
+    }, 5000);
+} 
 
 
     }, 1000);
 }
 
-
-
-
-updateFirstMoveClock();
+ updateFirstMoveClock();
 
 startFirstMoveClock();
 
