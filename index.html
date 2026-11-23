@@ -918,13 +918,7 @@ padding-left: 0px;
     }
 
     #resignButton {
-    order: 0 !important;
-    width: 45px !important;
-    height: 37px !important;
-    font-size: 11px !important;
-    align-self: center !important;
-    margin: 5px auto !important;
-    transform: none !important;
+    order: 5;
 }
 
 #newGameButton {
@@ -973,9 +967,8 @@ padding-left: 0px;
 
    #clockBoardArea {
     display: grid;
-    grid-template-columns: 70px 1fr 60px;
+    grid-template-columns: 70px 1fr 5px;
     grid-template-areas:
-". . resign"
     "blackFirst blackClock newGame"
     "board board board"
     "whiteFirst whiteClock ."
@@ -1003,17 +996,6 @@ transform: translateX(0);
         grid-area: blackClock;
     }
 
-#resignButton {
-    grid-area: resign !important;
-    grid-column: auto !important;
-    justify-self: end !important;
-    align-self: center !important;
-    width: 45px !important;
-    height: 37px !important;
-    font-size: 11px !important;
-    margin: 0 !important;
-    transform: none !important;
-}
  #newGameButton {
     grid-area: newGame;
     width: 50px !important;
@@ -1033,7 +1015,7 @@ transform: translateX(0);
 }
 #blackFirstMove,
 #blackClock {
-    transform: translateX(10px);
+    transform: translateX(-20px);
 }
 
 #blackFirstMove {
@@ -1045,7 +1027,7 @@ transform: translateX(0);
 }
 
 #newGameButton {
-  transform: translate(10px, 0);
+  transform: translate(-30px, 0);
 }
    
 #board {
@@ -1070,7 +1052,7 @@ transform: translateX(0);
     align-self: center !important;
 }
 #whiteClock {
-    transform: translateX(10px);
+    transform: translateX(-30px);
 }
    #moveHistory {
     grid-area: moveHistory;
