@@ -967,20 +967,20 @@ padding-left: 0px;
 
 @media (max-width: 600px) {
 
-   #clockBoardArea {
+ #clockBoardArea {
     display: grid;
-    grid-template-columns: 70px 1fr 5px;
+    grid-template-columns: 70px 1fr 50px 50px;
     grid-template-areas:
-    "blackFirst blackClock newGame"
-    "board board board"
-    "whiteFirst whiteClock ."
-    "moveHistory moveHistory moveHistory";
+        "blackFirst blackClock newGame resign"
+        "board board board board"
+        "whiteFirst whiteClock . ."
+        "moveHistory moveHistory moveHistory moveHistory";
     align-items: end;
     justify-items: center;
     width: 100%;
     gap: 8px;
-transform: translateX(0);
-   } 
+    transform: translateX(0);
+}
 
 #gameArea,
 #sidePanel,
@@ -998,7 +998,7 @@ transform: translateX(0);
         grid-area: blackClock;
     }
 
- #newGameButton {
+#newGameButton {
     grid-area: newGame;
     width: 50px !important;
     height: 50px !important;
@@ -1010,6 +1010,11 @@ transform: translateX(0);
     box-shadow: none !important;
     color: #28a745 !important;
 }
+
+#resignButton {
+    grid-area: resign;
+}
+
 #blackFirstMove,
 #blackClock,
 #newGameButton {
