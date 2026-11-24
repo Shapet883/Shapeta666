@@ -966,15 +966,14 @@ padding-left: 0px;
  /* KËTU FILLON PJESA E RE PËR TELEFON */
 
 @media (max-width: 600px) {
-
- #clockBoardArea {
+#clockBoardArea {
     display: grid;
-    grid-template-columns: 70px 1fr 50px 50px;
+    grid-template-columns: 70px 1fr 5px;
     grid-template-areas:
-        "blackFirst blackClock newGame resign"
-        "board board board board"
-        "whiteFirst whiteClock . ."
-        "moveHistory moveHistory moveHistory moveHistory";
+        "blackFirst blackClock newGame"
+        "board board board"
+        "whiteFirst whiteClock ."
+        "moveHistory moveHistory moveHistory";
     align-items: end;
     justify-items: center;
     width: 100%;
@@ -1009,10 +1008,6 @@ padding-left: 0px;
     background: transparent !important;
     box-shadow: none !important;
     color: #28a745 !important;
-}
-
-#resignButton {
-    grid-area: resign;
 }
 
 #blackFirstMove,
