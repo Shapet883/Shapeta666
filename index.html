@@ -4260,14 +4260,7 @@ document.getElementById(
 ).addEventListener(
     "click",
     function () {
-if (window.matchMedia("(max-width: 600px)").matches) {
-    document.querySelectorAll("#board .mat-board-alert").forEach(
-        alert => alert.remove()
-    );
-}
-
 boardFlipped = !boardFlipped;
-
 document.getElementById("board").classList.toggle(
     "board-flipped",
     boardFlipped
