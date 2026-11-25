@@ -1571,11 +1571,11 @@ function updateFirstMoveClock() {
 
     } else {
 
-    whiteCount.style.visibility =
-        !whiteFirstMoveDone && whiteTurn ? "visible" : "hidden";
+    whiteCount.style.display =
+        !whiteFirstMoveDone && whiteTurn ? "block" : "none";
 
-    blackCount.style.visibility =
-        !blackFirstMoveDone && !whiteTurn ? "visible" : "hidden";
+    blackCount.style.display =
+        !blackFirstMoveDone && !whiteTurn ? "block" : "none";
 }
 
     whiteCount.classList.toggle(
