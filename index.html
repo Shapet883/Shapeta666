@@ -1571,12 +1571,12 @@ function updateFirstMoveClock() {
 
     } else {
 
-        whiteCount.style.display =
-            !whiteFirstMoveDone && whiteTurn ? "block" : "none";
+    whiteCount.style.visibility =
+        !whiteFirstMoveDone && whiteTurn ? "visible" : "hidden";
 
-        blackCount.style.display =
-            !blackFirstMoveDone && !whiteTurn ? "block" : "none";
-    }
+    blackCount.style.visibility =
+        !blackFirstMoveDone && !whiteTurn ? "visible" : "hidden";
+}
 
     whiteCount.classList.toggle(
         "first-move-danger",
