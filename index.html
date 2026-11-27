@@ -1407,6 +1407,63 @@ border-radius: 8px !important;
         border: 2px solid #00cc44 !important;
     }
 }
+/* PROFILI I LOJTARIT – PROVË */
+#playerProfilePanel {
+    box-sizing: border-box;
+    padding: 12px;
+    background: #222;
+    border: 2px solid #D4AF37;
+    border-radius: 8px;
+    color: white;
+    flex: 0 0 150px;
+    width: 150px;
+    text-align: center;
+}
+
+.player-profile-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.player-icon {
+    font-size: 27px;
+}
+
+#playerName {
+    font-size: 14px;
+    color: #D4AF37;
+}
+
+.player-points {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #D4AF37;
+}
+
+.player-points span {
+    font-size: 12px;
+}
+
+#playerPoints {
+    font-size: 25px;
+    color: #D4AF37;
+}
+
+/* TELEFON */
+@media (max-width: 600px) {
+    #playerProfilePanel {
+        grid-area: profile;
+        width: 92vw;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
 
 </style>
 </head>
@@ -1424,9 +1481,17 @@ border-radius: 8px !important;
 <div id="blackClock">05:00</div>
 </div>
 <div id="gameResult"></div>
-
 <div id="gameArea">
-
+<div id="playerProfilePanel">
+    <div class="player-profile-top">
+        <span class="player-icon">♟️</span>
+        <strong id="playerName">LOJTARI</strong>
+    </div>
+    <div class="player-points">
+        <span>PIKËT</span>
+        <strong id="playerPoints">0</strong>
+    </div>
+</div>
 <div id="board"></div>
 
 <div id="sidePanel">
